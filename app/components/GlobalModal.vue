@@ -5,7 +5,7 @@
 
       <div 
         class="relative w-full max-h-[90vh] flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out"
-        :class="isExpanded ? 'max-w-4xl h-[85vh]' : 'max-w-2xl animate-slide-up'"
+        :class="isExpanded ? 'max-w-4xl' : 'max-w-2xl animate-slide-up'"
       >
         
         <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 shrink-0">
@@ -83,8 +83,12 @@
                   <span v-else>Réduire &uarr;</span>
                 </button>
                 
-                <div v-show="isExpanded" class="mt-4 p-5 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line animate-fade-in">
-                  {{ projectData.longDescription }}
+                <div class="grid transition-all duration-500 ease-in-out" :style="{ gridTemplateRows: isExpanded ? '1fr' : '0fr' }">
+                  <div class="overflow-hidden">
+                    <div class="mt-3 p-5 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line">
+                      {{ projectData.longDescription }}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -95,7 +99,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
+              <div v-if="projectData.toolIds?.length">
                 <h3 class="font-bold text-gray-900 dark:text-white mb-3 border-b border-gray-200 dark:border-gray-700 pb-2">Outils sollicités</h3>
                 <div class="flex flex-wrap gap-2">
                   <button 
@@ -108,7 +112,7 @@
                 </div>
               </div>
               
-              <div>
+              <div v-if="projectData.compIds?.length">
                 <h3 class="font-bold text-gray-900 dark:text-white mb-3 border-b border-gray-200 dark:border-gray-700 pb-2">Compétences</h3>
                 <ul class="list-disc list-inside space-y-1 text-sm text-gray-700 dark:text-gray-300">
                   <li v-for="cid in projectData.compIds" :key="cid">{{ COMPETENCES[cid].title }}</li>
@@ -132,13 +136,17 @@
                   <span v-else>Réduire &uarr;</span>
                 </button>
                 
-                <div v-show="isExpanded" class="mt-4 p-5 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line animate-fade-in">
-                  {{ EXPERIENCES[currentModal.id].longDescription }}
+                <div class="grid transition-all duration-500 ease-in-out" :style="{ gridTemplateRows: isExpanded ? '1fr' : '0fr' }">
+                  <div class="overflow-hidden">
+                    <div class="mt-3 p-5 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line">
+                      {{ EXPERIENCES[currentModal.id].longDescription }}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             
-            <div v-if="EXPERIENCES[currentModal.id].toolIds.length" class="mt-6">
+            <div v-if="EXPERIENCES[currentModal.id].toolIds?.length" class="mt-6">
               <h3 class="font-bold mb-3 border-b border-gray-200 dark:border-gray-700 pb-2">Outils sollicités</h3>
               <div class="flex flex-wrap gap-2">
                 <button v-for="tid in EXPERIENCES[currentModal.id].toolIds" :key="tid" @click="openModal({ type: 'tool', id: tid })" class="px-3 py-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-emerald-500 hover:text-emerald-600 transition-colors text-sm font-medium">
@@ -163,8 +171,12 @@
                   <span v-else>Réduire &uarr;</span>
                 </button>
                 
-                <div v-show="isExpanded" class="mt-4 p-5 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line animate-fade-in">
-                  {{ EDUCATIONS[currentModal.id].longDescription }}
+                <div class="grid transition-all duration-500 ease-in-out" :style="{ gridTemplateRows: isExpanded ? '1fr' : '0fr' }">
+                  <div class="overflow-hidden">
+                    <div class="mt-3 p-5 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line">
+                      {{ EDUCATIONS[currentModal.id].longDescription }}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -188,6 +200,7 @@
               </div>
             </div>
           </div>
+          
         </div>
       </div>
     </div>
@@ -203,11 +216,10 @@ const { isOpen, currentModal, hasHistory, closeAll, goBack, openModal } = useMod
 const toolData = computed(() => currentModal.value?.type === 'tool' ? TOOLS[currentModal.value.id as keyof typeof TOOLS] : null)
 const projectData = computed(() => currentModal.value?.type === 'project' ? PROJECTS[currentModal.value.id as keyof typeof PROJECTS] : null)
 
-// GESTION DE L'EXPANSION (En savoir plus)
+// GESTION DE L'EXPANSION
 const isExpanded = ref(false)
 const toggleExpand = () => { isExpanded.value = !isExpanded.value }
 
-// On réinitialise l'expansion dès que l'utilisateur navigue vers un autre modal
 watch(currentModal, () => {
   isExpanded.value = false
 })
@@ -218,6 +230,4 @@ watch(currentModal, () => {
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 .animate-slide-up { animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 @keyframes slideUp { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-.animate-fade-in { animation: fadeIn 0.4s ease forwards; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 </style>

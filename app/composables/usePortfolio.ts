@@ -26,13 +26,25 @@ export const TOOLS = {
 }
 
 export const PROJECTS = {
-  'uno-disc': { id: 'uno-disc', title: 'UnoOnDisc', context: 'Projet Perso', description: 'Agent logiciel Discord pour jouer au UNO. Présent sur +1800 serveurs, +128 000 membres.', longDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", github: '', website: '', images: [], toolIds: ['typescript', 'docker', 'git'], compIds: ['realiser', 'collaborer'] },
+  'uno-disc': { id: 'uno-disc', title: 'UnoOnDisc', context: 'Projet Perso', description: 'Agent logiciel Discord pour jouer au UNO. Présent sur +1800 serveurs, +128 000 membres.', longDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", github: '', website: '', images: ['https://imgur.com/RiZV3YV.png','https://imgur.com/RlpI9qc.png'], toolIds: ['typescript', 'docker', 'git'], compIds: ['realiser', 'collaborer'] },
   'mc-plugin': { id: 'mc-plugin', title: 'Plugin Minecraft', context: 'Projet Perso', description: 'Gestion des permissions et zones sur serveur multijoueur. Configuration Yaml.', longDescription: "Lorem ipsum dolor sit amet... (Description complète à rédiger)", github: '', website: '', images: [], toolIds: ['java', 'git'], compIds: ['realiser'] },
   'sae-echecs': { id: 'sae-echecs', title: 'Jeu d\'échecs', context: 'SAÉ BUT', description: 'Développement d\'un jeu d\'échecs complet.', longDescription: "", github: '', website: '', images: [], toolIds: ['java'], compIds: ['realiser', 'conduire'] },
   'sae-suivi': { id: 'sae-suivi', title: 'Suivi de colis', context: 'SAÉ BUT', description: 'Site web de suivi de colis pour l\'IUT.', longDescription: "", github: '', website: '', images: [], toolIds: ['php'], compIds: ['realiser'] },
   'sae-python': { id: 'sae-python', title: 'Étude de graphes', context: 'SAÉ BUT', description: 'Étude de réseaux et de complexité algorithmique.', longDescription: "", github: '', website: '', images: [], toolIds: ['python'], compIds: ['optimiser'] },
   'sae-bd': { id: 'sae-bd', title: 'Modélisation BD', context: 'SAÉ BUT', description: 'Recueil des besoins, modélisation et construction de bases de données.', longDescription: "", github: '', website: '', images: [], toolIds: ['sql'], compIds: ['gerer'] },
   'sae-sys': { id: 'sae-sys', title: 'Configuration Ubuntu', context: 'SAÉ BUT', description: 'Configurations d\'un système Ubuntu (Linux) et réseaux (IPv4, DHCP, Pare-feux).', longDescription: "", github: '', website: '', images: [], toolIds: ['linux'], compIds: ['administrer'] },
+  'sae-colis': { 
+    id: 'sae-colis', 
+    title: "Site de suivi de colis pour l'IUT", 
+    context: 'SAÉ BUT', 
+    description: 'Projet de deuxième année : Site qui répertorie les devis, bons de commandes, bons de livraisons avec possibilité de les traiter.',
+    longDescription: "",
+    github: 'https://github.com/Nostres25/suivi-colis-iutv-v2', 
+    website: '', 
+    images: [], 
+    toolIds: ['git', "php", 'docker', 'sql'], 
+    compIds: ['realiser', 'administrer', 'optimiser', 'gerer', 'conduire', 'collaborer'] },
+
 }
 
 export const EXPERIENCES = {

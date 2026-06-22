@@ -17,7 +17,7 @@
         
         <div class="text-center md:text-left flex-1">
           <h1 class="text-4xl font-extrabold tracking-tight mb-2">
-            Prénom <span class="text-emerald-500">NOM</span>
+            Soan <span class="text-emerald-500">MOREAU</span>
           </h1>
           <h2 class="text-xl text-gray-600 dark:text-gray-300 mb-4 font-medium">
             Étudiant en 2e année de BUT Informatique
@@ -27,16 +27,16 @@
             À la recherche d'une alternance — Septembre 2026
           </div>
           
-          <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+          <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300" style="text-align: justify;">
+            Je suis autodidacte en développement back-end à partir de mes 13 ans, j’ai développé en Java pendant 2 ans. Je me suis ensuite concentré sur un projet NodeJs et Typescript durant 3 ans avant de me focaliser sur mes études. Ma rapidité d’apprentissage me permet de lancer et d’entretenir un projet de programmation quelle que soit la complexité.<br>
+            Aujourd’hui, je recherche une alternance pour ma troisième année d’études (2026-2027), dans le développement logiciel.</p>
         </div>
       </header>
 
       <!-- FRISE CHRONOLOGIQUE À ÉCHELLE -->
       <section class="mt-12 mb-16">
         <div class="flex items-center justify-between mb-8">
-          <h2 class="text-2xl font-bold flex items-center gap-2">
+          <h2 id="parcours" class="text-2xl font-bold flex items-center gap-2">
             <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
             Mon Parcours
           </h2>
@@ -109,15 +109,23 @@
 
           </div>
         </div>
+        <div class="mt-6 text-right md:pr-4">
+          <NuxtLink to="/parcours" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 hover:underline transition-all">
+            En savoir plus sur le parcours &rarr;
+          </NuxtLink>
+        </div>
       </section>
 
       <hr class="border-gray-200 dark:border-gray-800/60">
       <section>
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold flex items-center gap-2">
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold flex items-center gap-2 mb-3">
             <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
             Compétences Clés
           </h2>
+          <p class="text-sm text-gray-600 dark:text-gray-400 text-justify">
+            Les compétences correspondent à celles définies par le programme national du B.U.T Informatique.
+          </p>
         </div>
         
         <div class="flex flex-col gap-4">
@@ -200,13 +208,18 @@
             </div>
           </div>
         </div>
+        <div class="mt-6 text-right">
+          <NuxtLink to="/parcours#formation" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 hover:underline transition-all">
+            Voir l'évolution des compétences au fil de la formation &rarr;
+          </NuxtLink>
+        </div>
       </section>
 
       <section>
         <div class="flex items-center justify-between mb-8">
           <h2 class="text-2xl font-bold flex items-center gap-2">
             <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
-            Projets & SAÉ Récents
+            Projets & SAÉ
           </h2>
           
           <div class="hidden md:flex gap-2">
@@ -264,9 +277,9 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           
           <div>
-            <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-4">Prénom NOM</h3>
+            <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-4">Soan MOREAU</h3>
             <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-              Étudiant en BUT Informatique passionné par le développement et l'optimisation.
+              Étudiant en BUT Informatique autonome, soucieux du détail et rigoureux.
             </p>
             <div class="flex gap-4">
               <a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-emerald-100 hover:text-emerald-600 transition-colors">in</a>
@@ -278,7 +291,7 @@
             <h3 class="font-bold text-gray-900 dark:text-white mb-4">Navigation</h3>
             <ul class="space-y-2 text-gray-600 dark:text-gray-400">
               <li><NuxtLink to="/" class="hover:text-emerald-500 transition-colors">Accueil</NuxtLink></li>
-              <li><NuxtLink to="/parcours" class="hover:text-emerald-500 transition-colors">Parcours détaillé</NuxtLink></li>
+              <li><NuxtLink to="#parcours" class="hover:text-emerald-500 transition-colors">Parcours détaillé</NuxtLink></li>
               <li><NuxtLink to="/competences" class="hover:text-emerald-500 transition-colors">Compétences</NuxtLink></li>
               <li><NuxtLink to="/sae" class="hover:text-emerald-500 transition-colors">Projets & SAÉ</NuxtLink></li>
               <li><NuxtLink to="/stage" class="hover:text-emerald-500 transition-colors">Bilan de Stage</NuxtLink></li>
@@ -289,7 +302,7 @@
             <h3 class="font-bold text-gray-900 dark:text-white mb-4">Contact</h3>
             <ul class="space-y-2 text-gray-600 dark:text-gray-400">
               <li class="flex items-center gap-2">
-                <span class="text-emerald-500">@</span> prenom.nom@email.com
+                <span class="text-emerald-500">@</span> soanmoreau5@gmail.com
               </li>
               <li class="flex items-center gap-2">
                 <span class="w-2 h-2 bg-emerald-500 rounded-full"></span> À la recherche d'une alternance
@@ -305,7 +318,7 @@
         </div>
         
         <div class="text-center text-gray-500 dark:text-gray-500 pt-8 border-t border-gray-100 dark:border-gray-800/60">
-          &copy; 2026 Prénom Nom. Portfolio réalisé avec Nuxt 4 & Tailwind CSS.
+          &copy; 2026 Soan MOREAU. Portfolio réalisé avec Nuxt 4, Tailwind CSS et Gemini PRO.
         </div>
       </footer>
   </div>
