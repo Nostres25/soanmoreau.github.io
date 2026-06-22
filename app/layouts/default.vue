@@ -46,6 +46,7 @@
       <!-- Transition douce entre les pages -->
       <NuxtPage />
     </main>
+    <GlobalModal />
   </div>
 </template>
 

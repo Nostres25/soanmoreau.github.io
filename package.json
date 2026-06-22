@@ -2,6 +2,11 @@
   "name": "nuxt-app",
   "private": true,
   "type": "module",
+  "author": {
+    "name": "Soan MOREAU",
+    "email": "soanmoreau5@gmail.com",
+    "url": "https://soanmoreau.vercel.app/"
+  },
   "scripts": {
     "build_github": "NUXT_APP_BASE_URL=/Nostres25/portfolio/ npx nuxt build --preset github_pages",
     "build": "nuxt build",
