@@ -13,9 +13,8 @@
         <svg v-else xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
     </header>
-
-    <nav class="fixed bottom-0 w-full md:relative md:w-64 md:min-h-screen bg-white dark:bg-gray-800 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] md:shadow-none border-t md:border-t-0 md:border-r border-gray-200 dark:border-gray-700 z-[110] flex md:flex-col justify-between">
-      
+    
+    <nav class="fixed bottom-0 w-full md:sticky md:top-0 md:w-64 md:h-screen bg-white dark:bg-gray-800 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] md:shadow-none border-t md:border-t-0 md:border-r border-gray-200 dark:border-gray-700 z-[110] flex md:flex-col justify-between overflow-y-auto hide-scrollbar">      
       <div class="hidden md:block p-6">
         <NuxtLink to="/">
           <h1 class="text-2xl font-bold tracking-tight hover:opacity-80 transition-opacity">
