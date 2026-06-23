@@ -1,5 +1,6 @@
 // composables/usePortfolio.ts
 import { ref, computed } from 'vue'
+import { stripIndents } from 'common-tags';
 
 // --- 1. DONNÉES NORMALISÉES ---
 
@@ -38,7 +39,10 @@ export const PROJECTS = {
     title: "Site de suivi de colis pour l'IUT", 
     context: 'SAÉ BUT', 
     description: 'Projet de deuxième année : Site qui répertorie les devis, bons de commandes, bons de livraisons avec possibilité de les traiter.',
-    longDescription: "",
+    longDescription: stripIndents`
+      L'objectif était de développer un site en PHP et avec une base de donnée MariaDB pour assurer le suivi des commandes et des colis des différents départements de l'IUT de Villetaneuse. 
+      Avec un suivi des commandes et des colis à chaque étape, du devis au paiement de la commande en passant par la livtaison des colis. Chaque commande doit être facilement accessible notamment via une recherche, différents acteurs peuvent traiter la commande.
+    `,
     github: 'https://github.com/Nostres25/suivi-colis-iutv-v2', 
     website: '', 
     images: [], 
@@ -48,8 +52,24 @@ export const PROJECTS = {
 }
 
 export const EXPERIENCES = {
-  'stage-mf': { id: 'stage-mf', title: 'Développeur PHP front/back', entity: 'Market Factory', date: 'Janv 2026 - Mars 2026', description: 'Développement API, correction de failles, refonte et rédaction de documentation.', longDescription: "Pendant ce stage, j'ai eu l'opportunité de travailler sur l'architecture globale. J'y ai développé de nouvelles fonctionnalités utilisant des API, trouvé et corrigé des failles de sécurité, et proposé une refonte du projet pour une structure plus évolutive.", toolIds: ['php', 'git'] },
-  'draftbot': { id: 'draftbot', title: 'Support Utilisateur', entity: 'DraftBot', date: 'Depuis 2019', description: 'Tests, identification et résolution de problèmes. Agent présent sur +1M de serveurs.', longDescription: "Mes missions incluaient la réalisation de tests, l'identification et la résolution de problèmes en direct avec la communauté. J'ai également identifié les besoins des utilisateurs en apportant des solutions cohérentes.", toolIds: [] }
+  'stage-mf': { 
+    id: 'stage-mf', 
+    title: 'Développeur PHP front/back', 
+    entity: 'Market Factory', 
+    date: 'Janv 2026 - Mars 2026', 
+    description: 'Développement API, correction de failles, refonte et rédaction de documentation.', 
+    longDescription: "Ce stage de deuxième année a marqué ma véritable transition entre le code académique et les exigences de production en entreprise. J'y ai été confronté à une base de code existante, m'apprenant l'importance cruciale de la maintenabilité et de la sécurité.\n\nQu'ai-je appris ? J'ai acquis une solide méthodologie dans l'audit de code, en identifiant et en corrigeant des failles de sécurité. J'ai également compris que le développement ne s'arrête pas au code : j'ai pris l'initiative de rédiger une documentation complète et d'intégrer de nouveaux outils à la stack technique pour faciliter le travail futur de l'équipe.\n\nComment le démontrer ? Les nouvelles fonctionnalités API que j'ai développées sont aujourd'hui en production. La refonte architecturale que j'ai amorcée a permis un gain de performance et de clarté, validé par les retours positifs de mon tuteur de stage.\n\nQue me reste-t-il à améliorer ? Cette expérience m'a fait réaliser que je devais encore approfondir mes connaissances sur les processus d'intégration continue (CI/CD) et l'automatisation des tests, des objectifs que je compte cibler lors de ma troisième année en alternance.", 
+    toolIds: ['php', 'git'] 
+  },
+  'draftbot': { 
+    id: 'draftbot', 
+    title: 'Support Utilisateur', 
+    entity: 'DraftBot', 
+    date: 'Depuis 2019', 
+    description: 'Tests, identification et résolution de problèmes. Agent présent sur +1M de serveurs.', 
+    longDescription: "Mes missions incluaient la réalisation de tests, l'identification et la résolution de problèmes en direct avec la communauté. J'ai également identifié les besoins des utilisateurs en apportant des solutions cohérentes.", 
+    toolIds: [] 
+  }
 }
 
 export const EDUCATIONS = {

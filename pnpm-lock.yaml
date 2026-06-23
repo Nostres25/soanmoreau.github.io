@@ -29,6 +29,9 @@ importers:
       better-sqlite3:
         specifier: ^12.2.0
         version: 12.2.0
+      common-tags:
+        specifier: ^1.8.2
+        version: 1.8.2
       eslint:
         specifier: ^9.31.0
         version: 9.31.0(jiti@2.4.2)
@@ -2375,6 +2378,10 @@ packages:
 
   common-path-prefix@3.0.0:
     resolution: {integrity: sha512-QE33hToZseCH3jS0qN96O/bSh3kaw/h+Tq7ngyY9eWDUnTlTNUyqfqvCXioLe5Na5jFsL78ra/wuBU4iuEgd4w==}
+
+  common-tags@1.8.2:
+    resolution: {integrity: sha512-gk/Z852D2Wtb//0I+kRFNKKE9dIIVirjoqPoA1wJU+XePVXZfGeBpk45+A1rKO4Q43prqWBNY/MiIeRLbPWUaA==}
+    engines: {node: '>=4.0.0'}
 
   commondir@1.0.1:
     resolution: {integrity: sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==}
@@ -8465,6 +8472,8 @@ snapshots:
   comment-parser@1.4.1: {}
 
   common-path-prefix@3.0.0: {}
+
+  common-tags@1.8.2: {}
 
   commondir@1.0.1: {}
 
