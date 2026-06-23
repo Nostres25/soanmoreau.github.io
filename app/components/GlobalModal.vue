@@ -40,6 +40,7 @@
             <h3 class="font-bold text-gray-900 dark:text-white mb-3">Notions maîtrisées :</h3>
             <div v-if="toolData.conceptIds?.length" class="space-y-4">
               <div v-for="cid in toolData.conceptIds" :key="cid" class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
+
                 <h4 class="font-bold text-emerald-700 dark:text-emerald-400 mb-1">{{ CONCEPTS[cid].name }}</h4>
                 <p class="text-sm text-gray-600 dark:text-gray-400 text-justify mb-3">{{ CONCEPTS[cid].description }}</p>
                 
