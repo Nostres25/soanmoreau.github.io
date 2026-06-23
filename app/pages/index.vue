@@ -117,7 +117,8 @@
       </section>
 
       <hr class="border-gray-200 dark:border-gray-800/60">
-      <section>
+      <!-- 2. COMPÉTENCES CLÉS -->
+      <section id="competences" class="scroll-mt-24">
         <div class="mb-6">
           <h2 class="text-2xl font-bold flex items-center gap-2 mb-3">
             <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
@@ -128,84 +129,39 @@
           </p>
         </div>
         
-        <div class="flex flex-col gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div 
-            v-for="comp in Object.values(COMPETENCES)" 
+            v-for="comp in COMPETENCES" 
             :key="comp.id" 
-            class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl border border-gray-100 dark:border-gray-700 transition-all duration-300 overflow-hidden"
-            :class="{ 'border-emerald-500/50 shadow-md': expandedSkills[comp.id] }"
+            class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all"
           >
-            <div 
-              @click="toggleSkill(comp.id)"
-              class="p-4 sm:p-5 flex items-center justify-between cursor-pointer hover:bg-gray-50/50 dark:hover:bg-gray-700/50 transition-colors"
-            >
-              <div class="flex-1 pr-4">
-                <h3 
-                  class="font-bold text-lg mb-1 transition-colors"
-                  :class="expandedSkills[comp.id] ? 'text-emerald-600 dark:text-emerald-400' : 'text-gray-900 dark:text-white'"
-                >
-                  {{ comp.title }}
-                </h3>
-                <p class="text-sm text-gray-600 dark:text-gray-400">
-                  {{ comp.description }}
-                </p>
-              </div>
-              
-              <div 
-                class="shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300"
-                :class="expandedSkills[comp.id] ? 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rotate-180' : 'bg-gray-100 dark:bg-gray-700 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600'"
+            <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-2">{{ comp.title }}</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 text-justify min-h-[40px]">{{ comp.description }}</p>
+            
+            <!-- Utilisation de la fonction dynamique pour les outils -->
+            <div class="flex flex-wrap gap-2 mb-4">
+              <button 
+                v-for="tool in getToolsForCompetence(comp.id)" 
+                :key="tool.id" 
+                @click="openModal({ type: 'tool', id: tool.id as any })"
+                class="px-2 py-1 text-xs font-medium bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded hover:bg-emerald-100 dark:hover:bg-emerald-800 transition-colors"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-              </div>
+                {{ tool.name }}
+              </button>
             </div>
-
-            <div 
-              class="expandable-wrapper bg-gray-50/50 dark:bg-gray-900/50 border-t border-transparent transition-colors"
-              :class="expandedSkills[comp.id] ? 'is-expanded border-gray-100 dark:border-gray-700' : ''"
-            >
-              <div class="expandable-content">
-                <div class="p-5 flex flex-col md:flex-row gap-6 md:gap-12">
-                  
-                  <div class="flex-1">
-                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Outils & Langages</h4>
-                    <ul class="space-y-2">
-                      <li 
-                        v-for="tid in comp.toolIds.slice(0, 5)" 
-                        :key="tid" 
-                        @click="openModal({ type: 'tool', id: tid as any })"
-                        class="flex items-center justify-between p-2 -mx-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer transition-colors"
-                      >
-                        <div class="flex items-center gap-3">
-                          <div class="w-6 h-6 shrink-0 bg-white dark:bg-gray-700 rounded-md border border-gray-200 dark:border-gray-600 flex items-center justify-center text-[10px] font-bold text-emerald-500">
-                            {{ TOOLS[tid as keyof typeof TOOLS].icon }}
-                          </div>
-                          <span class="text-sm font-medium text-gray-800 dark:text-gray-200">{{ TOOLS[tid as keyof typeof TOOLS].name }}</span>
-                        </div>
-                        <span class="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/40 px-2 py-0.5 rounded">
-                          {{ TOOLS[tid as keyof typeof TOOLS].masteryIndex + 1 }}/5
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div class="flex-1">
-                    <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Projets associés</h4>
-                    <ul class="space-y-2">
-                      <li 
-                        v-for="pid in comp.projectIds.slice(0, 3)" 
-                        :key="pid"
-                        @click="openModal({ type: 'project', id: pid as any })"
-                        class="flex items-center gap-2 bg-white dark:bg-gray-800 p-2.5 rounded-lg border border-gray-100 dark:border-gray-700 cursor-pointer hover:border-emerald-500 hover:text-emerald-600 transition-colors"
-                      >
-                        <span class="text-emerald-500">&rarr;</span>
-                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300 truncate pr-2">{{ PROJECTS[pid as keyof typeof PROJECTS].title }}</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-            </div>
+            
+            <!-- Utilisation de la fonction dynamique pour les projets -->
+            <ul class="space-y-2 mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+              <li 
+                v-for="projet in getProjectsForCompetence(comp.id)" 
+                :key="projet.id" 
+                @click="openModal({ type: 'project', id: projet.id as any })" 
+                class="text-sm text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 cursor-pointer transition-colors flex items-center gap-2"
+              >
+                <span class="w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full"></span>
+                {{ projet.title }}
+              </li>
+            </ul>
           </div>
         </div>
         <div class="mt-6 text-right">
@@ -214,6 +170,9 @@
           </NuxtLink>
         </div>
       </section>
+
+      <!-- 3. PROJETS & SAÉ -->
+      <!-- ... -->
 
       <section>
         <div class="flex items-center justify-between mb-8">
@@ -251,12 +210,13 @@
               </p>
               
               <div class="flex flex-wrap gap-2 mb-6">
+                <!-- Remplacement de projet.toolIds par projet.tools.map -->
                 <span 
-                  v-for="tid in projet.toolIds" 
-                  :key="tid" 
+                  v-for="t in projet.tools" 
+                  :key="t.id" 
                   class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium rounded"
                 >
-                  {{ TOOLS[tid as keyof typeof TOOLS].name }}
+                  {{ TOOLS[t.id].name }}
                 </span>
               </div>
               

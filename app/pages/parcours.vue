@@ -152,12 +152,13 @@
           </p>
           
           <div class="flex flex-wrap gap-2 mb-6">
+            <!-- Boucle sur projet.tools au lieu de toolIds -->
             <span 
-              v-for="tid in projet.toolIds" 
-              :key="tid" 
+              v-for="t in projet.tools" 
+              :key="t.id" 
               class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium rounded"
             >
-              {{ TOOLS[tid as keyof typeof TOOLS].name }}
+              {{ TOOLS[t.id].name }}
             </span>
           </div>
           
