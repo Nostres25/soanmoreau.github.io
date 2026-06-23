@@ -348,18 +348,31 @@ export const EXPERIENCES = {
     description: 'Développement API, correction de failles, refonte et rédaction de documentation.', 
     longDescription: stripIndents`Ce stage de deuxième année a marqué ma véritable transition entre le code académique et les exigences de production en entreprise. J'y ai été confronté à une base de code existante, m'apprenant l'importance cruciale de la maintenabilité et de la sécurité.
     
-    Qu'ai-je appris ? J'ai acquis une solide méthodologie dans l'audit de code, en identifiant et en corrigeant des failles de sécurité. J'ai également compris que le développement ne s'arrête pas au code : j'ai pris l'initiative de rédiger une documentation complète et d'intégrer de nouveaux outils à la stack technique pour faciliter le travail futur de l'équipe.
+    ## Qu'ai-je appris ? 
+    J'ai acquis une solide méthodologie dans l'audit de code, en identifiant et en corrigeant des failles de sécurité. J'ai également compris que le développement ne s'arrête pas au code : j'ai pris l'initiative de rédiger une documentation complète et d'intégrer de nouveaux outils à la stack technique pour faciliter le travail futur de l'équipe.
     
-    Comment le démontrer ? Les nouvelles fonctionnalités API que j'ai développées sont aujourd'hui en production. La refonte architecturale que j'ai amorcée a permis un gain de performance et de clarté, validé par les retours positifs de mon tuteur de stage.
+    ## Comment le démontrer ? 
+    Les nouvelles fonctionnalités API que j'ai développées sont aujourd'hui en production. La refonte architecturale que j'ai amorcée a permis un gain de performance et de clarté, et je peux vous montrer les codes réalisés sur demande.
     
-    Que me reste-t-il à améliorer ? Cette expérience m'a fait réaliser que je devais encore approfondir mes connaissances sur les processus d'intégration continue (CI/CD) et l'automatisation des tests, des objectifs que je compte cibler lors de ma troisième année en alternance.`, 
+    ## Que me reste-t-il à améliorer ? 
+    Cette expérience m'a fait réaliser à quel point j'apprécie le développement de qualité, la sécurité et l'optimisation. J'ai encore beaucoup de choses à apprendre du côté de la sécurté. Je peux aussi gagner en efficacité et en connaissance sur de nouvelles technologies.`, 
     
     competencies: [
-      { id: 'realiser-app', description: "Création d'endpoints API.", longDescription: "" }
+      { id: 'realiser-app', description: "Refonte d'une application web PHP, correction de failles de sécurité...", longDescription: "" },
+      { id: 'optimiser', description: "Optimisation de requêtes HTTP/API, logique PHP, requêtes SQL...", longDescription: "" },
+      { id: 'administrer', description: "Configuration Apache2, documentation du projet, définition de fichier .htaccess", longDescription: "" },
+      { id: 'gerer-donnees', description: "Stockage des stocks toptex, enquête sur les schémas SQL, debug par requêtes SQL...", longDescription: "" },
+      { id: 'conduire-projet', description: "Redéfinition de la structure du projet, documentation.", longDescription: "" },
+      { id: 'collaborer', description: "retours réguliers au supérieur, communication des changements importants en temps réel...", longDescription: "" },
     ],
     tools: [
-      { id: 'php', description: "Refonte sous framework.", longDescription: "", conceptIds: ['mvc', 'secu'] },
-      { id: 'git', description: "Travail en équipe.", longDescription: "", conceptIds: ['versioning'] }
+      // TODO à compléter (dom, javascript, jquery, ajax, composer "sources annexes")
+      { id: 'php', description: "Refonte sans framework en PHP 8.3 traditionel", longDescription: "", conceptIds: ['mvc', 'secu'] },
+      { id: 'git', description: "Travail en équipe.", longDescription: "", conceptIds: ['git-commits', 'versioning', 'git-branches'] },
+      { id: 'css', description: "HTML/CSS des plus traditionnels, sans moteur de template", conceptIds: [] },
+      { id: 'bootstrap', description: "Utilisation de classes bootstrap", conceptIds: [] },
+      { id: 'javascript', description: "Affichages dynamiques via havascript", conceptIds: ['dom', 'ajax'] },
+      { id: 'composer', description: "Mise en place de composer pour des outils de développement & installer les ressources ainsi que css", conceptIds: ['paquets-scripts', 'modules', 'modules-dev'] },
     ]
   },
   'draftbot': { 
@@ -425,3 +438,16 @@ export const TIMELINE_DATA = [
   { id: 'but-info', modalType: 'education', type: 'edu', title: 'BUT Informatique', entity: 'IUT Sorbonne P-N', startDate: 'Sept 2024', endDate: 'Juin 2027', durationMonths: 33, isEvent: false, stemHeight: 80, textOffset: '-translate-x-[60%]' },
   { id: 'stage-mf', modalType: 'experience', type: 'pro', title: 'Stage Dev PHP', entity: 'Market Factory', startDate: 'Jan 2026', endDate: 'Mars 2026', durationMonths: 3, isEvent: false, stemHeight: 110, textOffset: '-translate-x-[50%]' }
 ]
+
+// À la fin de composables/usePortfolio.ts
+
+// --- OUTIL DE RENDU MARKDOWN LÉGER ---
+export const renderMarkdown = (text: string) => {
+  if (!text) return ''
+  return text
+    .replace(/^### (.*$)/gim, '<h3 class="text-lg font-bold text-gray-900 dark:text-white mt-5 mb-2">$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2 class="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">$1</h2>')
+    .replace(/\*\*(.*?)\*\*/gim, '<strong class="font-bold text-emerald-700 dark:text-emerald-400">$1</strong>')
+    .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+    .replace(/^\- (.*$)/gim, '<li class="ml-5 list-disc">$1</li>')
+}

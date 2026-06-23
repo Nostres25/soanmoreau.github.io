@@ -174,7 +174,7 @@
       <!-- 3. PROJETS & SAÉ -->
       <!-- ... -->
 
-      <section>
+      <section id="projets" class="scroll-mt-24">
         <div class="flex items-center justify-between mb-8">
           <h2 class="text-2xl font-bold flex items-center gap-2">
             <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>

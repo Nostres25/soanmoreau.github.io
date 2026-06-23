@@ -1,4 +1,3 @@
-<!-- components/GlobalModal.vue -->
 <template>
   <Transition name="fade">
     <div v-if="isOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
@@ -20,7 +19,6 @@
 
         <div class="p-6 overflow-y-auto">
           
-          <!-- ======= AFFICHAGE OUTIL ======= -->
           <div v-if="currentModal?.type === 'tool' && toolData">
             <div class="flex items-center gap-4 mb-6">
               <div class="w-16 h-16 shrink-0 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 flex items-center justify-center text-2xl font-bold text-emerald-500">
@@ -28,11 +26,23 @@
               </div>
               <div>
                 <h2 class="text-2xl font-bold">{{ toolData.name }}</h2>
-                <div class="flex items-center gap-2 mt-1">
-                  <span class="text-sm font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded">
+                
+                <div class="mt-2">
+                  <span class="text-sm font-medium text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded inline-block mb-1.5">
                     {{ MASTERY_LEVELS[toolData.masteryIndex] }}
                   </span>
-                  <span class="text-sm text-gray-500">&bull; Pratiqué depuis {{ toolData.duration }}</span>
+                  
+                  <div class="flex items-center gap-1.5">
+                    <div class="flex gap-1">
+                      <div 
+                        v-for="i in MASTERY_LEVELS.length" :key="i"
+                        class="w-4 h-4 rounded-[3px] transition-all duration-300"
+                        :class="i <= toolData.masteryIndex + 1 ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.4)] dark:bg-emerald-400' : 'bg-gray-200 dark:bg-gray-700'"
+                      ></div>
+                    </div>
+                    <span class="text-xs font-bold text-gray-500 ml-2">{{ toolData.masteryIndex + 1 }}/{{ MASTERY_LEVELS.length }}</span>
+                  </div>
+                  <span class="text-sm text-gray-500 mt-1 block">&bull; Pratiqué depuis {{ toolData.duration }}</span>
                 </div>
               </div>
             </div>
@@ -40,11 +50,9 @@
             <h3 class="font-bold text-gray-900 dark:text-white mb-3">Notions maîtrisées :</h3>
             <div v-if="toolData.conceptIds?.length" class="space-y-4">
               <div v-for="cid in toolData.conceptIds" :key="cid" class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
-
                 <h4 class="font-bold text-emerald-700 dark:text-emerald-400 mb-1">{{ CONCEPTS[cid].name }}</h4>
                 <p class="text-sm text-gray-600 dark:text-gray-400 text-justify mb-3">{{ CONCEPTS[cid].description }}</p>
                 
-                <!-- Liste des projets/exp dynamiques liés à cette notion -->
                 <div class="flex flex-wrap gap-2">
                   <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 py-1">Appliqué dans :</span>
                   <button 
@@ -59,10 +67,7 @@
             </div>
             <p v-else class="text-sm text-gray-500 italic">Aucune notion détaillée pour le moment.</p>
           </div>
-
-          <!-- ======= AFFICHAGE ENTITÉS (Projet, Expérience, Formation) ======= -->
           <div v-else-if="currentEntity">
-            <!-- En-tête dynamique -->
             <div class="mb-6">
               <span v-if="currentEntity.context || currentEntity.date" class="text-xs font-semibold px-2 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 rounded-md mb-2 inline-block">
                 {{ currentEntity.context || currentEntity.date }}
@@ -79,21 +84,20 @@
                 
                 <div class="grid transition-all duration-500 ease-in-out" :style="{ gridTemplateRows: isExpanded ? '1fr' : '0fr' }">
                   <div class="overflow-hidden">
-                    <div class="mt-3 p-5 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line text-justify">
-                      {{ currentEntity.longDescription }}
-                    </div>
-                  </div>
+                    <div 
+                      class="mt-3 p-5 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line text-justify"
+                      v-html="renderMarkdown(currentEntity.longDescription)"
+                    ></div>
+                  </div>  
                 </div>
               </div>
             </div>
 
-            <!-- Liens Projet (si applicables) -->
             <div v-if="currentEntity.github || currentEntity.website" class="flex gap-4 mb-8">
               <a v-if="currentEntity.github" :href="currentEntity.github" target="_blank" class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">GitHub</a>
               <a v-if="currentEntity.website" :href="currentEntity.website" target="_blank" class="px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium hover:bg-emerald-500 transition-colors">Voir le site</a>
             </div>
 
-            <!-- Outils Sollicités (Nouvelle structure riche) -->
             <div class="mt-8 space-y-6">
               <div v-if="currentEntity.tools?.length">
                 <h3 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Outils sollicités & notions</h3>
@@ -115,7 +119,6 @@
                 </div>
               </div>
 
-              <!-- Compétences Travaillées (Nouvelle structure riche) -->
               <div v-if="currentEntity.competencies?.length">
                 <h3 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Compétences appliquées</h3>
                 <div class="space-y-3">
@@ -126,7 +129,6 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -136,13 +138,11 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { useModalManager, TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS, getEntitiesForConcept } from '~/composables/usePortfolio'
-
+import { useModalManager, TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS, getEntitiesForConcept, renderMarkdown } from '~/composables/usePortfolio'
 const { isOpen, currentModal, hasHistory, closeAll, goBack, openModal } = useModalManager()
 
 const toolData = computed(() => currentModal.value?.type === 'tool' ? TOOLS[currentModal.value.id as keyof typeof TOOLS] : null)
 
-// Regroupe les données de Projet, Expérience ou Formation dans une seule variable dynamique pour un affichage unifié
 const currentEntity = computed(() => {
   if (!currentModal.value) return null
   if (currentModal.value.type === 'project') return PROJECTS[currentModal.value.id as keyof typeof PROJECTS]
@@ -164,4 +164,4 @@ watch(currentModal, () => {
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 .animate-slide-up { animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 @keyframes slideUp { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-</style>
+</style> 

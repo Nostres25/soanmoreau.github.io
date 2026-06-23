@@ -125,6 +125,35 @@
       </div>
     </section>
 
+
+    <section id="stage" class="scroll-mt-28">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+        <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span> 
+        Expérience professionnelle : Stage de deuxième année
+      </h2>
+      <div class="bg-blue-50/50 dark:bg-blue-900/10 p-6 sm:p-8 rounded-2xl border border-blue-100 dark:border-blue-800/30 leading-relaxed">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-xl text-blue-900 dark:text-blue-100">{{ stageData?.entity }}</h3>
+          <span class="text-xs font-bold text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/50 px-2 py-1 rounded">{{ stageData?.date }}</span>
+        </div>
+        <p class="text-blue-800 dark:text-blue-200 font-medium mb-6 text-justify">{{ stageData?.description }}</p>
+        
+        <div 
+          class="text-gray-600 dark:text-gray-400 text-justify whitespace-pre-line"
+          v-html="renderMarkdown(stageData?.longDescription || '')"
+        ></div>
+        
+        <div class="mt-8">
+          <button 
+            @click="openModal({ type: 'experience', id: 'stage-mf' })" 
+            class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline transition-all"
+          >
+            Ouvrir la fiche de ce stage &rarr;
+          </button>
+        </div>
+      </div>
+    </section>
+
     <section id="sae" class="scroll-mt-28">
       <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
         <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span> 
@@ -173,37 +202,12 @@
       </div>
     </section>
 
-    <section id="stage" class="scroll-mt-28">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-        <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span> 
-        Expérience professionnelle : Stage de deuxième année
-      </h2>
-      <div class="bg-blue-50/50 dark:bg-blue-900/10 p-6 sm:p-8 rounded-2xl border border-blue-100 dark:border-blue-800/30 text-justify leading-relaxed">
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="font-bold text-xl text-blue-900 dark:text-blue-100">{{ stageData?.entity }}</h3>
-          <span class="text-xs font-bold text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/50 px-2 py-1 rounded">{{ stageData?.date }}</span>
-        </div>
-        <p class="text-blue-800 dark:text-blue-200 font-medium mb-4">{{ stageData?.description }}</p>
-        <p class="text-gray-600 dark:text-gray-400">{{ stageData?.longDescription }}</p>
-        
-        <div class="mt-6">
-          <button 
-            @click="openModal({ type: 'experience', id: 'stage-mf' })" 
-            class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline transition-all"
-          >
-            Ouvrir la fiche de ce stage &rarr;
-          </button>
-        </div>
-      </div>
-    </section>
-
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { TOOLS, PROJECTS, EDUCATIONS, EXPERIENCES, useModalManager } from '~/composables/usePortfolio'
-
+import { TOOLS, PROJECTS, EDUCATIONS, EXPERIENCES, useModalManager, renderMarkdown } from '~/composables/usePortfolio'
 const { openModal } = useModalManager()
 
 // Récupération des données du BUT
