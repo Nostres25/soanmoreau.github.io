@@ -1,3 +1,28 @@
+<script setup lang="ts">
+import { ref, computed, watch } from 'vue'
+import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS } from '~/composables/objects'
+import { useModalManager, getEntitiesForConcept, renderMarkdown } from '~/composables/usePortfolio'
+
+const { isOpen, currentModal, hasHistory, closeAll, goBack, openModal } = useModalManager()
+
+const toolData = computed(() => currentModal.value?.type === 'tool' ? TOOLS[currentModal.value.id as keyof typeof TOOLS] : null)
+
+const currentEntity = computed(() => {
+  if (!currentModal.value) return null
+  if (currentModal.value.type === 'project') return PROJECTS[currentModal.value.id as keyof typeof PROJECTS]
+  if (currentModal.value.type === 'experience') return EXPERIENCES[currentModal.value.id as keyof typeof EXPERIENCES]
+  if (currentModal.value.type === 'education') return EDUCATIONS[currentModal.value.id as keyof typeof EDUCATIONS]
+  return null
+})
+
+const isExpanded = ref(false)
+const toggleExpand = () => { isExpanded.value = !isExpanded.value }
+
+watch(currentModal, () => {
+  isExpanded.value = false;
+})
+</script>
+
 <template>
   <Transition name="fade">
     <div v-if="isOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
@@ -5,7 +30,7 @@
 
       <div 
         class="relative w-full max-h-[90vh] flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out"
-        :class="isExpanded ? 'max-w-4xl' : 'max-w-2xl animate-slide-up'"
+        :class="currentModal?.type === 'education' || currentModal?.type === 'project' || isExpanded ? 'max-w-4xl' : 'max-w-2xl animate-slide-up'"
       >
         <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 shrink-0">
           <button v-if="hasHistory" @click="goBack" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-emerald-600 transition-colors">
@@ -78,8 +103,10 @@
               
               <div v-if="currentEntity.longDescription" class="mt-3">
                 <button @click="toggleExpand" class="text-sm font-medium text-emerald-600 hover:text-emerald-500 transition-colors inline-flex items-center gap-1">
-                  <span v-if="!isExpanded">En savoir plus &darr;</span>
-                  <span v-else>Réduire &uarr;</span>
+                  <strong>
+                    <span v-if="!isExpanded">En savoir plus &darr;</span>
+                    <span v-else>Réduire &uarr;</span>
+                  </strong>
                 </button>
                 
                 <div class="grid transition-all duration-500 ease-in-out" :style="{ gridTemplateRows: isExpanded ? '1fr' : '0fr' }">
@@ -135,31 +162,6 @@
     </div>
   </Transition>
 </template>
-
-<script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS } from '~/composables/objects'
-import { useModalManager, getEntitiesForConcept, renderMarkdown } from '~/composables/usePortfolio'
-
-const { isOpen, currentModal, hasHistory, closeAll, goBack, openModal } = useModalManager()
-
-const toolData = computed(() => currentModal.value?.type === 'tool' ? TOOLS[currentModal.value.id as keyof typeof TOOLS] : null)
-
-const currentEntity = computed(() => {
-  if (!currentModal.value) return null
-  if (currentModal.value.type === 'project') return PROJECTS[currentModal.value.id as keyof typeof PROJECTS]
-  if (currentModal.value.type === 'experience') return EXPERIENCES[currentModal.value.id as keyof typeof EXPERIENCES]
-  if (currentModal.value.type === 'education') return EDUCATIONS[currentModal.value.id as keyof typeof EDUCATIONS]
-  return null
-})
-
-const isExpanded = ref(false)
-const toggleExpand = () => { isExpanded.value = !isExpanded.value }
-
-watch(currentModal, () => {
-  isExpanded.value = false
-})
-</script>
 
 <style scoped>
 .fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
