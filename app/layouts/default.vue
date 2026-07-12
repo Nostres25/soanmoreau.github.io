@@ -1,6 +1,21 @@
+<script setup lang="ts">
+const colorMode = useColorMode()
+
+const toggleColorMode = () => {
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}
+
+const links = [
+  { name: 'Accueil', path: '/' },
+  { name: 'Compétences', path: '/#competences' },
+  { name: 'Projets', path: '/#projets' },
+  { name: 'Parcours', path: '/parcours' },
+  { name: 'Stage', path: '/parcours#stage' }
+]
+</script>
+
 <template>
   <div class="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 flex flex-col md:flex-row">
-
     <header class="md:hidden fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-[120] px-6 py-4 flex items-center justify-between shadow-sm">
       <NuxtLink to="/">
         <h1 class="text-xl font-extrabold tracking-tight">
@@ -62,29 +77,58 @@
       </div>
     </nav>
 
-    <main class="flex-1 p-6 md:p-12 pt-24 md:pt-12 mb-20 md:mb-0 overflow-y-auto">
-      <NuxtPage />
-    </main>
-    
-    <GlobalModal />
+    <div>
+      <main class="flex-1 p-6 md:p-12 pt-24 md:pt-12 mb-20 md:mb-0 overflow-y-auto">
+        <NuxtPage />
+      </main>
+      <footer class="p-6 md:p-12 pt-24 md:pt-12 mb-20 md:mb-0 border-t border-gray-200 dark:border-gray-800/60 text-sm">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          
+          <div>
+            <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-4">Soan MOREAU</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+              Étudiant en BUT Informatique autonome, soucieux du détail et rigoureux.
+            </p>
+            <div class="flex gap-4">
+              <a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-emerald-100 hover:text-emerald-600 transition-colors">in</a>
+              <a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-emerald-100 hover:text-emerald-600 transition-colors">gh</a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-4">Navigation</h3>
+            <ul v-for="link in links" :key="link.name" class="space-y-2 text-gray-600 dark:text-gray-400">
+              <li><NuxtLink :to="link.path" class="hover:text-emerald-500 transition-colors">{{ link.name }}</NuxtLink></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-4">Contact</h3>
+            <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+              <li class="flex items-center gap-2">
+                <span class="text-emerald-500">@</span> soanmoreau5@gmail.com
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-2 h-2 bg-emerald-500 rounded-full"></span> À la recherche d'une alternance
+              </li>
+              <li class="flex items-center gap-2 mt-2">
+                <a href="/cv.pdf" download class="inline-flex items-center gap-1 font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">
+                  Télécharger mon CV &rarr;
+                </a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        
+        <div class="text-center text-gray-500 dark:text-gray-500 pt-8 border-t border-gray-100 dark:border-gray-800/60">
+          &copy; 2026 Soan MOREAU. Portfolio réalisé avec Nuxt 4, Tailwind CSS.
+        </div>
+      </footer>
+      <GlobalModal />
+    </div>
   </div>
 </template>
-
-<script setup lang="ts">
-const colorMode = useColorMode()
-
-const toggleColorMode = () => {
-  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-}
-
-const links = [
-  { name: 'Accueil', path: '/' },
-  { name: 'Compétences', path: '/#competences' },
-  { name: 'Projets', path: '/#projets' },
-  { name: 'Parcours', path: '/parcours' },
-  { name: 'Stage', path: '/parcours#stage' }
-]
-</script>
 
 <style>
 .page-enter-active,
