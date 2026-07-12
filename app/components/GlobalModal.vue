@@ -85,7 +85,7 @@
                 <div class="grid transition-all duration-500 ease-in-out" :style="{ gridTemplateRows: isExpanded ? '1fr' : '0fr' }">
                   <div class="overflow-hidden">
                     <div 
-                      class="mt-3 p-5 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line text-justify"
+                      class="mt-0 p-5 pt-2 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm whitespace-pre-line text-justify markdown-container"
                       v-html="renderMarkdown(currentEntity.longDescription)"
                     ></div>
                   </div>  
