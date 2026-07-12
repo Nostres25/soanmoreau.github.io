@@ -30,6 +30,9 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    assetsInclude: [
+      "**/*.md",
+    ],
   },
 
   colorMode: {

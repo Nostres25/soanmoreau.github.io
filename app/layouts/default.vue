@@ -27,7 +27,7 @@
             Soan <span class="text-emerald-500 dark:text-emerald-400">MOREAU</span>
           </h1>
         </NuxtLink>
-        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Portfolio BUT</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Portfolio informatique</p>
       </div>
 
       <ul class="flex md:flex-col w-full md:w-auto justify-around md:justify-start md:px-4 md:gap-2 p-2 md:p-0 flex-1">

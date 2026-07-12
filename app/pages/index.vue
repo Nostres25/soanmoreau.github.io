@@ -111,7 +111,7 @@
         </div>
         <div class="mt-6 text-right md:pr-4">
           <NuxtLink to="/parcours" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 hover:underline transition-all">
-            En savoir plus sur le parcours &rarr;
+            En savoir plus sur mon parcours &rarr;
           </NuxtLink>
         </div>
       </section>
@@ -286,8 +286,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { COMPETENCES, TOOLS, PROJECTS, TIMELINE_DATA, useModalManager } from '~/composables/usePortfolio'
-
+import { COMPETENCES, TOOLS, PROJECTS, TIMELINE_DATA } from '~/composables/objects'
+import { useModalManager } from '~/composables/usePortfolio'
 
 const { openModal } = useModalManager()
 

@@ -138,7 +138,9 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { useModalManager, TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS, getEntitiesForConcept, renderMarkdown } from '~/composables/usePortfolio'
+import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS } from '~/composables/objects'
+import { useModalManager, getEntitiesForConcept, renderMarkdown } from '~/composables/usePortfolio'
+
 const { isOpen, currentModal, hasHistory, closeAll, goBack, openModal } = useModalManager()
 
 const toolData = computed(() => currentModal.value?.type === 'tool' ? TOOLS[currentModal.value.id as keyof typeof TOOLS] : null)

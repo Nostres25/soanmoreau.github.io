@@ -207,7 +207,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { TOOLS, PROJECTS, EDUCATIONS, EXPERIENCES, useModalManager, renderMarkdown } from '~/composables/usePortfolio'
+import { TOOLS, PROJECTS, EDUCATIONS, EXPERIENCES } from '~/composables/objects'
+import { renderMarkdown, useModalManager } from '~/composables/usePortfolio'
 const { openModal } = useModalManager()
 
 // Récupération des données du BUT
