@@ -157,7 +157,7 @@ export const EDUCATIONS = {
     id: 'formation-perso', title: 'Formation Personnelle (Autodidacte)', entity: 'Projets Personnels', context: 'Autodidacte', 
     description: 'Apprentissage en autonomie guidé par la curiosité et la réalisation de projets concrets.', 
     contentPath: '/formations/formation-perso.md',
-    longDescription: '', competencies: [], tools: []
+    longDescription: '', competencies: [], tools: [], medias: []
   },
   'but-info': { 
     id: 'but-info', title: 'BUT Informatique', entity: 'Univ. Sorbonne Paris-Nord', context: 'Formation', 
@@ -168,13 +168,14 @@ export const EDUCATIONS = {
     tools: [
       { id: 'python', description: "Algorithmique avancée", longDescription: "", conceptIds: ['complexite'] },
       { id: 'java', description: "POO approfondie", longDescription: "", conceptIds: ['poo'] }
-    ] 
+    ],
+    medias: []
   },
   'bac': { 
     id: 'bac', title: 'BAC Général (Maths, PC, SVT)', entity: 'Lycée', context: 'Diplôme', 
     contentPath: '/formations/bac.md',
     description: 'Apprentissage de la méthode scientifique. Bons résultats en mathématiques.', 
-    longDescription: '', competencies: [], tools: [] 
+    longDescription: '', competencies: [], tools: [], medias: []
   }
 }
 
@@ -204,7 +205,27 @@ export const PROJECTS = {
       { id: 'sentry', description: "Suivi des erreurs en production.", longDescription: "", conceptIds: ['bug-monitoring', 'sentry-debug'] },
       { id: 'git', description: "Gestion du code source.", longDescription: "", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-cherry', 'git-merges', 'git-conflicts'] },
     //   { id: 'github-actions', description: "Déploiement et tests continus.", longDescription: "", conceptIds: [] }
-    ]
+    ], 
+
+    medias: ['https://imgur.com/P0QFVBe.png', 'https://imgur.com/RiZV3YV.png', 'https://imgur.com/2ysW17Y.png', 'https://imgur.com/WrZsRzV.png'],
+    // medias: [
+    //   {
+    //     title: 'Invitation à jouer au UNO sur Discord avec le bot UnoOnDisc',  
+    //     url: 'https://imgur.com/RiZV3YV.png',      
+    //   },
+    //   {
+    //     title: 'Partie de uno sur Discord avec le bot UnoOnDisc',
+    //     url: 'https://imgur.com/RlpI9qc.png'
+    //   },
+    //   {
+    //     title: "Paramétrage des règles et fonctionnalités d'une partie de UNO avec le bot UnoOnDisc",
+    //     url: 'https://imgur.com/2ysW17Y.png'
+    //   },
+    //   {
+    //     title: 'Jeu du 2048 sur Discord avec le bot UnoOnDisc',
+    //     url: 'https://imgur.com/WrZsRzV.png'
+    //   }
+    // ],
   },
   'mc-plugin': { 
     id: 'mc-plugin', title: 'Plugin Minecraft', context: 'Projet Perso', educationId: 'formation-perso',
@@ -220,7 +241,9 @@ export const PROJECTS = {
       { id: 'java', description: "Apprentissage sur le tas du langage.", longDescription: "", conceptIds: ['exceptions', 'poo', 'poly', 'java-uml', 'scopes', 'java-arraylist', 'loops', 'switch', 'enums'] },
       { id: 'spigot', description: "API serveur Minecraft.", longDescription: "", conceptIds: ['perms', 'spigot-yaml', 'spigot-events', 'events', 'spigot-gui', 'spigot-tools', 'cmds', 'spigot-mod', 'spigot-tab', 'zone', 'spigot-groups'] },
       { id: 'git', description: "Sauvegardes du projet.", longDescription: "", conceptIds: ['git-commits', 'git-remote'] }
-    ]
+    ],
+
+    medias: []
   },
   'sae-echecs': { 
     id: 'sae-echecs', title: 'Jeu d\'échecs', context: 'SAÉ BUT', educationId: 'but-info',
@@ -239,8 +262,11 @@ export const PROJECTS = {
       { id: 'vscode', description: "IDE utilisé par l'équipe.", longDescription: "", conceptIds: [] },
       { id: 'java', description: "Développement en Java 8.", longDescription: "", conceptIds: ['exceptions', 'java-scanner', 'poo', 'poly', 'java-uml', 'scopes', 'java-arraylist', 'loops', 'switch', 'enums'] },
       { id: 'git', description: "Collaboration de code.", longDescription: "", conceptIds: ['git-commits', 'git-branches', 'git-merges', 'git-conflicts'] }
-    ]
+    ],
+
+    medias: [],
   },
+
   'sae-suivi': { 
     id: 'sae-suivi', title: 'Suivi de colis', context: 'SAÉ BUT', educationId: 'but-info',
     description: 'Site web de suivi de colis pour l\'IUT.', 
@@ -266,28 +292,36 @@ export const PROJECTS = {
       { id: 'git', description: "Versioning en équipe.", longDescription: "", conceptIds: ['git-commits', 'git-branches', 'git-merges', 'git-conflicts', 'git-issues', 'git-pr'] },
       { id: 'github-project', description: "Organisation des tâches.", longDescription: "", conceptIds: ['gh-backlog', 'gh-priority', 'gh-sub'] },
       { id: 'composer', description: "Gestionnaire de packages PHP.", longDescription: "", conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts'] }
-    ]
+    ],
+
+    medias: []
   },
   'sae-python': { 
     id: 'sae-python', title: 'Étude de graphes', context: 'SAÉ BUT', educationId: 'but-info',
     description: 'Étude de réseaux et de complexité algorithmique.', longDescription: "", github: '', website: '', images: [], 
     contentPath: '/projects/sae-python.md',
     competencies: [{ id: 'optimiser', description: "Analyse des temps d'exécution.", longDescription: "" }],
-    tools: [{ id: 'python', description: "Scripting d'analyse.", longDescription: "", conceptIds: ['complexite'] }]
+    tools: [{ id: 'python', description: "Scripting d'analyse.", longDescription: "", conceptIds: ['complexite'] }],
+
+    medias: []
   },
   'sae-bd': { 
     id: 'sae-bd', title: 'Modélisation BD', context: 'SAÉ BUT', educationId: 'but-info',
     description: 'Recueil des besoins, modélisation et construction de bases de données.', longDescription: "", github: '', website: '', images: [], 
     contentPath: '/projects/sae-bd.md',
     competencies: [{ id: 'gerer-donnees', description: "Architecture de la BD.", longDescription: "" }],
-    tools: [{ id: 'sql', description: "Requêtes de test.", longDescription: "", conceptIds: ['db-model'] }]
+    tools: [{ id: 'sql', description: "Requêtes de test.", longDescription: "", conceptIds: ['db-model'] }],
+
+    medias: []
   },
   'sae-sys': { 
     id: 'sae-sys', title: 'Configuration Ubuntu', context: 'SAÉ BUT', educationId: 'but-info',
     description: 'Configurations d\'un système Ubuntu (Linux) et réseaux (IPv4, DHCP, Pare-feux).', longDescription: "", github: '', website: '', images: [], 
     contentPath: '/projects/sae-sys.md',
     competencies: [{ id: 'administrer', description: "Installation et configuration OS.", longDescription: "" }],
-    tools: [{ id: 'linux', description: "Commandes terminal.", longDescription: "", conceptIds: ['sys'] }]
+    tools: [{ id: 'linux', description: "Commandes terminal.", longDescription: "", conceptIds: ['sys'] }],
+
+    medias: []
   } 
 }
 
@@ -315,7 +349,9 @@ export const EXPERIENCES = {
       { id: 'bootstrap', description: "Utilisation de classes bootstrap", conceptIds: [] },
       { id: 'javascript', description: "Affichages dynamiques via havascript", conceptIds: ['dom', 'ajax'] },
       { id: 'composer', description: "Mise en place de composer pour des outils de développement & installer les ressources ainsi que css", conceptIds: ['paquets-scripts', 'modules', 'modules-dev'] },
-    ]
+    ],
+
+    medias: []
   },
   'draftbot': { 
     id: 'draftbot', title: 'Support Utilisateur', entity: 'DraftBot', year: 2019, date: 'Depuis 2019', 
@@ -325,7 +361,9 @@ export const EXPERIENCES = {
     competencies: [
       { id: 'collaborer', description: "Support aux développeurs.", longDescription: "" }
     ],
-    tools: []
+    tools: [],
+
+    medias: []
   }
 }
 

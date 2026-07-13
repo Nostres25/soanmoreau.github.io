@@ -21,6 +21,14 @@ const toggleExpand = () => { isExpanded.value = !isExpanded.value }
 watch(currentModal, () => {
   isExpanded.value = false;
 })
+
+const imageIsOpen = ref(false)
+const selectedImage = ref<string | null>(null)
+function openImage(url: string) {
+  selectedImage.value = url
+  imageIsOpen.value = true
+}
+
 </script>
 
 <template>
@@ -117,6 +125,30 @@ watch(currentModal, () => {
                     ></div>
                   </div>  
                 </div>
+              </div>
+              <div v-if="currentEntity.medias && currentEntity.medias.length > 0">
+                <NuxtCarousel
+                  v-slot="{ item }"
+                  class-names
+                  dots
+                  arrows
+                  :items="currentEntity.medias as string[]"
+                  :ui="{
+                    item: 'basis-full flex items-center justify-center h-80 transition-opacity [&:not(.is-snapped)]:opacity-10'
+                  }"
+                  class="mx-auto max-w-sm"
+                >
+                  <img
+                    :src="item"
+                    class="max-w-full max-h-full object-contain rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+                    @click="openImage(item)"
+                  >
+                </NuxtCarousel>
+                <NuxtModal v-model:open="imageIsOpen">
+                  <template #content>
+                    <img v-if="selectedImage" :src="selectedImage" class="w-full h-auto max-h-[90vh] object-contain rounded-lg">
+                  </template>
+                </NuxtModal>
               </div>
             </div>
 
