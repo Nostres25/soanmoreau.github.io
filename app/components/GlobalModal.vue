@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS } from '~/composables/objects'
+import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS    } from '~/composables/objects'
+import type { Project, Experience, Education, Tool } from '~/composables/objects';
 import { useModalManager, getEntitiesForConcept, renderMarkdown } from '~/composables/usePortfolio'
 
 const { isOpen, currentModal, hasHistory, closeAll, goBack, openModal } = useModalManager()
 
-const toolData = computed(() => currentModal.value?.type === 'tool' ? TOOLS[currentModal.value.id as keyof typeof TOOLS] : null)
+const toolData = computed(() => currentModal.value?.type === 'tool' ? TOOLS[currentModal.value.id as Tool] : null)
 
 const currentEntity = computed(() => {
   if (!currentModal.value) return null
-  if (currentModal.value.type === 'project') return PROJECTS[currentModal.value.id as keyof typeof PROJECTS]
-  if (currentModal.value.type === 'experience') return EXPERIENCES[currentModal.value.id as keyof typeof EXPERIENCES]
-  if (currentModal.value.type === 'education') return EDUCATIONS[currentModal.value.id as keyof typeof EDUCATIONS]
+  if (currentModal.value.type === 'project') return PROJECTS[currentModal.value.id as Project]
+  if (currentModal.value.type === 'experience') return EXPERIENCES[currentModal.value.id as Experience]
+  if (currentModal.value.type === 'education') return EDUCATIONS[currentModal.value.id as Education]
   return null
 })
 

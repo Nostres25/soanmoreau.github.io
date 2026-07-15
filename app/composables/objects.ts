@@ -4,6 +4,12 @@ import { stripIndents } from 'common-tags'
 import stageMfContent from '../content/experiences/stage-mf.md?raw'
 import unoOnDiscContent from '../content/projects/uno-on-disc.md?raw'
 
+export type Project = keyof typeof PROJECTS;
+export type Concept = keyof typeof CONCEPTS;
+export type Skill = keyof typeof COMPETENCES;
+export type Experience = keyof typeof EXPERIENCES;
+export type Education = keyof typeof EDUCATIONS;
+export type Tool = keyof typeof TOOLS;
 
 export const MASTERY_LEVELS = [
   "Notions", // Je connais à peu prêt le fonctionnement global sans expérience
@@ -436,3 +442,7 @@ export const TIMELINE_DATA = [
   { id: 'but-info', modalType: 'education', type: 'edu', title: 'BUT Informatique', entity: 'IUT Sorbonne P-N', startDate: 'Sept 2024', endDate: 'Juin 2027', durationMonths: 33, isEvent: false, stemHeight: 80, textOffset: '-translate-x-[60%]' },
   { id: 'stage-mf', modalType: 'experience', type: 'pro', title: 'Stage Dev PHP', entity: 'Market Factory', startDate: 'Jan 2026', endDate: 'Mars 2026', durationMonths: 3, isEvent: false, stemHeight: 110, textOffset: '-translate-x-[50%]' }
 ]
+
+export const project_ids = Object.keys(PROJECTS) as Project[];
+export const experience_ids = Object.keys(EXPERIENCES) as Experience[];
+export const education_ids = Object.keys(EDUCATIONS) as Education[];
