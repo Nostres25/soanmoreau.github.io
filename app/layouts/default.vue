@@ -90,8 +90,8 @@ const links = [
               Étudiant en BUT Informatique autonome, soucieux du détail et rigoureux.
             </p>
             <div class="flex gap-4">
-              <a href="https://fr.linkedin.com/in/soan-moreau" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-emerald-100 hover:text-emerald-600 transition-colors"><img src="../assets/images/icons/icons8-linkedin.svg" loading="lazy"></a>
-              <a href="https://github.com/Nostres25" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-emerald-100 hover:text-emerald-600 transition-colors"><img src="../assets/images/icons/icons8-github.svg" loading="lazy"></a>
+              <a href="https://fr.linkedin.com/in/soan-moreau" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 dark:text-gray-400 hover:bg-emerald-100 hover:text-emerald-600 transition-colors"><img src="../assets/images/icons/icons8-linkedin.svg" loading="lazy"></a>
+              <a href="https://github.com/Nostres25" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 dark:text-gray-400 hover:bg-emerald-100 hover:text-emerald-600 transition-colors"><img src="../assets/images/icons/icons8-github.svg" loading="lazy"></a>
             </div>
           </div>
 
