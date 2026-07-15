@@ -163,7 +163,8 @@ export const EDUCATIONS = {
     id: 'formation-perso', title: 'Formation Personnelle (Autodidacte)', entity: 'Projets Personnels', context: 'Autodidacte', 
     description: 'Apprentissage en autonomie guidé par la curiosité et la réalisation de projets concrets.', 
     contentPath: '/formations/formation-perso.md',
-    longDescription: '', competencies: [], tools: [], medias: []
+    longDescription: '', competencies: [], tools: [], medias: [],
+    projects: [],
   },
   'but-info': { 
     id: 'but-info', title: 'BUT Informatique', entity: 'Univ. Sorbonne Paris-Nord', context: 'Formation', 
@@ -171,6 +172,50 @@ export const EDUCATIONS = {
     contentPath: '/formations/but-info.md',
     longDescription: stripIndents`Formation très technique et professionnalisante. Les nombreux travaux de groupe m'ont permis de développer mes soft-skills et mon leadership.`, 
     competencies: [{ id: 'conduire-projet', description: "Pilotage d'équipe", longDescription: "" }], 
+    segmentations: {
+      'S1': {
+        name: 'S1',
+        periode: '09/2024 - 12/2024',
+        startTimestamp: 1725170400,
+        type: 'Formation initiale',
+      },
+      'S2': {
+        name: 'S2',
+        periode: '01/2025 - 06/2025',
+        startTimestamp: 1735714800, 
+        type: 'Formation initiale',
+        projects: [ { id: 'sae-echecs', description: "La consigne était de réaliser un jeu d'échec dans le terminal en Java tout en utilisant les notions vues en cours (Héritage, Polymorphisme etc...). Cliquez sur le projet pour en savoir plus." } ]
+      },
+      'S3': {
+        name: 'S3',
+        periode: '09/2025 - 12/2025',
+        startTimestamp: 1756706400,
+        type: 'Formation initiale',
+        projects: [ { id: 'sae-suivi', description: "La consigne était de réaliser un site de suivi des colis pour l'IUT de Villetaneuse qui répond à un besoin réel, à partir de contraintes et d'exigences comme il peut y en avoir dans le monde professionnel. Cliquez sur le projet pour en savoir plus." } ]
+      },
+      'S4': {
+        name: 'S4',
+        periode: '01/2026 - 06/2026',
+        startTimestamp: 1767250800,
+        type: 'Formaition initiale',
+        projects: [ { id: 'sae-suivi', description: "Puisque par manque de temps, la majorité des projets n'étaient pas terminés, la consigne était de reprendre un des projets du semestre 3, de l'analyser puis de le terminer ou de l'améliorer afin de nous habituer à la reprise de projets et aux changements d'environnement. Pour ma part, j'ai changé d'équipe mais j'ai repris le même projet que j'avais construit. Cliquez sur le projet pour en savoir plus." } ]
+      },
+      'S5': {
+        name: 'S5',
+        periode: '09/2026 - 12/2026',
+        startTimestamp: 1788242400,
+        type: 'Formation alternance (prévu)',
+        projects: [],
+      },
+      'S6': {
+        name: 'S6',
+        periode: '01/2026 - 06/2026',
+        startTimestamp: 1767250800,
+        type: 'Formation alternance (prévu)',
+        projects: [],
+      }
+    },
+    
     tools: [
       { id: 'python', description: "Algorithmique avancée", longDescription: "", conceptIds: ['complexite'] },
       { id: 'java', description: "POO approfondie", longDescription: "", conceptIds: ['poo'] }
@@ -181,7 +226,7 @@ export const EDUCATIONS = {
     id: 'bac', title: 'BAC Général (Maths, PC, SVT)', entity: 'Lycée', context: 'Diplôme', 
     contentPath: '/formations/bac.md',
     description: 'Apprentissage de la méthode scientifique. Bons résultats en mathématiques.', 
-    longDescription: '', competencies: [], tools: [], medias: []
+    longDescription: '', competencies: [], tools: [], medias: [], projects: []
   }
 }
 
@@ -236,6 +281,7 @@ export const PROJECTS = {
   'mc-plugin': { 
     id: 'mc-plugin', title: 'Plugin Minecraft', context: 'Projet Perso', educationId: 'formation-perso',
     description: 'Gestion des permissions et zones sur serveur multijoueur. Configuration Yaml.', 
+    startDateTimesTamp: 1577833200,
     longDescription: stripIndents`Un projet développé lors de mes premières années de programmation, me permettant d'appréhender le fonctionnement d'un serveur de jeu, de son API publique et de la gestion de configurations personnalisées pour les administrateurs.`, 
     contentPath: '/projects/mc-plugin.md',
     github: 'https://github.com/Nostres25/MinerstiaPlugin', website: '', images: [], 
@@ -246,7 +292,8 @@ export const PROJECTS = {
       { id: 'eclipse', description: "Environnement de développement.", longDescription: "", conceptIds: ['eclipse-libs'] },
       { id: 'java', description: "Apprentissage sur le tas du langage.", longDescription: "", conceptIds: ['exceptions', 'poo', 'poly', 'java-uml', 'scopes', 'java-arraylist', 'loops', 'switch', 'enums'] },
       { id: 'spigot', description: "API serveur Minecraft.", longDescription: "", conceptIds: ['perms', 'spigot-yaml', 'spigot-events', 'events', 'spigot-gui', 'spigot-tools', 'cmds', 'spigot-mod', 'spigot-tab', 'zone', 'spigot-groups'] },
-      { id: 'git', description: "Sauvegardes du projet.", longDescription: "", conceptIds: ['git-commits', 'git-remote'] }
+      { id: 'git', description: "Sauvegardes du projet.", longDescription: "", conceptIds: ['git-commits', 'git-remote'] },
+      { id: 'trello', description: "Organisation des fonctionnalités à développer en backlog et par version", longDescription: "", conceptIds: [] }
     ],
 
     medias: []
@@ -255,6 +302,7 @@ export const PROJECTS = {
     id: 'sae-echecs', title: 'Jeu d\'échecs', context: 'SAÉ BUT', educationId: 'but-info',
     description: 'Développement d\'un jeu d\'échecs complet dans le terminal.', 
     contentPath: '/projects/sae-echecs.md',
+    startDateTimesTamp: EDUCATIONS['but-info'].segmentations['S2'].startTimestamp,
     longDescription: stripIndents`Création intégrale d'un jeu d'échecs respectant la totalité des règles officielles (roque, prise en passant) en implémentant une architecture orientée objet stricte.`, 
     github: 'https://github.com/Nostres25/JavaChess', website: '', images: [], 
     competencies: [
@@ -277,6 +325,7 @@ export const PROJECTS = {
     id: 'sae-suivi', title: 'Suivi de colis', context: 'SAÉ BUT', educationId: 'but-info',
     description: 'Site web de suivi de colis pour l\'IUT.', 
     contentPath: '/projects/sae-suivi.md',
+    startDateTimesTamp: EDUCATIONS['but-info'].segmentations['S3'].startTimestamp,
     longDescription: stripIndents`Application web interne permettant la gestion logistique des colis reçus par le secrétariat de l'IUT et envoyant des notifications aux destinataires.`, 
     github: 'https://github.com/Nostres25/suivi-colis-iutv-v2', website: '', images: [], 
     competencies: [
@@ -297,13 +346,15 @@ export const PROJECTS = {
       { id: 'filament', description: "Panneau d'administration.", longDescription: "", conceptIds: ['filament-pages', 'filament-sync'] },
       { id: 'git', description: "Versioning en équipe.", longDescription: "", conceptIds: ['git-commits', 'git-branches', 'git-merges', 'git-conflicts', 'git-issues', 'git-pr'] },
       { id: 'github-project', description: "Organisation des tâches.", longDescription: "", conceptIds: ['gh-backlog', 'gh-priority', 'gh-sub'] },
-      { id: 'composer', description: "Gestionnaire de packages PHP.", longDescription: "", conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts'] }
+      { id: 'composer', description: "Gestionnaire de packages PHP.", longDescription: "", conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts'] },
+      { id: 'php-storm', description: "Meilleur IDE trouvé pour le PHP bien qu'un peu lourd", longDescription: "", conceptIds: [] }
     ],
 
     medias: []
   },
   'sae-python': { 
     id: 'sae-python', title: 'Étude de graphes', context: 'SAÉ BUT', educationId: 'but-info',
+    startDateTimesTamp: EDUCATIONS['but-info'].segmentations.S1.startTimestamp,
     description: 'Étude de réseaux et de complexité algorithmique.', longDescription: "", github: '', website: '', images: [], 
     contentPath: '/projects/sae-python.md',
     competencies: [{ id: 'optimiser', description: "Analyse des temps d'exécution.", longDescription: "" }],
@@ -322,19 +373,49 @@ export const PROJECTS = {
   },
   'sae-sys': { 
     id: 'sae-sys', title: 'Configuration Ubuntu', context: 'SAÉ BUT', educationId: 'but-info',
+    startDateTimesTamp: EDUCATIONS['but-info'].segmentations.S2.startTimestamp,
     description: 'Configurations d\'un système Ubuntu (Linux) et réseaux (IPv4, DHCP, Pare-feux).', longDescription: "", github: '', website: '', images: [], 
     contentPath: '/projects/sae-sys.md',
     competencies: [{ id: 'administrer', description: "Installation et configuration OS.", longDescription: "" }],
     tools: [{ id: 'linux', description: "Commandes terminal.", longDescription: "", conceptIds: ['sys'] }],
 
     medias: []
-  } 
+  },
+
+  'portfolio-web': {
+    id: 'portfolio-web',
+    title: 'Site portfolio',
+    context: 'BUT',
+    educationId: 'but-info',
+    startDateTimesTamp: 1781647200,
+    description: "Le site sur lequel vous êtes. Au départ il s'agit d'un projet noté en BUT Informatique qui sert également à nous vendre dans le monde professionnel",
+
+    competencies: [
+      { id: 'realiser-app', description: "Réalisation de l'application du portfolio.", longDescription: "" },
+      { id: 'optimiser', description: "Optimisation de l'applciation pour la réactivité.", longDescription: "" },
+      { id: 'gerer-donnees', description: "Représentation des informations me concernant sous la forme de données dans le code.", longDescription: "" },
+      { id: 'conduire-projet', description: "Définition des tâches et des priorités", longDescription: "" },    ],
+    tools: [
+      { id: 'javascript', description: "Logique principale du bot.", longDescription: "", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'loops'] },
+      { id: 'nodejs', description: "Environnement d'exécution.", longDescription: "", conceptIds: ['modules', 'modules-dev'] },
+      { id: 'nuxtjs', description: "Découverte du fonctionnement du framework", longDescription: "", conceptIds: [] },
+      { id: 'typescript', description: "Migration vers du typage strict.", longDescription: "", conceptIds: ['interfaces', 'classes', 'enums'] },
+      { id: 'vscode', description: "Environnement de développement.", longDescription: "", conceptIds: [] },
+      { id: 'vuejs', description: "Vues en javascript avec layout, composants etc...", longDescription: "", conceptIds: [] },
+      { id: 'git', description: "Gestion du code source.", longDescription: "", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-cherry', 'git-merges', 'git-conflicts'] },
+      { id: 'tailwindcss', description: "Majorité du style de l'application"}
+    ],
+
+    medias:  []
+  }
 }
 
 // --- EXPÉRIENCES ---
 export const EXPERIENCES = {
   'stage-mf': { 
     id: 'stage-mf', title: 'Développeur PHP front/back', entity: 'Market Factory', date: 'Janv 2026 - Mars 2026', 
+    startDateTimesTamp: 1769414400,
+    endDateTimestamp: 1774022400,
     description: 'Développement API, correction de failles, refonte et rédaction de documentation.', 
     contentPath: stageMfContent,
     longDescription: stageMfContent, 
@@ -373,65 +454,68 @@ export const EXPERIENCES = {
   }
 }
 
+const currentDate = Date.now();
+
 // --- OUTILS ---
 // Index de maîtrise (0 = Notions, 1 = Découverte, 2 = Maîtrise globale, 3 = Assez avancée, 4 = Avancée, 5 = Très avancée)
 export const TOOLS = {
   // Langages & Frameworks JS/TS
-  javascript: { id: 'javascript', name: 'JavaScript', icon: 'JS', masteryIndex: 4, duration: `${getYearsBetween(PROJECTS['uno-disc'].startDateTimesTamp, Date.now())} ans`, conceptIds: ['async', 'callbacks', 'events', 'scopes', 'poo', 'switch', 'exceptions', 'loops', 'collections', 'dom', 'ajax'], compIds: ['realiser-app'] },
-  typescript: { id: 'typescript', name: 'TypeScript', icon: 'TS', masteryIndex: 3, duration: '2 ans', conceptIds: ['typage', 'poo', 'interfaces', 'classes', 'enums'], compIds: ['realiser-app'] },
-  nodejs: { id: 'nodejs', name: 'Node.js', icon: 'N', masteryIndex: 3, duration: '2 ans', conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts', 'sharding', 'fs'], compIds: ['realiser-app', 'optimiser'] },
-  expressjs: { id: 'expressjs', name: 'Express.js', icon: 'Ex', masteryIndex: 1, duration: '1 an', conceptIds: [], compIds: ['realiser-app'] },
-  discordjs: { id: 'discordjs', name: 'Discord.js', icon: 'Djs', masteryIndex: 4, duration: '2 ans', conceptIds: ['djs-slash', 'djs-components', 'djs-modals', 'djs-ephemeral', 'sharding', 'djs-cache', 'djs-collectors'], compIds: ['realiser-app', 'optimiser'] },
-  nuxtjs: { id: 'nuxtjs', name: 'Nuxt.js', icon: 'Nx', masteryIndex: 1, duration: '1 an', conceptIds: [], compIds: ['realiser-app'] },
-  vuejs: { id: 'vuejs', name: 'Vue.js', icon: 'V', masteryIndex: 1, duration: '1 an', conceptIds: [], compIds: ['realiser-app', 'optimiser'] },
+  javascript: { id: 'javascript', name: 'JavaScript', icon: 'JS', masteryIndex: 4, duration: getYearsFormatted(PROJECTS['uno-disc'].startDateTimesTamp, currentDate), conceptIds: ['async', 'callbacks', 'events', 'scopes', 'poo', 'switch', 'exceptions', 'loops', 'collections', 'dom', 'ajax'], compIds: ['realiser-app'] },
+  typescript: { id: 'typescript', name: 'TypeScript', icon: 'TS', masteryIndex: 3, duration: getYearsFormatted(1660341600, currentDate), conceptIds: ['typage', 'poo', 'interfaces', 'classes', 'enums'], compIds: ['realiser-app'] }, // preuve pour la date : https://github.com/DraftBot/DraftBot-uno/commits/feat/uno/?since=2021-10-13&until=2023-02-28
+  nodejs: { id: 'nodejs', name: 'Node.js', icon: 'N', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['uno-disc'].startDateTimesTamp, currentDate), conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts', 'sharding', 'fs'], compIds: ['realiser-app', 'optimiser'] },
+  expressjs: { id: 'expressjs', name: 'Express.js', icon: 'Ex', masteryIndex: 1, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations['S4'].startTimestamp, currentDate), conceptIds: [], compIds: ['realiser-app'] },
+  discordjs: { id: 'discordjs', name: 'Discord.js', icon: 'Djs', masteryIndex: 4, duration: getYearsFormatted(PROJECTS['uno-disc'].startDateTimesTamp, currentDate), conceptIds: ['djs-slash', 'djs-components', 'djs-modals', 'djs-ephemeral', 'sharding', 'djs-cache', 'djs-collectors'], compIds: ['realiser-app', 'optimiser'] },
+  nuxtjs: { id: 'nuxtjs', name: 'Nuxt.js', icon: 'Nx', masteryIndex: 1, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations['S4'].startTimestamp, currentDate), conceptIds: [], compIds: ['realiser-ap couduresbot ip'] },
+  vuejs: { id: 'vuejs', name: 'Vue.js', icon: 'V', masteryIndex: 1, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations['S4'].startTimestamp, currentDate), conceptIds: [], compIds: ['realiser-app', 'optimiser'] },
   
   // Outils & Libs Node
-  'node-fs': { id: 'node-fs', name: 'node fs', icon: 'fs', masteryIndex: 2, duration: '2 ans', conceptIds: ['fs'], compIds: ['realiser-app', 'optimiser', 'gerer-donnees'] },
-  nodemon: { id: 'nodemon', name: 'nodemon', icon: 'nd', masteryIndex: 2, duration: '2 ans', conceptIds: ['nodemon-restart'], compIds: ['realiser-app'] },
-  'node-canvas': { id: 'node-canvas', name: 'node canvas', icon: 'cv', masteryIndex: 1, duration: '1 an', conceptIds: ['canvas-2d', 'canvas-overlay', 'canvas-rotation'], compIds: ['realiser-app'] },
+  'node-fs': { id: 'node-fs', name: 'node fs', icon: 'fs', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['uno-disc'].startDateTimesTamp, currentDate), conceptIds: ['fs'], compIds: ['realiser-app', 'optimiser', 'gerer-donnees'] },
+  nodemon: { id: 'nodemon', name: 'nodemon', icon: 'nd', masteryIndex: 2, duration: getYearsFormatted(1753308000, currentDate), conceptIds: ['nodemon-restart'], compIds: ['realiser-app'] }, // Preuve de la date : https://github.com/DraftBot/DraftBot-uno/commits/feat/uno?after=56b7655c3d7eb1b82d9fd7dbbea86c5212645ccf+34
+  'node-canvas': { id: 'node-canvas', name: 'node canvas', icon: 'cv', masteryIndex: 1, duration: getYearsFormatted(1692828000, currentDate), conceptIds: ['canvas-2d', 'canvas-overlay', 'canvas-rotation'], compIds: ['realiser-app'] }, // Preuve pour la date : https://github.com/DraftBot/DraftBot-uno/commit/adc9a552a6af32b83b1a530c78c5cb95b455c5a3
 
   // Écosystème PHP
-  php: { id: 'php', name: 'PHP', icon: 'PHP', masteryIndex: 2, duration: '1 an', conceptIds: ['callbacks', 'enums', 'php-typing', 'loops', 'scopes', 'poo'], compIds: ['realiser-app'] },
-  laravel: { id: 'laravel', name: 'Laravel', icon: 'Lv', masteryIndex: 3, duration: '1 an', conceptIds: ['mvc', 'migrations', 'laravel-pagination', 'seeders', 'laravel-query', 'laravel-files', 'auth', 'sessions'], compIds: ['realiser-app', 'optimiser'] },
-  blade: { id: 'blade', name: 'Blade', icon: 'Bl', masteryIndex: 2, duration: '1 an', conceptIds: ['layouts', 'components', 'escape', 'blade-directives'], compIds: ['realiser-app', 'optimiser'] },
-  eloquent: { id: 'eloquent', name: 'Eloquent ORM', icon: 'El', masteryIndex: 2, duration: '1 an', conceptIds: ['eloquent-models', 'code-to-db', 'eloquent-relations', 'collections', 'factories'], compIds: ['realiser-app', 'optimiser', 'gerer-donnees'] },
-  filament: { id: 'filament', name: 'Filament', icon: 'Fm', masteryIndex: 1, duration: '1 an', conceptIds: ['filament-pages', 'filament-sync'], compIds: ['realiser-app', 'gerer-donnees'] },
-  composer: { id: 'composer', name: 'Composer', icon: 'Cp', masteryIndex: 2, duration: '1 an', conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts'], compIds: ['administrer'] }, // Concepts partagés avec Node (packages)
+  php: { id: 'php', name: 'PHP', icon: 'PHP', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['callbacks', 'enums', 'php-typing', 'loops', 'scopes', 'poo'], compIds: ['realiser-app'] },
+  laravel: { id: 'laravel', name: 'Laravel', icon: 'Lv', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['mvc', 'migrations', 'laravel-pagination', 'seeders', 'laravel-query', 'laravel-files', 'auth', 'sessions'], compIds: ['realiser-app', 'optimiser'] },
+  blade: { id: 'blade', name: 'Blade', icon: 'Bl', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['layouts', 'components', 'escape', 'blade-directives'], compIds: ['realiser-app', 'optimiser'] },
+  eloquent: { id: 'eloquent', name: 'Eloquent ORM', icon: 'El', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['eloquent-models', 'code-to-db', 'eloquent-relations', 'collections', 'factories'], compIds: ['realiser-app', 'optimiser', 'gerer-donnees'] },
+  filament: { id: 'filament', name: 'Filament', icon: 'Fm', masteryIndex: 1, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['filament-pages', 'filament-sync'], compIds: ['realiser-app', 'gerer-donnees'] },
+  composer: { id: 'composer', name: 'Composer', icon: 'Cp', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts'], compIds: ['administrer'] }, // Concepts partagés avec Node (packages)
 
   // Écosystème Java
-  java: { id: 'java', name: 'Java', icon: 'J', masteryIndex: 3, duration: '4 ans', conceptIds: ['poo', 'exceptions', 'poly', 'java-uml', 'scopes', 'java-arraylist', 'loops', 'switch', 'enums', 'java-scanner'], compIds: ['realiser-app'] },
-  spigot: { id: 'spigot', name: 'Spigot MC', icon: 'Spi', masteryIndex: 3, duration: '2 ans', conceptIds: ['perms', 'spigot-yaml', 'spigot-events', 'events', 'spigot-gui', 'spigot-tools', 'cmds', 'spigot-mod', 'spigot-tab', 'zone', 'spigot-groups'], compIds: ['realiser-app', 'optimiser', 'administrer'] },
+  java: { id: 'java', name: 'Java', icon: 'J', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['mc-plugin'].startDateTimesTamp, currentDate), conceptIds: ['poo', 'exceptions', 'poly', 'java-uml', 'scopes', 'java-arraylist', 'loops', 'switch', 'enums', 'java-scanner'], compIds: ['realiser-app'] },
+  spigot: { id: 'spigot', name: 'Spigot MC', icon: 'Spi', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['mc-plugin'].startDateTimesTamp, currentDate), conceptIds: ['perms', 'spigot-yaml', 'spigot-events', 'events', 'spigot-gui', 'spigot-tools', 'cmds', 'spigot-mod', 'spigot-tab', 'zone', 'spigot-groups'], compIds: ['realiser-app', 'optimiser', 'administrer'] },
   
   // Front-End (HTML/CSS)
-  css: { id: 'css', name: 'CSS', icon: 'CSS', masteryIndex: 2, duration: '3 ans', conceptIds: [], compIds: ['realiser-app'] },
-  bootstrap: { id: 'bootstrap', name: 'Bootstrap', icon: 'Bs', masteryIndex: 3, duration: '1 an', conceptIds: ['boot-modals', 'boot-buttons', 'boot-forms', 'boot-dropdowns', 'boot-icons', 'responsive', 'boot-collapse', 'boot-navbar', 'boot-text'], compIds: ['realiser-app'] },
-  tailwindcss: { id: 'tailwindcss', name: 'Tailwind CSS', icon: 'Tw', masteryIndex: 1, duration: '1 an', conceptIds: [], compIds: ['realiser-app'] },
-  figma: { id: 'figma', name: 'Figma', icon: 'Fg', masteryIndex: 2, duration: '2 ans', conceptIds: ['figma-logos', 'visuels'], compIds: ['realiser-app'] },
+  css: { id: 'css', name: 'CSS', icon: 'CSS', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S2.startTimestamp, currentDate), conceptIds: [], compIds: ['realiser-app'] },
+  bootstrap: { id: 'bootstrap', name: 'Bootstrap', icon: 'Bs', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['boot-modals', 'boot-buttons', 'boot-forms', 'boot-dropdowns', 'boot-icons', 'responsive', 'boot-collapse', 'boot-navbar', 'boot-text'], compIds: ['realiser-app'] },
+  tailwindcss: { id: 'tailwindcss', name: 'Tailwind CSS', icon: 'Tw', masteryIndex: 1, duration: getYearsFormatted(PROJECTS['portfolio-web'].startDateTimesTamp, currentDate), conceptIds: [], compIds: ['realiser-app'] },
+  figma: { id: 'figma', name: 'Figma', icon: 'Fg', masteryIndex: 2, duration: getYearsFormatted(1672527600, currentDate), conceptIds: ['figma-logos', 'visuels'], compIds: ['realiser-app'] },
 
   // Python
-  python: { id: 'python', name: 'Python', icon: 'Py', masteryIndex: 3, duration: '3 ans', conceptIds: ['complexite'], compIds: ['optimiser', 'realiser-app'] },
-  flask: { id: 'flask', name: 'Flask', icon: 'Fl', masteryIndex: 2, duration: '1 an', conceptIds: [], compIds: ['realiser-app'] },
+  python: { id: 'python', name: 'Python', icon: 'Py', masteryIndex: 3, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S1.startTimestamp, currentDate), conceptIds: ['complexite'], compIds: ['optimiser', 'realiser-app'] },
+  flask: { id: 'flask', name: 'Flask', icon: 'Fl', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S3.startTimestamp, currentDate), conceptIds: [], compIds: ['realiser-app'] },
 
   // Base de données & Infrastructure
-  sql: { id: 'sql', name: 'SQL / SGBDR', icon: 'DB', masteryIndex: 3, duration: '2 ans', conceptIds: ['db-model'], compIds: ['gerer-donnees'] },
-  linux: { id: 'linux', name: 'Linux / Bash', icon: 'L', masteryIndex: 3, duration: '2 ans', conceptIds: ['sys'], compIds: ['administrer'] },
-  nixos: { id: 'nixos', name: 'NixOS', icon: 'Nix', masteryIndex: 2, duration: '1 an', conceptIds: [], compIds: ['administrer'] },
-  docker: { id: 'docker', name: 'Docker', icon: 'D', masteryIndex: 2, duration: '2 ans', conceptIds: ['conteneur'], compIds: ['administrer'] },
+  sql: { id: 'sql', name: 'SQL / SGBDR', icon: 'DB', masteryIndex: 3, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S1.startTimestamp, currentDate), conceptIds: ['db-model'], compIds: ['gerer-donnees'] },
+  linux: { id: 'linux', name: 'Linux / Bash', icon: 'L', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['uno-disc'].startDateTimesTamp, currentDate), conceptIds: ['sys'], compIds: ['administrer'] },
+  nixos: { id: 'nixos', name: 'NixOS', icon: 'Nix', masteryIndex: 2, duration: getYearsFormatted(1752012000, currentDate), conceptIds: [], compIds: ['administrer'] },
+  docker: { id: 'docker', name: 'Docker', icon: 'D', masteryIndex: 2, duration: getYearsFormatted(1660341600, currentDate), conceptIds: ['conteneur'], compIds: ['administrer'] },
 
   // Outils de gestion & IDE
-  vscode: { id: 'vscode', name: 'Visual Studio Code', icon: 'VS', masteryIndex: 3, duration: '4 ans', conceptIds: [], compIds: ['realiser-app', 'collaborer'] },
-  eclipse: { id: 'eclipse', name: 'Eclipse IDE', icon: 'Ec', masteryIndex: 2, duration: '2 ans', conceptIds: ['eclipse-libs'], compIds: ['realiser-app'] },
-  'android-studio': { id: 'android-studio', name: 'Android Studio', icon: 'AS', masteryIndex: 2, duration: '1 an', conceptIds: ['android-bases'], compIds: ['realiser-app'] },
-  
+  vscode: { id: 'vscode', name: 'Visual Studio Code', icon: 'VS', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['uno-disc'].startDateTimesTamp, currentDate), conceptIds: [], compIds: ['realiser-app', 'collaborer'] },
+  eclipse: { id: 'eclipse', name: 'Eclipse IDE', icon: 'Ec', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['mc-plugin'].startDateTimesTamp, currentDate), conceptIds: ['eclipse-libs'], compIds: ['realiser-app'] },
+  'android-studio': { id: 'android-studio', name: 'Android Studio', icon: 'AS', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S4.startTimestamp, currentDate), conceptIds: ['android-bases'], compIds: ['realiser-app'] },
+  'php-storm': { id: 'php-storm', name: 'PHP Storm IDE', icon: 'PS', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: [], compIds: ['realiser-app', 'collaborer']},
+
   // Collaboration & DevOps
-  git: { id: 'git', name: 'Git', icon: 'G', masteryIndex: 3, duration: '4 ans', conceptIds: ['versioning', 'git-commits', 'git-remote', 'git-branches', 'git-cherry', 'git-merges', 'git-conflicts', 'git-issues', 'git-pr'], compIds: ['collaborer', 'conduire-projet'] },
-  'github-actions': { id: 'github-actions', name: 'GitHub Actions (CI/CD)', icon: 'GA', masteryIndex: 1, duration: '1 an', conceptIds: [], compIds: ['administrer', 'realiser-app'] },
-  'github-project': { id: 'github-project', name: 'GitHub Project', icon: 'GP', masteryIndex: 2, duration: '2 ans', conceptIds: ['gh-backlog', 'gh-priority', 'gh-sub'], compIds: ['conduire-projet', 'collaborer'] },
-  trello: { id: 'trello', name: 'Trello', icon: 'Tr', masteryIndex: 2, duration: '2 ans', conceptIds: [], compIds: ['conduire-projet', 'collaborer'] },
-  sentry: { id: 'sentry', name: 'Sentry', icon: 'Se', masteryIndex: 1, duration: '1 an', conceptIds: ['bug-monitoring', 'sentry-debug'], compIds: ['optimiser', 'conduire-projet', 'administrer'] },
+  git: { id: 'git', name: 'Git', icon: 'G', masteryIndex: 3, duration: getYearsFormatted(1610578800, currentDate), conceptIds: ['versioning', 'git-commits', 'git-remote', 'git-branches', 'git-cherry', 'git-merges', 'git-conflicts', 'git-issues', 'git-pr'], compIds: ['collaborer', 'conduire-projet'] }, // Preuve de la date : premier repo github (ScandiumPlugin)
+  'github-actions': { id: 'github-actions', name: 'GitHub Actions (CI/CD)', icon: 'GA', masteryIndex: 1, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S4.startTimestamp, currentDate), conceptIds: [], compIds: ['administrer', 'realiser-app'] },
+  'github-project': { id: 'github-project', name: 'GitHub Project', icon: 'GP', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S4.startTimestamp, currentDate), conceptIds: ['gh-backlog', 'gh-priority', 'gh-sub'], compIds: ['conduire-projet', 'collaborer'] },
+  trello: { id: 'trello', name: 'Trello', icon: 'Tr', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['mc-plugin'].startDateTimesTamp, currentDate), conceptIds: [], compIds: ['conduire-projet', 'collaborer'] },
+  sentry: { id: 'sentry', name: 'Sentry', icon: 'Se', masteryIndex: 1, duration: getYearsFormatted(1688335200, currentDate), conceptIds: ['bug-monitoring', 'sentry-debug'], compIds: ['optimiser', 'conduire-projet', 'administrer'] }, // Preuve de la date : https://github.com/DraftBot/DraftBot-uno/commits/feat/uno/?before=56b7655c3d7eb1b82d9fd7dbbea86c5212645ccf+350
 
   // Divers
-  'ia-gen': { id: 'ia-gen', name: 'IA Génératives', icon: 'IA', masteryIndex: 2, duration: '1 an', conceptIds: [], compIds: ['realiser-app'] },
+  'ia-gen': { id: 'ia-gen', name: 'IA Génératives', icon: 'IA', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S4.startTimestamp, currentDate), conceptIds: [], compIds: ['realiser-app'] },
 }
 
 // Timeline data...
@@ -441,7 +525,7 @@ export const TIMELINE_DATA = [
   { id: 'uno-disc', modalType: 'project', type: 'pro', title: 'UnoOnDisc', entity: 'Projet Perso', startDate: 'Sept 2022', endDate: 'Présent', durationMonths: 46, isEvent: false, stemHeight: 40, textOffset: '-translate-x-[30%]' },
   { id: 'but-info', modalType: 'education', type: 'edu', title: 'BUT Informatique', entity: 'IUT Sorbonne P-N', startDate: 'Sept 2024', endDate: 'Juin 2027', durationMonths: 33, isEvent: false, stemHeight: 80, textOffset: '-translate-x-[60%]' },
   { id: 'stage-mf', modalType: 'experience', type: 'pro', title: 'Stage Dev PHP', entity: 'Market Factory', startDate: 'Jan 2026', endDate: 'Mars 2026', durationMonths: 3, isEvent: false, stemHeight: 110, textOffset: '-translate-x-[50%]' }
-]
+] 
 
 export const project_ids = Object.keys(PROJECTS) as Project[];
 export const experience_ids = Object.keys(EXPERIENCES) as Experience[];

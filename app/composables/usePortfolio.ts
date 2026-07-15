@@ -15,6 +15,8 @@ export const getProjectsForCompetence = (compId: string) => {
   return Object.values(PROJECTS).filter(p => p.competencies.some(c => c.id === compId))
 }
 
+
+
 // Trouver TOUTES les entités (Projets, Exp, Formations) qui utilisent une Notion
 export const getEntitiesForConcept = (conceptId: string) => {
   const results: { type: 'project' | 'experience' | 'education', id: string, title: string }[] = []
@@ -65,16 +67,28 @@ export const renderMarkdown = (text: string) => {
 
 }
 
+export function parseDate(timestamp: number|string): Date {
+  // To accept timestamp in seconds
+  if ((timestamp+'').length === 10) timestamp = typeof timestamp === 'string' ? parseInt(timestamp+'000') : timestamp * 1000;
+
+  // Parse from timestamp in miliseconds
+  return new Date(timestamp);
+}
+
 // La date peut être un string ou un number sous la forme de timestamp en milisecondes ou un objet Date
-export function getYearsBetween(firstDate: Date|string|number, secondDate: Date|string|number) {
+export function getYearsBetween(firstDate: Date|string|number, secondDate: Date|string|number): number {
 
   if (!(firstDate instanceof Date)) {
-    firstDate = new Date(firstDate);
+    firstDate = parseDate(firstDate);
   }
 
   if (!(secondDate instanceof Date)) {
-    secondDate = new Date(secondDate);
+    secondDate = parseDate(secondDate);
   }
-
   return Math.abs(secondDate.getFullYear() - firstDate.getFullYear());
+}
+
+export function getYearsFormatted(firstDate: Date|string|number, secondDate: Date|string|number): string {
+  const years = getYearsBetween(firstDate, secondDate);
+  return typeof years === 'number' && years === 0 ? "moins d'un an" : `${years} ans`;
 }
