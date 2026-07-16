@@ -1,5 +1,5 @@
 ## Plus précisément
-Bot ou agent logiciel Discord codé en TypeScript avec Node.js permettant de jouer au uno sur la plateforme via un plateau de jeu sous la forme de message composé de boutons. Ce projet a été un excellent terrain de jeu pour appréhender Node.js, l'asynchrone, Typescript, l'optimisation logicielle, l'utilisation de modules NPM et d'API.
+Bot ou agent logiciel codé seul en TypeScript avec Node.js, permettant de jouer au uno sur la messagerie Discord via un plateau de jeu sous la forme de message composé de boutons. Ce projet a été un excellent terrain de jeu pour appréhender Node.js, l'asynchrone, Typescript, l'optimisation logicielle, l'utilisation de modules NPM et d'API.
 
 
 <details open><summary class="text-xl font-bold text-gray-900 dark:text-white mb-0">Première verison / Premier résultat</summary>

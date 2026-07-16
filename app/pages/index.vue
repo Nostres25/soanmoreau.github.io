@@ -141,7 +141,7 @@
             <!-- Utilisation de la fonction dynamique pour les outils -->
             <div class="flex flex-wrap gap-2 mb-4">
               <button 
-                v-for="tool in getToolsForCompetence(comp.id)" 
+                v-for="tool in getToolsForCompetence(comp.id).sort((tool1, tool2) => tool2.masteryIndex - tool1.masteryIndex)" 
                 :key="tool.id" 
                 @click="openModal({ type: 'tool', id: tool.id as any })"
                 class="px-2 py-1 text-xs font-medium bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded hover:bg-emerald-100 dark:hover:bg-emerald-800 transition-colors"

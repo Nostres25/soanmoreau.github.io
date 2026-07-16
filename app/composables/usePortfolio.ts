@@ -1,33 +1,44 @@
 // composables/usePortfolio.ts
 import { ref, computed } from 'vue'
-import { TOOLS, PROJECTS, EXPERIENCES, EDUCATIONS  } from './objects'
-import type { COMPETENCES, Education, Experience, Project } from './objects';
+import { TOOL_VALUES, PROJECT_VALUES  } from './objects'
+import type { COMPETENCES, TOOLS, PROJECTS, EXPERIENCES, EDUCATIONS, Tool} from './objects';
 
 // --- MÉTHODES DYNAMIQUES DE RECHERCHE ---
 
 // Trouver les outils liés à une compétence
-export const getToolsForCompetence = (compId: string) => {
-  return Object.values(TOOLS).filter(tool => tool.compIds.includes(compId))
+export const getToolsForCompetence = (compId: string, limit = NaN) => {
+  const associatedTools = [];
+  for (let i = 0; i < TOOL_VALUES.length && (!limit || associatedTools.length < limit); i++) {
+    const tool = TOOL_VALUES[i];
+    if (tool?.compIds?.includes(compId)) {
+      associatedTools.push(tool);
+    }
+  }
+
+  return associatedTools;
 }
 
 // Trouver les projets liés à une compétence
 export const getProjectsForCompetence = (compId: string) => {
-  return Object.values(PROJECTS).filter(p => p.competencies.some(c => c.id === compId))
+  return PROJECT_VALUES.filter(p => p.competencies.some(c => c.id === compId))
 }
 
+export function getProjectForTool(tool: Tool) {
+  return PROJECT_VALUES.filter(p => p.tools.find(t => t.id === tool));
+} 
 
 
 // Trouver TOUTES les entités (Projets, Exp, Formations) qui utilisent une Notion
 export const getEntitiesForConcept = (conceptId: string) => {
   const results: { type: 'project' | 'experience' | 'education', id: string, title: string }[] = []
   
-  Object.values(PROJECTS).forEach(p => {
+  PROJECT_VALUES.forEach(p => {
     if (p.tools?.some(t => t.conceptIds?.includes(conceptId))) results.push({ type: 'project', id: p.id, title: p.title })
   })
-  Object.values(EXPERIENCES).forEach(e => {
+  EXPERIENCE_VALUES.forEach(e => {
     if (e.tools?.some(t => t.conceptIds?.includes(conceptId))) results.push({ type: 'experience', id: e.id, title: e.title })
   })
-  Object.values(EDUCATIONS).forEach(e => {
+  EDUCATION_VALUES.forEach(e => {
     if (e.tools?.some(t => t.conceptIds?.includes(conceptId))) results.push({ type: 'education', id: e.id, title: e.title })
   })
   

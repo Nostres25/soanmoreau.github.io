@@ -434,7 +434,7 @@ export const EXPERIENCES = {
       { id: 'git', description: "Travail en équipe.", longDescription: "", conceptIds: ['git-commits', 'versioning', 'git-branches'] },
       { id: 'css', description: "HTML/CSS des plus traditionnels, sans moteur de template", conceptIds: [] },
       { id: 'bootstrap', description: "Utilisation de classes bootstrap", conceptIds: [] },
-      { id: 'javascript', description: "Affichages dynamiques via havascript", conceptIds: ['dom', 'ajax'] },
+      { id: 'javascript', description: "Affichages dynamiques via javascript", conceptIds: ['dom', 'ajax'] },
       { id: 'composer', description: "Mise en place de composer pour des outils de développement & installer les ressources ainsi que css", conceptIds: ['paquets-scripts', 'modules', 'modules-dev'] },
     ],
 
@@ -527,6 +527,11 @@ export const TIMELINE_DATA = [
   { id: 'stage-mf', modalType: 'experience', type: 'pro', title: 'Stage Dev PHP', entity: 'Market Factory', startDate: 'Jan 2026', endDate: 'Mars 2026', durationMonths: 3, isEvent: false, stemHeight: 110, textOffset: '-translate-x-[50%]' }
 ] 
 
-export const project_ids = Object.keys(PROJECTS) as Project[];
-export const experience_ids = Object.keys(EXPERIENCES) as Experience[];
-export const education_ids = Object.keys(EDUCATIONS) as Education[];
+export const PROJECT_IDS = Object.keys(PROJECTS) as Project[];
+export const EXPERIENCE_IDS = Object.keys(EXPERIENCES) as Experience[];
+export const EDUCATION_IDS = Object.keys(EDUCATIONS) as Education[];
+
+export const TOOL_VALUES = Object.values(TOOLS);
+export const PROJECT_VALUES = Object.values(PROJECTS);
+export const EXPERIENCE_VALUES = Object.values(EXPERIENCES);
+export const EDUCATION_VALUES = Object.values(EDUCATIONS);
