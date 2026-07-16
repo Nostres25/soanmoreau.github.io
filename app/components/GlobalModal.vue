@@ -39,7 +39,7 @@ function openImage(url: string) {
 
       <div 
         class="relative w-full max-h-[90vh] flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out"
-        :class="currentModal?.type === 'education' || currentModal?.type === 'project' || isExpanded ? 'max-w-4xl' : 'max-w-2xl animate-slide-up'"
+        :class="currentModal?.type === 'education' || currentModal?.type === 'project' || currentModal?.type === 'experience' || isExpanded ? 'max-w-4xl' : 'max-w-2xl animate-slide-up'"
       >
         <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 shrink-0">
           <button v-if="hasHistory" @click="goBack" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-emerald-600 transition-colors">
