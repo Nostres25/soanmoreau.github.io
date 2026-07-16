@@ -81,6 +81,29 @@ function openImage(url: string) {
               </div>
             </div>
 
+            <h3 class="font-bold text-gray-900 dark:text-white mb-3">Projets concernés :</h3>
+            <div class="mb-4 pb-2">
+              <div 
+                v-for="projet in getProjectForTool(toolData.id as Tool)" 
+                :key="projet.id" 
+                class="flex flex-col bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-4 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-emerald-500 transition-colors shadow-sm hover:shadow-md mb-4"
+              >
+                <div class="flex justify-between items-start mb-4">
+                  <h4 class="font-bold text-gray-900 dark:text-white mb-1">{{ projet.title }}</h4>
+                  <span class="shrink-0 text-xs font-semibold px-2 py-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-md">
+                    {{ projet.context }}
+                  </span>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400 text-sm mb-2 flex-1 line-clamp-4 text-justify">
+                  {{ projet.description }}
+                </p>
+                <button 
+                  @click="openModal({ type: 'project', id: projet.id as any })" 
+                  class="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors mt-auto group text-left w-max"
+                >Analyser cette SAÉ<span class="text-emerald-500 group-hover:translate-x-1 transition-transform">&rarr;</span></button>
+              </div>
+            </div>
+
             <h3 class="font-bold text-gray-900 dark:text-white mb-3">Notions maîtrisées :</h3>
             <div v-if="toolData.conceptIds?.length" class="space-y-4">
               <div v-for="cid in toolData.conceptIds" :key="cid" class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
