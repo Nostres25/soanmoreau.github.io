@@ -1,12 +1,12 @@
 // composables/usePortfolio.ts
 import { ref, computed } from 'vue'
-import { TOOL_VALUES, PROJECT_VALUES  } from './objects'
+import { TOOL_VALUES, PROJECT_VALUES, EXPERIENCE_VALUES, EDUCATION_VALUES  } from './objects'
 import type { COMPETENCES, TOOLS, PROJECTS, EXPERIENCES, EDUCATIONS, Tool} from './objects';
 
 // --- MÉTHODES DYNAMIQUES DE RECHERCHE ---
 
 // Trouver les outils liés à une compétence
-export const getToolsForCompetence = (compId: string, limit = NaN) => {
+export function getToolsForCompetence(compId: string, limit = NaN) {
   const associatedTools = [];
   for (let i = 0; i < TOOL_VALUES.length && (!limit || associatedTools.length < limit); i++) {
     const tool = TOOL_VALUES[i];
@@ -19,7 +19,7 @@ export const getToolsForCompetence = (compId: string, limit = NaN) => {
 }
 
 // Trouver les projets liés à une compétence
-export const getProjectsForCompetence = (compId: string) => {
+export function getProjectsForCompetence (compId: string) {
   return PROJECT_VALUES.filter(p => p.competencies.some(c => c.id === compId))
 }
 
@@ -29,7 +29,7 @@ export function getProjectForTool(tool: Tool) {
 
 
 // Trouver TOUTES les entités (Projets, Exp, Formations) qui utilisent une Notion
-export const getEntitiesForConcept = (conceptId: string) => {
+export function getEntitiesForConcept(conceptId: string) {
   const results: { type: 'project' | 'experience' | 'education', id: string, title: string }[] = []
   
   PROJECT_VALUES.forEach(p => {
@@ -50,7 +50,7 @@ export type ModalPayload = { type: 'tool', id: keyof typeof TOOLS } | { type: 'p
 
 const modalStack = ref<ModalPayload[]>([])
 
-export const useModalManager = () => {
+export function useModalManager() {
   const currentModal = computed(() => modalStack.value[modalStack.value.length - 1] || null)
   const hasHistory = computed(() => modalStack.value.length > 1)
   const isOpen = computed(() => modalStack.value.length > 0)
@@ -63,7 +63,7 @@ export const useModalManager = () => {
 // À la fin de composables/usePortfolio.ts
 
 // --- OUTIL DE RENDU MARKDOWN LÉGER ---
-export const renderMarkdown = (text: string) => {
+export function renderMarkdown (text: string) {
   if (!text) return ''
   return '<small class="mt-0 pt-0" style="text-align:start">Partie rédigée avec un markdown personnalisé</small></br></br>' + text
     .replace(/^### (.*$)/gim, '<h4 class="text-lg font-bold text-gray-900 dark:text-white">$1</h4>')
