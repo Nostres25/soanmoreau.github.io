@@ -177,8 +177,14 @@ function openImage(url: string) {
             </div>
 
             <div v-if="currentEntity.github || currentEntity.website" class="flex gap-4 mb-8">
-              <a v-if="currentEntity.github" :href="currentEntity.github" target="_blank" class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">GitHub</a>
               <a v-if="currentEntity.website" :href="currentEntity.website" target="_blank" class="px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium hover:bg-emerald-500 transition-colors">Voir le site</a>
+              <a v-if="currentEntity.github" 
+              :href="currentEntity.github" 
+              target="_blank" 
+              class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors" 
+              :style="currentEntity.github === 'privé' ? 'pointer-events: none;' : ''"
+              title="Vous pouvez me contacter pour voir le dépôt Github" 
+              >GitHub {{currentEntity.github === 'privé' ? 'privé' : ''}}</a>
             </div>
 
             <div class="mt-8 space-y-6">
