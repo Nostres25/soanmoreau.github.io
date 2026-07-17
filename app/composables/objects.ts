@@ -67,6 +67,10 @@ export const CONCEPTS = {
   // ça va avec MVC en soit, puis peut-être que model dans ce contexte c'est la même chose que classe
   //'models': { id: 'models', name: 'Models', description: stripIndents`Logique métier et règles de l'application.` },
 
+  // Notions de tests
+  'tests-unitaires': { id: 'tests-unitaires', name: 'Tests unitaires', description: "Réalisation de tests unitaires visant à vérifier des fonctions précises du programme notamment avec des outils comme Junit"},
+  'tests-fonctionnels': { id: 'tests-fonctionnels', name: "Tests d'intégration", description: "Réalisation de tests fonctionnels pour les services et modules de l'application notamment grâce à des outils comme MockMVC en SpringBoot"},
+  'couverture-tests': { id: 'couverture-tests', name: 'Couverture de tests', description: "Couverture de tous les branchement du programme pour les tests notamment grâce à des outils adaptés comme JaCoCo"},
 
   // Notions JavaScript / TypeScript
   'async': { id: 'async', name: 'Développement asynchrone', description: stripIndents`Gestion des promesses, async/await et requêtes non bloquantes.` },
@@ -171,7 +175,6 @@ export const EDUCATIONS = {
     description: stripIndents`Moyenne stabilisée à ~15/20. Chef d'équipe sur divers projets (Jeu d'échecs, algo graphes, BDD, config Linux, Site de colis).`, 
     contentPath: '/formations/but-info.md',
     longDescription: stripIndents`Formation très technique et professionnalisante. Les nombreux travaux de groupe m'ont permis de développer mes soft-skills et mon leadership.`, 
-    competencies: [{ id: 'conduire-projet', description: "Pilotage d'équipe", longDescription: "" }], 
     segmentations: {
       'S1': {
         name: 'S1',
@@ -217,9 +220,33 @@ export const EDUCATIONS = {
     },
     
     tools: [
-      { id: 'python', description: "Algorithmique avancée", longDescription: "", conceptIds: ['complexite'] },
-      { id: 'java', description: "POO approfondie", longDescription: "", conceptIds: ['poo'] }
+      { id: 'python', description: "Algorithmique avancée avec études de complexité, méthodes de tri et plus", longDescription: "", conceptIds: ['complexite', 'code-to-db', 'escape', 'poo', 'classes', 'interfaces'] },
+      { id: 'flask', description: "Développement web en python", longDescription: "", conceptIds: ['mvc', 'secu', 'code-to-db', 'escape', 'sessions', 'layouts', 'components', 'auth']},
+      { id: 'java', description: "POO approfondie avec de l'héritage, du polymorphisme, du SOLID et des structures de qualité logicielle comme les observateurs et les observateurs", longDescription: "", conceptIds: ['poo'] },
+      { id: 'javascript', description: "Javascript dans le DOM et avec Node.js, comprenant les subtilités du langage, l'asynchrone etc...", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'exceptions', 'loops']},
+      { id: 'git', description: "Gestion du code source.", longDescription: "", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-merges', 'git-conflicts'] },
+      { id: 'nodejs', description: "Travail sur plusieurs technologies Node.js.", longDescription: "", conceptIds: ['modules', 'fs'] },
+      { id: 'regex', description: 'Regex en PostgreSQL et en Javascript.', conceptIds: [], longDescription: "" },
+      { id: 'sql', description: 'SGBDR avec modélisaition, requêtes SQL, PostgreSQL et mariadb', longDescription: "", conceptIds: ['db-model']},
+      { id: 'android-studio', description: "Création d'applications Android", longDescription: "", conceptIds: ['poo']},
+      { id: 'eclipse', description: 'Utilisation de Eclipse pour Java et utilisations des intégrations JUnit & JaCoCO', longDescription: "", conceptIds: ['eclipse-libs']},
+      { id: 'springboot', description: 'Applications web en Java exploitant le fonctionnement global de SpringBoot', longDescription: "", conceptIds: ['mvc']},
+      { id: 'junit', description: 'Tests en Java', longDescription: "", conceptIds: ['tests-unitaires', 'tests-fonctionnels']},
+      { id: 'jacoco', description: 'Couverture de code pour les tests en Java', longDescription: "", conceptIds: ['couverture-tests']},
+      { id: 'mockmvc', description: "Tests d'intéractions HTTP en Java notamment pour les applications SpringBoot", longDescription: "", conceptIds: ['tests-fonctionnels']},
+      { id: 'linux', description: "Installation et configuration d'un poste Ubuntu ; travail sur Xubuntu durant le cursus ; travaux réseaux & systèmes sur debian", longDescription: "", conceptIds: []},
+      { id: 'node-fs', description: 'Exercices sur le module fs/promise', longDescription: "", conceptIds: ['fs']},
+      { id: 'expressjs', description: "Exercices sur le fonctionnement de base", longDescription: "", conceptIds: []},
+      { id: 'vuejs', description: 'Exercices en profondeur sur le fonctionnement de base', longDescription: "", conceptIds: []},
     ],
+    competencies: [
+      { id: 'realiser-app', description: "Réalisation d'applications et formation orientée développement.", longDescription: "" },
+      { id: 'optimiser', description: "Cours sur les optimisations, la sécurité et l'architecture logicielle.", longDescription: "" },
+      { id: 'administrer', description: "Installation d'un poste Xubuntu et travaux en réseau ainsi qu'en systèmes linux.", longDescription: "" },
+      { id: 'gerer-donnees', description: "Travail sur la science de données avec de l'analyse de données, des bases de données SQL (SGBDR) et du traitement algorithmique des données.", longDescription: "" },
+      { id: 'conduire-projet', description: "Cours de gestion de projets, de management SI & réalisaion de toutes les étapes de projets.", longDescription: "" },
+      { id: 'collaborer', description: "Multitude de travaux en groupe pour des projets ou pour des ressources transversales.", longDescription: "" },
+    ], 
     medias: []
   },
   'bac': { 
@@ -237,7 +264,7 @@ export const PROJECTS = {
     description: 'Agent logiciel très complet sur la messagerie Discord pour jouer au UNO. Présent sur +1800 serveurs, +128 000 membres.', 
     contentPath: 'test',
     longDescription: unoOnDiscContent, 
-    github: '', website: 'https://top.gg/bot/985152555791290408', images: [], 
+    github: 'privé', website: 'https://top.gg/bot/985152555791290408', images: [], 
     competencies: [
       { id: 'realiser-app', description: "Développement d'un bot interactif.", longDescription: "" },
       { id: 'collaborer', description: "Utilisation des standards de développement à plusieurs.", longDescription: "" },
@@ -255,6 +282,7 @@ export const PROJECTS = {
       { id: 'discordjs', description: "Interaction avec l'API Discord.", longDescription: "", conceptIds: ['djs-slash', 'djs-components', 'djs-modals', 'djs-ephemeral', 'sharding', 'djs-cache', 'djs-collectors'] },
       { id: 'sentry', description: "Suivi des erreurs en production.", longDescription: "", conceptIds: ['bug-monitoring', 'sentry-debug'] },
       { id: 'git', description: "Gestion du code source.", longDescription: "", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-cherry', 'git-merges', 'git-conflicts'] },
+      { id: 'regex', description: 'Système de recherche dans les logs via Regex', conceptIds: [], longDescription: "D'abord utilisé pour contracter des conditions avec plusieurs `startsWith` en une seul regex, jusqu'à ce que je découvre en réalisant de tests que l'ensemble de startsWith était bien souvent plus rapide qu'un RegEx qui est un outil plutôt lourd à l'échelle de quelques milisecondes" }
     //   { id: 'github-actions', description: "Déploiement et tests continus.", longDescription: "", conceptIds: [] }
     ], 
 
@@ -484,7 +512,11 @@ export const TOOLS = {
   // Écosystème Java
   java: { id: 'java', name: 'Java', icon: 'J', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['mc-plugin'].startDateTimesTamp, currentDate), conceptIds: ['poo', 'exceptions', 'poly', 'java-uml', 'scopes', 'java-arraylist', 'loops', 'switch', 'enums', 'java-scanner'], compIds: ['realiser-app'] },
   spigot: { id: 'spigot', name: 'Spigot MC', icon: 'Spi', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['mc-plugin'].startDateTimesTamp, currentDate), conceptIds: ['perms', 'spigot-yaml', 'spigot-events', 'events', 'spigot-gui', 'spigot-tools', 'cmds', 'spigot-mod', 'spigot-tab', 'zone', 'spigot-groups'], compIds: ['realiser-app', 'optimiser', 'administrer'] },
-  
+  junit: { id: 'junit', name: 'JUnit 4 & 5', icon: 'Ju', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S2.startTimestamp, currentDate), conceptIds: ['tests-unitaires', 'tests-fonctionnels'], compIds: ['realiser-app', 'optimiser']},
+  jacoco: { id: 'jacoco', name: 'JaCoCo', icon: 'JaCo', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S2.startTimestamp, currentDate), conceptIds: ['couverture-tests'], compIds: ['realiser-app', 'optimiser']},
+  mockmvc: { id: 'mockmvc', name: 'MockMVC', icon: 'Mock', masteryIndex: 1, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S4.startTimestamp, currentDate), conceptIds: ['tests-fonctionnels'], compIds: ['realiser-app', 'optimiser']},
+  springboot: { id: 'springboot', name: 'SpringBoot', icon: 'SpBo', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S2.startTimestamp, currentDate), conceptIds: ['mvc'], compIds: ['realiser-app']},
+
   // Front-End (HTML/CSS)
   css: { id: 'css', name: 'CSS', icon: 'CSS', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S2.startTimestamp, currentDate), conceptIds: [], compIds: ['realiser-app'] },
   bootstrap: { id: 'bootstrap', name: 'Bootstrap', icon: 'Bs', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['boot-modals', 'boot-buttons', 'boot-forms', 'boot-dropdowns', 'boot-icons', 'responsive', 'boot-collapse', 'boot-navbar', 'boot-text'], compIds: ['realiser-app'] },
@@ -493,7 +525,7 @@ export const TOOLS = {
 
   // Python
   python: { id: 'python', name: 'Python', icon: 'Py', masteryIndex: 3, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S1.startTimestamp, currentDate), conceptIds: ['complexite'], compIds: ['optimiser', 'realiser-app'] },
-  flask: { id: 'flask', name: 'Flask', icon: 'Fl', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S3.startTimestamp, currentDate), conceptIds: [], compIds: ['realiser-app'] },
+  flask: { id: 'flask', name: 'Flask', icon: 'Fl', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S3.startTimestamp, currentDate), conceptIds: ['mvc'], compIds: ['realiser-app'] },
 
   // Base de données & Infrastructure
   sql: { id: 'sql', name: 'SQL / SGBDR', icon: 'DB', masteryIndex: 3, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S1.startTimestamp, currentDate), conceptIds: ['db-model'], compIds: ['gerer-donnees'] },
@@ -515,6 +547,7 @@ export const TOOLS = {
   sentry: { id: 'sentry', name: 'Sentry', icon: 'Se', masteryIndex: 1, duration: getYearsFormatted(1688335200, currentDate), conceptIds: ['bug-monitoring', 'sentry-debug'], compIds: ['optimiser', 'conduire-projet', 'administrer'] }, // Preuve de la date : https://github.com/DraftBot/DraftBot-uno/commits/feat/uno/?before=56b7655c3d7eb1b82d9fd7dbbea86c5212645ccf+350
 
   // Divers
+  regex: { id: 'regex', name: 'RegEx', icon: 'RE', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S1.startTimestamp, currentDate), conceptIds: [], compIds: ['realiser-app', 'optimiser']},
   'ia-gen': { id: 'ia-gen', name: 'IA Génératives', icon: 'IA', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S4.startTimestamp, currentDate), conceptIds: [], compIds: ['realiser-app'] },
 }
 
