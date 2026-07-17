@@ -96,14 +96,7 @@ const links = [
           </div>
 
           <div>
-            <h3 class="font-bold text-gray-900 dark:text-white mb-4">Navigation</h3>
-            <ul v-for="link in links" :key="link.name" class="space-y-2 text-gray-600 dark:text-gray-400">
-              <li><NuxtLink :to="link.path" class="hover:text-emerald-500 transition-colors">{{ link.name }}</NuxtLink></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 class="font-bold text-gray-900 dark:text-white mb-4">Contact</h3>
+            <h3 id="contact" class="font-bold text-gray-900 dark:text-white mb-4">Contact</h3>
             <ul class="space-y-2 text-gray-600 dark:text-gray-400">
               <li class="flex items-center gap-2">
                 <span class="text-emerald-500">@</span> soanmoreau5@gmail.com
@@ -116,6 +109,13 @@ const links = [
                   Télécharger mon CV &rarr;
                 </a>
               </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-4">Navigation</h3>
+            <ul v-for="link in links" :key="link.name" class="space-y-2 text-gray-600 dark:text-gray-400">
+              <li><NuxtLink :to="link.path" class="hover:text-emerald-500 transition-colors">{{ link.name }}</NuxtLink></li>
             </ul>
           </div>
 
