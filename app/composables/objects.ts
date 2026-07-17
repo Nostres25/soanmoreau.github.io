@@ -153,12 +153,12 @@ export const CONCEPTS = {
 
 // --- COMPÉTENCES (Renommées) ---
 export const COMPETENCES = {
-  'realiser-app': { id: 'realiser-app', title: 'Réaliser', description: 'Développer des applications informatiques complexes.' },
-  'optimiser': { id: 'optimiser', title: 'Optimiser', description: 'Améliorer les performances et l\'algorithmique.' },
-  'administrer': { id: 'administrer', title: 'Administrer', description: 'Configurer systèmes et réseaux.' },
-  'gerer-donnees': { id: 'gerer-donnees', title: 'Gérer', description: 'Concevoir et exploiter des bases de données.' },
-  'conduire-projet': { id: 'conduire-projet', title: 'Conduire', description: 'Piloter un projet informatique.' },
-  'collaborer': { id: 'collaborer', title: 'Collaborer', description: 'Travailler en équipe de manière agile.' }
+  'realiser-app': { id: 'realiser-app', title: "Réaliser un développement d'application", description: 'Développer des applications informatiques complexes.' },
+  'optimiser': { id: 'optimiser', title: 'Optimiser des applications', description: 'Améliorer les performances et l\'algorithmique.' },
+  'administrer': { id: 'administrer', title: "Administrer des systèmes", description: 'Configurer systèmes et réseaux.' },
+  'gerer-donnees': { id: 'gerer-donnees', title: 'Gérer des données', description: 'Concevoir et exploiter des bases de données.' },
+  'conduire-projet': { id: 'conduire-projet', title: 'Conduire un projet', description: 'Piloter un projet informatique.' },
+  'collaborer': { id: 'collaborer', title: 'Travailler en équipe', description: 'Travailler en équipe de manière agile.' }
 }
 
 // --- FORMATIONS (Ajout de "formation-perso") ---

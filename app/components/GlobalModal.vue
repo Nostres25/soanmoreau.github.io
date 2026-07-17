@@ -212,8 +212,7 @@ function openImage(url: string) {
                 <h3 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Compétences appliquées</h3>
                 <div class="space-y-3">
                   <div v-for="c in currentEntity.competencies" :key="c.id" class="flex flex-col sm:flex-row gap-2 sm:gap-4 p-3 bg-gray-50 dark:bg-gray-800/30 rounded-lg border border-gray-100 dark:border-gray-700/50">
-                    <span class="font-bold text-emerald-700 dark:text-emerald-400 whitespace-nowrap min-w-[120px]">{{ COMPETENCES[c.id].title }}</span>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 text-justify">{{ c.description }}</p>
+                    <p class="text-gray-600 dark:text-gray-400 text-justify"><span class="font-bold text-lg text-emerald-700 dark:text-emerald-400 min-w-[120px]">{{ COMPETENCES[c.id].title }} : </span> {{ c.description }}</p>
                   </div>
                 </div>
               </div>

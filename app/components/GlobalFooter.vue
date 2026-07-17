@@ -55,7 +55,7 @@ export default {
         </div>
 
         <div class="text-center text-gray-500 dark:text-gray-500 pt-8 border-t border-gray-100 dark:border-gray-800/60">
-            &copy; 2026 Soan MOREAU. Portfolio réalisé avec Nuxt 4, Tailwind CSS.
+            &copy; 2026 Soan MOREAU. Portfolio réalisé avec Nuxt 4.
         </div>
     </footer>
 </template>
