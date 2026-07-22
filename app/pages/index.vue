@@ -118,7 +118,7 @@
             <!-- Utilisation de la fonction dynamique pour les outils -->
             <div class="flex flex-wrap gap-2 mb-4">
               <button 
-                v-for="tool in getToolsForCompetence(comp.id).sort((tool1, tool2) => tool2.masteryIndex - tool1.masteryIndex)" 
+                v-for="tool in getToolsForCompetence(comp.id, 15).sort((tool1, tool2) => tool2.masteryIndex - tool1.masteryIndex)" 
                 :key="tool.id" 
                 @click="openModal({ type: 'tool', id: tool.id as any })"
                 class="px-2 py-1 text-xs font-medium bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded hover:bg-emerald-100 dark:hover:bg-emerald-800 transition-colors"
@@ -126,6 +126,11 @@
                 {{ tool.name }}
               </button>
             </div>
+                                  <!-- <div class="mt-6 text-left mb-2">
+          <a class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 hover:underline transition-all">
+            Voir plus d'outils &rarr;
+          </a>
+        </div> -->
             
             <!-- Utilisation de la fonction dynamique pour les projets -->
             <ul class="space-y-2 mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">

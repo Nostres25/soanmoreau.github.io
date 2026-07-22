@@ -183,7 +183,6 @@ function openImage(url: string) {
               target="_blank" 
               class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors" 
               :style="currentEntity.github === 'privé' ? 'pointer-events: none;' : ''"
-              title="Vous pouvez me contacter pour voir le dépôt Github" 
               >GitHub {{currentEntity.github === 'privé' ? 'privé' : ''}}</a>
             </div>
 

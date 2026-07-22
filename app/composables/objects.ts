@@ -441,7 +441,7 @@ export const PROJECTS = {
 // --- EXPÉRIENCES ---
 export const EXPERIENCES = {
   'stage-mf': { 
-    id: 'stage-mf', title: 'Développeur PHP front/back', entity: 'Market Factory', date: 'Janv 2026 - Mars 2026', 
+    id: 'stage-mf', title: 'Développeur PHP front/back', entity: 'Market Factory', date: 'Janv 2026 - Mars 2026', github: 'privé',
     startDateTimesTamp: 1769414400,
     endDateTimestamp: 1774022400,
     description: 'Développement API, correction de failles, refonte et rédaction de documentation.', 
