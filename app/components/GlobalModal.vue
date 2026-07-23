@@ -144,7 +144,7 @@ function openImage(url: string) {
                 <div class="grid transition-all duration-500 ease-in-out" :style="{ gridTemplateRows: isExpanded ? '1fr' : '0fr' }">
                   <div class="overflow-hidden">
                     <div 
-                      class="mt-0 p-5 pt-2 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm whitespace-pre-line text-justify markdown-container"
+                      class="mt-0 p-5 pt-2 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-md whitespace-pre-line text-justify markdown-container"
                       v-html="renderMarkdown(currentEntity.longDescription)"
                     ></div>
                   </div>  
