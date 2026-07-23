@@ -71,6 +71,7 @@ export function renderMarkdown (text: string) {
     .replace(/^# (.*$)/gim, '<h2 class="text-2xl font-bold text-gray-900 dark:text-white">$1</h2>')
     .replace(/\*\*(.*?)\*\*/gim, '<strong class="font-bold">$1</strong>')
     .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+    .replace(/`(.*?)`/gim, '<code class="bg-gray-600 text-white rounded-sm">$1</code>')
     .replace(/^- (.*$)/gim, '<li class="ml-5 list-disc">$1</li>')
     .replace(/^-# (.*$)/gim, '<small>$1</small>')
     .replace(/\[([^\]]*)\]\(([^)]*)\)/gim, '<a href="$2" class="inline-flex items-center gap-1 font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">$1</a>')
