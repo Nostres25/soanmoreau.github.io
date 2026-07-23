@@ -22,6 +22,10 @@
     margin-left: 0.2em;
   }
 }
+
+details>summary {
+  cursor: pointer;
+}
 /* .markdown-container details:open {
     
     border-left: 2px outset;

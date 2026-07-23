@@ -42,11 +42,11 @@ function openImage(url: string) {
         :class="currentModal?.type === 'education' || currentModal?.type === 'project' || currentModal?.type === 'experience' || isExpanded ? 'max-w-4xl' : 'max-w-2xl animate-slide-up'"
       >
         <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 shrink-0">
-          <button v-if="hasHistory" @click="goBack" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-emerald-600 transition-colors">
+          <button v-if="hasHistory" @click="goBack" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-emerald-600 transition-colors cursor-pointer">
             <span>&larr;</span> Retour
           </button>
           <div v-else></div> 
-          <button @click="closeAll" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
+          <button @click="closeAll" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 cursor-pointer">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
           </button>
         </div>
@@ -99,8 +99,8 @@ function openImage(url: string) {
                 </p>
                 <button 
                   @click="openModal({ type: 'project', id: projet.id as any })" 
-                  class="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors mt-auto group text-left w-max"
-                >Analyser cette SAÉ<span class="text-emerald-500 group-hover:translate-x-1 transition-transform">&rarr;</span></button>
+                  class="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors mt-auto group text-left w-max cursor-pointer"
+                >Analyser ce projet<span class="text-emerald-500 group-hover:translate-x-1 transition-transform">&rarr;</span></button>
               </div>
             </div>
 
@@ -115,7 +115,7 @@ function openImage(url: string) {
                   <button 
                     v-for="entity in getEntitiesForConcept(cid)" :key="entity.id"
                     @click="openModal({ type: entity.type, id: entity.id as any })"
-                    class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 border border-gray-200 dark:border-gray-600 transition-colors"
+                    class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 border border-gray-200 dark:border-gray-600 transition-colors cursor-pointer"
                   >
                     {{ entity.title }} &rarr;
                   </button>
@@ -134,7 +134,7 @@ function openImage(url: string) {
               <p class="text-gray-600 dark:text-gray-300 text-justify">{{ currentEntity.description }}</p>
               
               <div v-if="currentEntity.longDescription" class="mt-3">
-                <button @click="toggleExpand" class="text-sm font-medium text-emerald-600 hover:text-emerald-500 transition-colors inline-flex items-center gap-1">
+                <button @click="toggleExpand" class="text-sm font-medium text-emerald-600 hover:text-emerald-500 transition-colors inline-flex items-center gap-1 cursor-pointer">
                   <strong>
                     <span v-if="!isExpanded">En savoir plus &darr;</span>
                     <span v-else>Réduire &uarr;</span>
@@ -192,7 +192,7 @@ function openImage(url: string) {
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div v-for="t in currentEntity.tools" :key="t.id" class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-100 dark:border-gray-700 flex flex-col">
                     <div class="flex items-center justify-between mb-2">
-                      <button @click="openModal({ type: 'tool', id: t.id as any })" class="flex items-center gap-2 font-bold text-gray-900 dark:text-white hover:text-emerald-600 transition-colors">
+                      <button @click="openModal({ type: 'tool', id: t.id as any })" class="flex items-center gap-2 font-bold text-gray-900 dark:text-white hover:text-emerald-600 transition-colors cursor-pointer">
                         <span class="w-6 h-6 flex items-center justify-center bg-white dark:bg-gray-700 rounded shadow-sm text-xs">{{ TOOLS[t.id].icon }}</span>
                         {{ TOOLS[t.id].name }}
                       </button>
