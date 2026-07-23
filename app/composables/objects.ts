@@ -3,6 +3,8 @@ import { stripIndents } from 'common-tags'
 
 import stageMfContent from '../content/experiences/stage-mf.md?raw'
 import unoOnDiscContent from '../content/projects/uno-on-disc.md?raw'
+import portfolioContent from '../content/projects/portfolio.md?raw'
+
 
 export type Project = keyof typeof PROJECTS;
 export type Concept = keyof typeof CONCEPTS;
@@ -416,7 +418,8 @@ export const PROJECTS = {
     context: 'BUT',
     educationId: 'but-info',
     startDateTimesTamp: 1781647200,
-    description: "Le site sur lequel vous êtes. Au départ il s'agit d'un projet noté en BUT Informatique qui sert également à nous vendre dans le monde professionnel",
+    description: "Le site sur lequel vous êtes. Cela a été pour moi une nouvelle occasion de découvrir de nouveaux outils notamment en Javascript, d'où mon choix du framework Nuxt.js",
+    longDescription: portfolioContent,
 
     competencies: [
       { id: 'realiser-app', description: "Réalisation de l'application du portfolio.", longDescription: "" },
@@ -426,7 +429,7 @@ export const PROJECTS = {
     tools: [
       { id: 'javascript', description: "Logique principale du bot.", longDescription: "", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'loops'] },
       { id: 'nodejs', description: "Environnement d'exécution.", longDescription: "", conceptIds: ['modules', 'modules-dev'] },
-      { id: 'nuxtjs', description: "Découverte du fonctionnement du framework", longDescription: "", conceptIds: [] },
+      { id: 'nuxtjs', description: "Découverte du fonctionnement du framework Nuxt v4", longDescription: "", conceptIds: [] },
       { id: 'typescript', description: "Migration vers du typage strict.", longDescription: "", conceptIds: ['interfaces', 'classes', 'enums'] },
       { id: 'vscode', description: "Environnement de développement.", longDescription: "", conceptIds: [] },
       { id: 'vuejs', description: "Vues en javascript avec layout, composants etc...", longDescription: "", conceptIds: [] },
