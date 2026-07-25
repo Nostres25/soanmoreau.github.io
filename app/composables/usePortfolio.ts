@@ -1,7 +1,7 @@
 // composables/usePortfolio.ts
 import { ref, computed } from 'vue'
 import { TOOL_VALUES, PROJECT_VALUES, EXPERIENCE_VALUES, EDUCATION_VALUES  } from './objects'
-import type { COMPETENCES, TOOLS, PROJECTS, EXPERIENCES, EDUCATIONS, Tool} from './objects';
+import type { COMPETENCES, TOOLS, PROJECTS, EXPERIENCES, ToolId } from './objects';
 
 // --- MÉTHODES DYNAMIQUES DE RECHERCHE ---
 
@@ -23,7 +23,7 @@ export function getProjectsForCompetence (compId: string) {
   return PROJECT_VALUES.filter(p => p.competencies.some(c => c.id === compId))
 }
 
-export function getProjectForTool(tool: Tool) {
+export function getProjectForTool(tool: ToolId) {
   return PROJECT_VALUES.filter(p => p.tools.find(t => t.id === tool));
 } 
 

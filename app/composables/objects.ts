@@ -4,14 +4,18 @@ import { stripIndents } from 'common-tags'
 import stageMfContent from '../content/experiences/stage-mf.md?raw'
 import unoOnDiscContent from '../content/projects/uno-on-disc.md?raw'
 import portfolioContent from '../content/projects/portfolio.md?raw'
+import nixosSystemContent from '../content/projects/nixos-personal-system.md?raw'
 
 
-export type Project = keyof typeof PROJECTS;
-export type Concept = keyof typeof CONCEPTS;
-export type Skill = keyof typeof COMPETENCES;
-export type Experience = keyof typeof EXPERIENCES;
-export type Education = keyof typeof EDUCATIONS;
-export type Tool = keyof typeof TOOLS;
+
+export type ProjectId = keyof typeof PROJECTS;
+export type ConceptId = keyof typeof CONCEPTS;
+export type SkillId = keyof typeof COMPETENCES;
+export type ExperienceId = keyof typeof EXPERIENCES;
+export type EducationId = keyof typeof EDUCATIONS;
+export type ToolId = keyof typeof TOOLS;
+export type SoftSkillsId = keyof typeof SOFT_SKILLS;
+
 
 export const MASTERY_LEVELS = [
   "Notions", // Je connais à peu prêt le fonctionnement global sans expérience
@@ -21,8 +25,114 @@ export const MASTERY_LEVELS = [
   "Maîtrise avancée", // J'estime que ce que je connais est globalement avancé par rapport aux fonctionnalités/notions et que je suis peut-être au dessu des espérance pour mon profil grâce à des projets ou des formations
   "Maîtrise très avancée" // J'estime que mes connaissances sont sûrement au delà des espérances pour mon profil
 ];
+
+export const MASTERY_LEVEL_DESC = [
+  'Je connais à peu prêt le fonctionnement global sans expérience',
+  "Je connais à peu prêt le fonctionnement global et je suis entrain de tester ainsi qu'apprendre en même temps",
+  "Je connais la majorité des fonctionnalités/notions de base grâce à un ou des projets ou grâce des formations",
+  "Je connais la majorité des fonctionnalités/notions de base et j'ai quelques points avancés grâce à des projets ou des formations",
+  "J'estime que ce que je connais est globalement avancé par rapport aux fonctionnalités/notions et que je suis peut-être au dessus des espérance pour mon profil grâce à des projets ou des formations",
+  "J'estime que mes connaissances sont sûrement bien au delà des espérances pour mon profil"
+];
+
+
+export interface Concept {
+    id: ConceptId,
+    name: string,
+    description: string
+}
+
+export interface Skill {
+  id: SkillId,
+  title: string,
+  description: string
+}
+
+export interface SkillIntegration {
+  id: SkillId,
+  description: string,
+  longDescription: string
+}
+
+export interface Education {
+  id: EducationId,
+  title: string,
+  description: string,
+  entity: string, 
+  context: string,
+  contentPath: string,
+  longDescription: string,
+  competencies: SkillIntegration[],
+  tools: ToolIntegration[],
+  medias: string[],
+  projects?: ProjectIntegration[],
+  segmentations?: {[segmentation: string]: {name: string, periode: string, startTimestamp: number, type: string, projects?: ProjectIntegration[]}},
+  softSkills?: SoftSkillIntegration[]
+}
+
+export interface Project {
+  id: ProjectId,
+  title: string,
+  context: string,
+  educationId: EducationId,
+  startDateTimesTamp: number,
+  description: string,
+  longDescription: string,
+  github: string,
+  website?: string,
+  medias: string[],
+  competencies: SkillIntegration[], 
+  tools: ToolIntegration[],
+  softSkills?: SoftSkillIntegration[]
+}
+
+export interface ProjectIntegration {
+  id: ProjectId,
+  description: string, 
+}
+
+export interface Experience {
+  id: ExperienceId,
+  title: string,
+  entity: string,
+  date: string,
+  github: string,
+  startDateTimesTamp: number,
+  endDateTimestamp: number,
+  description: string,
+  competencies: SkillIntegration[],
+  tools: ToolIntegration[],
+  softSkills?: SoftSkillIntegration[],
+  medias: string[],
+  website?: string,
+  longDescription?: string
+}
+
+export interface Tool {
+  id: ToolId,
+  name: string,
+  icon: string,
+  masteryIndex: number,
+  duration: string,
+  conceptIds: ConceptId[],
+  compIds: SkillId[]
+}
+
+export interface ToolIntegration {
+  id: ToolId,
+  description: string,
+  conceptIds: ConceptId[]
+  longDescription?: string, // TODO currently not visible
+}
+
+export interface SoftSkillIntegration {
+  id: SoftSkillsId,
+  description: string,
+}
+
+
 // --- NOTIONS (Nouveau concept indépendant) ---
-export const CONCEPTS = {
+export const CONCEPTS: {[conceptId: string]: Concept} = {
   // Notions générales & transverses
   'poo': { id: 'poo', name: 'Programmation Orientée Objet (POO)', description: stripIndents`Paradigme de programmation basé sur le concept d'objets contenant des données et des méthodes.` },
   'complexite': { id: 'complexite', name: 'Complexité Algorithmique', description: stripIndents`Évaluation des performances et de l'efficacité mathématique des algorithmes.` },
@@ -154,7 +264,7 @@ export const CONCEPTS = {
 }
 
 // --- COMPÉTENCES (Renommées) ---
-export const COMPETENCES = {
+export const COMPETENCES: {[skillId: string]: Skill} = {
   'realiser-app': { id: 'realiser-app', title: "Réaliser un développement d'application", description: 'Développer des applications informatiques complexes.' },
   'optimiser': { id: 'optimiser', title: 'Optimiser des applications', description: 'Améliorer les performances et l\'algorithmique.' },
   'administrer': { id: 'administrer', title: "Administrer des systèmes", description: 'Configurer systèmes et réseaux.' },
@@ -164,7 +274,7 @@ export const COMPETENCES = {
 }
 
 // --- FORMATIONS (Ajout de "formation-perso") ---
-export const EDUCATIONS = {
+export const EDUCATIONS: {[educationId: string]: Education} = {
   'formation-perso': { 
     id: 'formation-perso', title: 'Formation Personnelle (Autodidacte)', entity: 'Projets Personnels', context: 'Autodidacte', 
     description: 'Apprentissage en autonomie guidé par la curiosité et la réalisation de projets concrets.', 
@@ -260,13 +370,12 @@ export const EDUCATIONS = {
 }
 
 // --- PROJETS ---
-export const PROJECTS = {
+export const PROJECTS: {[projectId: string]: Project} = {
   'uno-disc': { 
     id: 'uno-disc', title: 'Jeu de UNO sur Discord (Non officiel)', context: 'Projet Perso', educationId: 'formation-perso', startDateTimesTamp: 1648219351000,
     description: 'Agent logiciel très complet sur la messagerie Discord pour jouer au UNO. Présent sur +1800 serveurs, +128 000 membres.', 
-    contentPath: 'test',
     longDescription: unoOnDiscContent, 
-    github: 'privé', website: 'https://top.gg/bot/985152555791290408', images: [], 
+    github: 'privé', website: 'https://top.gg/bot/985152555791290408',
     competencies: [
       { id: 'realiser-app', description: "Développement d'un bot interactif.", longDescription: "" },
       { id: 'collaborer', description: "Utilisation des standards de développement à plusieurs.", longDescription: "" },
@@ -313,8 +422,7 @@ export const PROJECTS = {
     description: 'Gestion des permissions et zones sur serveur multijoueur. Configuration Yaml.', 
     startDateTimesTamp: 1577833200,
     longDescription: stripIndents`Un projet développé lors de mes premières années de programmation, me permettant d'appréhender le fonctionnement d'un serveur de jeu, de son API publique et de la gestion de configurations personnalisées pour les administrateurs.`, 
-    contentPath: '/projects/mc-plugin.md',
-    github: 'https://github.com/Nostres25/MinerstiaPlugin', website: '', images: [], 
+    github: 'https://github.com/Nostres25/MinerstiaPlugin', website: '',  
     competencies: [
       { id: 'realiser-app', description: "Création d'un plugin utilitaire.", longDescription: "" }
     ],
@@ -331,10 +439,9 @@ export const PROJECTS = {
   'sae-echecs': { 
     id: 'sae-echecs', title: 'Jeu d\'échecs', context: 'SAÉ BUT', educationId: 'but-info',
     description: 'Développement d\'un jeu d\'échecs complet dans le terminal.', 
-    contentPath: '/projects/sae-echecs.md',
     startDateTimesTamp: EDUCATIONS['but-info'].segmentations['S2'].startTimestamp,
     longDescription: stripIndents`Création intégrale d'un jeu d'échecs respectant la totalité des règles officielles (roque, prise en passant) en implémentant une architecture orientée objet stricte.`, 
-    github: 'https://github.com/Nostres25/JavaChess', website: '', images: [], 
+    github: 'https://github.com/Nostres25/JavaChess', website: '', 
     competencies: [
       { id: 'realiser-app', description: "Logique métier des échecs.", longDescription: "" },
       { id: 'optimiser', description: "Optmisation de mémoire, des opérations et de l'aspect visuel du code.", longDescription: "" },
@@ -354,10 +461,9 @@ export const PROJECTS = {
   'sae-suivi': { 
     id: 'sae-suivi', title: 'Suivi de colis', context: 'SAÉ BUT', educationId: 'but-info',
     description: 'Site web de suivi de colis pour l\'IUT.', 
-    contentPath: '/projects/sae-suivi.md',
     startDateTimesTamp: EDUCATIONS['but-info'].segmentations['S3'].startTimestamp,
     longDescription: stripIndents`Application web interne permettant la gestion logistique des colis reçus par le secrétariat de l'IUT et envoyant des notifications aux destinataires.`, 
-    github: 'https://github.com/Nostres25/suivi-colis-iutv-v2', website: '', images: [], 
+    github: 'https://github.com/Nostres25/suivi-colis-iutv-v2', website: '',
     competencies: [
       { id: 'realiser-app', description: "Création de la plateforme web complète.", longDescription: "" },
       { id: 'optimiser', description: "Optimisation de l'applciation pour la réactivité.", longDescription: "" },
@@ -385,17 +491,15 @@ export const PROJECTS = {
   'sae-python': { 
     id: 'sae-python', title: 'Étude de graphes', context: 'SAÉ BUT', educationId: 'but-info',
     startDateTimesTamp: EDUCATIONS['but-info'].segmentations.S1.startTimestamp,
-    description: 'Étude de réseaux et de complexité algorithmique.', longDescription: "", github: '', website: '', images: [], 
-    contentPath: '/projects/sae-python.md',
+    description: 'Étude de réseaux et de complexité algorithmique.', longDescription: "", github: '', website: '',
     competencies: [{ id: 'optimiser', description: "Analyse des temps d'exécution.", longDescription: "" }],
     tools: [{ id: 'python', description: "Scripting d'analyse.", longDescription: "", conceptIds: ['complexite'] }],
 
     medias: []
   },
   'sae-bd': { 
-    id: 'sae-bd', title: 'Modélisation BD', context: 'SAÉ BUT', educationId: 'but-info',
-    description: 'Recueil des besoins, modélisation et construction de bases de données.', longDescription: "", github: '', website: '', images: [], 
-    contentPath: '/projects/sae-bd.md',
+    id: 'sae-bd', title: 'Modélisation BD', context: 'SAÉ BUT', educationId: 'but-info', startDateTimesTamp: EDUCATIONS['but-info'].segmentations.S1.startTimestamp,
+    description: 'Recueil des besoins, modélisation et construction de bases de données.', longDescription: "", github: '', website: '',
     competencies: [{ id: 'gerer-donnees', description: "Architecture de la BD.", longDescription: "" }],
     tools: [{ id: 'sql', description: "Requêtes de test.", longDescription: "", conceptIds: ['db-model'] }],
 
@@ -404,8 +508,7 @@ export const PROJECTS = {
   'sae-sys': { 
     id: 'sae-sys', title: 'Configuration Ubuntu', context: 'SAÉ BUT', educationId: 'but-info',
     startDateTimesTamp: EDUCATIONS['but-info'].segmentations.S2.startTimestamp,
-    description: 'Configurations d\'un système Ubuntu (Linux) et réseaux (IPv4, DHCP, Pare-feux).', longDescription: "", github: '', website: '', images: [], 
-    contentPath: '/projects/sae-sys.md',
+    description: 'Configurations d\'un système Ubuntu (Linux) et réseaux (IPv4, DHCP, Pare-feux).', longDescription: "", github: '', website: '',
     competencies: [{ id: 'administrer', description: "Installation et configuration OS.", longDescription: "" }],
     tools: [{ id: 'linux', description: "Commandes terminal.", longDescription: "", conceptIds: ['sys'] }],
 
@@ -442,13 +545,12 @@ export const PROJECTS = {
 }
 
 // --- EXPÉRIENCES ---
-export const EXPERIENCES = {
+export const EXPERIENCES: {[experiencId: string]: Experience} = {
   'stage-mf': { 
     id: 'stage-mf', title: 'Développeur PHP front/back', entity: 'Market Factory', date: 'Janv 2026 - Mars 2026', github: 'privé',
     startDateTimesTamp: 1769414400,
     endDateTimestamp: 1774022400,
     description: 'Développement API, correction de failles, refonte et rédaction de documentation.', 
-    contentPath: stageMfContent,
     longDescription: stageMfContent, 
     
     competencies: [
@@ -489,7 +591,7 @@ const currentDate = Date.now();
 
 // --- OUTILS ---
 // Index de maîtrise (0 = Notions, 1 = Découverte, 2 = Maîtrise globale, 3 = Assez avancée, 4 = Avancée, 5 = Très avancée)
-export const TOOLS = {
+export const TOOLS: {[toolId: string]: Tool} = {
   // Langages & Frameworks JS/TS
   javascript: { id: 'javascript', name: 'JavaScript', icon: 'JS', masteryIndex: 4, duration: getYearsFormatted(PROJECTS['uno-disc'].startDateTimesTamp, currentDate), conceptIds: ['async', 'callbacks', 'events', 'scopes', 'poo', 'switch', 'exceptions', 'loops', 'collections', 'dom', 'ajax'], compIds: ['realiser-app'] },
   typescript: { id: 'typescript', name: 'TypeScript', icon: 'TS', masteryIndex: 3, duration: getYearsFormatted(1660341600, currentDate), conceptIds: ['typage', 'poo', 'interfaces', 'classes', 'enums'], compIds: ['realiser-app'] }, // preuve pour la date : https://github.com/DraftBot/DraftBot-uno/commits/feat/uno/?since=2021-10-13&until=2023-02-28
@@ -574,9 +676,9 @@ export const TIMELINE_DATA = [
   { id: 'stage-mf', modalType: 'experience', type: 'pro', title: 'Stage Dev PHP', entity: 'Market Factory', startDate: 'Jan 2026', endDate: 'Mars 2026', durationMonths: 3, isEvent: false, stemHeight: 110, textOffset: '-translate-x-[50%]' }
 ] 
 
-export const PROJECT_IDS = Object.keys(PROJECTS) as Project[];
-export const EXPERIENCE_IDS = Object.keys(EXPERIENCES) as Experience[];
-export const EDUCATION_IDS = Object.keys(EDUCATIONS) as Education[];
+export const PROJECT_IDS = Object.keys(PROJECTS) as ProjectId[];
+export const EXPERIENCE_IDS = Object.keys(EXPERIENCES) as ExperienceId[];
+export const EDUCATION_IDS = Object.keys(EDUCATIONS) as EducationId[];
 
 export const TOOL_VALUES = Object.values(TOOLS);
 export const PROJECT_VALUES = Object.values(PROJECTS);

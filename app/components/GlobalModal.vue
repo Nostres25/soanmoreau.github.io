@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS    } from '~/composables/objects'
-import type { Project, Experience, Education, Tool } from '~/composables/objects';
-import { useModalManager, getEntitiesForConcept, renderMarkdown } from '~/composables/usePortfolio'
+import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS } from '~/composables/objects'
+import type { ProjectId, ExperienceId, EducationId, ToolId, Project, Education, Experience } from '~/composables/objects';
+import { useModalManager, getEntitiesForConcept, getProjectForTool, renderMarkdown } from '~/composables/usePortfolio'
 
 const { isOpen, currentModal, hasHistory, closeAll, goBack, openModal } = useModalManager()
 
@@ -12,9 +12,10 @@ const modalContent = ref<HTMLElement | null>(null)
 
 const currentEntity = computed(() => {
   if (!currentModal.value) return null
-  if (currentModal.value.type === 'project') return PROJECTS[currentModal.value.id as Project]
-  if (currentModal.value.type === 'experience') return EXPERIENCES[currentModal.value.id as Experience]
-  if (currentModal.value.type === 'education') return EDUCATIONS[currentModal.value.id as Education]
+  if (currentModal.value.type === 'project') return PROJECTS[currentModal.value.id as ProjectId] as Project
+  if (currentModal.value.type === 'experience') return EXPERIENCES[currentModal.value.id as ExperienceId] as Experience
+  if (currentModal.value.type === 'education') return EDUCATIONS[currentModal.value.id as EducationId] as Education
+
   return null
 })
 
@@ -62,7 +63,7 @@ function openImage(url: string) {
                 {{ toolData.icon }}
               </div>
               <div>
-                <h2 class="text-2xl font-bold">{{ toolData.name }}</h2>
+                <h1 class="text-2xl font-bold">{{ toolData.name }}</h1>
                 
                 <div class="mt-2">
                   <span class="text-sm font-medium text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded inline-block mb-1.5">
@@ -84,33 +85,12 @@ function openImage(url: string) {
               </div>
             </div>
 
-            <h3 class="font-bold text-gray-900 dark:text-white mb-3">Projets concernés :</h3>
-            <div class="mb-4 pb-2">
-              <div 
-                v-for="projet in getProjectForTool(toolData.id as Tool)" 
-                :key="projet.id" 
-                class="flex flex-col bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-4 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-emerald-500 transition-colors shadow-sm hover:shadow-md mb-4"
-              >
-                <div class="flex justify-between items-start mb-4">
-                  <h4 class="font-bold text-gray-900 dark:text-white mb-1">{{ projet.title }}</h4>
-                  <span class="shrink-0 text-xs font-semibold px-2 py-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-md">
-                    {{ projet.context }}
-                  </span>
-                </div>
-                <p class="text-gray-600 dark:text-gray-400 text-sm mb-2 flex-1 line-clamp-4 text-justify">
-                  {{ projet.description }}
-                </p>
-                <button 
-                  @click="openModal({ type: 'project', id: projet.id as any })" 
-                  class="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors mt-auto group text-left w-max cursor-pointer"
-                >Analyser ce projet<span class="text-emerald-500 group-hover:translate-x-1 transition-transform">&rarr;</span></button>
-              </div>
-            </div>
+            <ProjectsListField :projects="getProjectForTool(toolData.id as ToolId)"/>
 
-            <h3 class="font-bold text-gray-900 dark:text-white mb-3">Notions maîtrisées :</h3>
+            <h2 class="font-bold text-gray-900 dark:text-white mb-3">Notions maîtrisées <NuxtIcon name="i-lucide-circle-help" class="size-4" title="Par souci de temps, les notions sont actuellement définies à la volée en fonction de ce que je considère utile à préciser. Mais à l'avenir elles pourraient être déifnies en fonction des catégories des documentations respectives à chaque outil"/></h2> 
             <div v-if="toolData.conceptIds?.length" class="space-y-4">
               <div v-for="cid in toolData.conceptIds" :key="cid" class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
-                <h4 class="font-bold text-emerald-700 dark:text-emerald-400 mb-1">{{ CONCEPTS[cid].name }}</h4>
+                <h3 class="font-bold text-emerald-700 dark:text-emerald-400 mb-1">{{ CONCEPTS[cid].name }}</h3>
                 <p class="text-sm text-gray-600 dark:text-gray-400 text-justify mb-3">{{ CONCEPTS[cid].description }}</p>
                 
                 <div class="flex flex-wrap gap-2">
@@ -132,7 +112,7 @@ function openImage(url: string) {
               <span v-if="currentEntity.context || currentEntity.date" class="text-xs font-semibold px-2 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 rounded-md mb-2 inline-block">
                 {{ currentEntity.context || currentEntity.date }}
               </span>
-              <h2 class="text-3xl font-extrabold mb-2">{{ currentEntity.title }}</h2>
+              <h1 class="text-3xl font-extrabold mb-2">{{ currentEntity.title }}</h1>
               <h3 v-if="currentEntity.entity" class="text-xl text-gray-500 mb-4">{{ currentEntity.entity }}</h3>
               <p class="text-gray-600 dark:text-gray-300 text-justify">{{ currentEntity.description }}</p>
               
@@ -191,7 +171,7 @@ function openImage(url: string) {
 
             <div class="mt-8 space-y-6">
               <div v-if="currentEntity.tools?.length">
-                <h3 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Outils sollicités & notions</h3>
+                <h2 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Outils sollicités & notions <NuxtIcon name="i-lucide-circle-help" class="size-4" title="- Cliquez sur l'outil de votre choix pour en savoir plus sur ma maîtrise actuelle.&#013;- Les notions visibles ci-dessous sont celles solicitées par moi-même dans le cadre du projet, de la formation ou de l'expérience." /></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div v-for="t in currentEntity.tools" :key="t.id" class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-100 dark:border-gray-700 flex flex-col">
                     <div class="flex items-center justify-between mb-2">
@@ -202,7 +182,7 @@ function openImage(url: string) {
                     </div>
                     <p class="text-sm text-gray-600 dark:text-gray-400 text-justify mb-3 flex-1">{{ t.description }}</p>
                     <div v-if="t.conceptIds?.length" class="flex flex-wrap gap-1.5 mt-auto">
-                      <span v-for="cid in t.conceptIds" :key="cid" class="text-[10px] px-1.5 py-0.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded font-semibold uppercase tracking-wide">
+                      <span v-for="cid in t.conceptIds" :key="cid" :title="CONCEPTS[cid]?.description" class="text-[10px] px-1.5 py-0.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded font-semibold uppercase tracking-wide">
                         {{ CONCEPTS[cid].name }}
                       </span>
                     </div>
@@ -211,7 +191,7 @@ function openImage(url: string) {
               </div>
 
               <div v-if="currentEntity.competencies?.length">
-                <h3 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Compétences appliquées</h3>
+                <h2 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Compétences académiques appliquées</h2>
                 <div class="space-y-3">
                   <div v-for="c in currentEntity.competencies" :key="c.id" class="flex flex-col sm:flex-row gap-2 sm:gap-4 p-3 bg-gray-50 dark:bg-gray-800/30 rounded-lg border border-gray-100 dark:border-gray-700/50">
                     <p class="text-gray-600 dark:text-gray-400 text-justify"><span class="font-bold text-lg text-emerald-700 dark:text-emerald-400 min-w-[120px]">{{ COMPETENCES[c.id].title }} : </span> {{ c.description }}</p>
