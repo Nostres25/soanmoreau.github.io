@@ -6,7 +6,9 @@ import { useModalManager, getEntitiesForConcept, renderMarkdown } from '~/compos
 
 const { isOpen, currentModal, hasHistory, closeAll, goBack, openModal } = useModalManager()
 
-const toolData = computed(() => currentModal.value?.type === 'tool' ? TOOLS[currentModal.value.id as Tool] : null)
+const toolData = computed(() => currentModal.value?.type === 'tool' ? TOOLS[currentModal.value.id as ToolId] : null);
+
+const modalContent = ref<HTMLElement | null>(null)
 
 const currentEntity = computed(() => {
   if (!currentModal.value) return null
@@ -20,6 +22,7 @@ const isExpanded = ref(false)
 const toggleExpand = () => { isExpanded.value = !isExpanded.value }
 
 watch(currentModal, () => {
+  modalContent.value?.scrollTo({ top: 0 })
   isExpanded.value = false;
 })
 
@@ -51,7 +54,7 @@ function openImage(url: string) {
           </button>
         </div>
 
-        <div class="p-6 overflow-y-auto">
+        <div ref="modalContent" class="p-6 overflow-y-auto">
           
           <div v-if="currentModal?.type === 'tool' && toolData">
             <div class="flex items-center gap-4 mb-6">
