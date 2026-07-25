@@ -99,10 +99,10 @@
         <div class="mb-6">
           <h2 class="text-2xl font-bold flex items-center gap-2 mb-3">
             <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
-            Compétences Clés
-          </h2>
+            Compétences clés
+           <NuxtIcon name="i-lucide-circle-help" class="size-4" title="- Cliquez sur les outils pour observer les autres compétences techniques / notions maîtrisées ; les projets ; ainsi que le niveau de maîtrise, par outil.&#013;- Certains outils spécifiques à un outil peuvent être considérés comme notion car faisant partie du bagage de connaissances pour un outil" /></h2>
           <p class="text-sm text-gray-600 dark:text-gray-400 text-justify">
-            Les compétences correspondent à celles définies par le programme national du B.U.T Informatique.
+            Les compétences correspondent à celles définies par le programme national du B.U.T Informatique qui sont rattachées à des outils eux-mêmes rattachés à des notions.
           </p>
         </div>
         
@@ -150,6 +150,27 @@
           <NuxtLink to="/parcours#formation" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 hover:underline transition-all">
             Voir l'évolution des compétences au fil de la formation &rarr;
           </NuxtLink>
+        </div>
+        <div class="mb-6 mt-4">
+          <h3 class="text-xl font-bold flex items-center gap-2 mb-3">
+            Compétences transversales
+          </h3>
+          <ul>
+            <li v-for="softSkill in SOFT_SKILLS" :key="softSkill.id" class="ml-5 list-disc mb-2">
+              <span class="font-bold text-lg text-emerald-600 dark:text-emerald-400 min-w-[120px]">{{softSkill.name}}</span> <br/>
+              {{ softSkill.description }}
+              <div class="flex flex-wrap gap-2">
+                <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 py-1">Appliqué dans :</span>
+                <button 
+                  v-for="entity in getEntitiesForSoftSkill(softSkill.id)" :key="entity.id"
+                  @click="openModal({ type: entity.type, id: entity.id as any })"
+                  class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 border border-gray-200 dark:border-gray-600 transition-colors cursor-pointer"
+                >
+                  {{ entity.title }} &rarr;
+                </button>
+              </div>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -219,7 +240,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { COMPETENCES, TOOLS, PROJECTS, TIMELINE_DATA } from '~/composables/objects'
+import { COMPETENCES, TOOLS, PROJECTS, TIMELINE_DATA, SOFT_SKILLS } from '~/composables/objects'
 import { useModalManager } from '~/composables/usePortfolio'
 
 const { openModal } = useModalManager()

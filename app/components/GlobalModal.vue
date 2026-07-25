@@ -215,6 +215,19 @@ function openImage(url: string) {
                   </div>
                 </div>
               </div>
+              <div v-if="currentEntity?.softSkills && currentEntity.softSkills.length > 0" class="mb-6 mt-4">
+                <h2 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
+                  Compétences transversales
+                </h2>
+                <ul>
+                  <li v-for="softSkill in currentEntity?.softSkills" :key="softSkill.id" class="ml-5 list-disc mb-2">
+                    <span class="font-bold text-lg text-emerald-700 dark:text-emerald-400 min-w-[120px]">{{SOFT_SKILLS[softSkill.id].name}}</span> <br>
+                    {{ softSkill.description }}
+                    
+                  </li>
+                </ul>
+              </div>
+              <ProjectsListField v-if="currentEntity.id === 'but-info'" :projects="PROJECT_VALUES.filter((project) => project.context.includes('BUT'))"/> 
             </div>
           </div>
         </div>

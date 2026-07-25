@@ -45,6 +45,24 @@ export function getEntitiesForConcept(conceptId: string) {
   return results
 }
 
+export function getEntitiesForSoftSkill(softSkillId: string) {
+  const results: { type: 'project' | 'experience' | 'education', id: string, title: string }[] = [];
+
+  PROJECT_VALUES.forEach(p => {
+    if (p?.softSkills?.find((softSkill) => softSkill.id === softSkillId)) results.push({ type: 'project', id: p.id, title: p.title })
+  });
+  EXPERIENCE_VALUES.forEach(e => {
+    if (e?.softSkills?.find((softSkill) => softSkill.id === softSkillId)) results.push({ type: 'experience', id: e.id, title: e.title })
+  });
+  EDUCATION_VALUES.forEach(e => {
+    if (e?.softSkills?.find((softSkill) => softSkill.id === softSkillId)) results.push({ type: 'education', id: e.id, title: e.title })
+  });
+  
+  return results;
+
+
+}
+
 // L'extension du type pour le Modal (mis à jour)
 export type ModalPayload = { type: 'tool', id: keyof typeof TOOLS } | { type: 'project', id: keyof typeof PROJECTS } | { type: 'competence', id: keyof typeof COMPETENCES } | { type: 'experience', id: keyof typeof EXPERIENCES } | { type: 'education', id: keyof typeof EDUCATIONS }
 
