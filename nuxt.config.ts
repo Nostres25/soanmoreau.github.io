@@ -41,6 +41,11 @@ export default defineNuxtConfig({
     assetsInclude: [
       "**/*.md",
     ],
+    optimizeDeps: {
+      include: [
+        'common-tags',
+      ]
+    }
   },
 
   colorMode: {
