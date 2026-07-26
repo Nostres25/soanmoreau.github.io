@@ -74,7 +74,7 @@ export function useModalManager() {
   const isOpen = computed(() => modalStack.value.length > 0)
   const openModal = (payload: ModalPayload) => { modalStack.value.push(payload); document.body.style.overflow = 'hidden' }
   const goBack = () => { modalStack.value.pop(); if (modalStack.value.length === 0) document.body.style.overflow = '' }
-  const closeAll = () => { modalStack.value = []; document.body.style.overflow = '' }
+  const closeAll = () => { modalStack.value = []; if (document) document.body.style.overflow = '' }
   return { currentModal, hasHistory, isOpen, openModal, goBack, closeAll }
 }
 
