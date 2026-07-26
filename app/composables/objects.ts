@@ -1,4 +1,4 @@
-import { getYearsBetween } from './usePortfolio'
+import { getYearsFormatted } from './usePortfolio'
 import { stripIndents } from 'common-tags'
 
 import stageMfContent from '../content/experiences/stage-mf.md?raw'
@@ -15,7 +15,6 @@ export type ExperienceId = keyof typeof EXPERIENCES;
 export type EducationId = keyof typeof EDUCATIONS;
 export type ToolId = keyof typeof TOOLS;
 export type SoftSkillsId = keyof typeof SOFT_SKILLS;
-
 
 export const MASTERY_LEVELS = [
   "Notions", // Je connais à peu prêt le fonctionnement global sans expérience
@@ -51,7 +50,7 @@ export interface Skill {
 export interface SkillIntegration {
   id: SkillId,
   description: string,
-  longDescription: string
+  longDescription?: string
 }
 
 export interface Education {
@@ -61,10 +60,10 @@ export interface Education {
   entity: string, 
   context: string,
   contentPath: string,
-  longDescription: string,
+  longDescription?: string,
   competencies: SkillIntegration[],
   tools: ToolIntegration[],
-  medias: string[],
+  medias?: string[],
   projects?: ProjectIntegration[],
   segmentations?: {[segmentation: string]: {name: string, periode: string, startTimestamp: number, type: string, projects?: ProjectIntegration[]}},
   softSkills?: SoftSkillIntegration[]
@@ -77,10 +76,10 @@ export interface Project {
   educationId: EducationId,
   startDateTimesTamp: number,
   description: string,
-  longDescription: string,
+  longDescription?: string,
   github: string,
   website?: string,
-  medias: string[],
+  medias?: string[],
   competencies: SkillIntegration[], 
   tools: ToolIntegration[],
   softSkills?: SoftSkillIntegration[]
@@ -103,7 +102,7 @@ export interface Experience {
   competencies: SkillIntegration[],
   tools: ToolIntegration[],
   softSkills?: SoftSkillIntegration[],
-  medias: string[],
+  medias?: string[],
   website?: string,
   longDescription?: string
 }
@@ -269,6 +268,7 @@ export const CONCEPTS: {[conceptId: string]: Concept} = {
   'figma-logos': { id: 'figma-logos', name: 'Logos', description: stripIndents`Conception vectorielle d'identités visuelles.` },
   'visuels': { id: 'visuels', name: 'Conception de visuels graphiques simples', description: stripIndents`Création de maquettes basiques.` },
   'decorators': { id: 'decorators', name: 'Décorateurs', description: "Ajout dynamique de comportements en préservant l'intégrité du code pour une classe ou une fonction." },
+  'middlewares': { id: 'middlewares', name: 'Middlewares', description: "Code s'exécutant avant celui lié à chaque route"},
   
   // Linux / NixOs
   'zsh-config': { id: 'zsh-config', name: 'Config zsh', description: 'Configuration du shell zsh en déclaratif avec Nix.' },
@@ -303,7 +303,7 @@ export const EDUCATIONS: {[educationId: string]: Education} = {
     id: 'formation-perso', title: 'Formation Personnelle (Autodidacte)', entity: 'Projets Personnels', context: 'Autodidacte', 
     description: 'Apprentissage en autonomie guidé par la curiosité et la réalisation de projets concrets.', 
     contentPath: '/formations/formation-perso.md',
-    longDescription: '', competencies: [], tools: [], medias: [],
+    competencies: [], tools: [], 
     projects: [],
   },
   'but-info': { 
@@ -356,43 +356,42 @@ export const EDUCATIONS: {[educationId: string]: Education} = {
     },
     
     tools: [
-      { id: 'python', description: "Algorithmique avancée avec études de complexité, méthodes de tri et plus", longDescription: "", conceptIds: ['complexite', 'code-to-db', 'escape', 'poo', 'classes', 'interfaces', 'poly', 'decorators'] },
-      { id: 'flask', description: "Développement web en python", longDescription: "", conceptIds: ['mvc', 'secu', 'code-to-db', 'escape', 'sessions', 'layouts', 'components', 'auth']},
-      { id: 'java', description: "POO approfondie avec de l'héritage, du polymorphisme, du SOLID et des structures de qualité logicielle comme les observateurs et les observateurs", longDescription: "", conceptIds: ['poo', 'poly', 'java-scanner', 'decorators'] },
+      { id: 'python', description: "Algorithmique avancée avec études de complexité, méthodes de tri et plus", conceptIds: ['complexite', 'code-to-db', 'escape', 'poo', 'classes', 'interfaces', 'poly', 'decorators'] },
+      { id: 'flask', description: "Développement web en python", conceptIds: ['mvc', 'secu', 'code-to-db', 'escape', 'sessions', 'layouts', 'components', 'auth']},
+      { id: 'java', description: "POO approfondie avec de l'héritage, du polymorphisme, du SOLID et des structures de qualité logicielle comme les observateurs et les observateurs", conceptIds: ['poo', 'poly', 'java-scanner', 'decorators'] },
       { id: 'javascript', description: "Javascript dans le DOM et avec Node.js, comprenant les subtilités du langage, l'asynchrone etc...", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'exceptions', 'loops']},
-      { id: 'git', description: "Gestion du code source.", longDescription: "", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-merges', 'git-conflicts'] },
-      { id: 'nodejs', description: "Travail sur plusieurs technologies Node.js.", longDescription: "", conceptIds: ['modules', 'fs'] },
-      { id: 'regex', description: 'Regex en PostgreSQL et en Javascript.', conceptIds: [], longDescription: "" },
-      { id: 'sql', description: 'SGBDR avec modélisaition, requêtes SQL, PostgreSQL et mariadb', longDescription: "", conceptIds: ['db-model']},
-      { id: 'android-studio', description: "Création d'applications Android", longDescription: "", conceptIds: ['poo']},
-      { id: 'eclipse', description: 'Utilisation de Eclipse pour Java et utilisations des intégrations JUnit & JaCoCO', longDescription: "", conceptIds: ['eclipse-libs']},
-      { id: 'springboot', description: 'Applications web en Java exploitant le fonctionnement global de SpringBoot', longDescription: "", conceptIds: ['mvc']},
-      { id: 'junit', description: 'Tests en Java', longDescription: "", conceptIds: ['tests-unitaires', 'tests-fonctionnels']},
-      { id: 'jacoco', description: 'Couverture de code pour les tests en Java', longDescription: "", conceptIds: ['couverture-tests']},
-      { id: 'mockmvc', description: "Tests d'intéractions HTTP en Java notamment pour les applications SpringBoot", longDescription: "", conceptIds: ['tests-fonctionnels']},
-      { id: 'linux', description: "Installation et configuration d'un poste Ubuntu ; travail sur Xubuntu durant le cursus ; travaux réseaux & systèmes sur debian", longDescription: "", conceptIds: ['firewall', 'mounts', 'packages-install']},
-      { id: 'node-fs', description: 'Exercices sur le module fs/promise', longDescription: "", conceptIds: ['fs']},
-      { id: 'expressjs', description: "Exercices sur le fonctionnement de base", longDescription: "", conceptIds: []},
-      { id: 'vuejs', description: 'Exercices en profondeur sur le fonctionnement de base', longDescription: "", conceptIds: ['reactive-values']},
+      { id: 'git', description: "Gestion du code source.", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-merges', 'git-conflicts'] },
+      { id: 'nodejs', description: "Travail sur plusieurs technologies Node.js.", conceptIds: ['modules', 'fs'] },
+      { id: 'regex', description: 'Regex en PostgreSQL et en Javascript.', conceptIds: [],  },
+      { id: 'sql', description: 'SGBDR avec modélisaition, requêtes SQL, PostgreSQL et mariadb', conceptIds: ['db-model']},
+      { id: 'android-studio', description: "Création d'applications Android", conceptIds: ['poo']},
+      { id: 'eclipse', description: 'Utilisation de Eclipse pour Java et utilisations des intégrations JUnit & JaCoCO', conceptIds: ['eclipse-libs']},
+      { id: 'springboot', description: 'Applications web en Java exploitant le fonctionnement global de SpringBoot', conceptIds: ['mvc']},
+      { id: 'junit', description: 'Tests en Java', conceptIds: ['tests-unitaires', 'tests-fonctionnels']},
+      { id: 'jacoco', description: 'Couverture de code pour les tests en Java', conceptIds: ['couverture-tests']},
+      { id: 'mockmvc', description: "Tests d'intéractions HTTP en Java notamment pour les applications SpringBoot", conceptIds: ['tests-fonctionnels']},
+      { id: 'linux', description: "Installation et configuration d'un poste Ubuntu ; travail sur Xubuntu durant le cursus ; travaux réseaux & systèmes sur debian", conceptIds: ['firewall', 'mounts', 'packages-install']},
+      { id: 'node-fs', description: 'Exercices sur le module fs/promise', conceptIds: ['fs']},
+      { id: 'expressjs', description: "Exercices sur le fonctionnement de base", conceptIds: []},
+      { id: 'vuejs', description: 'Exercices en profondeur sur le fonctionnement de base', conceptIds: ['reactive-values']},
     ],
     competencies: [
-      { id: 'realiser-app', description: "Réalisation d'applications et formation orientée développement.", longDescription: "" },
-      { id: 'optimiser', description: "Cours sur les optimisations, la sécurité et l'architecture logicielle.", longDescription: "" },
-      { id: 'administrer', description: "Installation d'un poste Xubuntu et travaux en réseau ainsi qu'en systèmes linux.", longDescription: "" },
-      { id: 'gerer-donnees', description: "Travail sur la science de données avec de l'analyse de données, des bases de données SQL (SGBDR) et du traitement algorithmique des données.", longDescription: "" },
-      { id: 'conduire-projet', description: "Cours de gestion de projets, de management SI & réalisaion de toutes les étapes de projets.", longDescription: "" },
-      { id: 'collaborer', description: "Multitude de travaux en groupe pour des projets ou pour des ressources transversales.", longDescription: "" },
+      { id: 'realiser-app', description: "Réalisation d'applications et formation orientée développement.",  },
+      { id: 'optimiser', description: "Cours sur les optimisations, la sécurité et l'architecture logicielle.",  },
+      { id: 'administrer', description: "Installation d'un poste Xubuntu et travaux en réseau ainsi qu'en systèmes linux.",  },
+      { id: 'gerer-donnees', description: "Travail sur la science de données avec de l'analyse de données, des bases de données SQL (SGBDR) et du traitement algorithmique des données.",  },
+      { id: 'conduire-projet', description: "Cours de gestion de projets, de management SI & réalisaion de toutes les étapes de projets.",  },
+      { id: 'collaborer', description: "Multitude de travaux en groupe pour des projets ou pour des ressources transversales.",  },
     ], 
-    medias: []
+    
   },
   'bac': { 
     id: 'bac', title: 'BAC Général (Maths, PC, SVT)', entity: 'Lycée', context: 'Diplôme', 
     contentPath: '/formations/bac.md',
     description: 'Apprentissage de la méthode scientifique. Bons résultats en mathématiques.', 
-    longDescription: '', competencies: [], tools: [], medias: [], projects: []
+    competencies: [], tools: [], projects: []
   }
 }
-
 // --- PROJETS ---
 export const PROJECTS: {[projectId: string]: Project} = {
   'uno-disc': { 
@@ -401,25 +400,25 @@ export const PROJECTS: {[projectId: string]: Project} = {
     longDescription: unoOnDiscContent, 
     github: 'privé', website: 'https://top.gg/bot/985152555791290408',
     competencies: [
-      { id: 'realiser-app', description: "Développement d'un bot interactif.", longDescription: "" },
-      { id: 'collaborer', description: "Utilisation des standards de développement à plusieurs.", longDescription: "" },
-      { id: 'conduire-projet', description: "Maintenir un projet sur la durée.", longDescription: "" },
-      { id: 'optimiser', description: "Optimisation de code pour gérer des milliers de serveurs simultanément.", longDescription: "" }
+      { id: 'realiser-app', description: "Développement d'un bot interactif.",  },
+      { id: 'collaborer', description: "Utilisation des standards de développement à plusieurs.",  },
+      { id: 'conduire-projet', description: "Maintenir un projet sur la durée.",  },
+      { id: 'optimiser', description: "Optimisation de code pour gérer des milliers de serveurs simultanément.",  }
     ],
     tools: [
-      { id: 'javascript', description: "Logique principale du bot.", longDescription: "", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'poo', 'switch', 'exceptions', 'loops', 'collections'] },
-      { id: 'nodejs', description: "Environnement d'exécution.", longDescription: "", conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts', 'sharding', 'fs'] },
-      { id: 'nodemon', description: "Outil de dev.", longDescription: "", conceptIds: ['nodemon-restart'] },
-      { id: 'node-canvas', description: "Génération dynamique des cartes visuelles.", longDescription: "", conceptIds: ['canvas-2d', 'canvas-overlay', 'canvas-rotation'] },
-      { id: 'figma', description: "Design des assets du jeu.", longDescription: "", conceptIds: ['figma-logos', 'visuels'] },
-      { id: 'typescript', description: "Migration vers du typage strict.", longDescription: "", conceptIds: ['interfaces', 'classes', 'enums', 'typage'] },
-      { id: 'vscode', description: "Environnement de développement.", longDescription: "", conceptIds: [] },
-      { id: 'discordjs', description: "Interaction avec l'API Discord.", longDescription: "", conceptIds: ['djs-slash', 'djs-components', 'djs-modals', 'djs-ephemeral', 'sharding', 'djs-cache', 'djs-collectors'] },
-      { id: 'sentry', description: "Suivi des erreurs en production.", longDescription: "", conceptIds: ['bug-monitoring', 'sentry-debug'] },
-      { id: 'git', description: "Gestion du code source.", longDescription: "", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-cherry', 'git-merges', 'git-conflicts'] },
+      { id: 'javascript', description: "Logique principale du bot.", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'poo', 'switch', 'exceptions', 'loops', 'collections'] },
+      { id: 'nodejs', description: "Environnement d'exécution.", conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts', 'sharding', 'fs'] },
+      { id: 'nodemon', description: "Outil de dev.", conceptIds: ['nodemon-restart'] },
+      { id: 'node-canvas', description: "Génération dynamique des cartes visuelles.", conceptIds: ['canvas-2d', 'canvas-overlay', 'canvas-rotation'] },
+      { id: 'figma', description: "Design des assets du jeu.", conceptIds: ['figma-logos', 'visuels'] },
+      { id: 'typescript', description: "Migration vers du typage strict.", conceptIds: ['interfaces', 'classes', 'enums', 'typage'] },
+      { id: 'vscode', description: "Environnement de développement.", conceptIds: [] },
+      { id: 'discordjs', description: "Interaction avec l'API Discord.", conceptIds: ['djs-slash', 'djs-components', 'djs-modals', 'djs-ephemeral', 'sharding', 'djs-cache', 'djs-collectors'] },
+      { id: 'sentry', description: "Suivi des erreurs en production.", conceptIds: ['bug-monitoring', 'sentry-debug'] },
+      { id: 'git', description: "Gestion du code source.", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-cherry', 'git-merges', 'git-conflicts'] },
       { id: 'regex', description: 'Système de recherche dans les logs via Regex', conceptIds: [], longDescription: "D'abord utilisé pour contracter des conditions avec plusieurs `startsWith` en une seul regex, jusqu'à ce que je découvre en réalisant de tests que l'ensemble de startsWith était bien souvent plus rapide qu'un RegEx qui est un outil plutôt lourd à l'échelle de quelques milisecondes" },
       { id: 'node-fs', description: "Écriture et sauvegarde de fichiers de logs", conceptIds: ['fs']}
-    //   { id: 'github-actions', description: "Déploiement et tests continus.", longDescription: "", conceptIds: [] }
+    //   { id: 'github-actions', description: "Déploiement et tests continus.", conceptIds: [] }
     ], 
 
     medias: ['https://imgur.com/P0QFVBe.png', 'https://imgur.com/RiZV3YV.png', 'https://imgur.com/2ysW17Y.png', 'https://imgur.com/WrZsRzV.png'],
@@ -447,40 +446,40 @@ export const PROJECTS: {[projectId: string]: Project} = {
     description: 'Gestion des permissions et zones sur serveur multijoueur. Configuration Yaml.', 
     startDateTimesTamp: 1577833200,
     longDescription: stripIndents`Un projet développé lors de mes premières années de programmation, me permettant d'appréhender le fonctionnement d'un serveur de jeu, de son API publique et de la gestion de configurations personnalisées pour les administrateurs.`, 
-    github: 'https://github.com/Nostres25/MinerstiaPlugin', website: '',  
+    github: 'https://github.com/Nostres25/MinerstiaPlugin',  
     competencies: [
-      { id: 'realiser-app', description: "Création d'un plugin utilitaire.", longDescription: "" }
+      { id: 'realiser-app', description: "Création d'un plugin utilitaire.",  }
     ],
     tools: [
-      { id: 'eclipse', description: "Environnement de développement.", longDescription: "", conceptIds: ['eclipse-libs'] },
-      { id: 'java', description: "Apprentissage sur le tas du langage.", longDescription: "", conceptIds: ['exceptions', 'poo', 'poly', 'java-uml', 'scopes', 'java-arraylist', 'loops', 'switch', 'enums'] },
-      { id: 'spigot', description: "API serveur Minecraft.", longDescription: "", conceptIds: ['perms', 'spigot-yaml', 'spigot-events', 'events', 'spigot-gui', 'spigot-tools', 'cmds', 'spigot-mod', 'spigot-tab', 'zone', 'spigot-groups'] },
-      { id: 'git', description: "Sauvegardes du projet.", longDescription: "", conceptIds: ['git-commits', 'git-remote'] },
-      { id: 'trello', description: "Organisation des fonctionnalités à développer en backlog et par version", longDescription: "", conceptIds: [] }
+      { id: 'eclipse', description: "Environnement de développement.", conceptIds: ['eclipse-libs'] },
+      { id: 'java', description: "Apprentissage sur le tas du langage.", conceptIds: ['exceptions', 'poo', 'poly', 'java-uml', 'scopes', 'java-arraylist', 'loops', 'switch', 'enums'] },
+      { id: 'spigot', description: "API serveur Minecraft.", conceptIds: ['perms', 'spigot-yaml', 'spigot-events', 'events', 'spigot-gui', 'spigot-tools', 'cmds', 'spigot-mod', 'spigot-tab', 'zone', 'spigot-groups'] },
+      { id: 'git', description: "Sauvegardes du projet.", conceptIds: ['git-commits', 'git-remote'] },
+      { id: 'trello', description: "Organisation des fonctionnalités à développer en backlog et par version", conceptIds: [] }
     ],
 
-    medias: []
+    
   },
   'sae-echecs': { 
     id: 'sae-echecs', title: 'Jeu d\'échecs', context: 'SAÉ BUT', educationId: 'but-info',
     description: 'Développement d\'un jeu d\'échecs complet dans le terminal.', 
     startDateTimesTamp: EDUCATIONS['but-info'].segmentations['S2'].startTimestamp,
     longDescription: stripIndents`Création intégrale d'un jeu d'échecs respectant la totalité des règles officielles (roque, prise en passant) en implémentant une architecture orientée objet stricte.`, 
-    github: 'https://github.com/Nostres25/JavaChess', website: '', 
+    github: 'https://github.com/Nostres25/JavaChess', 
     competencies: [
-      { id: 'realiser-app', description: "Logique métier des échecs.", longDescription: "" },
-      { id: 'optimiser', description: "Optmisation de mémoire, des opérations et de l'aspect visuel du code.", longDescription: "" },
+      { id: 'realiser-app', description: "Logique métier des échecs.",  },
+      { id: 'optimiser', description: "Optmisation de mémoire, des opérations et de l'aspect visuel du code.",  },
       { id: 'conduire-projet', description: "Création d'un nouveau projet de développement.", longDescription: "Respect des échéances, mise en place du Git, définition des tâches" },
-      { id: 'collaborer', description: "Collaboration en duo.", longDescription: "" }
+      { id: 'collaborer', description: "Collaboration en duo.",  }
 
     ],
     tools: [
-      { id: 'vscode', description: "IDE utilisé par l'équipe.", longDescription: "", conceptIds: [] },
-      { id: 'java', description: "Développement en Java 8.", longDescription: "", conceptIds: ['exceptions', 'java-scanner', 'poo', 'poly', 'java-uml', 'scopes', 'java-arraylist', 'loops', 'switch', 'enums'] },
-      { id: 'git', description: "Collaboration de code.", longDescription: "", conceptIds: ['git-commits', 'git-branches', 'git-merges', 'git-conflicts'] }
+      { id: 'vscode', description: "IDE utilisé par l'équipe.", conceptIds: [] },
+      { id: 'java', description: "Développement en Java 8.", conceptIds: ['exceptions', 'java-scanner', 'poo', 'poly', 'java-uml', 'scopes', 'java-arraylist', 'loops', 'switch', 'enums'] },
+      { id: 'git', description: "Collaboration de code.", conceptIds: ['git-commits', 'git-branches', 'git-merges', 'git-conflicts'] }
     ],
 
-    medias: [],
+    
   },
 
   'sae-suivi': {
@@ -488,27 +487,27 @@ export const PROJECTS: {[projectId: string]: Project} = {
     description: 'Site web de suivi de colis pour l\'IUT.', 
     startDateTimesTamp: EDUCATIONS['but-info'].segmentations['S3'].startTimestamp,
     longDescription: stripIndents`Application web interne permettant la gestion logistique des colis reçus par le secrétariat de l'IUT et envoyant des notifications aux destinataires.`, 
-    github: 'https://github.com/Nostres25/suivi-colis-iutv-v2', website: '',
+    github: 'https://github.com/Nostres25/suivi-colis-iutv-v2', 
     competencies: [
-      { id: 'realiser-app', description: "Création de la plateforme web complète.", longDescription: "" },
-      { id: 'optimiser', description: "Optimisation de l'applciation pour la réactivité.", longDescription: "" },
-      { id: 'administrer', description: "Mise en place d'une image docker pour l'application.", longDescription: "" },
-      { id: 'gerer-donnees', description: "Modélisation des données, utilisations d'une base de données.", longDescription: "" },
-      { id: 'conduire-projet', description: "Définition des tâches & objectifs, rappels de tâches, organisation du code...", longDescription: "" },
-      { id: 'collaborer', description: "En équipe de 5, répartition des tâches & communication.", longDescription: "" },
+      { id: 'realiser-app', description: "Création de la plateforme web complète.",  },
+      { id: 'optimiser', description: "Optimisation de l'applciation pour la réactivité.",  },
+      { id: 'administrer', description: "Mise en place d'une image docker pour l'application.",  },
+      { id: 'gerer-donnees', description: "Modélisation des données, utilisations d'une base de données.",  },
+      { id: 'conduire-projet', description: "Définition des tâches & objectifs, rappels de tâches, organisation du code...",  },
+      { id: 'collaborer', description: "En équipe de 5, répartition des tâches & communication.",  },
     ],
     tools: [
-      { id: 'laravel', description: "Framework Back-end.", longDescription: "", conceptIds: ['mvc', 'migrations', 'laravel-pagination', 'seeders', 'laravel-query', 'laravel-files', 'auth', 'sessions'] },
-      { id: 'javascript', description: "Interactivité de l'interface.", longDescription: "", conceptIds: ['dom', 'ajax', 'events', 'callbacks', 'loops', 'scopes'] },
-      { id: 'bootstrap', description: "Design rapide et responsive.", longDescription: "", conceptIds: ['boot-modals', 'boot-buttons', 'boot-forms', 'boot-dropdowns', 'boot-icons', 'responsive', 'boot-collapse', 'boot-navbar', 'boot-text'] },
-      { id: 'blade', description: "Moteur de template.", longDescription: "", conceptIds: ['layouts', 'components', 'escape', 'blade-directives'] },
-      { id: 'php', description: "Logique métier.", longDescription: "", conceptIds: ['callbacks', 'enums', 'php-typing', 'loops', 'scopes', 'poo', 'typage'] },
-      { id: 'eloquent', description: "ORM pour la base de données.", longDescription: "", conceptIds: ['eloquent-models', 'code-to-db', 'laravel-query', 'collections', 'eloquent-relations', 'factories'] },
-      { id: 'filament', description: "Panneau d'administration.", longDescription: "", conceptIds: ['filament-pages', 'filament-sync'] },
-      { id: 'git', description: "Versioning en équipe.", longDescription: "", conceptIds: ['git-commits', 'git-branches', 'git-merges', 'git-conflicts', 'git-issues', 'git-pr'] },
-      { id: 'github-project', description: "Organisation des tâches.", longDescription: "", conceptIds: ['backlog', 'priority', 'gh-sub'] },
-      { id: 'composer', description: "Gestionnaire de packages PHP.", longDescription: "", conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts'] },
-      { id: 'php-storm', description: "Meilleur IDE trouvé pour le PHP bien qu'un peu lourd", longDescription: "", conceptIds: [] }
+      { id: 'laravel', description: "Framework Back-end.", conceptIds: ['mvc', 'migrations', 'laravel-pagination', 'seeders', 'laravel-query', 'laravel-files', 'auth', 'sessions', 'middlewares'] },
+      { id: 'javascript', description: "Interactivité de l'interface.", conceptIds: ['dom', 'ajax', 'events', 'callbacks', 'loops', 'scopes'] },
+      { id: 'bootstrap', description: "Design rapide et responsive.", conceptIds: ['boot-modals', 'boot-buttons', 'boot-forms', 'boot-dropdowns', 'boot-icons', 'responsive', 'boot-collapse', 'boot-navbar', 'boot-text'] },
+      { id: 'blade', description: "Moteur de template.", conceptIds: ['layouts', 'components', 'escape', 'blade-directives'] },
+      { id: 'php', description: "Logique métier.", conceptIds: ['callbacks', 'enums', 'php-typing', 'loops', 'scopes', 'poo', 'typage'] },
+      { id: 'eloquent', description: "ORM pour la base de données.", conceptIds: ['eloquent-models', 'code-to-db', 'laravel-query', 'collections', 'eloquent-relations', 'factories'] },
+      { id: 'filament', description: "Panneau d'administration.", conceptIds: ['filament-pages', 'filament-sync'] },
+      { id: 'git', description: "Versioning en équipe.", conceptIds: ['git-commits', 'git-branches', 'git-merges', 'git-conflicts', 'git-issues', 'git-pr'] },
+      { id: 'github-project', description: "Organisation des tâches.", conceptIds: ['backlog', 'priority', 'gh-sub'] },
+      { id: 'composer', description: "Gestionnaire de packages PHP.", conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts'] },
+      { id: 'php-storm', description: "Meilleur IDE trouvé pour le PHP bien qu'un peu lourd", conceptIds: [] }
     ],
     softSkills: [
         { id: 'analyse', description: 'Analyse minutieuse du processus actuel de suivi de colis, des besoins de chaque acteur et des meilleurs outils à utiliser.' },
@@ -519,33 +518,33 @@ export const PROJECTS: {[projectId: string]: Project} = {
         { id: 'redaction-fr', description: "Rédaction d'une documentation pour l'organisation du projet, du github, pour l'installation de l'environnement de développement, le déploiement du projet et plus."},
         { id: 'esprit-critique', description: "Recul sur les choix du projet et analyse critique de la situation."}
     ],
-    medias: []
+    
   },
   'sae-python': { 
     id: 'sae-python', title: 'Étude de graphes', context: 'SAÉ BUT', educationId: 'but-info',
     startDateTimesTamp: EDUCATIONS['but-info'].segmentations.S1.startTimestamp,
-    description: 'Étude de réseaux et de complexité algorithmique.', longDescription: "", github: '', website: '',
-    competencies: [{ id: 'optimiser', description: "Analyse des temps d'exécution.", longDescription: "" }],
-    tools: [{ id: 'python', description: "Scripting d'analyse.", longDescription: "", conceptIds: ['complexite'] }],
-    softSkills: [],
-    medias: []
+    description: 'Étude de réseaux et de complexité algorithmique.', github: '', 
+    competencies: [{ id: 'optimiser', description: "Analyse des temps d'exécution.",  }],
+    tools: [{ id: 'python', description: "Scripting d'analyse.", conceptIds: ['complexite'] }],
+    
+    
   },
   'sae-bd': { 
     id: 'sae-bd', title: 'Modélisation BD', context: 'SAÉ BUT', educationId: 'but-info', startDateTimesTamp: EDUCATIONS['but-info'].segmentations.S1.startTimestamp,
-    description: 'Recueil des besoins, modélisation et construction de bases de données.', longDescription: "", github: '', website: '',
-    competencies: [{ id: 'gerer-donnees', description: "Architecture de la BD.", longDescription: "" }],
-    tools: [{ id: 'sql', description: "Requêtes de test.", longDescription: "", conceptIds: ['db-model'] }],
-    softSkills: [],
-    medias: []
+    description: 'Recueil des besoins, modélisation et construction de bases de données.', github: '', 
+    competencies: [{ id: 'gerer-donnees', description: "Architecture de la BD.",  }],
+    tools: [{ id: 'sql', description: "Requêtes de test.", conceptIds: ['db-model'] }],
+    
+    
   },
   'sae-sys': { 
     id: 'sae-sys', title: 'Configuration Ubuntu', context: 'SAÉ BUT', educationId: 'but-info',
     startDateTimesTamp: EDUCATIONS['but-info'].segmentations.S2.startTimestamp,
-    description: 'Configurations d\'un système Ubuntu (Linux) et réseaux (IPv4, DHCP, Pare-feux).', longDescription: "", github: '', website: '',
-    competencies: [{ id: 'administrer', description: "Installation et configuration OS.", longDescription: "" }],
-    tools: [{ id: 'linux', description: "Commandes terminal.", longDescription: "", conceptIds: ['sys'] }],
-    softSkills: [],
-    medias: []
+    description: 'Configurations d\'un système Ubuntu (Linux) et réseaux (IPv4, DHCP, Pare-feux).', github: '', 
+    competencies: [{ id: 'administrer', description: "Installation et configuration OS.",  }],
+    tools: [{ id: 'linux', description: "Commandes terminal.", conceptIds: ['sys'] }],
+    
+    
   },
 
   'portfolio-web': {
@@ -560,21 +559,21 @@ export const PROJECTS: {[projectId: string]: Project} = {
     longDescription: portfolioContent,
 
     competencies: [
-      { id: 'realiser-app', description: "Réalisation de l'application du portfolio.", longDescription: "" },
-      { id: 'optimiser', description: "Optimisation de l'applciation pour la réactivité.", longDescription: "" },
-      { id: 'gerer-donnees', description: "Représentation des informations me concernant sous la forme de données dans le code.", longDescription: "" },
-      { id: 'conduire-projet', description: "Définition des tâches et des priorités", longDescription: "" },    ],
+      { id: 'realiser-app', description: "Réalisation de l'application du portfolio.",  },
+      { id: 'optimiser', description: "Optimisation de l'applciation pour la réactivité.",  },
+      { id: 'gerer-donnees', description: "Représentation des informations me concernant sous la forme de données dans le code.",  },
+      { id: 'conduire-projet', description: "Définition des tâches et des priorités",  },    ],
     tools: [
-      { id: 'javascript', description: "Logique principale du bot.", longDescription: "", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'loops'] },
-      { id: 'nodejs', description: "Environnement d'exécution.", longDescription: "", conceptIds: ['modules', 'modules-dev'] },
-      { id: 'nuxtjs', description: "Découverte du fonctionnement du framework Nuxt v4", conceptIds: ['@nuxt/ui', 'layouts'] },
-      { id: 'typescript', description: "Migration vers du typage strict.", longDescription: "", conceptIds: ['interfaces', 'classes', 'enums', 'typage'] },
-      { id: 'vscode', description: "Environnement de développement.", longDescription: "", conceptIds: [] },
+      { id: 'javascript', description: "Logique principale du bot.", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'loops'] },
+      { id: 'nodejs', description: "Environnement d'exécution.", conceptIds: ['modules', 'modules-dev'] },
+      { id: 'nuxtjs', description: "Découverte du fonctionnement du framework Nuxt v4", conceptIds: ['@nuxt/ui', 'layouts', 'middlewares'] },
+      { id: 'typescript', description: "Migration vers du typage strict.", conceptIds: ['interfaces', 'classes', 'enums', 'typage'] },
+      { id: 'vscode', description: "Environnement de développement.", conceptIds: [] },
       { id: 'vuejs', description: "Vues en javascript avec layout, composants etc...", conceptIds: ['reactive-values', 'vue-props', 'vue-components'] },
-      { id: 'git', description: "Gestion du code source.", longDescription: "", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-cherry', 'git-merges', 'git-conflicts'] },
+      { id: 'git', description: "Gestion du code source.", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-cherry', 'git-merges', 'git-conflicts'] },
       { id: 'tailwindcss', description: "Majorité du style de l'application", conceptIds: ['responsive']}
     ],
-    softSkills: [],
+    
     medias:  []
   },
 
@@ -594,7 +593,7 @@ export const PROJECTS: {[projectId: string]: Project} = {
       { id: 'vscode', description: "IDE que j'utilise pour ma configuration Nix avec des extensions pour le style, les formateurs etc...", conceptIds: [] },
 
     ],
-    softSkills: [],
+    
     medias:  []
   }
 }
@@ -609,17 +608,17 @@ export const EXPERIENCES: {[experiencId: string]: Experience} = {
     longDescription: stageMfContent, 
     
     competencies: [
-      { id: 'realiser-app', description: "Refonte d'une application web PHP, correction de failles de sécurité...", longDescription: "" },
-      { id: 'optimiser', description: "Optimisation de requêtes HTTP/API, logique PHP, requêtes SQL...", longDescription: "" },
-      { id: 'administrer', description: "Configuration Apache2, documentation du projet, définition de fichier .htaccess", longDescription: "" },
-      { id: 'gerer-donnees', description: "Stockage des stocks toptex, enquête sur les schémas SQL, debug par requêtes SQL...", longDescription: "" },
-      { id: 'conduire-projet', description: "Redéfinition de la structure du projet, documentation.", longDescription: "" },
-      { id: 'collaborer', description: "retours réguliers au supérieur, communication des changements importants en temps réel...", longDescription: "" },
+      { id: 'realiser-app', description: "Refonte d'une application web PHP, correction de failles de sécurité...",  },
+      { id: 'optimiser', description: "Optimisation de requêtes HTTP/API, logique PHP, requêtes SQL...",  },
+      { id: 'administrer', description: "Configuration Apache2, documentation du projet, définition de fichier .htaccess",  },
+      { id: 'gerer-donnees', description: "Stockage des stocks toptex, enquête sur les schémas SQL, debug par requêtes SQL...",  },
+      { id: 'conduire-projet', description: "Redéfinition de la structure du projet, documentation.",  },
+      { id: 'collaborer', description: "retours réguliers au supérieur, communication des changements importants en temps réel...",  },
     ],
     tools: [
       // TODO à compléter (dom, javascript, jquery, ajax, composer "sources annexes")
-      { id: 'php', description: "Refonte sans framework en PHP 8.3 traditionel", longDescription: "", conceptIds: ['mvc', 'secu'] },
-      { id: 'git', description: "Travail en équipe.", longDescription: "", conceptIds: ['git-commits', 'versioning', 'git-branches'] },
+      { id: 'php', description: "Refonte sans framework en PHP 8.3 traditionel", conceptIds: ['mvc', 'secu'] },
+      { id: 'git', description: "Travail en équipe.", conceptIds: ['git-commits', 'versioning', 'git-branches'] },
       { id: 'css', description: "HTML/CSS des plus traditionnels, sans moteur de template", conceptIds: [] },
       { id: 'bootstrap', description: "Utilisation de classes bootstrap", conceptIds: [] },
       { id: 'javascript', description: "Affichages dynamiques via javascript", conceptIds: ['dom', 'ajax'] },
@@ -635,7 +634,7 @@ export const EXPERIENCES: {[experiencId: string]: Experience} = {
         { id: 'esprit-critique', description: "Recul sur les choix du projet et analyse critique du code."}
     ],
 
-    medias: []
+    
   },
   'draftbot': { // TODO remplacer year par startDateTimesTamp ou un truc du genre comme le reste
     id: 'draftbot', title: 'Support utilisateur bénévole', entity: 'DraftBot', year: 2019, date: 'Depuis 2019', 
@@ -644,7 +643,7 @@ export const EXPERIENCES: {[experiencId: string]: Experience} = {
     contentPath: '/experiences/draftbot.md',
     longDescription: stripIndents`Mes missions au sein de [l'équipe DraftBot](https://draftbot.fr/equipe) incluaient la réalisation de tests, l'identification et la résolution de problèmes en direct avec la communauté. J'ai également identifié les besoins des utilisateurs en apportant des solutions cohérentes. En reconnaissance à ma contribution, les fondateurs m'ont rédigé une lettre de recommandation que je peux vous partager sur demande par mail.`, 
     competencies: [
-      { id: 'collaborer', description: "Support aux développeurs.", longDescription: "" }
+      { id: 'collaborer', description: "Support aux développeurs.",  }
     ],
     tools: [
       { id: 'discordjs', description: "Compréhension de Discord et de l'API Discord et du module Discord.js pour mieux comprendre le fonctionnement du bot et mieux répondre aux utilisateurs.", conceptIds: []},
@@ -661,7 +660,7 @@ export const EXPERIENCES: {[experiencId: string]: Experience} = {
       { id: 'mediation', description: "Dans la modération depuis août 2021, visant à régler les conflits et à faire respecter un règlement ainsi que le respect dans les canaux de discussions."}
     ],
 
-    medias: []
+    
   }
 }
 
@@ -676,7 +675,7 @@ export const TOOLS: {[toolId: string]: Tool} = {
   nodejs: { id: 'nodejs', name: 'Node.js', icon: 'N', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['uno-disc'].startDateTimesTamp, currentDate), conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts', 'sharding', 'fs'], compIds: ['realiser-app', 'optimiser'] },
   expressjs: { id: 'expressjs', name: 'Express.js', icon: 'Ex', masteryIndex: 1, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations['S4'].startTimestamp, currentDate), conceptIds: [], compIds: ['realiser-app'] },
   discordjs: { id: 'discordjs', name: 'Discord.js', icon: 'Djs', masteryIndex: 4, duration: getYearsFormatted(PROJECTS['uno-disc'].startDateTimesTamp, currentDate), conceptIds: ['djs-slash', 'djs-components', 'djs-modals', 'djs-ephemeral', 'sharding', 'djs-cache', 'djs-collectors'], compIds: ['realiser-app', 'optimiser'] },
-  nuxtjs: { id: 'nuxtjs', name: 'Nuxt.js', icon: 'Nx', masteryIndex: 1, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations['S4'].startTimestamp, currentDate), conceptIds: ['@nuxt/ui', 'layouts'], compIds: ['realiser-app'] },
+  nuxtjs: { id: 'nuxtjs', name: 'Nuxt.js', icon: 'Nx', masteryIndex: 1, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations['S4'].startTimestamp, currentDate), conceptIds: ['@nuxt/ui', 'layouts', 'middlewares'], compIds: ['realiser-app'] },
   vuejs: { id: 'vuejs', name: 'Vue.js', icon: 'V', masteryIndex: 1, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations['S4'].startTimestamp, currentDate), conceptIds: ['reactive-values', 'vue-props', 'vue-components'], compIds: ['realiser-app', 'optimiser'] },
   
   // Outils & Libs Node
@@ -686,7 +685,7 @@ export const TOOLS: {[toolId: string]: Tool} = {
 
   // Écosystème PHP
   php: { id: 'php', name: 'PHP', icon: 'PHP', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['callbacks', 'enums', 'php-typing', 'loops', 'scopes', 'poo'], compIds: ['realiser-app'] },
-  laravel: { id: 'laravel', name: 'Laravel', icon: 'Lv', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['mvc', 'migrations', 'laravel-pagination', 'seeders', 'laravel-query', 'laravel-files', 'auth', 'sessions'], compIds: ['realiser-app', 'optimiser'] },
+  laravel: { id: 'laravel', name: 'Laravel', icon: 'Lv', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['mvc', 'migrations', 'laravel-pagination', 'seeders', 'laravel-query', 'laravel-files', 'auth', 'sessions', 'middlewares'], compIds: ['realiser-app', 'optimiser'] },
   blade: { id: 'blade', name: 'Blade', icon: 'Bl', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['layouts', 'components', 'escape', 'blade-directives'], compIds: ['realiser-app', 'optimiser'] },
   eloquent: { id: 'eloquent', name: 'Eloquent ORM', icon: 'El', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['eloquent-models', 'code-to-db', 'eloquent-relations', 'collections', 'factories'], compIds: ['realiser-app', 'optimiser', 'gerer-donnees'] },
   filament: { id: 'filament', name: 'Filament', icon: 'Fm', masteryIndex: 1, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['filament-pages', 'filament-sync'], compIds: ['realiser-app', 'gerer-donnees'] },
