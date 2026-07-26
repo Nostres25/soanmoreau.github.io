@@ -65,23 +65,7 @@ function openImage(url: string) {
               <div>
                 <h1 class="text-2xl font-bold">{{ toolData.name }}</h1>
                 
-                <div class="mt-2">
-                  <span class="text-sm font-medium text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded inline-block mb-1.5">
-                    {{ MASTERY_LEVELS[toolData.masteryIndex] }}
-                  </span>
-                  
-                  <div class="flex items-center gap-1.5">
-                    <div class="flex gap-1">
-                      <div 
-                        v-for="i in MASTERY_LEVELS.length" :key="i"
-                        class="w-4 h-4 rounded-[3px] transition-all duration-300"
-                        :class="i <= toolData.masteryIndex + 1 ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.4)] dark:bg-emerald-400' : 'bg-gray-200 dark:bg-gray-700'"
-                      ></div>
-                    </div>
-                    <span class="text-xs font-bold text-gray-500 ml-2">{{ toolData.masteryIndex + 1 }}/{{ MASTERY_LEVELS.length }}</span>
-                  </div>
-                  <span class="text-sm text-gray-500 mt-1 block">&bull; Pratiqué depuis {{ toolData.duration }}</span>
-                </div>
+                <ToolsMasteryIndexComponent :toolData="toolData"/>
               </div>
             </div>
 
