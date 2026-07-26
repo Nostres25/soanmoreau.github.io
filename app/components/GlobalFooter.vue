@@ -14,8 +14,8 @@ export default {
 }
 </script>
 <template>
-    <footer class="p-6 md:p-12 pt-24 md:pt-12 mb-20 md:mb-0 border-t border-gray-200 dark:border-gray-800/60 text-sm">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <footer class="p-6 lg:p-12 pt-24 lg:pt-12 mb-20 lg:mb-0 border-t border-gray-200 dark:border-gray-800/60 text-sm">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
             
             <div>
             <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-4">Soan MOREAU</h3>
