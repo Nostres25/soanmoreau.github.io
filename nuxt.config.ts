@@ -30,7 +30,6 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/color-mode',
     '@nuxt/eslint',
-    '@nuxt/image',
     '@nuxt/test-utils',
     '@nuxt/ui'
   ],
