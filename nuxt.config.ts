@@ -14,8 +14,10 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      ]
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ],
+      title: 'Soan MOREAU - Portfolio - Informatique',
+      charset: 'UTF-8',     
     },
   },
 
@@ -37,7 +39,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
     assetsInclude: [
-      "**/*.md",
+      "~/content/**/*.md"
     ],
   },
 
