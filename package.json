@@ -20,7 +20,7 @@
     "@nuxt/eslint": "1.5.2",
     "@nuxt/image": "1.10.0",
     "@nuxt/test-utils": "3.19.2",
-    "@nuxt/ui": "3.2.0",
+    "@nuxt/ui": "4.10.0",
     "@tailwindcss/vite": "^4.3.1",
     "better-sqlite3": "^12.2.0",
     "common-tags": "^1.8.2",
