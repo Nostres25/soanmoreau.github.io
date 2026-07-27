@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { SEARCH_GROUPS } from '../composables/objects'
 
 const colorMode = useColorMode()
 
@@ -13,11 +14,26 @@ const links = [
   { name: 'Parcours', path: '/parcours' },
   { name: 'Stage', path: '/parcours#stage' }
 ]
+
+function onSelect() {
+  nextTick(() => {
+    // To unfocus the search bar when an item is selected
+    (document.activeElement as HTMLElement)?.blur()
+  })
+}
+
+// make to click on an item when the input is focused 
+function preventInputBlur(e: MouseEvent) {
+  const target = e.target as HTMLElement
+  if (target.closest('[role="option"]')) {
+    e.preventDefault()
+  }
+}
 </script>
 
 <template>
   <div class="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 flex flex-col xl:flex-row">
-    <header class="xl:hidden fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-[120] px-6 py-4 flex items-center justify-between shadow-sm">
+     <header class="xl:hidden fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-[120] px-6 py-4 flex items-center justify-between shadow-sm">
       <NuxtLink to="/">
         <h1 class="text-xl font-extrabold tracking-tight">
           Soan <span class="text-emerald-500">MOREAU</span>
@@ -30,12 +46,12 @@ const links = [
           <svg v-else key="light" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
         <template #fallback>
-          <div class="w-7 h-7"></div>
+          <div class="w-7 h-7"/>
         </template>
       </ClientOnly>
     </header>
 
-    <nav class="fixed bottom-0 w-full xl:sticky xl:top-0 xl:w-64 xl:h-screen bg-white dark:bg-gray-800 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] xl:shadow-none border-t xl:border-t-0 xl:border-r border-gray-200 dark:border-gray-700 z-[110] flex xl:flex-col justify-between overflow-y-auto hide-scrollbar">
+    <nav class="fixed bottom-0 w-full xl:sticky xl:top-0 xl:w-64 xl:h-screen bg-white dark:bg-gray-800 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] xl:shadow-none border-t xl:border-t-0 xl:border-r border-gray-200 dark:border-gray-700 z-[130] flex xl:flex-col justify-between overflow-y-auto hide-scrollbar">
       
       <div class="hidden xl:block p-6">
         <NuxtLink to="/">
@@ -60,6 +76,30 @@ const links = [
             <span class="text-[10px] xl:text-base">{{ link.name }}</span>
           </NuxtLink>
         </li>
+        <div
+          class="rounded-md opacity-95 dark:opacity-100 backdrop-blur-2xl transition-all z-140 bg bg-gray-200/80 dark:bg-gray-600/40 overflow-scroll fixed top-1.5 right-15 left-45 has-[input:focus]:top-20 has-[input:focus]:left-2 has-[input:focus]:right-2 lg:left-50 lg:right-50 lg:has-[input:focus]:left-60 lg:has-[input:focus]:right-60 lg:has-[input:focus]:top-20 2xl:mb-10 2xl:left-0 2xl:right-0 2xl:relative 2xl:top-10 2xl:w-auto 2xl:has-[input:focus]:fixed"
+          @mousedown="preventInputBlur"
+         >
+          <NuxtCommandPalette
+          class="rounded-lg h-12 has-[input:focus]:h-auto has-[input:focus]:max-h-80 2xl:max-h-80 2xl:h-auto"
+          shortcut="meta_k"
+          :groups="SEARCH_GROUPS"
+          :fuse="{ 
+            resultLimit: 1000,
+            matchAllWhenSearchEmpty: true, 
+            fuseOptions: { 
+              includeMatches: true,
+              ignoreLocation: true,
+              keys: ['label', 'description', 'suffix', 'type', 'academic-skills']
+            }
+          }"
+          placeholder="Chercher compétences, outils, notions, expériences, projets etc..." 
+          :highlight-on-hover="true"
+          selection-behavior="replace"
+          :autofocus="false"
+          @update:model-value="onSelect"
+          />
+        </div>
       </ul>
 
       <div class="hidden xl:flex p-6 mt-auto">

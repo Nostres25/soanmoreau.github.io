@@ -72,7 +72,7 @@ export function useModalManager() {
   const currentModal = computed(() => modalStack.value[modalStack.value.length - 1] || null)
   const hasHistory = computed(() => modalStack.value.length > 1)
   const isOpen = computed(() => modalStack.value.length > 0)
-  const openModal = (payload: ModalPayload) => { modalStack.value.push(payload); document.body.style.overflow = 'hidden' }
+  const openModal = (payload: ModalPayload) => { if (currentModal.value?.id !== payload.id) { modalStack.value.push(payload); document.body.style.overflow = 'hidden' } }
   const goBack = () => { modalStack.value.pop(); if (modalStack.value.length === 0) document.body.style.overflow = '' }
   const closeAll = () => { modalStack.value = []; if (document) document.body.style.overflow = '' }
   return { currentModal, hasHistory, isOpen, openModal, goBack, closeAll }
