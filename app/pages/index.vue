@@ -100,7 +100,8 @@
           <h2 class="text-2xl font-bold flex items-center gap-2 mb-3">
             <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
             Compétences clés
-           <NuxtIcon name="i-lucide-circle-help" class="size-4" title="- Cliquez sur les outils pour observer les autres compétences techniques / notions maîtrisées ; les projets ; ainsi que le niveau de maîtrise, par outil.&#013;- Certains outils spécifiques à un outil peuvent être considérés comme notion car faisant partie du bagage de connaissances pour un outil" /></h2>
+              <NuxtIcon name="i-lucide-circle-help" class="size-4" title="- Cliquez sur les outils pour observer les autres compétences techniques / notions maîtrisées ; les projets ; ainsi que le niveau de maîtrise, par outil.&#010;- Certains outils spécifiques à un outil peuvent être considérés comme notion car faisant partie du bagage de connaissances pour un outil" />
+           </h2>
           <p class="text-sm text-gray-600 dark:text-gray-400 text-justify">
             Les compétences correspondent à celles définies par le programme national du B.U.T Informatique qui sont rattachées à des outils eux-mêmes rattachés à des notions.
           </p>
