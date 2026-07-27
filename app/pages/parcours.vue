@@ -140,7 +140,7 @@
         
         <div 
           class="text-gray-600 dark:text-gray-400 text-justify whitespace-pre-line"
-          v-html="renderMarkdown(stageData?.longDescription || '')"
+          v-html="stageData?.longDescription || ''"
         ></div>
         
         <div class="mt-8">

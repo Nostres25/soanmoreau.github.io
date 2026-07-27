@@ -112,7 +112,7 @@ function openImage(url: string) {
                   <div class="overflow-hidden">
                     <div 
                       class="mt-0 p-5 pt-2 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-md whitespace-pre-line text-justify markdown-container"
-                      v-html="renderMarkdown(currentEntity.longDescription)"
+                      v-html="currentEntity.longDescription"
                     ></div>
                   </div>  
                 </div>

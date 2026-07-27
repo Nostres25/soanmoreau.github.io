@@ -1,4 +1,5 @@
-import { getYearsFormatted } from './usePortfolio'
+import { getYearsFormatted, useModalManager, renderMarkdown } from './usePortfolio'
+import type { CommandPaletteGroup } from '@nuxt/ui'
 
 import stageMfContent from '../content/experiences/stage-mf.md?raw'
 import unoOnDiscContent from '../content/projects/uno-on-disc.md?raw'
@@ -309,7 +310,7 @@ export const EDUCATIONS: {[educationId: string]: Education} = {
     id: 'but-info', title: 'BUT Informatique', entity: 'Univ. Sorbonne Paris-Nord', context: 'Formation', 
     description: `Moyenne stabilisée à ~15/20. Chef d'équipe sur divers projets (Jeu d'échecs, algo graphes, BDD, config Linux, Site de colis).`, 
     contentPath: '/formations/but-info.md',
-    longDescription: `Formation très technique et professionnalisante. Les nombreux travaux de groupe m'ont permis de développer mes soft-skills et mon leadership.`, 
+    longDescription: renderMarkdown(`Formation très technique et professionnalisante. Les nombreux travaux de groupe m'ont permis de développer mes soft-skills et mon leadership.`), 
     segmentations: {
       'S1': {
         name: 'S1',
@@ -396,7 +397,7 @@ export const PROJECTS: {[projectId: string]: Project} = {
   'uno-disc': { 
     id: 'uno-disc', title: 'Jeu de UNO sur Discord (Non officiel)', context: 'Projet Perso', educationId: 'formation-perso', startDateTimesTamp: 1648219351000,
     description: 'Agent logiciel très complet sur la messagerie Discord pour jouer au UNO. Présent sur +1800 serveurs, +128 000 membres.', 
-    longDescription: unoOnDiscContent, 
+    longDescription: renderMarkdown(unoOnDiscContent), 
     github: 'privé', website: 'https://top.gg/bot/985152555791290408',
     competencies: [
       { id: 'realiser-app', description: "Développement d'un bot interactif.",  },
@@ -444,7 +445,7 @@ export const PROJECTS: {[projectId: string]: Project} = {
     id: 'mc-plugin', title: 'Plugin Minecraft', context: 'Projet Perso', educationId: 'formation-perso',
     description: 'Gestion des permissions et zones sur serveur multijoueur. Configuration Yaml.', 
     startDateTimesTamp: 1577833200,
-    longDescription: `Un projet développé lors de mes premières années de programmation, me permettant d'appréhender le fonctionnement d'un serveur de jeu, de son API publique et de la gestion de configurations personnalisées pour les administrateurs.`, 
+    longDescription: renderMarkdown(`Un projet développé lors de mes premières années de programmation, me permettant d'appréhender le fonctionnement d'un serveur de jeu, de son API publique et de la gestion de configurations personnalisées pour les administrateurs.`), 
     github: 'https://github.com/Nostres25/MinerstiaPlugin',  
     competencies: [
       { id: 'realiser-app', description: "Création d'un plugin utilitaire.",  }
@@ -463,7 +464,7 @@ export const PROJECTS: {[projectId: string]: Project} = {
     id: 'sae-echecs', title: 'Jeu d\'échecs', context: 'SAÉ BUT', educationId: 'but-info',
     description: 'Développement d\'un jeu d\'échecs complet dans le terminal.', 
     startDateTimesTamp: EDUCATIONS['but-info'].segmentations['S2'].startTimestamp,
-    longDescription: `Création intégrale d'un jeu d'échecs respectant la totalité des règles officielles (roque, prise en passant) en implémentant une architecture orientée objet stricte.`, 
+    longDescription: renderMarkdown(`Création intégrale d'un jeu d'échecs respectant la totalité des règles officielles (roque, prise en passant) en implémentant une architecture orientée objet stricte.`), 
     github: 'https://github.com/Nostres25/JavaChess', 
     competencies: [
       { id: 'realiser-app', description: "Logique métier des échecs.",  },
@@ -485,7 +486,7 @@ export const PROJECTS: {[projectId: string]: Project} = {
     id: 'sae-suivi', title: 'Suivi de colis', context: 'SAÉ BUT', educationId: 'but-info',
     description: 'Site web de suivi de colis pour l\'IUT.', 
     startDateTimesTamp: EDUCATIONS['but-info'].segmentations['S3'].startTimestamp,
-    longDescription: `Application web interne permettant la gestion logistique des colis reçus par le secrétariat de l'IUT et envoyant des notifications aux destinataires.`, 
+    longDescription: renderMarkdown(`Application web interne permettant la gestion logistique des colis reçus par le secrétariat de l'IUT et envoyant des notifications aux destinataires.`), 
     github: 'https://github.com/Nostres25/suivi-colis-iutv-v2', 
     competencies: [
       { id: 'realiser-app', description: "Création de la plateforme web complète.",  },
@@ -555,7 +556,7 @@ export const PROJECTS: {[projectId: string]: Project} = {
     website: 'https://soanmoreau.vercel.app/',
     startDateTimesTamp: 1781647200,
     description: "Le site sur lequel vous êtes. Cela a été pour moi une nouvelle occasion de découvrir de nouveaux outils notamment en Javascript, d'où mon choix du framework Nuxt.js",
-    longDescription: portfolioContent,
+    longDescription: renderMarkdown(portfolioContent),
 
     competencies: [
       { id: 'realiser-app', description: "Réalisation de l'application du portfolio.",  },
@@ -584,7 +585,7 @@ export const PROJECTS: {[projectId: string]: Project} = {
     github: 'https://github.com/Nostres25/nixos-config-system',
     startDateTimesTamp: 1752012000,
     description: "Mon propre système linux que j'utilise au quotidien utilisant la distribution NixOs et donc les paquets Nix avec une configuration déclarative.",
-    longDescription: nixosSystemContent,
+    longDescription: renderMarkdown(nixosSystemContent),
 
     competencies: [ ],
     tools: [
@@ -604,7 +605,7 @@ export const EXPERIENCES: {[experiencId: string]: Experience} = {
     startDateTimesTamp: 1769414400,
     endDateTimestamp: 1774022400,
     description: 'Développement API, correction de failles, refonte et rédaction de documentation.', 
-    longDescription: stageMfContent, 
+    longDescription: renderMarkdown(stageMfContent), 
     
     competencies: [
       { id: 'realiser-app', description: "Refonte d'une application web PHP, correction de failles de sécurité...",  },
@@ -640,7 +641,7 @@ export const EXPERIENCES: {[experiencId: string]: Experience} = {
     website: 'https://draftbot.fr', 
     description: "Sous le pseudonyme Nostres, j'ai pu réaliser Tests, identification et résolution de problèmes, rédactions, modération et résolution de conflits. Agent présent sur +1M de serveurs.", 
     contentPath: '/experiences/draftbot.md',
-    longDescription: `Mes missions au sein de [l'équipe DraftBot](https://draftbot.fr/equipe) incluaient la réalisation de tests, l'identification et la résolution de problèmes en direct avec la communauté. J'ai également identifié les besoins des utilisateurs en apportant des solutions cohérentes. En reconnaissance à ma contribution, les fondateurs m'ont rédigé une lettre de recommandation que je peux vous partager sur demande par mail.`, 
+    longDescription: renderMarkdown(`Mes missions au sein de [l'équipe DraftBot](https://draftbot.fr/equipe) incluaient la réalisation de tests, l'identification et la résolution de problèmes en direct avec la communauté. J'ai également identifié les besoins des utilisateurs en apportant des solutions cohérentes. En reconnaissance à ma contribution, les fondateurs m'ont rédigé une lettre de recommandation que je peux vous partager sur demande par mail.`), 
     competencies: [
       { id: 'collaborer', description: "Support aux développeurs.",  }
     ],
