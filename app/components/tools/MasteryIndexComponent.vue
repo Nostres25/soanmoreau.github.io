@@ -24,8 +24,8 @@ const popoverSide = computed(() => isSmallScreen.value ? 'bottom' : 'right')
 export default {
   props: {
     toolData: {
-      type: Array,
-      default: () => []
+      type: Object,
+      default: () => {}
     }
   },
   data() {

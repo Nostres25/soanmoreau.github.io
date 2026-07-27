@@ -758,7 +758,7 @@ export const PROJECT_IDS = Object.keys(PROJECTS) as ProjectId[];
 export const EXPERIENCE_IDS = Object.keys(EXPERIENCES) as ExperienceId[];
 export const EDUCATION_IDS = Object.keys(EDUCATIONS) as EducationId[];
 
-export const TOOL_VALUES = Object.values(TOOLS);
+export const TOOL_VALUES = Object.values(TOOLS).sort((tool1, tool2) => tool2.masteryIndex - tool1.masteryIndex);
 export const PROJECT_VALUES = Object.values(PROJECTS);
 export const EXPERIENCE_VALUES = Object.values(EXPERIENCES);
 export const EDUCATION_VALUES = Object.values(EDUCATIONS);
