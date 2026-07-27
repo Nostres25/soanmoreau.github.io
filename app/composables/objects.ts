@@ -5,8 +5,7 @@ import stageMfContent from '../content/experiences/stage-mf.md?raw'
 import unoOnDiscContent from '../content/projects/uno-on-disc.md?raw'
 import portfolioContent from '../content/projects/portfolio.md?raw'
 import nixosSystemContent from '../content/projects/nixos-personal-system.md?raw'
-
-
+import phoneBatteryReplacemenContent from '../content/projects/phone-battery-replacement.md?raw'
 
 export type ProjectId = keyof typeof PROJECTS;
 export type ConceptId = keyof typeof CONCEPTS;
@@ -83,6 +82,8 @@ export interface Project {
   competencies: SkillIntegration[], 
   tools: ToolIntegration[],
   softSkills?: SoftSkillIntegration[]
+  endDateTimestamp?: number,
+  icon?: string
 }
 
 export interface ProjectIntegration {
@@ -104,13 +105,15 @@ export interface Experience {
   softSkills?: SoftSkillIntegration[],
   medias?: string[],
   website?: string,
-  longDescription?: string
+  longDescription?: string,
+  icon?: string
 }
 
 export interface Tool {
   id: ToolId,
   name: string,
   icon: string,
+  realIcon?: string,
   masteryIndex: number,
   duration: string,
   conceptIds: ConceptId[],
@@ -358,6 +361,8 @@ export const EDUCATIONS: {[educationId: string]: Education} = {
     tools: [
       { id: 'python', description: "Algorithmique avancée avec études de complexité, méthodes de tri et plus", conceptIds: ['complexite', 'code-to-db', 'escape', 'poo', 'classes', 'interfaces', 'poly', 'decorators'] },
       { id: 'flask', description: "Développement web en python", conceptIds: ['mvc', 'secu', 'code-to-db', 'escape', 'sessions', 'layouts', 'components', 'auth']},
+      { id: 'matplotlib', description: "Visualisation de données en python", conceptIds: []},
+      { id: 'pandas', description: 'Analyse et manipulation de données notamment statistiques', conceptIds: []},
       { id: 'java', description: "POO approfondie avec de l'héritage, du polymorphisme, du SOLID et des structures de qualité logicielle comme les observateurs et les observateurs", conceptIds: ['poo', 'poly', 'java-scanner', 'decorators'] },
       { id: 'javascript', description: "Javascript dans le DOM et avec Node.js, comprenant les subtilités du langage, l'asynchrone etc...", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'exceptions', 'loops']},
       { id: 'git', description: "Gestion du code source.", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-merges', 'git-conflicts'] },
@@ -422,24 +427,6 @@ export const PROJECTS: {[projectId: string]: Project} = {
     ], 
 
     medias: ['https://imgur.com/P0QFVBe.png', 'https://imgur.com/RiZV3YV.png', 'https://imgur.com/2ysW17Y.png', 'https://imgur.com/WrZsRzV.png'],
-    // medias: [
-    //   {
-    //     title: 'Invitation à jouer au UNO sur Discord avec le bot UnoOnDisc',  
-    //     url: 'https://imgur.com/RiZV3YV.png',      
-    //   },
-    //   {
-    //     title: 'Partie de uno sur Discord avec le bot UnoOnDisc',
-    //     url: 'https://imgur.com/RlpI9qc.png'
-    //   },
-    //   {
-    //     title: "Paramétrage des règles et fonctionnalités d'une partie de UNO avec le bot UnoOnDisc",
-    //     url: 'https://imgur.com/2ysW17Y.png'
-    //   },
-    //   {
-    //     title: 'Jeu du 2048 sur Discord avec le bot UnoOnDisc',
-    //     url: 'https://imgur.com/WrZsRzV.png'
-    //   }
-    // ],
   },
   'mc-plugin': { 
     id: 'mc-plugin', title: 'Plugin Minecraft', context: 'Projet Perso', educationId: 'formation-perso',
@@ -587,7 +574,9 @@ export const PROJECTS: {[projectId: string]: Project} = {
     description: "Mon propre système linux que j'utilise au quotidien utilisant la distribution NixOs et donc les paquets Nix avec une configuration déclarative.",
     longDescription: renderMarkdown(nixosSystemContent),
 
-    competencies: [ ],
+    competencies: [
+      {id: 'administrer', description: 'Configuration système plus ou moins avancées en déclaratif (drivers, firewall, partitions etc...)'}
+    ],
     tools: [
       { id: 'nixos', description: "Distribution linux utilisée pour une configuration déclarative & reproductible facilement avec la sécurité de pouvoir revenir en arrière facilement en cas d'échec de mise à jour",   conceptIds: ['zsh-config', 'packages-install', 'nvidia-drivers', 'home-manager', 'desktop-manager', 'wayland', 'dual-boot-config', 'firewall', 'firefox-config-declarative', 'vscode-config-declarative', 'git-config-declarative', 'nix-options-vars', 'mounts'] },
       { id: 'vscode', description: "IDE que j'utilise pour ma configuration Nix avec des extensions pour le style, les formateurs etc...", conceptIds: [] },
@@ -595,13 +584,33 @@ export const PROJECTS: {[projectId: string]: Project} = {
     ],
     
     medias:  []
+  },
+
+  'phone-replace-battery': {
+    id: 'phone-replace-battery',
+    title: "Remplacement de la batterie d'un smartphone (S22)",
+    context: 'Projet Perso',
+    educationId: 'formation-perso', 
+    startDateTimesTamp: 1750197600,
+    endDateTimestamp: 1750765860,
+    github: '',
+    description: "Suite au gonflement de la batterie d'un Samsung Galaxy S22 d'un membre de ma famille qui ne tenait plus la charge, j'ai proposé, sans experience, de la remplacer par moi-même.",
+    longDescription: renderMarkdown(phoneBatteryReplacemenContent),
+    competencies: [],
+    tools: [],
+    medias: ['images/projects/IMG-20250624-WA0000.jpg'],
+    softSkills: [
+      { id: 'curiosité', description: "Curiosité derrière la réalisabilité d'un tel projet."},
+      { id: 'esprit-initiative', description: "Initiative de proposer une réparation manuelle, peu cher et sans expérience."},
+    ],
+
   }
 }
 
 // --- EXPÉRIENCES ---
 export const EXPERIENCES: {[experiencId: string]: Experience} = {
   'stage-mf': { 
-    id: 'stage-mf', title: 'Développeur PHP front/back', entity: 'Market Factory', date: 'Janv 2026 - Mars 2026', github: 'privé',
+    id: 'stage-mf', title: 'Stage développeur PHP front/back', entity: 'Market Factory', date: 'Janv 2026 - Mars 2026', github: 'privé',
     startDateTimesTamp: 1769414400,
     endDateTimestamp: 1774022400,
     description: 'Développement API, correction de failles, refonte et rédaction de documentation.', 

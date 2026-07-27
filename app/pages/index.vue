@@ -102,7 +102,7 @@
             Compétences clés
               <NuxtIcon name="i-lucide-circle-help" class="size-4" title="- Cliquez sur les outils pour observer les autres compétences techniques / notions maîtrisées ; les projets ; ainsi que le niveau de maîtrise, par outil.&#010;- Certains outils spécifiques à un outil peuvent être considérés comme notion car faisant partie du bagage de connaissances pour un outil" />
            </h2>
-          <p class="text-sm text-gray-600 dark:text-gray-400 text-justify">
+          <p class="text-sm text-gray-600 dark:text-gray-400 text-justify"> 
             Les compétences correspondent à celles définies par le programme national du B.U.T Informatique qui sont rattachées à des outils eux-mêmes rattachés à des notions.
           </p>
         </div>
@@ -220,7 +220,7 @@
                   :key="t.id" 
                   class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium rounded"
                 >
-                  {{ TOOLS[t.id]?.name  }}
+                  {{ TOOLS[t.id]?.name }}
                 </span>
               </div>
               
