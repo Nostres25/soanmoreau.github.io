@@ -1,3 +1,37 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import { TOOLS, PROJECTS, EDUCATIONS, EXPERIENCES } from '~/composables/objects'
+import { useModalManager } from '~/composables/usePortfolio'
+const { openModal } = useModalManager()
+
+// Récupération des données du BUT
+const butInfoData = computed(() => EDUCATIONS['but-info'])
+
+// Récupération des données du Stage
+const stageData = computed(() => EXPERIENCES['stage-mf'])
+
+// Filtre pour ne récupérer que les projets de BUT
+const butProjects = computed(() => {
+  return Object.values(PROJECTS).filter(projet => projet.context.includes('BUT'))
+});
+
+// Données de progression des compétences
+const competencesProgression = [
+  { titre: 'Réaliser', levelBut1: 35, levelBut2: 85, but1: "Développement de scripts simples et de petits programmes procéduraux (Python, Java) afin d'assimiler la logique algorithmique de base.", but2: "Conception d'applications complètes et robustes orientées objet (ex: Jeu d'échecs en Java) et implémentation d'architectures web avec des frameworks (PHP/Laravel)." },
+  { titre: 'Optimiser', levelBut1: 30, levelBut2: 80, but1: "Découverte des concepts initiaux de l'algorithmique, des tris et des structures de données simples en Python.", but2: "Étude approfondie de la complexité algorithmique mathématique, optimisation des parcours de graphes et amélioration mesurable des performances." },
+  { titre: 'Administrer', levelBut1: 35, levelBut2: 80, but1: "Familiarisation avec l'environnement de ligne de commande Linux, navigation dans les systèmes de fichiers et commandes de base.", but2: "Configuration complète de systèmes Ubuntu, déploiement de services réseaux locaux (DHCP, DNS), gestion stricte de l'adressage (IPv4/IPv6) et des pare-feux." },
+  { titre: 'Gérer', levelBut1: 40, levelBut2: 85, but1: "Écriture de requêtes SQL basiques et découverte intuitive de l'interrogation de bases de données pré-construites.", but2: "Recueil formel des besoins, modélisation conceptuelle et logique (MCD/MLD), et construction de bases de données robustes sous PostgreSQL et MariaDB." },
+  { titre: 'Conduire', levelBut1: 20, levelBut2: 75, but1: "Participation au travail en groupe avec un suivi classique des tâches de développement assignées par les professeurs.", but2: "Prise de responsabilité systématique en tant que chef d'équipe, pilotage du cycle de vie du projet informatique et gestion de l'organisation collective." },
+  { titre: 'Collaborer', levelBut1: 45, levelBut2: 90, but1: "Découverte des outils de travail collaboratif basiques et manipulations initiales des dépôts Git.", but2: "Collaboration technique fluide sur Git/GitHub (fusions, branches temporelles) et communication efficace au sein d'une organisation professionnelle." }
+]
+
+// Données de progression des outils
+const outilsProgression = [
+  { categorie: 'Langages (Python, Java, PHP, JS, HTML/CSS)', levelBut1: 40, levelBut2: 85, but1: "Apprentissage de la syntaxe, des types de variables et de l'algorithmique fondamentale (boucles, conditions, fonctions).", but2: "Maîtrise de la Programmation Orientée Objet (POO), intégration structurée d'APIs et application du pattern MVC via des frameworks." },
+  { categorie: 'Systèmes & Réseaux (Linux, Bash, Protocoles)', levelBut1: 30, levelBut2: 75, but1: "Exécution de commandes simples, gestion des droits utilisateurs et découverte théorique d'internet.", but2: "Création de scripts d'automatisation en Bash, conception d'architectures réseaux physiques et compréhension des couches Ethernet et ARP." },
+  { categorie: 'Bases de Données (SQL, PostgreSQL, MariaDB)', levelBut1: 40, levelBut2: 85, but1: "Création de tables simples et requêtes de sélection isolées (SELECT, JOIN simples).", but2: "Optimisation de la structure, gestion des contraintes d'intégrité, manipulation des vues et intégration des bases aux applications logicielles." }
+]
+</script>
 <template>
   <div class="relative max-w-4xl mx-auto min-h-screen pt-8 pb-12 animate-fade-in space-y-16">
     
@@ -56,7 +90,7 @@
             <div class="grid gap-4">
               <div v-for="(prog, index) in competencesProgression" :key="index" class="bg-white/70 dark:bg-gray-800/70 p-5 rounded-xl border border-emerald-100/80 dark:border-emerald-800/40 shadow-sm transition-all hover:shadow-md">
                 
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
+                <div class="flex flex-col md:flex-column md:items-center justify-between gap-4 mb-5">
                   <h4 class="font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-2">
                     <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> {{ prog.titre }}
                   </h4>
@@ -64,10 +98,16 @@
                   <div class="w-full md:w-1/2 flex items-center gap-3">
                     <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider w-10 text-right">B.U.T 1</span>
                     <div class="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden flex relative shadow-inner">
-                      <div class="h-full bg-emerald-300 dark:bg-emerald-800/60" :style="{ width: prog.levelBut1 + '%' }"></div>
-                      <div class="h-full bg-emerald-500 dark:bg-emerald-400" :style="{ width: (prog.levelBut2 - prog.levelBut1) + '%' }"></div>
+                      <div class="h-full bg-emerald-300 dark:bg-emerald-400" :style="{ width: prog.levelBut1 + '%' }"></div>
                     </div>
-                    <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider w-10">B.U.T 2</span>
+                    <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider w-10">{{ prog.levelBut1 + '%' }}</span>
+                  </div>
+                  <div class="w-full md:w-1/2 flex items-center gap-3">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider w-10 text-right">B.U.T 2</span>
+                    <div class="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden flex relative shadow-inner">
+                      <div class="h-full bg-emerald-300 dark:bg-emerald-400" :style="{ width: prog.levelBut2 + '%' }"></div>
+                    </div>
+                    <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider w-10">{{ prog.levelBut2 + '%' }}</span>
                   </div>
                 </div>
 
@@ -144,10 +184,9 @@
         ></div>
         
         <div class="mt-8">
-          <button 
-            @click="openModal({ type: 'experience', id: 'stage-mf' })" 
+          <button
             class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline transition-all"
-          >
+            @click="openModal({ type: 'experience', id: 'stage-mf' })"           >
             Ouvrir la fiche de ce stage &rarr;
           </button>
         </div>
@@ -165,7 +204,7 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <article 
-          v-for="projet in saeProjects" 
+          v-for="projet in butProjects" 
           :key="projet.id" 
           class="flex flex-col bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-emerald-500 transition-colors shadow-sm hover:shadow-md"
         >
@@ -192,8 +231,8 @@
           </div>
           
           <button 
-            @click="openModal({ type: 'project', id: projet.id as any })" 
             class="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors mt-auto group text-left w-max cursor-pointer"
+            @click="openModal({ type: 'project', id: projet.id as any })" 
           >
             Analyser cette SAÉ
             <span class="text-emerald-500 group-hover:translate-x-1 transition-transform">&rarr;</span>
@@ -204,42 +243,6 @@
 
   </div>
 </template>
-
-<script setup lang="ts">
-import { computed } from 'vue'
-import { TOOLS, PROJECTS, EDUCATIONS, EXPERIENCES } from '~/composables/objects'
-import { renderMarkdown, useModalManager } from '~/composables/usePortfolio'
-const { openModal } = useModalManager()
-
-// Récupération des données du BUT
-const butInfoData = computed(() => EDUCATIONS['but-info'])
-
-// Récupération des données du Stage
-const stageData = computed(() => EXPERIENCES['stage-mf'])
-
-// Filtre pour ne récupérer que les SAÉ
-const saeProjects = computed(() => {
-  return Object.values(PROJECTS).filter(projet => projet.context === 'SAÉ BUT')
-});
-
-// Données de progression des compétences
-const competencesProgression = [
-  { titre: 'Réaliser', levelBut1: 35, levelBut2: 85, but1: "Développement de scripts simples et de petits programmes procéduraux (Python, Java) afin d'assimiler la logique algorithmique de base.", but2: "Conception d'applications complètes et robustes orientées objet (ex: Jeu d'échecs en Java) et implémentation d'architectures web avec des frameworks (PHP/Laravel)." },
-  { titre: 'Optimiser', levelBut1: 30, levelBut2: 80, but1: "Découverte des concepts initiaux de l'algorithmique, des tris et des structures de données simples en Python.", but2: "Étude approfondie de la complexité algorithmique mathématique, optimisation des parcours de graphes et amélioration mesurable des performances." },
-  { titre: 'Administrer', levelBut1: 35, levelBut2: 80, but1: "Familiarisation avec l'environnement de ligne de commande Linux, navigation dans les systèmes de fichiers et commandes de base.", but2: "Configuration complète de systèmes Ubuntu, déploiement de services réseaux locaux (DHCP, DNS), gestion stricte de l'adressage (IPv4/IPv6) et des pare-feux." },
-  { titre: 'Gérer', levelBut1: 40, levelBut2: 85, but1: "Écriture de requêtes SQL basiques et découverte intuitive de l'interrogation de bases de données pré-construites.", but2: "Recueil formel des besoins, modélisation conceptuelle et logique (MCD/MLD), et construction de bases de données robustes sous PostgreSQL et MariaDB." },
-  { titre: 'Conduire', levelBut1: 20, levelBut2: 75, but1: "Participation au travail en groupe avec un suivi classique des tâches de développement assignées par les professeurs.", but2: "Prise de responsabilité systématique en tant que chef d'équipe, pilotage du cycle de vie du projet informatique et gestion de l'organisation collective." },
-  { titre: 'Collaborer', levelBut1: 45, levelBut2: 90, but1: "Découverte des outils de travail collaboratif basiques et manipulations initiales des dépôts Git.", but2: "Collaboration technique fluide sur Git/GitHub (fusions, branches temporelles) et communication efficace au sein d'une organisation professionnelle." }
-]
-
-// Données de progression des outils
-const outilsProgression = [
-  { categorie: 'Langages (Python, Java, PHP, JS, HTML/CSS)', levelBut1: 40, levelBut2: 85, but1: "Apprentissage de la syntaxe, des types de variables et de l'algorithmique fondamentale (boucles, conditions, fonctions).", but2: "Maîtrise de la Programmation Orientée Objet (POO), intégration structurée d'APIs et application du pattern MVC via des frameworks." },
-  { categorie: 'Systèmes & Réseaux (Linux, Bash, Protocoles)', levelBut1: 30, levelBut2: 75, but1: "Exécution de commandes simples, gestion des droits utilisateurs et découverte théorique d'internet.", but2: "Création de scripts d'automatisation en Bash, conception d'architectures réseaux physiques et compréhension des couches Ethernet et ARP." },
-  { categorie: 'Bases de Données (SQL, PostgreSQL, MariaDB)', levelBut1: 40, levelBut2: 85, but1: "Création de tables simples et requêtes de sélection isolées (SELECT, JOIN simples).", but2: "Optimisation de la structure, gestion des contraintes d'intégrité, manipulation des vues et intégration des bases aux applications logicielles." }
-]
-</script>
-
 <style scoped>
 .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }

@@ -29,6 +29,12 @@ function preventInputBlur(e: MouseEvent) {
     e.preventDefault()
   }
 }
+
+// TODO Peut-être pas utile en async car directement visible pour la command platette. Et le footer doit faire partie de la structure de base
+const GlobalFooter = defineAsyncComponent(() => import('@/components/GlobalFooter.vue'))
+const NuxtCommandPalette = defineAsyncComponent(() => import('@nuxt/ui/components/CommandPalette.vue'))
+
+const GlobalModal = defineAsyncComponent(() => import('@/components/GlobalModal.vue'))
 </script>
 
 <template>
@@ -90,7 +96,7 @@ function preventInputBlur(e: MouseEvent) {
             fuseOptions: { 
               includeMatches: true,
               ignoreLocation: true,
-              keys: ['label', 'description', 'suffix', 'type', 'academic-skills']
+              keys: ['label', 'description', 'suffix', 'type', 'academic-skills', 'tools']
             }
           }"
           placeholder="Chercher compétences, outils, notions, expériences, projets etc..." 
@@ -122,8 +128,8 @@ function preventInputBlur(e: MouseEvent) {
       <main class="flex-1 p-6 xl:p-12 pt-24 xl:pt-12 mb-20 xl:mb-0 overflow-y-auto">
         <NuxtPage />
       </main>
-      <GlobalFooter :links="links" />
-      <GlobalModal />
+      <GlobalFooter hydrate-on-idle :links="links" />
+      <GlobalModal hydrate-on-visible />
     </div>
   </div>
 </template>

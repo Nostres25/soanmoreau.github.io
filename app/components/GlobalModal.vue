@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS } from '~/composables/objects'
-import type { ProjectId, ExperienceId, EducationId, ToolId, Project, Education, Experience } from '~/composables/objects';
-import { useModalManager, getEntitiesForConcept, getProjectForTool, renderMarkdown } from '~/composables/usePortfolio'
+import type { ProjectId, ExperienceId, EducationId, ToolId, Project, Education, Experience, Website } from '~/composables/objects';
+import { useModalManager, getEntitiesForConcept, getProjectForTool } from '~/composables/usePortfolio'
 
 const { isOpen, currentModal, hasHistory, closeAll, goBack, openModal } = useModalManager()
 
@@ -34,6 +34,8 @@ function openImage(url: string) {
   imageIsOpen.value = true
 }
 
+const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/components/tools/MasteryIndexComponent.vue'))
+
 </script>
 
 <template>
@@ -42,7 +44,7 @@ function openImage(url: string) {
       <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" @click="closeAll"></div>
 
       <div 
-        class="relative w-full max-h-[85vh] md:max-h-[90vh] flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out"
+        class="relative w-full max-h-[85vh] 2xl:max-h-[90vh] flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out"
         :class="currentModal?.type === 'education' || currentModal?.type === 'project' || currentModal?.type === 'experience' || isExpanded ? 'max-w-4xl' : 'max-w-2xl animate-slide-up'"
       >
         <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 shrink-0">
@@ -50,6 +52,7 @@ function openImage(url: string) {
             <span>&larr;</span> Retour
           </button>
           <div v-else></div> 
+          <!-- TODO emplacement pour titre de modal <h1 class="text-2xl font-bold">Remplacement de la batterie d'un smartphone (S22)</h1> -->
           <button @click="closeAll" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 cursor-pointer">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
           </button>
@@ -65,7 +68,7 @@ function openImage(url: string) {
               <div>
                 <h1 class="text-2xl font-bold">{{ toolData.name }}</h1>
                 
-                <ToolsMasteryIndexComponent :toolData="toolData"/>
+                <ToolsMasteryIndexComponent hydrate-on-interaction="mouseover" :tool-data="toolData"/>
               </div>
             </div>
 
@@ -97,7 +100,7 @@ function openImage(url: string) {
                 {{ currentEntity.context || currentEntity.date }}
               </span>
               <h1 class="text-3xl font-extrabold mb-2">{{ currentEntity.title }}</h1>
-              <h3 v-if="currentEntity.entity" class="text-xl text-gray-500 mb-4">{{ currentEntity.entity }}</h3>
+              <h3 v-if="currentEntity.entity" class="text-xl text-gray-500 mb-4">{{ (currentModal.type === 'experience' ? 'Chez ' : '') + currentEntity.entity }}</h3>
               <p class="text-gray-600 dark:text-gray-300 text-justify">{{ currentEntity.description }}</p>
               
               <div v-if="currentEntity.longDescription" class="mt-3">
@@ -135,7 +138,7 @@ function openImage(url: string) {
                     @click="openImage(item)"
                   >
                 </NuxtCarousel>
-                <NuxtModal v-model:open="imageIsOpen">
+                <NuxtModal v-model:open="imageIsOpen" class="max-w-5xl h-auto">
                   <template #content>
                     <img v-if="selectedImage" :src="selectedImage" class="w-full h-auto max-h-[90vh] object-contain rounded-lg">
                   </template>
@@ -144,7 +147,7 @@ function openImage(url: string) {
             </div>
 
             <div v-if="currentEntity.github || currentEntity.website" class="flex gap-4 mb-8">
-              <a v-if="currentEntity.website" :href="currentEntity.website" target="_blank" class="px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium hover:bg-emerald-500 transition-colors">Voir le site</a>
+              <a v-if="currentEntity.website" :href="currentEntity.website?.label ? currentEntity.website.url : currentEntity.website" target="_blank" class="px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium hover:bg-emerald-500 transition-colors">{{currentEntity.website?.label ? currentEntity.website.label : 'Voir le site' }}</a>
               <a v-if="currentEntity.github" 
               :href="currentEntity.github" 
               target="_blank" 

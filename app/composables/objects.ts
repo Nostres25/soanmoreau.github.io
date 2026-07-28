@@ -7,6 +7,8 @@ import portfolioContent from '../content/projects/portfolio.md?raw'
 import nixosSystemContent from '../content/projects/nixos-personal-system.md?raw'
 import phoneBatteryReplacemenContent from '../content/projects/phone-battery-replacement.md?raw'
 
+const startDate = Date.now();
+
 export type ProjectId = keyof typeof PROJECTS;
 export type ConceptId = keyof typeof CONCEPTS;
 export type SkillId = keyof typeof COMPETENCES;
@@ -65,7 +67,9 @@ export interface Education {
   medias?: string[],
   projects?: ProjectIntegration[],
   segmentations?: {[segmentation: string]: {name: string, periode: string, startTimestamp: number, type: string, projects?: ProjectIntegration[]}},
-  softSkills?: SoftSkillIntegration[]
+  softSkills?: SoftSkillIntegration[],
+  website?: string | Website,
+  icon?: string
 }
 
 export interface Project {
@@ -77,7 +81,7 @@ export interface Project {
   description: string,
   longDescription?: string,
   github: string,
-  website?: string,
+  website?: string | Website,
   medias?: string[],
   competencies: SkillIntegration[], 
   tools: ToolIntegration[],
@@ -104,7 +108,7 @@ export interface Experience {
   tools: ToolIntegration[],
   softSkills?: SoftSkillIntegration[],
   medias?: string[],
-  website?: string,
+  website?: string | Website,
   longDescription?: string,
   icon?: string
 }
@@ -132,6 +136,10 @@ export interface SoftSkillIntegration {
   description: string,
 }
 
+export interface Website {
+  label: string,
+  url: string,
+}
 
 // --- NOTIONS (Nouveau concept indépendant) ---
 export const CONCEPTS: {[conceptId: string]: Concept} = {
@@ -383,7 +391,7 @@ export const EDUCATIONS: {[educationId: string]: Education} = {
     competencies: [
       { id: 'realiser-app', description: "Réalisation d'applications et formation orientée développement.",  },
       { id: 'optimiser', description: "Cours sur les optimisations, la sécurité et l'architecture logicielle.",  },
-      { id: 'administrer', description: "Installation d'un poste Xubuntu et travaux en réseau ainsi qu'en systèmes linux.",  },
+      { id: 'administrer', description: "Installation d'un poste Xubuntu et travaux en systèmes linux ainsi qu'en réseaux (ARP, DHCP, Ethernet, TCP/UDP, IPv4 & IPv6, CIDR, Pare-feu, DNS, VPN, NFS, NIS etc...",  },
       { id: 'gerer-donnees', description: "Travail sur la science de données avec de l'analyse de données, des bases de données SQL (SGBDR) et du traitement algorithmique des données.",  },
       { id: 'conduire-projet', description: "Cours de gestion de projets, de management SI & réalisaion de toutes les étapes de projets.",  },
       { id: 'collaborer', description: "Multitude de travaux en groupe pour des projets ou pour des ressources transversales.",  },
@@ -393,7 +401,7 @@ export const EDUCATIONS: {[educationId: string]: Education} = {
   'bac': { 
     id: 'bac', title: 'BAC Général (Maths, PC, SVT)', entity: 'Lycée', context: 'Diplôme', 
     contentPath: '/formations/bac.md',
-    description: 'Apprentissage de la méthode scientifique. Bons résultats en mathématiques.', 
+    description: 'Apprentissage de la méthode scientifique en sciences et vie de la terre, bons résultats en mathématiques, certification PIX', 
     competencies: [], tools: [], projects: []
   }
 }
@@ -432,7 +440,7 @@ export const PROJECTS: {[projectId: string]: Project} = {
     id: 'mc-plugin', title: 'Plugin Minecraft', context: 'Projet Perso', educationId: 'formation-perso',
     description: 'Gestion des permissions et zones sur serveur multijoueur. Configuration Yaml.', 
     startDateTimesTamp: 1577833200,
-    longDescription: renderMarkdown(`Un projet développé lors de mes premières années de programmation, me permettant d'appréhender le fonctionnement d'un serveur de jeu, de son API publique et de la gestion de configurations personnalisées pour les administrateurs.`), 
+    longDescription: renderMarkdown(`Un projet développé lors de mes premières années de programmation, me permettant d'appréhender le fonctionnement d'un serveur de jeu, de son API publique et de la gestion de configurations personnalisées pour les administrateurs. Rendez-vous sur le github pour en savoir plus.`), 
     github: 'https://github.com/Nostres25/MinerstiaPlugin',  
     competencies: [
       { id: 'realiser-app', description: "Création d'un plugin utilitaire.",  }
@@ -451,7 +459,7 @@ export const PROJECTS: {[projectId: string]: Project} = {
     id: 'sae-echecs', title: 'Jeu d\'échecs', context: 'SAÉ BUT', educationId: 'but-info',
     description: 'Développement d\'un jeu d\'échecs complet dans le terminal.', 
     startDateTimesTamp: EDUCATIONS['but-info'].segmentations['S2'].startTimestamp,
-    longDescription: renderMarkdown(`Création intégrale d'un jeu d'échecs respectant la totalité des règles officielles (roque, prise en passant) en implémentant une architecture orientée objet stricte.`), 
+    longDescription: renderMarkdown(`Création d'un jeu d'échecs dans complet en respectant les règles officielles (roque, prise en passant) et en implémentant une architecture stricte. Voir le github pour plus d'informations.`), 
     github: 'https://github.com/Nostres25/JavaChess', 
     competencies: [
       { id: 'realiser-app', description: "Logique métier des échecs.",  },
@@ -611,13 +619,14 @@ export const PROJECTS: {[projectId: string]: Project} = {
 export const EXPERIENCES: {[experiencId: string]: Experience} = {
   'stage-mf': { 
     id: 'stage-mf', title: 'Stage développeur PHP front/back', entity: 'Market Factory', date: 'Janv 2026 - Mars 2026', github: 'privé',
+    website: { label: "Voir le site vitrine de l'entreprise", url: 'https://market-factory.fr/'},
     startDateTimesTamp: 1769414400,
     endDateTimestamp: 1774022400,
-    description: 'Développement API, correction de failles, refonte et rédaction de documentation.', 
+    description: "Amélioration, correction et refonte du site back-office", 
     longDescription: renderMarkdown(stageMfContent), 
     
     competencies: [
-      { id: 'realiser-app', description: "Refonte d'une application web PHP, correction de failles de sécurité...",  },
+      { id: 'realiser-app', description: "Refonte d'une application web PHP, améliorations, correction de failles de sécurité...",  },
       { id: 'optimiser', description: "Optimisation de requêtes HTTP/API, logique PHP, requêtes SQL...",  },
       { id: 'administrer', description: "Configuration Apache2, documentation du projet, définition de fichier .htaccess",  },
       { id: 'gerer-donnees', description: "Stockage des stocks toptex, enquête sur les schémas SQL, debug par requêtes SQL...",  },
@@ -632,16 +641,18 @@ export const EXPERIENCES: {[experiencId: string]: Experience} = {
       { id: 'bootstrap', description: "Utilisation de classes bootstrap", conceptIds: [] },
       { id: 'javascript', description: "Affichages dynamiques via javascript", conceptIds: ['dom', 'ajax'] },
       { id: 'composer', description: "Mise en place de composer pour des outils de développement & installer les ressources ainsi que css", conceptIds: ['paquets-scripts', 'modules', 'modules-dev'] },
+
     ],
     softSkills: [
-        { id: 'analyse', description: 'Analyse minutieuse du code existant, de son fonctionnement, du fonctionnement des API utilisées etc...' },
-        { id: 'apprentissage-rapide', description: "Apprentissage sur le terrain en autonomie de la programmation PHP, les pratiques du langage et du projet." },
-        { id: 'bon-communicant', description: "Comptes rendus régulier de mes avancées sur mes missions, aides et explications auprès de mes camarades stagiaires, multiples propositions d'améliorations orales"},
-        { id: 'curiosité', description: "Curiosité qui m'a amené à explorer le code en profondeur afin d'y trouver des points d'amélioration."},
-        { id: 'esprit-initiative', description: "Prise d'initiative concernant la recherche de failles de sécurités après être tombé sur une faille de sécurité majeur ce qui m'a permi de trouver 5 autres failles majeurs et pour proposer ainsi que réaliser une refonte du projet à partir notamment de principes de qualité de développement."},
-        { id: 'redaction-fr', description: "Rédaction d'une documentation pour l'organisation du projet suite à la refonte."},
-        { id: 'esprit-critique', description: "Recul sur les choix du projet et analyse critique du code."}
+      { id: 'analyse', description: 'Analyse minutieuse du code existant, de son fonctionnement, du fonctionnement des API utilisées etc...' },
+      { id: 'apprentissage-rapide', description: "Apprentissage sur le terrain en autonomie de la programmation PHP, les pratiques du langage et du projet." },
+      { id: 'bon-communicant', description: "Comptes rendus régulier de mes avancées sur mes missions, aides et explications auprès de mes camarades stagiaires, multiples propositions d'améliorations orales"},
+      { id: 'curiosité', description: "Curiosité qui m'a amené à explorer le code en profondeur afin d'y trouver des points d'amélioration."},
+      { id: 'esprit-initiative', description: "Prise d'initiative concernant la recherche de failles de sécurités après être tombé sur une faille de sécurité majeur ce qui m'a permi de trouver 5 autres failles majeurs et pour proposer ainsi que réaliser une refonte du projet à partir notamment de principes de qualité de développement."},
+      { id: 'redaction-fr', description: "Rédaction d'une documentation pour l'organisation du projet suite à la refonte."},
+      { id: 'esprit-critique', description: "Recul sur les choix du projet et analyse critique du code."}
     ],
+    medias: ['images/experiences/stage/stage-mf-overview-presentation.png', 'images/experiences/stage/stage-mf-missions.png', 'images/experiences/stage/stage-mf-rework.png']
 
     
   },
@@ -794,14 +805,15 @@ export const SEARCH_GROUPS = ref<CommandPaletteGroup[]>([
   },
   { // TODO ajouter les formations dans "experiences" qui devient donc "experiences et formations"
     id: 'experiences',
-    label: 'Experiences',
+    label: 'Expériences',
     items: EXPERIENCE_VALUES.map((experience) => ({ 
       label: experience.entity,
       suffix: experience.title,
       icon: experience.icon,
       id: experience.id,
+      tools: experience.tools.map((tool) => TOOLS[tool.id]?.name).join(', '),
       'academic-skills': experience.competencies.map((skill) => COMPETENCES[skill.id]?.title).join(', '),
-      type: 'Experiences professionnelle',
+      type: 'Expériences professionnelle',
       description: experience.description,
       onSelect() {
           openModal({ type: 'experience', id: experience.id })
@@ -816,6 +828,7 @@ export const SEARCH_GROUPS = ref<CommandPaletteGroup[]>([
       suffix: project.context,
       icon: project.icon,
       id: project.id,
+      tools: project.tools.map((tool) => TOOLS[tool.id]?.name).join(', '),
       'academic-skills': project.competencies.map((skill) => COMPETENCES[skill.id]?.title).join(', '),
       type: 'Projets',
       description: project.description,
@@ -823,6 +836,24 @@ export const SEARCH_GROUPS = ref<CommandPaletteGroup[]>([
           openModal({ type: 'project', id: project.id })
         }
      }))
+  },    
+  {
+    id: 'education',
+    label: 'Formations et diplômes',
+    items: EDUCATION_VALUES.map((education) => ({ 
+      label: education.title,
+      prefix: education.context,
+      suffix: education.entity,
+      icon: education.icon,
+      id: education.id,
+      tools: education.tools.map((tool) => TOOLS[tool.id]?.name).join(', '),
+      'academic-skills': education.competencies.map((skill) => { console.log('blabla skill'); return COMPETENCES[skill.id]?.title }).join(', '),
+      type: 'Formations et diplômes',
+      description: education.description,
+      onSelect() {
+          openModal({ type: 'education', id: education.id })
+        }
+    }))
   },
   // {
   //   id: 'concepts',
@@ -835,3 +866,5 @@ export const SEARCH_GROUPS = ref<CommandPaletteGroup[]>([
   //    }))
   // }
 ])
+
+console.log(`blabla js chargé en ${Date.now() - startDate}ms`)

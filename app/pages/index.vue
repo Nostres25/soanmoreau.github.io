@@ -225,8 +225,8 @@
               </div>
               
               <button 
-                @click="openModal({ type: 'project', id: projet.id as any })" 
                 class="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors mt-auto group text-left w-max cursor-pointer"
+                @click="openModal({ type: 'project', id: projet.id as any })" 
               >
                 Analyser ce projet 
                 <span class="text-emerald-500 group-hover:translate-x-1 transition-transform">&rarr;</span>
