@@ -11,6 +11,15 @@ export default defineNuxtConfig({
     }
   },
 
+  nitro: {
+    preset: 'vercel',
+    prerender: {
+      crawlLinks: true,
+      routes: ['/']
+    }
+  },
+  ssr: true,
+
   app: {
     head: {
       link: [
@@ -29,11 +38,23 @@ export default defineNuxtConfig({
       ],
   },
 
+  // icon: {
+  //   customCollections: [
+  //       {
+  //         prefix: 'custom-icons',
+  //         dir: 'images/icons',
+  //         recursive: true,
+  //       },
+  //     ],
+  // },
+
   modules: [
     '@nuxtjs/color-mode',
     '@nuxt/eslint',
     '@nuxt/test-utils',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@vercel/analytics',
+    '@vercel/speed-insights'
   ],
 
   vite: {
