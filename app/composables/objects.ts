@@ -187,6 +187,8 @@ export const CONCEPTS = {
   'modules-dev': { id: 'modules-dev', name: 'Modules de développement', description: `Création d'environnements de tests automatisés.` },
   'paquets-scripts': { id: 'paquets-scripts', name: 'Scripts de gestionnaire de paquet', description: `Automatisation des tâches d'exécution et de build dans le package.json.` },
   'poly': { id: 'poly', name: 'Héritage et polymorphisme', description: `Concepts avancés de POO pour un code normalisé et réutilisable.` },
+  'api-usage': { id: 'api-usage', name: "Interactions API", description: "Utilisation d'API en programmation et maîtriser les interactions."},
+  'api-integrations': { id: 'api-integrations', name: "Développement d'API", description: "Création de points de terminaisons API pour transmettre des informations à un ou des services tiers."},
   // ça va avec MVC en soit, puis peut-être que model dans ce contexte c'est la même chose que classe
   //'models': { id: 'models', name: 'Models', description: `Logique métier et règles de l'application.` },
 
@@ -373,20 +375,20 @@ export const EDUCATIONS = {
       { id: 'matplotlib', description: "Visualisation de données en python", conceptIds: []},
       { id: 'pandas', description: 'Analyse et manipulation de données notamment statistiques', conceptIds: []},
       { id: 'java', description: "POO approfondie avec de l'héritage, du polymorphisme, du SOLID et des structures de qualité logicielle comme les observateurs et les observateurs", conceptIds: ['poo', 'poly', 'java-scanner', 'decorators'] },
-      { id: 'javascript', description: "Javascript dans le DOM et avec Node.js, comprenant les subtilités du langage, l'asynchrone etc...", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'exceptions', 'loops']},
+      { id: 'javascript', description: "Javascript dans le DOM et avec Node.js, comprenant les subtilités du langage, l'asynchrone etc...", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'exceptions', 'loops', 'api-usage']},
       { id: 'git', description: "Gestion du code source.", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-merges', 'git-conflicts'] },
       { id: 'nodejs', description: "Travail sur plusieurs technologies Node.js.", conceptIds: ['modules', 'fs'] },
       { id: 'regex', description: 'Regex en PostgreSQL et en Javascript.', conceptIds: [],  },
       { id: 'sql', description: 'SGBDR avec modélisaition, requêtes SQL, PostgreSQL et mariadb', conceptIds: ['db-model']},
       { id: 'androidstudio', description: "Création d'applications Android", conceptIds: ['poo']},
       { id: 'eclipse', description: 'Utilisation de Eclipse pour Java et utilisations des intégrations JUnit & JaCoCO', conceptIds: ['eclipse-libs']},
-      { id: 'spring', description: 'Applications web en Java exploitant le fonctionnement global de SpringBoot', conceptIds: ['mvc']},
+      { id: 'spring', description: 'Applications web en Java exploitant le fonctionnement global de SpringBoot', conceptIds: ['mvc', 'api-usage']},
       { id: 'junit', description: 'Tests en Java', conceptIds: ['tests-unitaires', 'tests-fonctionnels']},
       { id: 'jacoco', description: 'Couverture de code pour les tests en Java', conceptIds: ['couverture-tests']},
       { id: 'mockmvc', description: "Tests d'intéractions HTTP en Java notamment pour les applications SpringBoot", conceptIds: ['tests-fonctionnels']},
       { id: 'linux', description: "Installation et configuration d'un poste Ubuntu ; travail sur Xubuntu durant le cursus ; travaux réseaux & systèmes sur debian", conceptIds: ['firewall', 'mounts', 'packages-install']},
       { id: 'node-fs', description: 'Exercices sur le module fs/promise', conceptIds: ['fs']},
-      { id: 'express', description: "Exercices sur le fonctionnement de base", conceptIds: []},
+      { id: 'express', description: "Exercices sur le fonctionnement de base et création de points de terminaisons d'API", conceptIds: ['api-integrations', 'api-usage']},
       { id: 'vuejs', description: 'Exercices en profondeur sur le fonctionnement de base', conceptIds: ['reactive-values']},
     ],
     competencies: [
@@ -422,7 +424,7 @@ export const PROJECTS = {
     ],
     tools: [
       { id: 'javascript', description: "Logique principale du bot.", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'poo', 'switch', 'exceptions', 'loops', 'collections'] },
-      { id: 'nodejs', description: "Environnement d'exécution.", conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts', 'sharding', 'fs'] },
+      { id: 'nodejs', description: "Environnement d'exécution.", conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts', 'sharding', 'fs', 'api-usage'] },
       { id: 'nodemon', description: "Outil de dev.", conceptIds: ['nodemon-restart'] },
       { id: 'node-canvas', description: "Génération dynamique des cartes visuelles.", conceptIds: ['canvas-2d', 'canvas-overlay', 'canvas-rotation'] },
       { id: 'figma', description: "Design des assets du jeu.", conceptIds: ['figma-logos', 'visuels'] },
@@ -504,7 +506,8 @@ export const PROJECTS = {
       { id: 'git', description: "Versioning en équipe.", conceptIds: ['git-commits', 'git-branches', 'git-merges', 'git-conflicts', 'git-issues', 'git-pr'] },
       { id: 'github-project', description: "Organisation des tâches.", conceptIds: ['backlog', 'priority', 'gh-sub'] },
       { id: 'composer', description: "Gestionnaire de packages PHP.", conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts'] },
-      { id: 'phpstorm', description: "Meilleur IDE trouvé pour le PHP bien qu'un peu lourd", conceptIds: [] }
+      { id: 'phpstorm', description: "Meilleur IDE trouvé pour le PHP bien qu'un peu lourd", conceptIds: [] },
+      { id: 'sql', description: 'Modélisation SQL et debug avec des requêtes SQL', conceptIds: ['db-model']}
     ],
     softSkills: [
         { id: 'analyse', description: 'Analyse minutieuse du processus actuel de suivi de colis, des besoins de chaque acteur et des meilleurs outils à utiliser.' },
@@ -647,13 +650,13 @@ export const EXPERIENCES: {[experiencId: string]: Experience} = {
     ],
     tools: [
       // TODO à compléter (dom, javascript, jquery, ajax, composer "sources annexes")
-      { id: 'php', description: "Refonte sans framework en PHP 8.3 traditionel", conceptIds: ['mvc', 'secu'] },
+      { id: 'php', description: "Refonte sans framework en PHP 8.3 traditionel", conceptIds: ['mvc', 'secu', 'code-to-db'] },
       { id: 'git', description: "Travail en équipe.", conceptIds: ['git-commits', 'versioning', 'git-branches'] },
+      { id: 'sql', description: 'Interactions avec la base de données en PHP grâce à PDO Mysql et requêtes SQL de debug', conceptIds: []},  
       { id: 'css', description: "HTML/CSS des plus traditionnels, sans moteur de template", conceptIds: [] },
       { id: 'bootstrap', description: "Utilisation de classes bootstrap", conceptIds: [] },
       { id: 'javascript', description: "Affichages dynamiques via javascript", conceptIds: ['dom', 'ajax'] },
       { id: 'composer', description: "Mise en place de composer pour des outils de développement & installer les ressources ainsi que css", conceptIds: ['paquets-scripts', 'modules', 'modules-dev'] },
-
     ],
     softSkills: [
       { id: 'analyse', description: 'Analyse minutieuse du code existant, de son fonctionnement, du fonctionnement des API utilisées etc...' },
