@@ -266,7 +266,7 @@ const scrollProjects = (direction: 'left' | 'right') => {
 const timelineContainer = ref<HTMLElement | null>(null)
 const timelineScale = 25 
 const timelineStartYear = 2018
-const timelineYears = 9 // Jusqu'à 2026
+const timelineYears = new Date().getFullYear() + 1 - timelineStartYear // Jusqu'à l'année actuelle + 1 
 
 const getMonthIndex = (str: string) => {
   const s = str.toLowerCase();
