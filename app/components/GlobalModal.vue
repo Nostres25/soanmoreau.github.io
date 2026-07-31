@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS, SOFT_SKILLS } from '~/composables/objects'
-import type { ProjectId, ExperienceId, EducationId, ToolId, Project, Education, Experience, Website } from '~/composables/objects';
-import { useModalManager, getEntitiesForConcept, getProjectForTool } from '~/composables/usePortfolio'
+import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS, SOFT_SKILLS } from '@/composables/objects'
+import type { ProjectId, ExperienceId, EducationId, ToolId, Project, Education, Experience, Website } from '@/composables/objects';
+import { useModalManager, getEntitiesForConcept, getProjectForTool } from '@/composables/usePortfolio'
 
 const { isOpen, currentModal, hasHistory, closeAll, goBack, openModal } = useModalManager()
 
@@ -55,7 +55,9 @@ function openImage(url: string) {
   imageIsOpen.value = true
 }
 
-const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/components/tools/MasteryIndexComponent.vue'))
+const LazyToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/components/tools/MasteryIndexComponent.vue'))
+const LazyToolsRenderedList = defineAsyncComponent(() => import('@/components/tools/RenderedList.vue'))
+const LazyProjectsListField = defineAsyncComponent(() => import('@/components/projects/ListField.vue'))
 
 </script>
 
@@ -93,11 +95,11 @@ const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/componen
               <div>
                 <h1 class="text-2xl font-bold">{{ toolData.name }}</h1>
                 
-                <ToolsMasteryIndexComponent hydrate-on-interaction="mouseover" :tool-data="toolData"/>
+                <LazyToolsMasteryIndexComponent hydrate-on-interaction="mouseover" :tool-data="toolData"/>
               </div>
             </div>
 
-            <ProjectsListField :projects="getProjectForTool(toolData.id as ToolId)"/>
+            <LazyProjectsListField :projects="getProjectForTool(toolData.id as ToolId)" hydrate-on-visible />
 
             <h2 class="font-bold text-gray-900 dark:text-white mb-3">Notions maîtrisées <NuxtIcon name="i-lucide-circle-help" class="size-4" title="Par souci de temps, les notions sont actuellement définies à la volée en fonction de ce que je considère utile à préciser. Mais à l'avenir elles pourraient être déifnies en fonction des catégories des documentations respectives à chaque outil"/></h2> 
             <div v-if="toolData.conceptIds?.length" class="space-y-4">
@@ -189,23 +191,7 @@ const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/componen
               <div v-if="currentEntity.tools?.length || currentEducation?.id === 'formation-perso'">
                 <h2 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Outils sollicités & notions <NuxtIcon name="i-lucide-circle-help" class="size-4" title="- Cliquez sur l'outil de votre choix pour en savoir plus sur ma maîtrise actuelle.&#010;- Les notions visibles ci-dessous sont celles solicitées par moi-même dans le cadre du projet, de la formation ou de l'expérience." /></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div v-for="t in currentEntity.tools" :key="t.id" class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-100 dark:border-gray-700 flex flex-col">
-                    <div class="flex items-center justify-between mb-2">
-                      <button
-                        class="flex items-center gap-2 font-bold text-gray-900 dark:text-white hover:text-emerald-600 transition-colors cursor-pointer" 
-                        @click="openModal({ type: 'tool', id: t.id as any })"
-                      >
-                        <span class="w-6 h-6 flex items-center justify-center bg-white dark:bg-gray-700 rounded shadow-sm text-xs">{{ TOOLS[t.id]?.icon }}</span>
-                        {{ TOOLS[t.id]?.name }}
-                      </button>
-                    </div>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 text-justify mb-3 flex-1">{{ t.description }}</p>
-                    <div v-if="t.conceptIds?.length" class="flex flex-wrap gap-1.5 mt-auto">
-                      <span v-for="cid in t.conceptIds" :key="cid" :title="CONCEPTS[cid]?.description" class="text-[10px] px-1.5 py-0.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded font-semibold uppercase tracking-wide">
-                        {{ CONCEPTS[cid].name }}
-                      </span>
-                    </div>
-                  </div>
+                  <LazyToolsRenderedList :tools="currentEntity.tools" hydrate-on-visible />
                 </div>
               </div>
 
@@ -229,7 +215,7 @@ const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/componen
                   </li>
                 </ul>
               </div>
-              <ProjectsListField v-if="currentEntity.id === 'but-info'" :projects="PROJECT_VALUES.filter((project) => project.context.includes('BUT'))"/> 
+              <LazyProjectsListField v-if="currentEducation" :projects="currentEducation.projects" hydrate-on-visible /> 
             </div>
           </div>
         </div>

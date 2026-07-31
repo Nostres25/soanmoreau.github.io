@@ -31,10 +31,10 @@ function preventInputBlur(e: MouseEvent) {
 }
 
 // TODO Peut-être pas utile en async car directement visible pour la command platette. Et le footer doit faire partie de la structure de base
-const GlobalFooter = defineAsyncComponent(() => import('@/components/GlobalFooter.vue'))
+const LazyGlobalFooter = defineAsyncComponent(() => import('@/components/GlobalFooter.vue'))
 const NuxtCommandPalette = defineAsyncComponent(() => import('@nuxt/ui/components/CommandPalette.vue'))
 
-const GlobalModal = defineAsyncComponent(() => import('@/components/GlobalModal.vue'))
+const LazyGlobalModal = defineAsyncComponent(() => import('@/components/GlobalModal.vue'))
 </script>
 
 <template>
@@ -128,8 +128,8 @@ const GlobalModal = defineAsyncComponent(() => import('@/components/GlobalModal.
       <main class="flex-1 p-6 xl:p-12 pt-24 xl:pt-12 mb-20 xl:mb-0 overflow-y-auto">
         <NuxtPage />
       </main>
-      <GlobalFooter hydrate-on-idle :links="links" />
-      <GlobalModal hydrate-on-visible />
+      <LazyGlobalFooter hydrate-on-idle :links="links" />
+      <LazyGlobalModal hydrate-on-idle />
     </div>
   </div>
 </template>
