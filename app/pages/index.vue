@@ -2,8 +2,8 @@
   <div class="relative max-w-5xl mx-auto min-h-screen">
     
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-      <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-emerald-400/20 dark:bg-emerald-900/30 blur-[80px] animate-blob"></div>
-      <div class="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-teal-300/20 dark:bg-teal-900/20 blur-[100px] animate-blob animation-delay-2000"></div>
+      <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-emerald-400/20 dark:bg-emerald-900/30 blur-[80px] animate-blob"/>
+      <div class="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-teal-300/20 dark:bg-teal-900/20 blur-[100px] animate-blob animation-delay-2000"/>
     </div>
 
     <div class="relative z-10 animate-fade-in space-y-16 pb-12 pt-8">
@@ -14,7 +14,7 @@
       <section class="mt-12 mb-16">
         <div class="flex items-center justify-between mb-8">
           <h2 id="parcours" class="text-2xl font-bold flex items-center gap-2">
-            <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+            <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"/>
             Mon Parcours
           </h2>
         </div>
@@ -29,13 +29,13 @@
           @mousemove="doDrag"
           @dragstart.prevent
         >
-          <div class="relative h-[320px]" :style="{ width: (timelineYears * 12 * timelineScale) + 100 + 'px' }">
+          <div class="relative h-80" :style="{ width: (timelineYears * 12 * timelineScale) + 100 + 'px' }">
             
-            <div class="absolute top-1/2 left-8 right-8 h-[2px] bg-gray-300 dark:bg-gray-700 flex items-center pointer-events-none">
+            <div class="absolute top-1/2 left-8 right-8 h-0.5 bg-gray-300 dark:bg-gray-700 flex items-center pointer-events-none">
               <div v-for="year in timelineYears" :key="year" class="relative h-full" :style="{ width: (12 * timelineScale) + 'px' }">
-                <div class="absolute left-0 -top-2 w-[2px] h-5 bg-gray-400 dark:bg-gray-500"></div>
+                <div class="absolute left-0 -top-2 w-0.5 h-5 bg-gray-400 dark:bg-gray-500"/>
                 <div class="absolute -left-3 -top-8 text-xs font-bold text-gray-400">{{ timelineStartYear + year - 1 }}</div>
-                <div v-for="m in 11" :key="m" class="absolute -top-1.5 w-[2px] h-3 bg-gray-200 dark:bg-gray-700" :style="{ left: (m * timelineScale) + 'px' }"></div>
+                <div v-for="m in 11" :key="m" class="absolute -top-1.5 w-0.5 h-3 bg-gray-200 dark:bg-gray-700" :style="{ left: (m * timelineScale) + 'px' }"/>
               </div>
             </div>
             <!-- ÉVÉNEMENTS -->
@@ -48,7 +48,7 @@
                   class="absolute border-current opacity-60 group-hover:opacity-100 transition-all duration-300 pointer-events-none"
                   :class="item.type === 'pro' ? 'bottom-1/2 border-t-2 border-l-2 border-r-2 text-blue-500' : 'top-1/2 border-b-2 border-l-2 border-r-2 text-emerald-500'"
                   :style="{ left: item.left + 'px', width: item.width + 'px', height: '6px' }"
-                ></div>
+                />
 
                 <!-- TIGE PARFAITEMENT DROITE ET CENTRÉE -->
                 <div 
@@ -58,12 +58,11 @@
                     left: item.center + 'px',
                     height: item.stemHeight + 'px',
                   }"
-                ></div>
+                />
 
                 <!-- BLOC TEXTE -->
                 <!-- Ajout du @click ici + pointer-events-auto pour rendre SEULEMENT ce bloc cliquable -->
                 <div
-                  @click="!isDragging && openModal({ type: item.modalType as any, id: item.id as any })"
                   class="absolute pointer-events-auto -translate-x-1/2 w-48 text-center cursor-pointer p-2 rounded-xl bg-transparent hover:bg-white/90 dark:hover:bg-gray-800/90 transition-all shadow-none hover:shadow-md border border-transparent hover:border-gray-200 dark:hover:border-gray-700"
                   :class="item.type === 'pro' ? 'bottom-1/2' : 'top-1/2'"
                   :style="{
@@ -71,6 +70,7 @@
                      marginBottom: item.type === 'pro' ? `${item.stemHeight + 4}px` : '0',
                      marginTop: item.type !== 'pro' ? `${item.stemHeight + 4}px` : '0'
                   }"
+                  @click="!isDragging && openModal({ type: item.modalType as any, id: item.id as any })"
                 >
                   <div class="text-[10px] font-bold tracking-wider uppercase mb-1" :class="item.type === 'pro' ? 'text-blue-500' : 'text-emerald-500'">
                     {{ `${item.startDate} — ${item.endDate}` }}
@@ -98,7 +98,7 @@
       <section id="competences" class="scroll-mt-24">
         <div class="mb-6">
           <h2 class="text-2xl font-bold flex items-center gap-2 mb-3">
-            <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+            <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"/>
             Compétences clés
               <NuxtIcon name="i-lucide-circle-help" class="size-4" title="- Cliquez sur les outils pour observer les autres compétences techniques / notions maîtrisées ; les projets ; ainsi que le niveau de maîtrise, par outil.&#010;- Certains outils spécifiques à un outil peuvent être considérés comme notion car faisant partie du bagage de connaissances pour un outil" />
            </h2>
@@ -114,16 +114,15 @@
             class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all"
           >
             <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-2">{{ comp.title }}</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 text-justify min-h-[40px]">{{ comp.description }}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 min-h-10">{{ comp.description }}</p>
             
             <!-- Utilisation de la fonction dynamique pour les outils -->
             <div class="flex flex-wrap gap-2 mb-4">
               <button 
                 v-for="tool in getToolsForCompetence(comp.id, 15)" 
                 :key="tool.id" 
-                @click="openModal({ type: 'tool', id: tool.id as any })"
                 class="px-2 py-1 text-xs font-medium bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded hover:bg-emerald-100 dark:hover:bg-emerald-800 transition-colors cursor-pointer"
-              >
+                @click="openModal({ type: 'tool', id: tool.id as ToolId })"              >
                 {{ tool.name }}
               </button>
             </div>
@@ -138,10 +137,10 @@
               <li 
                 v-for="projet in getProjectsForCompetence(comp.id)" 
                 :key="projet.id" 
-                @click="openModal({ type: 'project', id: projet.id as any })" 
                 class="text-sm text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 cursor-pointer transition-colors flex items-center gap-2"
+                @click="openModal({ type: 'project', id: projet.id as ProjectId })" 
               >
-                <span class="w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full"></span>
+                <span class="w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full"/>
                 {{ projet.title }}
               </li>
             </ul>
@@ -158,14 +157,14 @@
           </h3>
           <ul>
             <li v-for="softSkill in SOFT_SKILLS" :key="softSkill.id" class="ml-5 list-disc mb-2">
-              <span class="font-bold text-lg text-emerald-600 dark:text-emerald-400 min-w-[120px]">{{softSkill.name}}</span> <br/>
+              <span class="font-bold text-lg text-emerald-600 dark:text-emerald-400 min-w-30">{{softSkill.name}}</span><br>
               {{ softSkill.description }}
               <div class="flex flex-wrap gap-2">
                 <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 py-1">Appliqué dans :</span>
                 <button 
                   v-for="entity in getEntitiesForSoftSkill(softSkill.id)" :key="entity.id"
-                  @click="openModal({ type: entity.type, id: entity.id as any })"
                   class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 border border-gray-200 dark:border-gray-600 transition-colors cursor-pointer"
+                  @click="openModal({ type: entity.type, id: entity.id as any })"
                 >
                   {{ entity.title }} &rarr;
                 </button>
@@ -181,15 +180,15 @@
       <section id="projets" class="scroll-mt-24">
         <div class="flex items-center justify-between mb-8">
           <h2 class="text-2xl font-bold flex items-center gap-2">
-            <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+            <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"/>
             Projets & SAÉ
           </h2>
           
-          <div class="hidden md:flex gap-2">
-            <button @click="scrollProjects('left')" class="p-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:text-emerald-500 hover:border-emerald-500 transition-colors shadow-sm cursor-pointer">
+          <div class="md:flex gap-2">
+            <button class="p-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:text-emerald-500 hover:border-emerald-500 transition-colors shadow-sm cursor-pointer" @click="scrollProjects('left')">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             </button>
-            <button @click="scrollProjects('right')" class="p-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:text-emerald-500 hover:border-emerald-500 transition-colors shadow-sm cursor-pointer">
+            <button class="p-2 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:text-emerald-500 hover:border-emerald-500 transition-colors shadow-sm cursor-pointer" @click="scrollProjects('right')">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
             </button>
           </div>
@@ -200,7 +199,7 @@
             <article 
               v-for="projet in PROJECT_VALUES" 
               :key="projet.id" 
-              class="snap-start shrink-0 w-[85vw] md:w-[400px] flex flex-col bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-emerald-500 transition-colors shadow-sm hover:shadow-md"
+              class="snap-start shrink-0 w-[85vw] md:w-100 flex flex-col bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-emerald-500 transition-colors shadow-sm hover:shadow-md"
             >
               <div class="flex justify-between items-start mb-4">
                 <h3 class="font-bold text-xl text-gray-900 dark:text-white pr-4">{{ projet.title }}</h3>

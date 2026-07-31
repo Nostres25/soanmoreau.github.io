@@ -44,7 +44,7 @@ const outilsProgression = [
 
     <section>
       <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-        <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span> 
+        <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"/> 
         Logique du parcours
       </h2>
       <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm text-gray-700 dark:text-gray-300 leading-relaxed space-y-4">
@@ -59,7 +59,7 @@ const outilsProgression = [
 
     <section>
       <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-        <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span> 
+        <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"/> 
         Secteur professionnel
       </h2>
       <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm text-gray-700 dark:text-gray-300 leading-relaxed space-y-4">
@@ -75,7 +75,7 @@ const outilsProgression = [
 
     <section id="formation" class="scroll-mt-28">
       <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-        <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span> 
+        <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"/> 
         Formation : B.U.T Informatique
       </h2>
       <div class="bg-emerald-50/50 dark:bg-emerald-900/10 p-6 sm:p-8 rounded-2xl border border-emerald-100 dark:border-emerald-800/30 leading-relaxed">
@@ -92,20 +92,20 @@ const outilsProgression = [
                 
                 <div class="flex flex-col md:flex-column md:items-center justify-between gap-4 mb-5">
                   <h4 class="font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-2">
-                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> {{ prog.titre }}
+                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"/> {{ prog.titre }}
                   </h4>
                   
                   <div class="w-full md:w-1/2 flex items-center gap-3">
                     <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider w-10 text-right">B.U.T 1</span>
                     <div class="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden flex relative shadow-inner">
-                      <div class="h-full bg-emerald-300 dark:bg-emerald-400" :style="{ width: prog.levelBut1 + '%' }"></div>
+                      <div class="h-full bg-emerald-300 dark:bg-emerald-400" :style="{ width: prog.levelBut1 + '%' }"/>
                     </div>
                     <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider w-10">{{ prog.levelBut1 + '%' }}</span>
                   </div>
                   <div class="w-full md:w-1/2 flex items-center gap-3">
                     <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider w-10 text-right">B.U.T 2</span>
                     <div class="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden flex relative shadow-inner">
-                      <div class="h-full bg-emerald-300 dark:bg-emerald-400" :style="{ width: prog.levelBut2 + '%' }"></div>
+                      <div class="h-full bg-emerald-300 dark:bg-emerald-400" :style="{ width: prog.levelBut2 + '%' }"/>
                     </div>
                     <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider w-10">{{ prog.levelBut2 + '%' }}</span>
                   </div>
@@ -134,14 +134,14 @@ const outilsProgression = [
                 
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
                   <h4 class="font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-2">
-                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> {{ prog.categorie }}
+                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"/> {{ prog.categorie }}
                   </h4>
                   
                   <div class="w-full md:w-1/2 flex items-center gap-3">
                     <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider w-10 text-right">B.U.T 1</span>
                     <div class="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden flex relative shadow-inner">
-                      <div class="h-full bg-emerald-300 dark:bg-emerald-800/60" :style="{ width: prog.levelBut1 + '%' }"></div>
-                      <div class="h-full bg-emerald-500 dark:bg-emerald-400" :style="{ width: (prog.levelBut2 - prog.levelBut1) + '%' }"></div>
+                      <div class="h-full bg-emerald-300 dark:bg-emerald-800/60" :style="{ width: prog.levelBut1 + '%' }"/>
+                      <div class="h-full bg-emerald-500 dark:bg-emerald-400" :style="{ width: (prog.levelBut2 - prog.levelBut1) + '%' }"/>
                     </div>
                     <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider w-10">B.U.T 2</span>
                   </div>
@@ -168,7 +168,7 @@ const outilsProgression = [
 
     <section id="stage" class="scroll-mt-28">
       <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-        <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span> 
+        <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"/> 
         Expérience professionnelle : Stage de deuxième année
       </h2>
       <div class="bg-blue-50/50 dark:bg-blue-900/10 p-6 sm:p-8 rounded-2xl border border-blue-100 dark:border-blue-800/30 leading-relaxed">
@@ -181,7 +181,7 @@ const outilsProgression = [
         <div 
           class="text-gray-600 dark:text-gray-400 text-justify whitespace-pre-line"
           v-html="stageData?.longDescription || ''"
-        ></div>
+        />
         
         <div class="mt-8">
           <button
@@ -195,7 +195,7 @@ const outilsProgression = [
 
     <section id="sae" class="scroll-mt-28">
       <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-        <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span> 
+        <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"/> 
         Projet d'études (SAÉ)
       </h2>
       <p class="text-gray-600 dark:text-gray-400 text-sm mb-8 text-justify">

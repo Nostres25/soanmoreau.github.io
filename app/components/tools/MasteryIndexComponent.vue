@@ -55,7 +55,7 @@ export default {
                 v-for="index in MASTERY_LEVELS.length" :key="index"
                 class="w-4 h-4 rounded-[3px] inline-grid mr-1"
                 :class="index <= i ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.4)] dark:bg-emerald-400' : 'bg-gray-200 dark:bg-gray-700'"
-            ></div> <p class="text-sm md:text-md">{{ i }}/{{ MASTERY_LEVELS.length }} - {{MASTERY_LEVEL_DESC[i - 1]}}</p>
+                                    /> <p class="text-sm md:text-md">{{ i }}/{{ MASTERY_LEVELS.length }} - {{MASTERY_LEVEL_DESC[i - 1]}}</p>
                         </li>
                     </ul>
                 </div>
@@ -69,7 +69,7 @@ export default {
                 class="w-4 h-4 rounded-[3px] hover:border-2 border-emerald-700"
                 :title="`${i}/${MASTERY_LEVELS.length} - ${MASTERY_LEVELS[i - 1]} : ${MASTERY_LEVEL_DESC[i - 1]}`"
                 :class="i <= toolData.masteryIndex + 1   ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.4)] dark:bg-emerald-400' : 'bg-gray-200 dark:bg-gray-700'"
-            ></div>
+            />
             </div>
             <span class="text-xs font-bold text-gray-500 ml-2">{{ toolData.masteryIndex + 1 }}/{{ MASTERY_LEVELS.length }}</span>
         </div>

@@ -40,20 +40,24 @@ const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/componen
 
 <template>
   <Transition name="fade">
-    <div v-if="isOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-      <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" @click="closeAll"></div>
+    <div v-if="isOpen" class="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6">
+      <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" @click="closeAll"/>
 
       <div 
         class="relative w-full max-h-[85vh] 2xl:max-h-[90vh] flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out"
         :class="currentModal?.type === 'education' || currentModal?.type === 'project' || currentModal?.type === 'experience' || isExpanded ? 'max-w-4xl' : 'max-w-2xl animate-slide-up'"
       >
         <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 shrink-0">
-          <button v-if="hasHistory" @click="goBack" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-emerald-600 transition-colors cursor-pointer">
+          <button 
+          v-if="hasHistory"
+          class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-emerald-600 transition-colors cursor-pointer"
+          @click="goBack" 
+          >
             <span>&larr;</span> Retour
           </button>
-          <div v-else></div> 
+          <div v-else/> 
           <!-- TODO emplacement pour titre de modal <h1 class="text-2xl font-bold">Remplacement de la batterie d'un smartphone (S22)</h1> -->
-          <button @click="closeAll" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 cursor-pointer">
+          <button class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 cursor-pointer" @click="closeAll">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
           </button>
         </div>
@@ -84,8 +88,8 @@ const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/componen
                   <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 py-1">Appliqué dans :</span>
                   <button 
                     v-for="entity in getEntitiesForConcept(cid)" :key="entity.id"
-                    @click="openModal({ type: entity.type, id: entity.id as any })"
                     class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 border border-gray-200 dark:border-gray-600 transition-colors cursor-pointer"
+                    @click="openModal({ type: entity.type, id: entity.id as any })"
                   >
                     {{ entity.title }} &rarr;
                   </button>
@@ -104,7 +108,10 @@ const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/componen
               <p class="text-gray-600 dark:text-gray-300 text-justify">{{ currentEntity.description }}</p>
               
               <div v-if="currentEntity.longDescription" class="mt-3">
-                <button @click="toggleExpand" class="text-sm font-medium text-emerald-600 hover:text-emerald-500 transition-colors inline-flex items-center gap-1 cursor-pointer">
+                <button
+                  class="text-sm font-medium text-emerald-600 hover:text-emerald-500 transition-colors inline-flex items-center gap-1 cursor-pointer"
+                  @click="toggleExpand"
+                  >
                   <strong>
                     <span v-if="!isExpanded">En savoir plus &darr;</span>
                     <span v-else>Réduire &uarr;</span>
@@ -162,9 +169,12 @@ const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/componen
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div v-for="t in currentEntity.tools" :key="t.id" class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-100 dark:border-gray-700 flex flex-col">
                     <div class="flex items-center justify-between mb-2">
-                      <button @click="openModal({ type: 'tool', id: t.id as any })" class="flex items-center gap-2 font-bold text-gray-900 dark:text-white hover:text-emerald-600 transition-colors cursor-pointer">
-                        <span class="w-6 h-6 flex items-center justify-center bg-white dark:bg-gray-700 rounded shadow-sm text-xs">{{ TOOLS[t.id].icon }}</span>
-                        {{ TOOLS[t.id].name }}
+                      <button
+                        class="flex items-center gap-2 font-bold text-gray-900 dark:text-white hover:text-emerald-600 transition-colors cursor-pointer" 
+                        @click="openModal({ type: 'tool', id: t.id as any })"
+                      >
+                        <span class="w-6 h-6 flex items-center justify-center bg-white dark:bg-gray-700 rounded shadow-sm text-xs">{{ TOOLS[t.id]?.icon }}</span>
+                        {{ TOOLS[t.id]?.name }}
                       </button>
                     </div>
                     <p class="text-sm text-gray-600 dark:text-gray-400 text-justify mb-3 flex-1">{{ t.description }}</p>
@@ -181,7 +191,7 @@ const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/componen
                 <h2 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Compétences académiques appliquées</h2>
                 <div class="space-y-3">
                   <div v-for="c in currentEntity.competencies" :key="c.id" class="flex flex-col sm:flex-row gap-2 sm:gap-4 p-3 bg-gray-50 dark:bg-gray-800/30 rounded-lg border border-gray-100 dark:border-gray-700/50">
-                    <p class="text-gray-600 dark:text-gray-400 text-justify"><span class="font-bold text-lg text-emerald-700 dark:text-emerald-400 min-w-[120px]">{{ COMPETENCES[c.id].title }} : </span> {{ c.description }}</p>
+                    <p class="text-gray-600 dark:text-gray-400 text-justify"><span class="font-bold text-lg text-emerald-700 dark:text-emerald-400 min-w-30">{{ COMPETENCES[c.id].title }} : </span> {{ c.description }}</p>
                   </div>
                 </div>
               </div>
@@ -191,7 +201,7 @@ const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/componen
                 </h2>
                 <ul>
                   <li v-for="softSkill in currentEntity?.softSkills" :key="softSkill.id" class="ml-5 list-disc mb-2">
-                    <span class="font-bold text-lg text-emerald-700 dark:text-emerald-400 min-w-[120px]">{{SOFT_SKILLS[softSkill.id].name}}</span> <br>
+                    <span class="font-bold text-lg text-emerald-700 dark:text-emerald-400 min-w-30">{{SOFT_SKILLS[softSkill.id].name}}</span> <br>
                     {{ softSkill.description }}
                     
                   </li>

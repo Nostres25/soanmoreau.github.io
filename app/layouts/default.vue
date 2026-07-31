@@ -39,7 +39,7 @@ const GlobalModal = defineAsyncComponent(() => import('@/components/GlobalModal.
 
 <template>
   <div class="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 flex flex-col xl:flex-row">
-     <header class="xl:hidden fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-[120] px-6 py-4 flex items-center justify-between shadow-sm">
+     <header class="xl:hidden fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-120 px-6 py-4 flex items-center justify-between shadow-sm">
       <NuxtLink to="/">
         <h1 class="text-xl font-extrabold tracking-tight">
           Soan <span class="text-emerald-500">MOREAU</span>
@@ -47,7 +47,7 @@ const GlobalModal = defineAsyncComponent(() => import('@/components/GlobalModal.
       </NuxtLink>
 
       <ClientOnly>
-        <button @click="toggleColorMode" class="text-gray-500 hover:text-emerald-500 transition-colors p-1">
+        <button class="text-gray-500 hover:text-emerald-500 transition-colors p-1" @click="toggleColorMode">
           <svg v-if="$colorMode.value === 'dark'" key="dark" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           <svg v-else key="light" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
@@ -57,7 +57,7 @@ const GlobalModal = defineAsyncComponent(() => import('@/components/GlobalModal.
       </ClientOnly>
     </header>
 
-    <nav class="fixed bottom-0 w-full xl:sticky xl:top-0 xl:w-64 xl:h-screen bg-white dark:bg-gray-800 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] xl:shadow-none border-t xl:border-t-0 xl:border-r border-gray-200 dark:border-gray-700 z-[130] flex xl:flex-col justify-between overflow-y-auto hide-scrollbar">
+    <nav class="fixed bottom-0 w-full xl:sticky xl:top-0 xl:w-64 xl:h-screen bg-white dark:bg-gray-800 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] xl:shadow-none border-t xl:border-t-0 xl:border-r border-gray-200 dark:border-gray-700 z-130 flex xl:flex-col justify-between overflow-y-auto hide-scrollbar">
       
       <div class="hidden xl:block p-6">
         <NuxtLink to="/">
@@ -111,14 +111,14 @@ const GlobalModal = defineAsyncComponent(() => import('@/components/GlobalModal.
       <div class="hidden xl:flex p-6 mt-auto">
         <ClientOnly>
           <button 
-            @click="toggleColorMode" 
             class="flex items-center justify-center xl:justify-start gap-2 text-sm text-gray-500 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors w-full p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700/50"
+            @click="toggleColorMode" 
           >
             <span v-if="$colorMode.value === 'dark'" key="dark">Passer au mode clair</span>
             <span v-else key="light">Passer au mode sombre</span>
           </button>
           <template #fallback>
-            <div class="h-9 w-full"></div>
+            <div class="h-9 w-full"/>
           </template>
         </ClientOnly>
       </div>
