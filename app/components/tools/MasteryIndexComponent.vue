@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { MASTERY_LEVELS, MASTERY_LEVEL_DESC } from '../../composables/objects'
 const isSmallScreen = ref(false)
 let mediaQuery: MediaQueryList | null = null
 
@@ -52,9 +53,9 @@ export default {
                             <span class="text-sm font-medium text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded inline-block mb-1.5">
                                 {{ MASTERY_LEVELS[i - 1] }}
                             </span> : <div 
-                v-for="index in MASTERY_LEVELS.length" :key="index"
-                class="w-4 h-4 rounded-[3px] inline-grid mr-1"
-                :class="index <= i ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.4)] dark:bg-emerald-400' : 'bg-gray-200 dark:bg-gray-700'"
+                                        v-for="index in MASTERY_LEVELS.length" :key="index"
+                                        class="w-4 h-4 rounded-[3px] inline-grid mr-1"
+                                        :class="index <= i ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.4)] dark:bg-emerald-400' : 'bg-gray-200 dark:bg-gray-700'"
                                     /> <p class="text-sm md:text-md">{{ i }}/{{ MASTERY_LEVELS.length }} - {{MASTERY_LEVEL_DESC[i - 1]}}</p>
                         </li>
                     </ul>

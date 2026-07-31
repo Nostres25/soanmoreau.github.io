@@ -1,12 +1,12 @@
 // composables/usePortfolio.ts
 import { ref, computed } from 'vue'
 import { TOOL_VALUES, PROJECT_VALUES, EXPERIENCE_VALUES, EDUCATION_VALUES  } from './objects'
-import type { COMPETENCES, TOOLS, PROJECTS, EXPERIENCES, ToolId } from './objects';
+import type { COMPETENCES, TOOLS, PROJECTS, EXPERIENCES, ToolId, SkillId, ConceptId, ToolIntegration, Education, Project } from './objects';
 
 // --- MÉTHODES DYNAMIQUES DE RECHERCHE ---
 
 // Trouver les outils liés à une compétence
-export function getToolsForCompetence(compId: string, limit = NaN) {
+export function getToolsForCompetence(compId: SkillId, limit = NaN) {
   const associatedTools = [];
   for (let i = 0; i < TOOL_VALUES.length && (!limit || associatedTools.length < limit); i++) {
     const tool = TOOL_VALUES[i];
@@ -19,7 +19,7 @@ export function getToolsForCompetence(compId: string, limit = NaN) {
 }
 
 // Trouver les projets liés à une compétence
-export function getProjectsForCompetence (compId: string) {
+export function getProjectsForCompetence (compId: SkillId) {
   return PROJECT_VALUES.filter(p => p.competencies.some(c => c.id === compId))
 }
 
@@ -29,17 +29,17 @@ export function getProjectForTool(tool: ToolId) {
 
 
 // Trouver TOUTES les entités (Projets, Exp, Formations) qui utilisent une Notion
-export function getEntitiesForConcept(conceptId: string) {
+export function getEntitiesForConcept(conceptId: ConceptId) {
   const results: { type: 'project' | 'experience' | 'education', id: string, title: string }[] = []
   
   PROJECT_VALUES.forEach(p => {
-    if (p.tools?.some(t => t.conceptIds?.includes(conceptId))) results.push({ type: 'project', id: p.id, title: p.title })
+    if (p.tools?.some((t: ToolIntegration) => t.conceptIds?.includes(conceptId))) results.push({ type: 'project', id: p.id, title: p.title })
   })
   EXPERIENCE_VALUES.forEach(e => {
     if (e.tools?.some(t => t.conceptIds?.includes(conceptId))) results.push({ type: 'experience', id: e.id, title: e.title })
   })
   EDUCATION_VALUES.forEach(e => {
-    if (e.tools?.some(t => t.conceptIds?.includes(conceptId))) results.push({ type: 'education', id: e.id, title: e.title })
+    if (e.tools?.some((t: ToolIntegration) => t.conceptIds?.includes(conceptId))) results.push({ type: 'education', id: e.id, title: e.title })
   })
   
   return results
@@ -48,13 +48,13 @@ export function getEntitiesForConcept(conceptId: string) {
 export function getEntitiesForSoftSkill(softSkillId: string) {
   const results: { type: 'project' | 'experience' | 'education', id: string, title: string }[] = [];
 
-  PROJECT_VALUES.forEach(p => {
+  PROJECT_VALUES.forEach((p: Project) => {
     if (p?.softSkills?.find((softSkill) => softSkill.id === softSkillId)) results.push({ type: 'project', id: p.id, title: p.title })
   });
   EXPERIENCE_VALUES.forEach(e => {
     if (e?.softSkills?.find((softSkill) => softSkill.id === softSkillId)) results.push({ type: 'experience', id: e.id, title: e.title })
   });
-  EDUCATION_VALUES.forEach(e => {
+  EDUCATION_VALUES.forEach((e: Education) => {
     if (e?.softSkills?.find((softSkill) => softSkill.id === softSkillId)) results.push({ type: 'education', id: e.id, title: e.title })
   });
   
@@ -118,7 +118,8 @@ export function getYearsBetween(firstDate: Date|string|number, secondDate: Date|
   return Math.abs(secondDate.getFullYear() - firstDate.getFullYear());
 }
 
-export function getYearsFormatted(firstDate: Date|string|number, secondDate: Date|string|number): string {
+export function getYearsFormatted(firstDate?: Date|string|number, secondDate?: Date|string|number): string {
+  if (!firstDate || !secondDate) return '';
   const years = getYearsBetween(firstDate, secondDate);
   return typeof years === 'number' && years === 0 ? "moins d'un an" : `${years} ans`;
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS } from '~/composables/objects'
+import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS, SOFT_SKILLS } from '~/composables/objects'
 import type { ProjectId, ExperienceId, EducationId, ToolId, Project, Education, Experience, Website } from '~/composables/objects';
 import { useModalManager, getEntitiesForConcept, getProjectForTool } from '~/composables/usePortfolio'
 
@@ -14,6 +14,27 @@ const currentEntity = computed(() => {
   if (!currentModal.value) return null
   if (currentModal.value.type === 'project') return PROJECTS[currentModal.value.id as ProjectId] as Project
   if (currentModal.value.type === 'experience') return EXPERIENCES[currentModal.value.id as ExperienceId] as Experience
+  if (currentModal.value.type === 'education') return EDUCATIONS[currentModal.value.id as EducationId] as Education
+
+  return null
+})
+
+const currentProject = computed(() => {
+  if (!currentModal.value) return null
+  if (currentModal.value.type === 'project') return PROJECTS[currentModal.value.id as ProjectId] as Project
+
+  return null
+})
+
+const currentExperience = computed(() => {
+  if (!currentModal.value) return null
+  if (currentModal.value.type === 'experience') return EXPERIENCES[currentModal.value.id as ExperienceId] as Experience
+
+  return null
+})
+
+const currentEducation = computed(() => {
+  if (!currentModal.value) return null
   if (currentModal.value.type === 'education') return EDUCATIONS[currentModal.value.id as EducationId] as Education
 
   return null
@@ -100,11 +121,11 @@ const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/componen
           </div>
           <div v-else-if="currentEntity">
             <div class="mb-6">
-              <span v-if="currentEntity.context || currentEntity.date" class="text-xs font-semibold px-2 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 rounded-md mb-2 inline-block">
-                {{ currentEntity.context || currentEntity.date }}
+              <span v-if="(currentEducation || currentProject)?.context || (currentExperience)?.date" class="text-xs font-semibold px-2 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 rounded-md mb-2 inline-block">
+                {{ (currentEducation || currentProject)?.context || (currentExperience)?.date }}
               </span>
               <h1 class="text-3xl font-extrabold mb-2">{{ currentEntity.title }}</h1>
-              <h3 v-if="currentEntity.entity" class="text-xl text-gray-500 mb-4">{{ (currentModal.type === 'experience' ? 'Chez ' : '') + currentEntity.entity }}</h3>
+              <h3 v-if="(currentEducation || currentExperience)?.entity" class="text-xl text-gray-500 mb-4">{{ (currentExperience ? 'Chez ' : '') + (currentEducation || currentExperience)?.entity }}</h3>
               <p class="text-gray-600 dark:text-gray-300 text-justify">{{ currentEntity.description }}</p>
               
               <div v-if="currentEntity.longDescription" class="mt-3">
@@ -123,7 +144,7 @@ const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/componen
                     <div 
                       class="mt-0 p-5 pt-2 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-md whitespace-pre-line text-justify markdown-container"
                       v-html="currentEntity.longDescription"
-                    ></div>
+                    />
                   </div>  
                 </div>
               </div>
@@ -153,18 +174,19 @@ const ToolsMasteryIndexComponent = defineAsyncComponent(() => import('@/componen
               </div>
             </div>
 
-            <div v-if="currentEntity.github || currentEntity.website" class="flex gap-4 mb-8">
-              <a v-if="currentEntity.website" :href="currentEntity.website?.label ? currentEntity.website.url : currentEntity.website" target="_blank" class="px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium hover:bg-emerald-500 transition-colors">{{currentEntity.website?.label ? currentEntity.website.label : 'Voir le site' }}</a>
-              <a v-if="currentEntity.github" 
-              :href="currentEntity.github" 
+            <div v-if="(currentExperience || currentProject)?.github || currentEntity.website" class="flex gap-4 mb-8">
+              <a v-if="currentEntity.website" :href="(currentEntity.website as Website)?.label ? (currentEntity.website as Website).url : (currentEntity.website as string)" target="_blank" class="px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium hover:bg-emerald-500 transition-colors">{{(currentEntity.website as Website)?.label ? (currentEntity.website as Website).label : 'Voir le site' }}</a>
+              <a 
+              v-if="(currentExperience || currentProject)?.github" 
+              :href="(currentExperience || currentProject)?.github" 
               target="_blank" 
               class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors" 
-              :style="currentEntity.github === 'privé' ? 'pointer-events: none;' : ''"
-              >GitHub {{currentEntity.github === 'privé' ? 'privé' : ''}}</a>
+              :style="(currentExperience || currentProject)?.github === 'privé' ? 'pointer-events: none;' : ''"
+              >GitHub {{(currentExperience || currentProject)?.github === 'privé' ? 'privé' : ''}}</a>
             </div>
 
             <div class="mt-8 space-y-6">
-              <div v-if="currentEntity.tools?.length">
+              <div v-if="currentEntity.tools?.length || currentEducation?.id === 'formation-perso'">
                 <h2 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Outils sollicités & notions <NuxtIcon name="i-lucide-circle-help" class="size-4" title="- Cliquez sur l'outil de votre choix pour en savoir plus sur ma maîtrise actuelle.&#010;- Les notions visibles ci-dessous sont celles solicitées par moi-même dans le cadre du projet, de la formation ou de l'expérience." /></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div v-for="t in currentEntity.tools" :key="t.id" class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-100 dark:border-gray-700 flex flex-col">

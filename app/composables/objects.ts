@@ -37,13 +37,13 @@ export const MASTERY_LEVEL_DESC = [
 
 
 export interface Concept {
-    id: ConceptId,
+    id: string,
     name: string,
     description: string
 }
 
 export interface Skill {
-  id: SkillId,
+  id: string,
   title: string,
   description: string
 }
@@ -55,7 +55,7 @@ export interface SkillIntegration {
 }
 
 export interface Education {
-  id: EducationId,
+  id: string,
   title: string,
   description: string,
   entity: string, 
@@ -73,10 +73,10 @@ export interface Education {
 }
 
 export interface Project {
-  id: ProjectId,
+  id: string,
   title: string,
   context: string,
-  educationId: EducationId,
+  educationId: string,
   startDateTimesTamp: number,
   description: string,
   longDescription?: string,
@@ -91,18 +91,19 @@ export interface Project {
 }
 
 export interface ProjectIntegration {
-  id: ProjectId,
-  description: string, 
+  id: string,
+  description?: string, 
 }
 
 export interface Experience {
-  id: ExperienceId,
+  id: string,
   title: string,
   entity: string,
+  educationId: EducationId,
   date: string,
   github: string,
   startDateTimesTamp: number,
-  endDateTimestamp: number,
+  endDateTimestamp?: number,
   description: string,
   competencies: SkillIntegration[],
   tools: ToolIntegration[],
@@ -114,7 +115,7 @@ export interface Experience {
 }
 
 export interface Tool {
-  id: ToolId,
+  id: string,
   name: string,
   icon: string,
   realIcon?: string,
@@ -142,7 +143,7 @@ export interface Website {
 }
 
 // --- NOTIONS (Nouveau concept indépendant) ---
-export const CONCEPTS: {[conceptId: string]: Concept} = {
+export const CONCEPTS = {
   // Notions générales & transverses
   'poo': { id: 'poo', name: 'Programmation Orientée Objet (POO)', description: `Paradigme de programmation basé sur le concept d'objets contenant des données et des méthodes.` },
   'complexite': { id: 'complexite', name: 'Complexité Algorithmique', description: `Évaluation des performances et de l'efficacité mathématique des algorithmes.` },
@@ -296,26 +297,26 @@ export const CONCEPTS: {[conceptId: string]: Concept} = {
   'nix-options-vars': { id: 'nix-options-vars', name: "Variables d'options Nix", description: 'Gestion de variables en Nix.'},
   'mounts': { id: 'mounts', name: 'Montage de partitions', description: "Montage de paritions sur Linux/Debian et NixOs."}
 
-} 
+} satisfies Record<string, Concept>
 
 // --- COMPÉTENCES (Renommées) ---
-export const COMPETENCES: {[skillId: string]: Skill} = {
+export const COMPETENCES = {
   'realiser-app': { id: 'realiser-app', title: "Réaliser un développement d'application", description: 'Développer des applications informatiques complexes.' },
   'optimiser': { id: 'optimiser', title: 'Optimiser des applications', description: 'Améliorer les performances et l\'algorithmique.' },
   'administrer': { id: 'administrer', title: "Administrer des systèmes", description: 'Configurer systèmes et réseaux.' },
   'gerer-donnees': { id: 'gerer-donnees', title: 'Gérer des données', description: 'Concevoir et exploiter des bases de données.' },
   'conduire-projet': { id: 'conduire-projet', title: 'Conduire un projet', description: 'Piloter un projet informatique.' },
   'collaborer': { id: 'collaborer', title: 'Travailler en équipe', description: 'Travailler en équipe de manière agile.' }
-}
+} satisfies Record<string, Skill>
 
 // --- FORMATIONS (Ajout de "formation-perso") ---
-export const EDUCATIONS: {[educationId: string]: Education} = {
+export const EDUCATIONS = {
   'formation-perso': { 
     id: 'formation-perso', title: 'Formation Personnelle (Autodidacte)', entity: 'Projets Personnels', context: 'Autodidacte', 
     description: 'Apprentissage en autonomie guidé par la curiosité et la réalisation de projets concrets.', 
     contentPath: '/formations/formation-perso.md',
-    competencies: [], tools: [], 
-    projects: [],
+    competencies: [],  tools: [], 
+    projects: [] as ProjectIntegration[],
   },
   'but-info': { 
     id: 'but-info', title: 'BUT Informatique', entity: 'Univ. Sorbonne Paris-Nord', context: 'Formation', 
@@ -396,6 +397,7 @@ export const EDUCATIONS: {[educationId: string]: Education} = {
       { id: 'conduire-projet', description: "Cours de gestion de projets, de management SI & réalisaion de toutes les étapes de projets.",  },
       { id: 'collaborer', description: "Multitude de travaux en groupe pour des projets ou pour des ressources transversales.",  },
     ], 
+    projects: [] as ProjectIntegration[],
     
   },
   'bac': { 
@@ -404,9 +406,9 @@ export const EDUCATIONS: {[educationId: string]: Education} = {
     description: 'Apprentissage de la méthode scientifique en sciences et vie de la terre, bons résultats en mathématiques, certification PIX', 
     competencies: [], tools: [], projects: []
   }
-}
+} satisfies Record<string, Education>
 // --- PROJETS ---
-export const PROJECTS: {[projectId: string]: Project} = {
+export const PROJECTS = {
   'uno-disc': { 
     id: 'uno-disc', title: 'Jeu de UNO sur Discord (Non officiel)', context: 'Projet Perso', educationId: 'formation-perso', startDateTimesTamp: 1648219351000,
     description: 'Agent logiciel très complet sur la messagerie Discord pour jouer au UNO. Présent sur +1800 serveurs, +128 000 membres.', 
@@ -613,7 +615,16 @@ export const PROJECTS: {[projectId: string]: Project} = {
     ],
 
   }
-}
+} satisfies Record<string, Project>
+
+export const PROJECT_VALUES = Object.values(PROJECTS);
+EDUCATIONS['formation-perso'].projects.concat(PROJECT_VALUES.filter((project) => project.educationId === EDUCATIONS['formation-perso']?.id).map((project: Project) => ({id: project.id})));
+EDUCATIONS['but-info'].projects.concat(PROJECT_VALUES.filter((project) => project.educationId === EDUCATIONS['but-info']?.id).map((project: Project) => ({id: project.id as ProjectId})));
+
+EDUCATIONS['formation-perso'].tools.concat(EDUCATIONS['formation-perso'].tools);
+EDUCATIONS['formation-perso'].competencies.concat(EDUCATIONS['formation-perso'].competencies);
+
+
 
 // --- EXPÉRIENCES ---
 export const EXPERIENCES: {[experiencId: string]: Experience} = {
@@ -621,6 +632,7 @@ export const EXPERIENCES: {[experiencId: string]: Experience} = {
     id: 'stage-mf', title: 'Stage développeur PHP front/back', entity: 'Market Factory', date: 'Janv 2026 - Mars 2026', github: 'privé',
     website: { label: "Voir le site vitrine de l'entreprise", url: 'https://market-factory.fr/'},
     startDateTimesTamp: 1769414400,
+    educationId: 'formation-perso',
     endDateTimestamp: 1774022400,
     description: "Amélioration, correction et refonte du site back-office", 
     longDescription: renderMarkdown(stageMfContent), 
@@ -657,10 +669,10 @@ export const EXPERIENCES: {[experiencId: string]: Experience} = {
     
   },
   'draftbot': { // TODO remplacer year par startDateTimesTamp ou un truc du genre comme le reste
-    id: 'draftbot', title: 'Support utilisateur bénévole', entity: 'DraftBot', year: 2019, date: 'Depuis 2019', 
-    website: 'https://draftbot.fr', 
+    id: 'draftbot', title: 'Support utilisateur bénévole', entity: 'DraftBot', date: 'Depuis 2019',
+    website: 'https://draftbot.fr', github: '', startDateTimesTamp: 1567355460,
+    educationId: 'formation-perso',
     description: "Sous le pseudonyme Nostres, j'ai pu réaliser Tests, identification et résolution de problèmes, rédactions, modération et résolution de conflits. Agent présent sur +1M de serveurs.", 
-    contentPath: '/experiences/draftbot.md',
     longDescription: renderMarkdown(`Mes missions au sein de [l'équipe DraftBot](https://draftbot.fr/equipe) incluaient la réalisation de tests, l'identification et la résolution de problèmes en direct avec la communauté. J'ai également identifié les besoins des utilisateurs en apportant des solutions cohérentes. En reconnaissance à ma contribution, les fondateurs m'ont rédigé une lettre de recommandation que je peux vous partager sur demande par mail.`), 
     competencies: [
       { id: 'collaborer', description: "Support aux développeurs.",  }
@@ -679,10 +691,8 @@ export const EXPERIENCES: {[experiencId: string]: Experience} = {
       { id: 'esprit-critique', description: "Recul derrière les choix en modération, sur les choses à dire ou non, sur les réactions à avoir, les sanctions adéquates etc..."},
       { id: 'mediation', description: "Dans la modération depuis août 2021, visant à régler les conflits et à faire respecter un règlement ainsi que le respect dans les canaux de discussions."}
     ],
-
-    
   }
-}
+} satisfies Record<string, Experience>
 
 const currentDate = Date.now();
 
@@ -712,7 +722,7 @@ export const TOOLS: {[toolId: string]: Tool} = {
   composer: { id: 'composer', name: 'Composer', icon: 'Cp', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts'], compIds: ['administrer'] }, // Concepts partagés avec Node (packages)
 
   // Écosystème Java 
-  java: { id: 'java', name: 'Java', icon: 'J', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['mc-plugin'].startDateTimesTamp, currentDate), conceptIds: ['poo', 'exceptions', 'poly', 'java-uml', 'scopes', 'java-arraylist', 'loops', 'switch', 'enums', 'java-scanner', 'decorators'], compIds: ['realiser-app'] },
+  java: { id: 'java', name: 'Java', icon: 'J', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['mc-plugin']?.startDateTimesTamp, currentDate), conceptIds: ['poo', 'exceptions', 'poly', 'java-uml', 'scopes', 'java-arraylist', 'loops', 'switch', 'enums', 'java-scanner', 'decorators'], compIds: ['realiser-app'] },
   spigot: { id: 'spigot', name: 'Spigot MC', icon: 'Spi', realIcon: 'simple-icons:spigotmc', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['mc-plugin'].startDateTimesTamp, currentDate), conceptIds: ['perms', 'spigot-yaml', 'spigot-events', 'events', 'spigot-gui', 'spigot-tools', 'cmds', 'spigot-mod', 'spigot-tab', 'zone', 'spigot-groups'], compIds: ['realiser-app', 'optimiser', 'administrer'] },
   junit: { id: 'junit', name: 'JUnit 4 & 5', icon: 'Ju', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S2.startTimestamp, currentDate), conceptIds: ['tests-unitaires', 'tests-fonctionnels'], compIds: ['realiser-app', 'optimiser']},
   jacoco: { id: 'jacoco', name: 'JaCoCo', icon: 'JaCo', realIcon: 'devicon:java', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S2.startTimestamp, currentDate), conceptIds: ['couverture-tests'], compIds: ['realiser-app', 'optimiser']},
@@ -781,7 +791,6 @@ export const EXPERIENCE_IDS = Object.keys(EXPERIENCES) as ExperienceId[];
 export const EDUCATION_IDS = Object.keys(EDUCATIONS) as EducationId[];
 
 export const TOOL_VALUES = Object.values(TOOLS).sort((tool1, tool2) => tool2.masteryIndex - tool1.masteryIndex);
-export const PROJECT_VALUES = Object.values(PROJECTS);
 export const EXPERIENCE_VALUES = Object.values(EXPERIENCES);
 export const EDUCATION_VALUES = Object.values(EDUCATIONS);
 
@@ -823,7 +832,7 @@ export const SEARCH_GROUPS = ref<CommandPaletteGroup[]>([
   {
     id: 'projects',
     label: 'Projets & SAÉ',
-    items: PROJECT_VALUES.map((project) => ({ 
+    items: PROJECT_VALUES.map((project: Project) => ({ 
       label: project.title,
       suffix: project.context,
       icon: project.icon,
@@ -833,14 +842,14 @@ export const SEARCH_GROUPS = ref<CommandPaletteGroup[]>([
       type: 'Projets',
       description: project.description,
       onSelect() {
-          openModal({ type: 'project', id: project.id })
+          openModal({ type: 'project', id: project.id as ProjectId })
         }
      }))
   },    
   {
     id: 'education',
     label: 'Formations et diplômes',
-    items: EDUCATION_VALUES.map((education) => ({ 
+    items: EDUCATION_VALUES.map((education: Education) => ({ 
       label: education.title,
       prefix: education.context,
       suffix: education.entity,
@@ -851,7 +860,7 @@ export const SEARCH_GROUPS = ref<CommandPaletteGroup[]>([
       type: 'Formations et diplômes',
       description: education.description,
       onSelect() {
-          openModal({ type: 'education', id: education.id })
+          openModal({ type: 'education', id: education.id as EducationId })
         }
     }))
   },

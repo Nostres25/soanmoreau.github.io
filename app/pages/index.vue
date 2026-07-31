@@ -119,7 +119,7 @@
             <!-- Utilisation de la fonction dynamique pour les outils -->
             <div class="flex flex-wrap gap-2 mb-4">
               <button 
-                v-for="tool in getToolsForCompetence(comp.id, 15)" 
+                v-for="tool in getToolsForCompetence(comp.id as SkillId, 15)" 
                 :key="tool.id" 
                 class="px-2 py-1 text-xs font-medium bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded hover:bg-emerald-100 dark:hover:bg-emerald-800 transition-colors cursor-pointer"
                 @click="openModal({ type: 'tool', id: tool.id as ToolId })"              >
@@ -135,7 +135,7 @@
             <!-- Utilisation de la fonction dynamique pour les projets -->
             <ul class="space-y-2 mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
               <li 
-                v-for="projet in getProjectsForCompetence(comp.id)" 
+                v-for="projet in getProjectsForCompetence(comp.id as SkillId)" 
                 :key="projet.id" 
                 class="text-sm text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 cursor-pointer transition-colors flex items-center gap-2"
                 @click="openModal({ type: 'project', id: projet.id as ProjectId })" 
@@ -240,17 +240,18 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { COMPETENCES, TOOLS, PROJECTS, TIMELINE_DATA, SOFT_SKILLS } from '~/composables/objects'
-import { useModalManager } from '~/composables/usePortfolio'
+import { COMPETENCES, TOOLS, PROJECT_VALUES, TIMELINE_DATA, SOFT_SKILLS  } from '~/composables/objects'
+import type {ProjectId, SkillId, ToolId} from '~/composables/objects';
+import { useModalManager, getEntitiesForSoftSkill, getToolsForCompetence, getProjectsForCompetence } from '~/composables/usePortfolio'
 
 const { openModal } = useModalManager()
 
-// NOUVEAU : Gestion de l'état "déroulé" pour chaque compétence
-const expandedSkills = ref<Record<string, boolean>>({})
+//  Gestion de l'état "déroulé" pour chaque compétence
+// const expandedSkills = ref<Record<string, boolean>>({})
 
-const toggleSkill = (id: string) => {
-  expandedSkills.value[id] = !expandedSkills.value[id]
-}
+// const toggleSkill = (id: string) => {
+//   expandedSkills.value[id] = !expandedSkills.value[id]
+// }
 
 // Contrôle du carrousel
 const carouselRef = ref<HTMLElement | null>(null)
@@ -279,8 +280,8 @@ const getMonthIndex = (str: string) => {
 const timelineItems = computed(() => {
   return TIMELINE_DATA.map((item, index) => {
     const parts = item.startDate.split(' ')
-    const m = parts.length > 1 ? getMonthIndex(parts[0]) : 0
-    const y = parseInt(parts.length > 1 ? parts[1] : parts[0]) || new Date().getFullYear()
+    const m = parts.length > 1 ? getMonthIndex(parts[0] as string) : 0
+    const y = parseInt((parts.length > 1 ? parts[1] : parts[0]) as string) || new Date().getFullYear()
     const start = (y - timelineStartYear) * 12 + m
     
     const left = start * timelineScale
