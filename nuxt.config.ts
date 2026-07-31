@@ -27,6 +27,10 @@ export default defineNuxtConfig({
       ],
       title: 'Soan MOREAU - Portfolio - Informatique',
       charset: 'UTF-8',     
+      meta : [
+        { name: 'robots', content: "noindex" }
+
+      ]
     },
   },
 
