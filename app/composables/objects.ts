@@ -317,7 +317,7 @@ export const EDUCATIONS = {
     id: 'formation-perso', title: 'Formation Personnelle (Autodidacte)', entity: 'Projets Personnels', context: 'Autodidacte', 
     description: 'Apprentissage en autonomie guidé par la curiosité et la réalisation de projets concrets.', 
     contentPath: '/formations/formation-perso.md',
-    competencies: [],  tools: [], 
+    competencies: [] as SkillIntegration[],  tools: [] as ToolIntegration[], 
     projects: [] as ProjectIntegration[],
   },
   'but-info': { 
@@ -390,7 +390,7 @@ export const EDUCATIONS = {
       { id: 'node-fs', description: 'Exercices sur le module fs/promise', conceptIds: ['fs']},
       { id: 'express', description: "Exercices sur le fonctionnement de base et création de points de terminaisons d'API", conceptIds: ['api-integrations', 'api-usage']},
       { id: 'vuejs', description: 'Exercices en profondeur sur le fonctionnement de base', conceptIds: ['reactive-values']},
-    ],
+    ] as ToolIntegration[],
     competencies: [
       { id: 'realiser-app', description: "Réalisation d'applications et formation orientée développement.",  },
       { id: 'optimiser', description: "Cours sur les optimisations, la sécurité et l'architecture logicielle.",  },
@@ -398,7 +398,7 @@ export const EDUCATIONS = {
       { id: 'gerer-donnees', description: "Travail sur la science de données avec de l'analyse de données, des bases de données SQL (SGBDR) et du traitement algorithmique des données.",  },
       { id: 'conduire-projet', description: "Cours de gestion de projets, de management SI & réalisaion de toutes les étapes de projets.",  },
       { id: 'collaborer', description: "Multitude de travaux en groupe pour des projets ou pour des ressources transversales.",  },
-    ], 
+    ] as SkillIntegration[], 
     projects: [] as ProjectIntegration[],
     
   },
@@ -551,7 +551,7 @@ export const PROJECTS = {
     id: 'portfolio-web',
     title: 'Site portfolio',
     context: 'BUT',
-    educationId: 'but-info', 
+    educationId: 'formation-perso', 
     github: 'https://github.com/Nostres25/soanmoreau.github.io',
     website: 'https://soanmoreau.vercel.app/',
     startDateTimesTamp: 1781647200,
@@ -619,15 +619,6 @@ export const PROJECTS = {
 
   }
 } satisfies Record<string, Project>
-
-export const PROJECT_VALUES = Object.values(PROJECTS);
-EDUCATIONS['formation-perso'].projects.concat(PROJECT_VALUES.filter((project) => project.educationId === EDUCATIONS['formation-perso']?.id).map((project: Project) => ({id: project.id})));
-EDUCATIONS['but-info'].projects.concat(PROJECT_VALUES.filter((project) => project.educationId === EDUCATIONS['but-info']?.id).map((project: Project) => ({id: project.id as ProjectId})));
-
-EDUCATIONS['formation-perso'].tools.concat(EDUCATIONS['formation-perso'].tools);
-EDUCATIONS['formation-perso'].competencies.concat(EDUCATIONS['formation-perso'].competencies);
-
-
 
 // --- EXPÉRIENCES ---
 export const EXPERIENCES: {[experiencId: string]: Experience} = {
@@ -796,6 +787,50 @@ export const EDUCATION_IDS = Object.keys(EDUCATIONS) as EducationId[];
 export const TOOL_VALUES = Object.values(TOOLS).sort((tool1, tool2) => tool2.masteryIndex - tool1.masteryIndex);
 export const EXPERIENCE_VALUES = Object.values(EXPERIENCES);
 export const EDUCATION_VALUES = Object.values(EDUCATIONS);
+export const PROJECT_VALUES = Object.values(PROJECTS);
+
+
+const projectSearchItems = [];
+
+// Logic relations script 
+for (const project of PROJECT_VALUES as Project[]) {
+  if (project.educationId === EDUCATIONS['but-info']?.id) {
+    EDUCATIONS['but-info'].projects.push({id: project.id})
+  }
+
+  if (project.educationId === EDUCATIONS['formation-perso']?.id) {
+    EDUCATIONS['formation-perso'].projects.push({id: project.id})
+
+    for (const tool of project.tools) {
+      const toolIntegrationFound = EDUCATIONS['formation-perso'].tools.find((t) => tool.id === t.id);
+      if (toolIntegrationFound) {
+        toolIntegrationFound.conceptIds.concat(tool.conceptIds);
+      } else {
+          EDUCATIONS['formation-perso'].tools.push({id: tool.id, conceptIds: TOOLS[tool.id]?.conceptIds as ConceptId[], description: tool.description });
+      }
+    }
+
+    for (const academicSkill of project.competencies) {
+      if (!EDUCATIONS['formation-perso'].competencies.find((t) => academicSkill.id === t.id)) {
+          EDUCATIONS['formation-perso'].competencies.push({ id: academicSkill.id, description: academicSkill.description + ` - ${project.title}`});
+      }
+    } 
+  }
+
+  projectSearchItems.push({ 
+    label: project.title,
+    suffix: project.context,
+    icon: project.icon,
+    id: project.id,
+    tools: project.tools.map((tool) => TOOLS[tool.id]?.name).join(', '),
+    'academic-skills': project.competencies.map((skill) => COMPETENCES[skill.id]?.title).join(', '),
+    type: 'Projets',
+    description: project.description,
+    onSelect() {
+        openModal({ type: 'project', id: project.id as ProjectId })
+      }
+  });
+}
 
 const { openModal }= useModalManager()
 
@@ -835,19 +870,7 @@ export const SEARCH_GROUPS = ref<CommandPaletteGroup[]>([
   {
     id: 'projects',
     label: 'Projets & SAÉ',
-    items: PROJECT_VALUES.map((project: Project) => ({ 
-      label: project.title,
-      suffix: project.context,
-      icon: project.icon,
-      id: project.id,
-      tools: project.tools.map((tool) => TOOLS[tool.id]?.name).join(', '),
-      'academic-skills': project.competencies.map((skill) => COMPETENCES[skill.id]?.title).join(', '),
-      type: 'Projets',
-      description: project.description,
-      onSelect() {
-          openModal({ type: 'project', id: project.id as ProjectId })
-        }
-     }))
+    items: projectSearchItems,
   },    
   {
     id: 'education',
