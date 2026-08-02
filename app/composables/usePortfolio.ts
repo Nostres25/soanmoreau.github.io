@@ -1,7 +1,7 @@
 // composables/usePortfolio.ts
 import { ref, computed } from 'vue'
 import { TOOL_VALUES, PROJECT_VALUES, EXPERIENCE_VALUES, EDUCATION_VALUES  } from './objects'
-import type { COMPETENCES, TOOLS, PROJECTS, EXPERIENCES, ToolId, SkillId, ConceptId, ToolIntegration, Education, Project } from './objects';
+import type { ToolId, SkillId, ConceptId, ToolIntegration, Education, Project, ProjectId, ExperienceId, EducationId } from './objects';
 
 // --- MÉTHODES DYNAMIQUES DE RECHERCHE ---
 
@@ -64,7 +64,7 @@ export function getEntitiesForSoftSkill(softSkillId: string) {
 }
 
 // L'extension du type pour le Modal (mis à jour)
-export type ModalPayload = { type: 'tool', id: keyof typeof TOOLS } | { type: 'project', id: keyof typeof PROJECTS } | { type: 'competence', id: keyof typeof COMPETENCES } | { type: 'experience', id: keyof typeof EXPERIENCES } | { type: 'education', id: keyof typeof EDUCATIONS }
+export type ModalPayload = { type: 'tool', id: ToolId } | { type: 'project', id: ProjectId } | { type: 'competence', id: SkillId } | { type: 'experience', id: ExperienceId } | { type: 'education', id: EducationId }
 
 const modalStack = ref<ModalPayload[]>([])
 

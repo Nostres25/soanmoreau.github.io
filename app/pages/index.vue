@@ -240,8 +240,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { COMPETENCES, TOOLS, PROJECT_VALUES, TIMELINE_DATA, SOFT_SKILLS  } from '~/composables/objects'
-import type {ProjectId, SkillId, ToolId} from '~/composables/objects';
+import { COMPETENCES, TOOLS, PROJECT_VALUES, TIMELINE_DATA, SOFT_SKILLS  } from '@/composables/objects'
+import type { ProjectId, SkillId, ToolId } from '@/composables/objects';
 import { useModalManager, getEntitiesForSoftSkill, getToolsForCompetence, getProjectsForCompetence } from '~/composables/usePortfolio'
 
 const { openModal } = useModalManager()

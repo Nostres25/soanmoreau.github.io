@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SEARCH_GROUPS } from '../composables/objects'
+import { SEARCH_GROUPS } from '@/composables/objects'
 
 const colorMode = useColorMode()
 

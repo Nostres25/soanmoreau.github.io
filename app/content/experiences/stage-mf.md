@@ -2,13 +2,28 @@
 
 ## Contexte
 J'ai réalisé un stage au sein de l'entreprise Market Factory pour ma deuxième année d'études en BUT Informatiuqe à l'IUT de l'université Surbonne Parisd Nord.
-Ce stage a duré 8 semaines mais, malgré cette courte durée j'ai pu réaliser un bon nombre de choses qui ont été appréciées par le directeur de l'entreprise, Stephane PACHIS. J'ai d'ailleurs reçu la proposition de continuer dans cette entreprise en alternance l'année qui suit mais j'ai refusé car le poste proposé ne correspond pas vraiment à ce que je recherche.  
+Ce stage a duré 8 semaines mais, malgré cette courte durée j'ai pu réaliser un bon nombre de choses qui ont été appréciées par le directeur de l'entreprise, Stephane PACHIS. Au ponit que la proposition de continuer dans cette entreprise en alternance l'année qui suit m'a été faite. Mais j'ai refusé car le poste proposé ne correspond pas vraiment à ce que je recherche.  
 
-J'y ai été confronté à une base de code existante, m'apprenant l'importance cruciale de la maintenabilité et de la sécurité. (j'ai rien appris je savais déjà que c'était important)
+## Mes missions
+J'ai été recruté en tant que développeur PHP front-end et back-end et mes missions étaient principalement liées au site back-office de l'entreprise qui sert à la gestion des de commandes et plus. Ce site est un projet qui a été maintenu par de nombreuses personnes avant moi, y compris des stagiaires. En terme de missions concrètes j'ai pu réaliser :
+- Optimisation du chargement de la page de gestion des commandes
+- Développement d'une pagination pour la page de commandes
+- Affichage des états des colis à l'aide de l'API laposte.fr
+- Mise à jour des stocks du fournisseur TopTex avec leur API
+- Correction de dysfonctionnements
+- Refonte du projet du site back-office (voir les détails plus bas)
+
+## Failles de sécurité
+
+## Refonte
 
 **je peux fournir mon rapport de stage si demandé par mail**
 
 ## Qu'ai-je appris ? 
+J'y ai été confronté à une base de code existante en PHP sans framework, sans MVC, cela m'a permi d'en apprendre beaucoup sur le PHP et son fonctionnement, sur les problématiques liées au langage, sur le CMS Prestashop utilisé sur le projet, sur les API de gestion des stocks etc... 
+
+ que j'ai pu améliorer, corriger et surtout totalement retravaillé pour la rendre plus clair, plus pratique à entretenir, plus évolutive et mieux optimisé.
+
 J'ai acquis une solide méthodologie dans l'audit de code, en identifiant et en corrigeant des failles de sécurité. J'ai également compris que le développement ne s'arrête pas au code : j'ai pris l'initiative de rédiger une documentation complète et d'intégrer de nouveaux outils à la stack technique pour faciliter le travail futur de l'équipe.
 
 ## Comment le démontrer ? 
