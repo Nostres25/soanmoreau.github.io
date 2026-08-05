@@ -1,0 +1,22 @@
+## Introduction
+Au départ il s'agit d'un projet noté en BUT Informatique qui sert également à nous vendre dans le monde professionnel. 
+
+## Réflexion : Pourquoi utiliser Nuxt.js
+Ayant travaillé sur PHP avec des framework comme Laravel ou sans et connaissant de nom les framework web javascript, j'ai choisi Nuxt.js pour mon portfolio afin de découvrir ce nouveau framework et le développement web javascript en général. Et ce dans un context de recherche des meilleurs outils & langages à utiliser pour mes projets.
+
+## Réflexion : Pourquoi des modals ?
+Mon approche a été de répondre intelligeamment aux exigences académiques derrière ce projet. En effet, j'ai d'abord cherché un moyen de résumer les informations me concernant tout en permettant d'obtenir plus de détails en un clique et sans perdre le lecteur dans sa navigation avec pleins de redirections. C'est pour cela que j'ai choisi d'utiliser les modals (ou popup). 
+
+## Réflexion : Pourquoi cette représentation des compétences ? 
+Par ailleurs j'ai aussi réfléchi à une manière de représenter mes compétences qui convient aux compétences académique mais avec les outils maîtrisés, les notions maîtrisées dans chaque outils, les notions et outils solicités pour chaque projet etc... et c'est pour cela que j'ai représenté toutes ces informations logiquement sous la forme d'objets pour pouvoir les afficher à plusieurs reprises sur le site et effectuer des opérations logiques dessus. 
+
+## Réflexion : Pourquoi des descriptions longues en markdown personnalisé ?
+Étant quelqu'un qui aime bien préciser et voyant un intérêt d'exprimer mes visions en profondeur dans mon portfolio, j'ai cherché le meilleur moyen de rédiger de longs textes sans écrire directement dans le code et tout en préservant une certaine mise en forme qui dépend du texte lui-même. C'est pour cela que j'ai cherché à écrire les descriptions longues des projets, experiences etc... en markdown. 
+Concernant l'affichage du markdown, avec Nuxt il existe des outils tels que `@nuxt/content` pour afficher du contenu markdown dans des vues et bien plus. Le problème étant que ce module est bien trop complet et volumineux pour l'usage que je souhaite en faire. C'est pourquoi je parse mon markdown chargé depuis des fichiers .md dans des vues via de simples fonctions `.replace()` qui est une méthode très simplifiée mais adaptée à ce projet.
+
+## Réflexion : Système de recherche (à venir) 
+Parmi mes toutes premières idées m'est venu un système de recherche permettant de rechercher des outils et des notions pour trouver **rapidement** si je maîtrise ou non ces outils ou notions, à quel point, grâce à quelle formation je les ai apprises et dans quels projets que les ai solicités.
+
+## Comment fonctionne le système d'évaluation des compétences (à venir) ?
+J'ai aussi cherché à mettre en place un système de confiance pour l'évaluation de mes compétences techniques pour chaque outil afin de donner une visualisation claire tout en étant prouvée et vérifiable par son fonctionnement : notions définies en fonction des documentations de chaque outils ; calcul et comparaison de la progression en fonction du nombre de notions maîtrisées en plus.
+Cela s'ajoute à une auto évaluation appelée "niveau de maîtrise" qui elle est beaucoup plus subjective.

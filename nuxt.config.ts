@@ -11,6 +11,33 @@ export default defineNuxtConfig({
     }
   },
 
+  routeRules: { 
+    '/': { prerender: true }
+  },
+
+  nitro: {
+    preset: 'vercel',
+    prerender: {
+      crawlLinks: true,
+      routes: ['/']
+    }
+  },
+  ssr: true,
+
+  app: {
+    head: {
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ],
+      title: 'Soan MOREAU - Portfolio - Informatique',
+      charset: 'UTF-8',     
+      meta : [
+        { name: 'robots', content: "noindex" }
+
+      ]
+    },
+  },
+
   debug: true,
   imports : {
       dirs: [
@@ -19,17 +46,30 @@ export default defineNuxtConfig({
       ],
   },
 
+  // icon: {
+  //   customCollections: [
+  //       {
+  //         prefix: 'custom-icons',
+  //         dir: 'images/icons',
+  //         recursive: true,
+  //       },
+  //     ],
+  // },
+
   modules: [
     '@nuxtjs/color-mode',
-    '@nuxt/content',
     '@nuxt/eslint',
-    '@nuxt/image',
     '@nuxt/test-utils',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@vercel/analytics',
+    '@vercel/speed-insights'
   ],
 
   vite: {
     plugins: [tailwindcss()],
+    assetsInclude: [
+      "~/content/**/*.md"
+    ],
   },
 
   colorMode: {

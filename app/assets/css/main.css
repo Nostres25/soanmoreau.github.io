@@ -1,2 +1,37 @@
 @import "@nuxt/ui";
 @import "tailwindcss";
+
+
+.markdown-container details {
+  @media (prefers-reduced-motion: no-preference) {
+    interpolate-size: allow-keywords;
+  }
+
+  &::details-content {
+    opacity: 0;
+    block-size: 0;
+    overflow-y: clip;
+    transition: content-visibility 1s allow-discrete, opacity 1s, block-size 1s;
+  }
+
+  &[open]::details-content {
+    opacity: 1;
+    block-size: auto;
+    border-left: 2px outset;
+    padding-left: 1em;
+    margin-left: 0.2em;
+  }
+}
+
+details>summary {
+  cursor: pointer;
+}
+/* .markdown-container details:open {
+    
+    border-left: 2px outset;
+    padding-left: 10px;
+    transition:
+        open 1s,
+        box-sizing 1s,
+        padding-left 1s,
+}  */
