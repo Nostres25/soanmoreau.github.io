@@ -141,11 +141,10 @@
               <li 
                 v-for="projet in getProjectsForCompetence(comp.id as SkillId)" 
                 :key="projet.id" 
-                class="text-sm text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 cursor-pointer transition-colors flex items-center gap-2"
-                @click="openModal({ type: 'project', id: projet.id as ProjectId })" 
+                class="text-sm text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 cursor-pointer transition-colors flex items-center gap-2 list-disc"
               >
                 <span class="w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full"/>
-                {{ projet.title }}
+                <button @click="openModal({ type: 'project', id: projet.id as ProjectId })" >{{ projet.title }}</button>
               </li>
             </ul>
           </div>
