@@ -824,6 +824,7 @@ for (const project of PROJECT_VALUES as Project[]) {
     id: project.id,
     tools: project.tools.map((tool) => TOOLS[tool.id]?.name).join(', '),
     'academic-skills': project.competencies.map((skill) => COMPETENCES[skill.id]?.title).join(', '),
+    concepts: project.tools.map((tool) => tool.conceptIds.map((concept) => CONCEPTS[concept].name).join(', ')).join(', '),
     type: 'Projets',
     description: project.description,
     onSelect() {
@@ -844,7 +845,7 @@ export const SEARCH_GROUPS = ref<CommandPaletteGroup[]>([
       icon: tool.realIcon || `devicon:${tool.id}`,
       id: tool.id,
       type: 'Compétences techniques / Hard skills',
-      description: tool.conceptIds.map((concept) => CONCEPTS[concept].name).join(', '),
+      description: getConceptsForTool(tool.id).map((concept) => CONCEPTS[concept].name).join(', '),
       onSelect() {
           openModal({ type: 'tool', id: tool.id })
         }
@@ -859,6 +860,7 @@ export const SEARCH_GROUPS = ref<CommandPaletteGroup[]>([
       icon: experience.icon,
       id: experience.id,
       tools: experience.tools.map((tool) => TOOLS[tool.id]?.name).join(', '),
+      concepts: experience.tools.map((tool) => tool.conceptIds.map((concept) => CONCEPTS[concept].name).join(', ')).join(', '),
       'academic-skills': experience.competencies.map((skill) => COMPETENCES[skill.id]?.title).join(', '),
       type: 'Expériences professionnelle',
       description: experience.description,
@@ -882,6 +884,7 @@ export const SEARCH_GROUPS = ref<CommandPaletteGroup[]>([
       icon: education.icon,
       id: education.id,
       tools: education.tools.map((tool) => TOOLS[tool.id]?.name).join(', '),
+      concepts: education.tools.map((tool) => tool.conceptIds.map((concept) => CONCEPTS[concept].name).join(', ')).join(', '),
       'academic-skills': education.competencies.map((skill) => { console.log('blabla skill'); return COMPETENCES[skill.id]?.title }).join(', '),
       type: 'Formations et diplômes',
       description: education.description,
@@ -901,5 +904,25 @@ export const SEARCH_GROUPS = ref<CommandPaletteGroup[]>([
   //    }))
   // }
 ])
+
+export function getConceptsForTool(toolId: string) {
+    let results: ConceptId[] = [];
+
+  PROJECT_VALUES.forEach((p: Project) => {
+    const toolFound = p?.tools?.find((tool) => tool.id === toolId);
+    if (toolFound) results = [...new Set([...results, ...toolFound.conceptIds])];
+  });
+  EXPERIENCE_VALUES.forEach(e => {
+    const toolFound = e?.tools?.find((tool) => tool.id === toolId);
+    if (toolFound) results = [...new Set([...results, ...toolFound.conceptIds])]; 
+  });
+  EDUCATION_VALUES.forEach((e: Education) => {
+    const toolFound = e?.tools?.find((tool) => tool.id === toolId);
+    if (toolFound) results = [...new Set([...results, ...toolFound.conceptIds])];
+  });
+
+  return results;
+
+}
 
 console.log(`blabla js chargé en ${Date.now() - startDate}ms`)

@@ -96,7 +96,7 @@ const LazyGlobalModal = defineAsyncComponent(() => import('@/components/GlobalMo
             fuseOptions: { 
               includeMatches: true,
               ignoreLocation: true,
-              keys: ['label', 'description', 'suffix', 'type', 'academic-skills', 'tools']
+              keys: ['label', 'description', 'suffix', 'concepts', 'type', 'academic-skills', 'tools']
             }
           }"
           placeholder="Chercher compétences, outils, notions, expériences, projets etc..." 
