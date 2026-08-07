@@ -9,10 +9,10 @@ const toggleColorMode = () => {
 
 const links = [
   { name: 'Accueil', path: '/' },
+  { name: 'Parcours', path: '/#parcours' },
   { name: 'Compétences', path: '/#competences' },
   { name: 'Projets', path: '/#projets' },
-  { name: 'Parcours', path: '/parcours' },
-  { name: 'Stage', path: '/parcours#stage' }
+  // { name: 'Stage', path: '/parcours#stage' }
 ]
 
 function onSelect() {

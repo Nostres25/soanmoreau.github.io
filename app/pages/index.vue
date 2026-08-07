@@ -89,11 +89,12 @@
 
           </div>
         </div>
-        <div class="mt-6 text-right md:pr-4">
+      
+        <!-- TODO renable when the "parcours" page is finished <div class="mt-6 text-right md:pr-4">
           <NuxtLink to="/parcours" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 hover:underline transition-all">
             En savoir plus sur mon parcours &rarr;
           </NuxtLink>
-        </div>
+        </div> -->
       </section>
 
       <hr class="border-gray-200 dark:border-gray-800/60">
@@ -149,12 +150,12 @@
             </ul>
           </div>
         </div>
-        <div class="mt-6 text-right">
+        <!-- TODO renable when the "parcours" page is finished<div class="mt-6 text-right">
           <NuxtLink to="/parcours#formation" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 hover:underline transition-all">
             Voir l'évolution des compétences au fil de la formation &rarr;
           </NuxtLink>
-        </div>
-        <div class="mb-6 mt-4">
+        </div> -->
+        <div class="mb-6 mt-12">
           <h3 class="text-xl font-bold flex items-center gap-2 mb-3">
             Compétences transversales
           </h3>
