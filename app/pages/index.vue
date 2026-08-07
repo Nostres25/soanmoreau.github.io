@@ -11,12 +11,15 @@
       <IndexHeader />
 
       <!-- FRISE CHRONOLOGIQUE À ÉCHELLE -->
-      <section class="mt-12 mb-16">
-        <div class="flex items-center justify-between mb-8">
-          <h2 id="parcours" class="text-2xl font-bold flex items-center gap-2">
+      <section id="parcours" class="mt-12 mb-16 scroll-mt-24">
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold flex items-center gap-2">
             <span class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"/>
             Mon Parcours
           </h2>
+          <p class="text-md lg:text-xl block text-gray-600 dark:text-gray-300 mb-4 font-medium">
+              Formations, experiences et projets personnnels
+          </p>
         </div>
 
         <div 
@@ -102,7 +105,7 @@
             Compétences clés
               <NuxtIcon name="i-lucide-circle-help" class="size-4" title="- Cliquez sur les outils pour observer les autres compétences techniques / notions maîtrisées ; les projets ; ainsi que le niveau de maîtrise, par outil.&#010;- Certains outils spécifiques à un outil peuvent être considérés comme notion car faisant partie du bagage de connaissances pour un outil" />
            </h2>
-          <p class="text-sm text-gray-600 dark:text-gray-400 text-justify"> 
+          <p class="text-lg text-gray-600 dark:text-gray-400 text-justify"> 
             Les compétences correspondent à celles définies par le programme national du B.U.T Informatique qui sont rattachées à des outils eux-mêmes rattachés à des notions.
           </p>
         </div>
@@ -195,11 +198,11 @@
         </div>
 
         <div class="relative -mx-6 px-6 md:mx-0 md:px-0">
-          <div ref="carouselRef" class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-2 hide-scrollbar">
+          <div ref="carouselRef" class="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-2">
             <article 
               v-for="projet in PROJECT_VALUES" 
               :key="projet.id" 
-              class="snap-start shrink-0 w-[85vw] md:w-100 flex flex-col bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-emerald-500 transition-colors shadow-sm hover:shadow-md"
+              class="snap-start shrink-0 w-80 md:w-100 flex flex-col bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-emerald-500 transition-colors shadow-sm hover:shadow-md"
             >
               <div class="flex justify-between items-start mb-4">
                 <h3 class="font-bold text-xl text-gray-900 dark:text-white pr-4">{{ projet.title }}</h3>
