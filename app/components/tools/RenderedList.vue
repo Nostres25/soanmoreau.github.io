@@ -25,7 +25,7 @@ const { openModal } = useModalManager();
           class="flex items-center gap-2 font-bold text-gray-900 dark:text-white hover:text-emerald-600 transition-colors cursor-pointer" 
           @click="openModal({ type: 'tool', id: t.id as any })"
         >
-          <span class="w-6 h-6 flex items-center justify-center bg-white dark:bg-gray-700 rounded shadow-sm text-xs">{{ TOOLS[t.id]?.icon }}</span>
+            <NuxtIcon :name="TOOLS[t.id]?.realIcon || `devicon:${TOOLS[t.id]?.id}`" class="w-6 h-6 flex items-center justify-center rounded"/>
           {{ TOOLS[t.id]?.name }}
         </button>
       </div>
