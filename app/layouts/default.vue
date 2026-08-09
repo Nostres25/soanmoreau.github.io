@@ -9,10 +9,10 @@ const toggleColorMode = () => {
 
 const links = [
   { name: 'Accueil', path: '/' },
+  { name: 'Parcours', path: '/#parcours' },
   { name: 'Compétences', path: '/#competences' },
   { name: 'Projets', path: '/#projets' },
-  { name: 'Parcours', path: '/parcours' },
-  { name: 'Stage', path: '/parcours#stage' }
+  // { name: 'Stage', path: '/parcours#stage' }
 ]
 
 function onSelect() {
@@ -96,7 +96,7 @@ const LazyGlobalModal = defineAsyncComponent(() => import('@/components/GlobalMo
             fuseOptions: { 
               includeMatches: true,
               ignoreLocation: true,
-              keys: ['label', 'description', 'suffix', 'type', 'academic-skills', 'tools']
+              keys: ['label', 'description', 'suffix', 'concepts', 'type', 'academic-skills', 'tools']
             }
           }"
           placeholder="Chercher compétences, outils, notions, expériences, projets etc..." 

@@ -89,9 +89,7 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
           
           <div v-if="currentModal?.type === 'tool' && toolData">
             <div class="flex items-center gap-4 mb-6">
-              <div class="w-16 h-16 shrink-0 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 flex items-center justify-center text-2xl font-bold text-emerald-500">
-                {{ toolData.icon }}
-              </div>
+              <NuxtIcon :name="toolData.realIcon || `devicon:${toolData.id}`" class="w-16 h-16 shrink-0 rounded-xl flex items-center justify-center"/>
               <div>
                 <h1 class="text-2xl font-bold">{{ toolData.name }}</h1>
                 
