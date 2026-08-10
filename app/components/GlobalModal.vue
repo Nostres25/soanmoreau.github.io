@@ -1,12 +1,26 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS, SOFT_SKILLS } from '@/composables/objects'
-import type { ProjectId, ExperienceId, EducationId, ToolId, Project, Education, Experience, Website } from '@/composables/objects';
+import type { ProjectId, ExperienceId, EducationId, ToolId, Project, Education, Experience, Website, ConceptId } from '@/composables/objects';
 import { useModalManager, getEntitiesForConcept, getProjectForTool } from '@/composables/usePortfolio'
 
 const { isOpen, currentModal, hasHistory, closeAll, goBack, openModal } = useModalManager()
 
 const toolData = computed(() => currentModal.value?.type === 'tool' ? TOOLS[currentModal.value.id as ToolId] : null);
+
+const route = useRoute();
+
+
+watch(
+  () => route.query.modal,
+  (modalId) => {
+    if (typeof modalId === 'string') {
+      const type = CONCEPTS[modalId as ConceptId] ? 'tool' : PROJECTS[modalId as ProjectId] ? 'project' : EDUCATIONS[modalId as EducationId] ? 'education' : EXPERIENCES[modalId as ExperienceId] ? 'experience' : null;
+      if (type) openModal({id: modalId, type})
+    }
+  },
+  { immediate: true }
+)
 
 const modalContent = ref<HTMLElement | null>(null)
 
