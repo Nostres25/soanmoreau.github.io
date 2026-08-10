@@ -76,7 +76,7 @@ const LazyGlobalModal = defineAsyncComponent(() => import('@/components/GlobalMo
             active-class="text-emerald-600 dark:text-emerald-400 xl:bg-emerald-50 xl:dark:bg-emerald-900/30 font-medium"
             :class="[ $route.path === link.path ? '' : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700/50' ]"
           >
-            <span class="w-6 h-6 rounded-lg flex items-center justify-center font-bold text-[10px] xl:text-xs group-hover:scale-110 transition-transform bg-gray-100 xl:bg-transparent dark:bg-gray-700 xl:dark:bg-transparent opacity-80" :class="$route.path === link.path ? 'bg-emerald-100 dark:bg-emerald-900/50' : ''">
+            <span class="w-6 h-4 rounded-lg flex items-center justify-center font-bold text-[10px] xl:text-xs group-hover:scale-110 transition-transform bg-gray-100 xl:bg-transparent dark:bg-gray-700 xl:dark:bg-transparent opacity-80" :class="$route.path === link.path ? 'bg-emerald-100 dark:bg-emerald-900/50' : ''">
               {{ link.name.charAt(0) }}
             </span> 
             <span class="text-[10px] xl:text-base">{{ link.name }}</span>

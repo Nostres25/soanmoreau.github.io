@@ -77,11 +77,11 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
 
 <template>
   <Transition name="fade">
-    <div v-if="isOpen" class="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6">
+    <div v-if="isOpen" class="fixed inset-0 z-100 flex items-center justify-center p-1 sm:p-4">
       <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" @click="closeAll"/>
 
       <div 
-        class="relative w-full max-h-[85vh] 2xl:max-h-[90vh] flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out"
+        class="relative w-full max-h-[82vh] 2xl:max-h-[90vh] flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out top-0"
         :class="currentModal?.type === 'education' || currentModal?.type === 'project' || currentModal?.type === 'experience' || isExpanded ? 'max-w-4xl' : 'max-w-2xl animate-slide-up'"
       >
         <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 shrink-0">
@@ -99,7 +99,7 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
           </button>
         </div>
 
-        <div ref="modalContent" class="p-6 overflow-y-auto">
+        <div ref="modalContent" class="p-3 md:p-6 overflow-y-auto">
           
           <div v-if="currentModal?.type === 'tool' && toolData">
             <div class="flex items-center gap-4 mb-6">
@@ -156,7 +156,7 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
                 <div class="grid transition-all duration-500 ease-in-out" :style="{ gridTemplateRows: isExpanded ? '1fr' : '0fr' }">
                   <div class="overflow-hidden">
                     <div 
-                      class="mt-0 p-5 pt-2 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-md whitespace-pre-line text-justify markdown-container"
+                      class="mt-0 p-3 md:p-5 pt-2 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-md whitespace-pre-line text-justify markdown-container"
                       v-html="currentEntity.longDescription"
                     />
                   </div>  
