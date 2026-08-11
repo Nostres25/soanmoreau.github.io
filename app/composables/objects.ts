@@ -165,7 +165,7 @@ export const CONCEPTS = {
   'db-join': { id: 'db-join', name: 'Jointures SQL', description: 'Utilisation de jointures internes ou externes dans les requêtes SQL'},
   'db-model': { id: 'db-model', name: 'Modélisation BD', description: `Conception de schémas relationnels (MCD/MLD) et intégrité des données.` },
   'json': {id: 'json', name: 'Utilisation de Json', description: 'Utilisation de la notation des objets javascript dans les langages de programmation et en SQL avec des SGBDR comme PostgreSQL'},
-  'normalisation': { id: 'normalisation', name: 'Normalisation (SQL)', description: 'Normes et conformtié aux standards des bases de données SQL'},
+  'normalisation': { id: 'normalisation', name: 'Normalisation (SQL)', description: 'Normes et conformité aux standards des bases de données SQL'},
   'indexes': { id: 'indexes', name: 'Indexes & B-Tree', description: "Fonctionnement et utilisation des indexes ainsi que de l'algorithme des arbres B plus précisément."},
   'db-analyse': { id: 'db-analyse', name: 'Analyse de requêtes SQL', description: "Analyse de l'exécution requêtes SQL avec la clause EXPLAIN [ANALYSE]"},
 
@@ -328,7 +328,7 @@ export const COMPETENCES = {
 export const EDUCATIONS = {
   'formation-perso': { 
     id: 'formation-perso', title: 'Formation Personnelle (Autodidacte)', entity: 'Projets Personnels', context: 'Autodidacte', 
-    description: 'Apprentissage en autonomie guidé par la curiosité et la réalisation de projets concrets.', 
+    description: "Apprentissage en autonomie guidé par mes projets personnels et ma curiosité. Toutes les compétences que vous trouverez ici sont celles que j'ai totalement ou en partie développées en autonomie et principalement avec des projets personnels.", 
     contentPath: '/formations/formation-perso.md',
     competencies: [] as SkillIntegration[],  tools: [] as ToolIntegration[], 
     projects: [] as ProjectIntegration[],
@@ -543,7 +543,9 @@ export const PROJECTS = {
       { id: 'sentry', description: "Suivi des erreurs en production.", conceptIds: ['bug-monitoring', 'sentry-debug'] },
       { id: 'git', description: "Gestion du code source.", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-cherry', 'git-merges', 'git-conflicts'] },
       { id: 'regex', description: 'Système de recherche dans les logs via Regex', conceptIds: [], longDescription: "D'abord utilisé pour contracter des conditions avec plusieurs `startsWith` en une seul regex, jusqu'à ce que je découvre en réalisant de tests que l'ensemble de startsWith était bien souvent plus rapide qu'un RegEx qui est un outil plutôt lourd à l'échelle de quelques milisecondes" },
-      { id: 'node-fs', description: "Écriture et sauvegarde de fichiers de logs", conceptIds: ['fs']}
+      { id: 'node-fs', description: "Écriture et sauvegarde de fichiers de logs", conceptIds: ['fs']},
+      { id: 'docker', description: "Environnement de développement et de production avec application conteneurisée", conceptIds: ['conteneur']}
+
     //   { id: 'githubactions', description: "Déploiement et tests continus.", conceptIds: [] }
     ], 
 
@@ -696,7 +698,7 @@ export const EXPERIENCES: {[experiencId: string]: Experience} = {
     startDateTimesTamp: 1769414400,
     educationId: 'formation-perso',
     endDateTimestamp: 1774022400,
-    description: "Amélioration, correction et refonte du site back-office", 
+    description: "Amélioration, correction et refonte du site back-office de l'entreprise.", 
     longDescription: renderMarkdown(stageMfContent), 
     
     competencies: [
@@ -804,7 +806,7 @@ export const TOOLS: {[toolId: string]: Tool} = {
   pandas: { id: 'pandas', name: 'Pandas lib', icon: 'Pan', masteryIndex: 1, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S2?.startTimestamp, currentDate), conceptIds: [], compIds: ['gerer-donnees']},
 
   // Base de données & Infrastructure
-  sql: { id: 'sql', name: 'SQL / SGBDR', icon: 'DB', realIcon: 'devicon:sqldeveloper', masteryIndex: 3, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S1.startTimestamp, currentDate), conceptIds: ['db-model', 'conditions', 'db-combining-queries', 'db-group-agg-order', 'db-views-cte', 'db-join', 'indexes', 'db-analyse', 'indexes', 'json', 'normalisation', 'custom-types'], compIds: ['gerer-donnees'] },
+  sql: { id: 'sql', name: 'SQL / SGBDR', icon: 'DB', realIcon: 'devicon:sqldeveloper', masteryIndex: 3, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S1.startTimestamp, currentDate), conceptIds: ['db-model', 'conditions', 'db-combining-queries', 'db-group-agg-order', 'db-views-cte', 'db-join', 'indexes', 'db-analyse', 'json', 'normalisation', 'custom-types'], compIds: ['gerer-donnees'] },
   linux: { id: 'linux', name: 'Linux / Bash', icon: 'L', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['uno-disc'].startDateTimesTamp, currentDate), conceptIds: ['sys', 'firewall', 'mounts', 'packages-install'], compIds: ['administrer'] },
   nixos: { id: 'nixos', name: 'NixOS', icon: 'Nix', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['nixos-personal-system'].startDateTimesTamp, currentDate), conceptIds: ['zsh-config', 'packages-install', 'nvidia-drivers', 'home-manager', 'desktop-manager', 'wayland', 'dual-boot-config', 'firewall', 'firefox-config-declarative', 'vscode-config-declarative', 'git-config-declarative', 'nix-options-vars', 'mounts'], compIds: ['administrer'] },
   docker: { id: 'docker', name: 'Docker', icon: 'D', masteryIndex: 2, duration: getYearsFormatted(1660341600, currentDate), conceptIds: ['conteneur'], compIds: ['administrer'] },
@@ -844,7 +846,7 @@ export const TIMELINE_DATA = [
   { id: 'mc-plugin', modalType: 'project', type: 'pro', title: 'Plugin Minecraft', entity: 'Projet Perso', startDate: 'Jan 2020', endDate: 'Dec 2022', durationMonths: 36, isEvent: false, stemHeight: 90, textOffset: '-translate-x-[80%]' },
   { id: 'bac', modalType: 'education', type: 'edu', title: 'BAC Général', entity: 'Lycée', startDate: 'Sept 2021', endDate: 'Juin 2024', durationMonths: 33, isEvent: false, stemHeight: 40, textOffset: '-translate-x-1/2' },
   { id: 'uno-disc', modalType: 'project', type: 'pro', title: 'UnoOnDisc', entity: 'Projet Perso', startDate: 'Sept 2022', endDate: 'Présent', durationMonths: 46, isEvent: false, stemHeight: 40, textOffset: '-translate-x-[30%]' },
-  { id: 'but-info', modalType: 'education', type: 'edu', title: 'BUT Informatique', entity: 'IUT Sorbonne P-N', startDate: 'Sept 2024', endDate: 'Juin 2027', durationMonths: 33, isEvent: false, stemHeight: 80, textOffset: '-translate-x-[60%]' },
+  { id: 'but-info', modalType: 'education', type: 'edu', title: 'BUT Informatique', entity: 'IUT USPN', startDate: 'Sept 2024', endDate: 'Juin 2027', durationMonths: 33, isEvent: false, stemHeight: 80, textOffset: '-translate-x-[60%]' },
   { id: 'stage-mf', modalType: 'experience', type: 'pro', title: 'Stage Dev PHP', entity: 'Market Factory', startDate: 'Jan 2026', endDate: 'Mars 2026', durationMonths: 3, isEvent: false, stemHeight: 110, textOffset: '-translate-x-[50%]' }
 ] 
 
@@ -872,7 +874,7 @@ for (const project of PROJECT_VALUES as Project[]) {
     for (const tool of project.tools) {
       const toolIntegrationFound = EDUCATIONS['formation-perso'].tools.find((t) => tool.id === t.id);
       if (toolIntegrationFound) {
-        toolIntegrationFound.conceptIds.concat(tool.conceptIds);
+        toolIntegrationFound.conceptIds = [...new Set([...toolIntegrationFound.conceptIds, ...tool.conceptIds])];
       } else {
           EDUCATIONS['formation-perso'].tools.push({id: tool.id, conceptIds: TOOLS[tool.id]?.conceptIds as ConceptId[], description: tool.description });
       }

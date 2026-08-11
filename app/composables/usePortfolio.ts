@@ -37,9 +37,9 @@ export function getEntitiesForConcept(conceptId: ConceptId) {
   })
   EXPERIENCE_VALUES.forEach(e => {
     if (e.tools?.some(t => t.conceptIds?.includes(conceptId))) results.push({ type: 'experience', id: e.id, title: e.title })
-  })
+  }) 
   EDUCATION_VALUES.forEach(e => {
-    if (e.tools?.some((t: ToolIntegration) => t.conceptIds?.includes(conceptId))) results.push({ type: 'education', id: e.id, title: e.title })
+    if (e.id !== 'formation-perso' && e.tools?.some((t: ToolIntegration) => t.conceptIds?.includes(conceptId))) results.push({ type: 'education', id: e.id, title: e.title })
   })
   
   return results
@@ -55,7 +55,7 @@ export function getEntitiesForSoftSkill(softSkillId: string) {
     if (e?.softSkills?.find((softSkill) => softSkill.id === softSkillId)) results.push({ type: 'experience', id: e.id, title: e.title })
   });
   EDUCATION_VALUES.forEach((e: Education) => {
-    if (e?.softSkills?.find((softSkill) => softSkill.id === softSkillId)) results.push({ type: 'education', id: e.id, title: e.title })
+    if (e.id !== 'formation-perso' && e?.softSkills?.find((softSkill) => softSkill.id === softSkillId)) results.push({ type: 'education', id: e.id, title: e.title })
   });
   
   return results;
@@ -72,7 +72,7 @@ export function useModalManager() {
   const currentModal = computed(() => modalStack.value[modalStack.value.length - 1] || null)
   const hasHistory = computed(() => modalStack.value.length > 1)
   const isOpen = computed(() => modalStack.value.length > 0)
-  const openModal = (payload: ModalPayload) => { if (currentModal.value?.id !== payload.id) { modalStack.value.push(payload); document.body.style.overflow = 'hidden' } }
+  const openModal = (payload: ModalPayload) => { if (currentModal.value?.id !== payload.id) { modalStack.value.push(payload); if (document) document.body.style.overflow = 'hidden' } }
   const goBack = () => { modalStack.value.pop(); if (modalStack.value.length === 0) document.body.style.overflow = '' }
   const closeAll = () => { modalStack.value = []; if (document) document.body.style.overflow = '' }
   return { currentModal, hasHistory, isOpen, openModal, goBack, closeAll }

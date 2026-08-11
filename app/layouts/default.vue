@@ -39,7 +39,7 @@ const LazyGlobalModal = defineAsyncComponent(() => import('@/components/GlobalMo
 
 <template>
   <div class="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 flex flex-col xl:flex-row">
-     <header class="xl:hidden fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-120 px-6 py-4 flex items-center justify-between shadow-sm">
+    <header class="xl:hidden fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-120 px-6 py-4 flex items-center justify-between shadow-sm">
       <NuxtLink to="/">
         <h1 class="text-xl font-extrabold tracking-tight">
           Soan <span class="text-emerald-500">MOREAU</span>

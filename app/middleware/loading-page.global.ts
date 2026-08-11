@@ -1,6 +1,6 @@
 import { useModalManager } from "~/composables/usePortfolio";
 
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware(() => {
 
     const { isOpen, closeAll} = useModalManager();
     if (isOpen) {
