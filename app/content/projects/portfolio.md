@@ -5,7 +5,7 @@ Au départ il s'agit d'un projet noté en BUT Informatique qui sert également �
 Ayant travaillé sur PHP avec des framework comme Laravel ou sans et connaissant de nom les framework web javascript, j'ai choisi Nuxt.js pour mon portfolio afin de découvrir ce nouveau framework et le développement web javascript en général. Et ce dans un context de recherche des meilleurs outils & langages à utiliser pour mes projets.
 
 ## Réflexion : Pourquoi des modals ?
-Mon approche a été de répondre intelligeamment aux exigences académiques derrière ce projet. En effet, j'ai d'abord cherché un moyen de résumer les informations me concernant tout en permettant d'obtenir plus de détails en un clique et sans perdre le lecteur dans sa navigation avec pleins de redirections. C'est pour cela que j'ai choisi d'utiliser les modals (ou popup). 
+Mon approche a été de répondre intelligeamment aux exigences académiques derrière ce projet, notamment le fait de détailler un maximum et d'afficher des analyses critiques de nos travaux. En effet, j'ai d'abord cherché un moyen de résumer les informations me concernant tout en permettant d'obtenir plus de détails en un clique et sans perdre le lecteur dans sa navigation avec pleins de redirections. C'est pour cela que j'ai choisi d'utiliser les modals (ou popup). 
 
 ## Réflexion : Pourquoi cette représentation des compétences ? 
 Par ailleurs j'ai aussi réfléchi à une manière de représenter mes compétences qui convient aux compétences académique mais avec les outils maîtrisés, les notions maîtrisées dans chaque outils, les notions et outils solicités pour chaque projet etc... et c'est pour cela que j'ai représenté toutes ces informations logiquement sous la forme d'objets pour pouvoir les afficher à plusieurs reprises sur le site et effectuer des opérations logiques dessus. 
@@ -16,6 +16,7 @@ Concernant l'affichage du markdown, avec Nuxt il existe des outils tels que `@nu
 
 ## Réflexion : Système de recherche (à venir) 
 Parmi mes toutes premières idées m'est venu un système de recherche permettant de rechercher des outils et des notions pour trouver **rapidement** si je maîtrise ou non ces outils ou notions, à quel point, grâce à quelle formation je les ai apprises et dans quels projets que les ai solicités.
+Pour réaliser cela, j'ai donc utilisé le composant [`CommandPalette` du module `@nuxt/ui`](https://ui.nuxt.com/docs/components/command-palette) pour avoir une barre de recherche fonctionnelle, trailwindcss pour modifier le style de ma barre de rechercher et la positionner dynamiquement à des endroits ergonomiques ainsi que mes projets, experiences, formations, outils représentées sous la forme d'objets pour en faire des articles recherchables. Et les compétences ainsi que les notions sont aussi recherchable pour accéder aux projets, expériences, formations et outils associés. 
 
 ## Comment fonctionne le système d'évaluation des compétences (à venir) ?
 J'ai aussi cherché à mettre en place un système de confiance pour l'évaluation de mes compétences techniques pour chaque outil afin de donner une visualisation claire tout en étant prouvée et vérifiable par son fonctionnement : notions définies en fonction des documentations de chaque outils ; calcul et comparaison de la progression en fonction du nombre de notions maîtrisées en plus.
