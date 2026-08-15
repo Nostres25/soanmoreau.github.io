@@ -1,0 +1,6 @@
+Les missions que j'ai pu réaliser au sein de [l'équipe DraftBot](https://draftbot.fr/equipe) incluent la réalisation de tests, l'identification et la résolution de problèmes en direct avec la communauté. J'ai également identifié les besoins des utilisateurs en apportant des solutions cohérentes. En reconnaissance à ma contribution, les fondateurs m'ont rédigé une lettre de recommandation que je peux vous partager sur demande par mail.
+
+## Rythme de contribution
+Depuis le début, notre fonctionnement est clair, les fondateurs du projet n'ont jamais exigé une activité minimum et ont toujours précisé que la vie personnelle, privée, sociale, scolaire et professionnelle était toujours prioritaire par rapport à notre activité sur le support.
+Je fonctionne évidemment ainsi et ma contribution pour ce projet se fera exclusivement sur mes temps libres ce qui n'est donc en aucun cas un frein à mon travail.
+Bien que cela puisse être étonnant, le support du projet fonctionne parfaitement grâce à des contributeurs volontaires qui décident eux-même sans restriction de leur activité.

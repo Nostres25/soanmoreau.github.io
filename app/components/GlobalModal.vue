@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS, SOFT_SKILLS } from '@/composables/objects'
+import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS, SOFT_SKILLS, isFirstAppear } from '@/composables/objects'
 import type { ProjectId, ExperienceId, EducationId, ToolId, Project, Education, Experience, Website, ConceptId } from '@/composables/objects';
-import { useModalManager, getEntitiesForConcept, getProjectForTool } from '@/composables/usePortfolio'
+import { useModalManager, getProjectForTool } from '@/composables/usePortfolio'
 
 const { isOpen, currentModal, hasHistory, closeAll, goBack, openModal } = useModalManager()
 
@@ -122,7 +122,7 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
                 <div class="flex flex-wrap gap-2">
                   <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 py-1">Appliqué dans :</span>
                   <button 
-                    v-for="entity in getEntitiesForConcept(cid)" :key="entity.id"
+                    v-for="entity in CONCEPTS[cid].entities" :key="entity.id"
                     class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 border border-gray-200 dark:border-gray-600 transition-colors cursor-pointer"
                     @click="openModal({ type: entity.type, id: entity.id as any })"
                   >
@@ -201,9 +201,12 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
 
             <div class="mt-8 space-y-6">
               <div v-if="currentEntity.tools?.length || currentEducation?.id === 'formation-perso'">
-                <h2 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Outils sollicités & notions <NuxtIcon name="i-lucide-circle-help" class="size-4" title="- Cliquez sur l'outil de votre choix pour en savoir plus sur ma maîtrise actuelle.&#010;- Les notions visibles ci-dessous sont celles solicitées par moi-même dans le cadre du projet, de la formation ou de l'expérience." /></h2>
+                <h2 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Outils sollicités & notions <NuxtIcon name="i-lucide-circle-help" class="size-4" title="- Cliquez sur l'outil de votre choix pour en savoir plus sur ma maîtrise actuelle.&#010;- Les notions visibles ci-dessous sont celles appliquées par moi-même dans le cadre du projet, de la formation ou de l'expérience." /></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <LazyToolsRenderedList :tools="currentEntity.tools" hydrate-on-visible />
+                  <LazyToolsRenderedList 
+                    :tools="currentEntity.tools.sort((t1, t2) => ((isFirstAppear(t2 as ToolIntegration, currentEntity?.id) ? 1 : 0) - (isFirstAppear(t1 as ToolIntegration, currentEntity?.id) ? 1 : 0)))" 
+                    :entity-id="currentEntity.id" hydrate-on-visible 
+                  />
                 </div>
               </div>
 
