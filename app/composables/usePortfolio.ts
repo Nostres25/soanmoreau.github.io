@@ -1,7 +1,7 @@
 // composables/usePortfolio.ts
 import { ref, computed } from 'vue'
 import { TOOL_VALUES, PROJECT_VALUES, EXPERIENCE_VALUES, EDUCATION_VALUES  } from './objects'
-import type { ToolId, SkillId, ConceptId, ToolIntegration, Education, Project, ProjectId, ExperienceId, EducationId } from './objects';
+import type { ToolId, SkillId, Education, Project, ProjectId, ExperienceId, EducationId } from './objects';
 
 // --- MÉTHODES DYNAMIQUES DE RECHERCHE ---
 
@@ -27,24 +27,6 @@ export function getProjectForTool(tool: ToolId) {
   return PROJECT_VALUES.filter(p => p.tools.find(t => t.id === tool));
 }
 
-
-// Trouver TOUTES les entités (Projets, Exp, Formations) qui utilisent une Notion
-export function getEntitiesForConcept(conceptId: ConceptId) {
-  const results: { type: 'project' | 'experience' | 'education', id: string, title: string }[] = []
-  
-  PROJECT_VALUES.forEach(p => {
-    if (p.tools?.some((t: ToolIntegration) => t.conceptIds?.includes(conceptId))) results.push({ type: 'project', id: p.id, title: p.title })
-  })
-  EXPERIENCE_VALUES.forEach(e => {
-    if (e.tools?.some(t => t.conceptIds?.includes(conceptId))) results.push({ type: 'experience', id: e.id, title: e.title })
-  })
-  EDUCATION_VALUES.forEach(e => {
-    if (e.tools?.some((t: ToolIntegration) => t.conceptIds?.includes(conceptId))) results.push({ type: 'education', id: e.id, title: e.title })
-  })
-  
-  return results
-}
-
 export function getEntitiesForSoftSkill(softSkillId: string) {
   const results: { type: 'project' | 'experience' | 'education', id: string, title: string }[] = [];
 
@@ -55,7 +37,7 @@ export function getEntitiesForSoftSkill(softSkillId: string) {
     if (e?.softSkills?.find((softSkill) => softSkill.id === softSkillId)) results.push({ type: 'experience', id: e.id, title: e.title })
   });
   EDUCATION_VALUES.forEach((e: Education) => {
-    if (e?.softSkills?.find((softSkill) => softSkill.id === softSkillId)) results.push({ type: 'education', id: e.id, title: e.title })
+    if (!e?.ignoreForToolsUsages && e?.softSkills?.find((softSkill) => softSkill.id === softSkillId)) results.push({ type: 'education', id: e.id, title: e.title })
   });
   
   return results;
@@ -72,9 +54,14 @@ export function useModalManager() {
   const currentModal = computed(() => modalStack.value[modalStack.value.length - 1] || null)
   const hasHistory = computed(() => modalStack.value.length > 1)
   const isOpen = computed(() => modalStack.value.length > 0)
-  const openModal = (payload: ModalPayload) => { if (currentModal.value?.id !== payload.id) { modalStack.value.push(payload); document.body.style.overflow = 'hidden' } }
+  const openModal = (payload: ModalPayload) => { if (currentModal.value?.id !== payload.id) { modalStack.value.push(payload); if (document) document.body.style.overflow = 'hidden' } }
   const goBack = () => { modalStack.value.pop(); if (modalStack.value.length === 0) document.body.style.overflow = '' }
-  const closeAll = () => { modalStack.value = []; if (document) document.body.style.overflow = '' }
+  const closeAll = () => { 
+    modalStack.value = []; 
+    if (document) {
+      document.body.style.overflow = '';
+    }
+  }
   return { currentModal, hasHistory, isOpen, openModal, goBack, closeAll }
 }
 
@@ -83,7 +70,7 @@ export function useModalManager() {
 // --- OUTIL DE RENDU MARKDOWN LÉGER ---
 export function renderMarkdown (text: string) {
   if (!text) return ''
-  return '<small class="mt-0 pt-0" style="text-align:start">Partie rédigée avec un markdown personnalisé</small></br></br>' + text
+  return '<small class="mt-0 pt-0" style="text-align:start">Partie rédigée avec un markdown personnalisé</small></br>' + text
     .replace(/^### (.*$)/gim, '<h4 class="text-lg font-bold text-gray-900 dark:text-white">$1</h4>')
     .replace(/^## (.*$)/gim, '<h3 class="text-xl font-bold text-gray-900 dark:text-white">$1</h3>')
     .replace(/^# (.*$)/gim, '<h2 class="text-2xl font-bold text-gray-900 dark:text-white">$1</h2>')

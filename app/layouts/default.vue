@@ -39,7 +39,7 @@ const LazyGlobalModal = defineAsyncComponent(() => import('@/components/GlobalMo
 
 <template>
   <div class="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 flex flex-col xl:flex-row">
-     <header class="xl:hidden fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-120 px-6 py-4 flex items-center justify-between shadow-sm">
+    <header class="xl:hidden fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-120 px-6 py-4 flex items-center justify-between shadow-sm">
       <NuxtLink to="/">
         <h1 class="text-xl font-extrabold tracking-tight">
           Soan <span class="text-emerald-500">MOREAU</span>
@@ -76,7 +76,7 @@ const LazyGlobalModal = defineAsyncComponent(() => import('@/components/GlobalMo
             active-class="text-emerald-600 dark:text-emerald-400 xl:bg-emerald-50 xl:dark:bg-emerald-900/30 font-medium"
             :class="[ $route.path === link.path ? '' : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700/50' ]"
           >
-            <span class="w-6 h-6 rounded-lg flex items-center justify-center font-bold text-[10px] xl:text-xs group-hover:scale-110 transition-transform bg-gray-100 xl:bg-transparent dark:bg-gray-700 xl:dark:bg-transparent opacity-80" :class="$route.path === link.path ? 'bg-emerald-100 dark:bg-emerald-900/50' : ''">
+            <span class="w-6 h-4 rounded-lg flex items-center justify-center font-bold text-[10px] xl:text-xs group-hover:scale-110 transition-transform bg-gray-100 xl:bg-transparent dark:bg-gray-700 xl:dark:bg-transparent opacity-80" :class="$route.path === link.path ? 'bg-emerald-100 dark:bg-emerald-900/50' : ''">
               {{ link.name.charAt(0) }}
             </span> 
             <span class="text-[10px] xl:text-base">{{ link.name }}</span>

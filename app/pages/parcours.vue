@@ -80,8 +80,10 @@ const outilsProgression = [
       </h2>
       <div class="bg-emerald-50/50 dark:bg-emerald-900/10 p-6 sm:p-8 rounded-2xl border border-emerald-100 dark:border-emerald-800/30 leading-relaxed">
         <p class="text-gray-700 dark:text-gray-300 font-medium mb-4 text-justify">{{ butInfoData?.description }}</p>
-        <p class="text-gray-600 dark:text-gray-400 mb-10 text-justify">{{ butInfoData?.longDescription }}</p>
-
+        <div 
+          class="text-gray-600 dark:text-gray-400 text-justify whitespace-pre-line markdown-container mb-10"
+          v-html="butInfoData?.longDescription"
+        />
         <div class="space-y-10">
           <div>
             <h3 class="font-bold text-xl text-emerald-800 dark:text-emerald-300 mb-6 border-b border-emerald-200 dark:border-emerald-800/50 pb-2">
@@ -179,7 +181,7 @@ const outilsProgression = [
         <p class="text-blue-800 dark:text-blue-200 font-medium mb-6 text-justify">{{ stageData?.description }}</p>
         
         <div 
-          class="text-gray-600 dark:text-gray-400 text-justify whitespace-pre-line"
+          class="text-gray-600 dark:text-gray-400 text-justify whitespace-pre-line markdown-container"
           v-html="stageData?.longDescription || ''"
         />
         

@@ -1,12 +1,26 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS, SOFT_SKILLS } from '@/composables/objects'
-import type { ProjectId, ExperienceId, EducationId, ToolId, Project, Education, Experience, Website } from '@/composables/objects';
-import { useModalManager, getEntitiesForConcept, getProjectForTool } from '@/composables/usePortfolio'
+import { TOOLS, CONCEPTS, PROJECTS, COMPETENCES, EXPERIENCES, EDUCATIONS, SOFT_SKILLS, isFirstAppear } from '@/composables/objects'
+import type { ProjectId, ExperienceId, EducationId, ToolId, Project, Education, Experience, Website, ConceptId } from '@/composables/objects';
+import { useModalManager, getProjectForTool } from '@/composables/usePortfolio'
 
 const { isOpen, currentModal, hasHistory, closeAll, goBack, openModal } = useModalManager()
 
 const toolData = computed(() => currentModal.value?.type === 'tool' ? TOOLS[currentModal.value.id as ToolId] : null);
+
+const route = useRoute();
+
+
+watch(
+  () => route.query.modal,
+  (modalId) => {
+    if (typeof modalId === 'string') {
+      const type = CONCEPTS[modalId as ConceptId] ? 'tool' : PROJECTS[modalId as ProjectId] ? 'project' : EDUCATIONS[modalId as EducationId] ? 'education' : EXPERIENCES[modalId as ExperienceId] ? 'experience' : null;
+      if (type) openModal({id: modalId, type})
+    }
+  },
+  { immediate: true }
+)
 
 const modalContent = ref<HTMLElement | null>(null)
 
@@ -63,11 +77,11 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
 
 <template>
   <Transition name="fade">
-    <div v-if="isOpen" class="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6">
+    <div v-if="isOpen" class="fixed inset-0 z-100 flex items-center justify-center p-1 sm:p-4">
       <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" @click="closeAll"/>
 
       <div 
-        class="relative w-full max-h-[85vh] 2xl:max-h-[90vh] flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out"
+        class="relative w-full max-h-[82vh] 2xl:max-h-[90vh] flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out top-0"
         :class="currentModal?.type === 'education' || currentModal?.type === 'project' || currentModal?.type === 'experience' || isExpanded ? 'max-w-4xl' : 'max-w-2xl animate-slide-up'"
       >
         <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 shrink-0">
@@ -85,7 +99,7 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
           </button>
         </div>
 
-        <div ref="modalContent" class="p-6 overflow-y-auto">
+        <div ref="modalContent" class="p-3 md:p-6 overflow-y-auto">
           
           <div v-if="currentModal?.type === 'tool' && toolData">
             <div class="flex items-center gap-4 mb-6">
@@ -108,7 +122,7 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
                 <div class="flex flex-wrap gap-2">
                   <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 py-1">Appliqué dans :</span>
                   <button 
-                    v-for="entity in getEntitiesForConcept(cid)" :key="entity.id"
+                    v-for="entity in CONCEPTS[cid].entities" :key="entity.id"
                     class="inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 border border-gray-200 dark:border-gray-600 transition-colors cursor-pointer"
                     @click="openModal({ type: entity.type, id: entity.id as any })"
                   >
@@ -142,7 +156,7 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
                 <div class="grid transition-all duration-500 ease-in-out" :style="{ gridTemplateRows: isExpanded ? '1fr' : '0fr' }">
                   <div class="overflow-hidden">
                     <div 
-                      class="mt-0 p-5 pt-2 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-md whitespace-pre-line text-justify markdown-container"
+                      class="mt-0 p-3 md:p-5 pt-2 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-md whitespace-pre-line text-justify markdown-container"
                       v-html="currentEntity.longDescription"
                     />
                   </div>  
@@ -187,9 +201,12 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
 
             <div class="mt-8 space-y-6">
               <div v-if="currentEntity.tools?.length || currentEducation?.id === 'formation-perso'">
-                <h2 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Outils sollicités & notions <NuxtIcon name="i-lucide-circle-help" class="size-4" title="- Cliquez sur l'outil de votre choix pour en savoir plus sur ma maîtrise actuelle.&#010;- Les notions visibles ci-dessous sont celles solicitées par moi-même dans le cadre du projet, de la formation ou de l'expérience." /></h2>
+                <h2 class="font-bold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Outils sollicités & notions <NuxtIcon name="i-lucide-circle-help" class="size-4" title="- Cliquez sur l'outil de votre choix pour en savoir plus sur ma maîtrise actuelle.&#010;- Les notions visibles ci-dessous sont celles appliquées par moi-même dans le cadre du projet, de la formation ou de l'expérience." /></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <LazyToolsRenderedList :tools="currentEntity.tools" hydrate-on-visible />
+                  <LazyToolsRenderedList 
+                    :tools="currentEntity.tools.sort((t1, t2) => ((isFirstAppear(t2 as ToolIntegration, currentEntity?.id) ? 1 : 0) - (isFirstAppear(t1 as ToolIntegration, currentEntity?.id) ? 1 : 0)))" 
+                    :entity-id="currentEntity.id" hydrate-on-visible 
+                  />
                 </div>
               </div>
 
