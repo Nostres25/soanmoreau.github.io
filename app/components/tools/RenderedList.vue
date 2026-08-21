@@ -35,7 +35,7 @@ export default {
       const concept = CONCEPTS[conceptId];
       const isFirst = !!this.entityId && concept?.entities[0]?.id === this.entityId;
 
-      return `${isFirst ? 'Première apparition : ' : ' '} ${concept?.description ?? ''}`;
+      return `${isFirst ? 'Première apparition : ' : ''}${concept?.description ?? ''}`;
     }
   }
 }

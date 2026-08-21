@@ -8,6 +8,7 @@ import nixosSystemContent from '@/content/projects/nixos-personal-system.md?raw'
 import phoneBatteryReplacemenContent from '@/content/projects/phone-battery-replacement.md?raw'
 import butInfoContent from '@/content/educations/but-info.md?raw'
 import draftbotContent from '@/content/experiences/draftbot.md?raw'
+import saeSuiviContent from '@/content/projects/sae-suivi.md?raw'
 
 
 const startDate = Date.now();
@@ -349,7 +350,7 @@ export const EDUCATIONS = {
   },
   'but-info': { 
     id: 'but-info', title: 'BUT Informatique', entity: 'Univ. Sorbonne Paris-Nord', context: 'Formation', 
-    description: `Moyenne stabilisée à ~15/20. Chef d'équipe sur divers projets (Jeu d'échecs, algo graphes, BDD, config Linux, Site de colis).`, 
+    description: `Formation en 3 ans avec des projets pratiques évalués (SAÉ), beaucoup de théorie et de pratique, du réseau, de la qualité logicielle, du bas niveau et plus. Moyenne stabilisée à ~15/20 & Chef d'équipe sur divers projets.`, 
     longDescription: renderMarkdown(butInfoContent), 
     segmentations: {
       'S1': {
@@ -495,9 +496,9 @@ export const PROJECTS = {
 
   'sae-suivi': {
     id: 'sae-suivi', title: 'Suivi de colis', context: 'SAÉ BUT', educationId: 'but-info',
-    description: 'Site web de suivi de colis pour l\'IUT.', 
+    description: "Projet d’application web garantissant le suivi des commandes et des colis à l’IUT de Villetaneuse.", 
     startDateTimesTamp: EDUCATIONS['but-info'].segmentations['S3'].startTimestamp,
-    longDescription: renderMarkdown(`Application web interne permettant la gestion logistique des colis reçus par le secrétariat de l'IUT et envoyant des notifications aux destinataires.`), 
+    longDescription: renderMarkdown(saeSuiviContent), 
     github: 'https://github.com/Nostres25/suivi-colis-iutv-v2', 
     competencies: [
       { id: 'realiser-app', description: "Création de la plateforme web complète.",  },
@@ -535,7 +536,7 @@ export const PROJECTS = {
 
   'uno-disc': { 
     id: 'uno-disc', title: 'Jeu de UNO sur Discord (Non officiel)', context: 'Projet Perso', educationId: 'formation-perso', startDateTimesTamp: 1648219351000,
-    description: 'Agent logiciel très complet sur la messagerie Discord pour jouer au UNO. Présent sur +1800 serveurs, +128 000 membres.', 
+    description: 'Agent logiciel très complet pour jouer au UNO sur la messagerie Discord. Présent sur +1800 serveurs, +128 000 membres.', 
     longDescription: renderMarkdown(unoOnDiscContent), 
     github: 'privé', website: 'https://top.gg/bot/985152555791290408',
     competencies: [
@@ -546,7 +547,7 @@ export const PROJECTS = {
     ],
     tools: [
       { id: 'javascript', description: "Logique principale du bot.", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'poo', 'switch', 'exceptions', 'loops', 'collections', 'json'] },
-      { id: 'nodejs', description: "Environnement d'exécution.", conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts', 'sharding', 'fs', 'api-usage', 'file-interacts'] },
+      { id: 'nodejs', description: "Environnement d'exécution. Avec pnpm en tant que gestionnaire de paquets", conceptIds: ['modules', 'modules-dev', 'versioning', 'paquets-scripts', 'sharding', 'fs', 'api-usage', 'file-interacts'] },
       { id: 'nodemon', description: "Outil de dev.", conceptIds: ['nodemon-restart'] },
       { id: 'node-canvas', description: "Génération dynamique des cartes visuelles.", conceptIds: ['canvas-2d', 'canvas-overlay', 'canvas-rotation'] },
       { id: 'figma', description: "Design des assets du jeu.", conceptIds: ['figma-logos', 'visuels'] },
@@ -566,7 +567,7 @@ export const PROJECTS = {
   },
   'mc-plugin': { 
     id: 'mc-plugin', title: 'Plugin Minecraft', context: 'Projet Perso', educationId: 'formation-perso',
-    description: 'Gestion des permissions et zones sur serveur multijoueur. Configuration Yaml.', 
+    description: 'Développement de systèmes plus ou moins complexe en java pour administrer un serveur multi-joueurs (Système de permissions, de zones protégées en 3D, développement de commandes, avec une configuration en Yaml, etc...).', 
     startDateTimesTamp: 1577833200000,
     longDescription: renderMarkdown(`Un projet développé lors de mes premières années de programmation, me permettant d'appréhender le fonctionnement d'un serveur de jeu, de son API publique et de la gestion de configurations personnalisées pour les administrateurs du serveur. Rendez-vous sur le github pour en savoir plus.`), 
     github: 'https://github.com/Nostres25/MinerstiaPlugin',  
@@ -663,7 +664,7 @@ export const PROJECTS = {
       { id: 'conduire-projet', description: "Définition des tâches et des priorités",  },    ],
     tools: [
       { id: 'javascript', description: "Logique principale du bot.", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'loops'] },
-      { id: 'nodejs', description: "Environnement d'exécution.", conceptIds: ['modules', 'modules-dev'] },
+      { id: 'nodejs', description: "Environnement d'exécution. Avec pnpm en tant que gestionnaire de paquets.", conceptIds: ['modules', 'modules-dev'] },
       { id: 'nuxtjs', description: "Découverte du fonctionnement du framework Nuxt v4", conceptIds: ['@nuxt/ui', 'layouts', 'middlewares'] },
       { id: 'typescript', description: "Migration vers du typage strict.", conceptIds: ['interfaces', 'classes', 'enums', 'typage'] },
       { id: 'vscode', description: "Environnement de développement.", conceptIds: [] },

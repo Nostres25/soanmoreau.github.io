@@ -1,7 +1,7 @@
 // composables/usePortfolio.ts
 import { ref, computed } from 'vue'
 import { TOOL_VALUES, PROJECT_VALUES, EXPERIENCE_VALUES, EDUCATION_VALUES  } from './objects'
-import type { ToolId, SkillId, Education, Project, ProjectId, ExperienceId, EducationId, EntityId } from './objects';
+import type { ToolId, SkillId, Education, Project, ProjectId, ExperienceId, EducationId } from './objects';
 
 // --- MÉTHODES DYNAMIQUES DE RECHERCHE ---
 
@@ -70,7 +70,7 @@ export function useModalManager() {
 // --- OUTIL DE RENDU MARKDOWN LÉGER ---
 export function renderMarkdown (text: string) {
   if (!text) return ''
-  return '<small class="mt-0 pt-0" style="text-align:start">Partie rédigée avec un markdown personnalisé</small></br></br>' + text
+  return '<small class="mt-0 pt-0" style="text-align:start">Partie rédigée avec un markdown personnalisé</small></br>' + text
     .replace(/^### (.*$)/gim, '<h4 class="text-lg font-bold text-gray-900 dark:text-white">$1</h4>')
     .replace(/^## (.*$)/gim, '<h3 class="text-xl font-bold text-gray-900 dark:text-white">$1</h3>')
     .replace(/^# (.*$)/gim, '<h2 class="text-2xl font-bold text-gray-900 dark:text-white">$1</h2>')
