@@ -134,7 +134,8 @@ export interface Tool {
 export interface ToolIntegration {
   id: ToolId,
   description: string,
-  conceptIds: ConceptId[]
+  conceptIds: ConceptId[],
+  specificConeptIds?: ConceptId[], // != global concept
   longDescription?: string, // TODO currently not visible
   startDateTimestamp?: number
 }
