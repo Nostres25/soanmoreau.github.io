@@ -26,3 +26,21 @@ Même s'il est recommandé d'utiliser un home-manager et les flakes pour un meil
 
 ## État du système
 Mon système utilise KDE comme environnement de bureau, un [home manager](https://nixos.wiki/wiki/Home_Manager), et je compte utiliser les flakes à l'aveni pour débloquer de nouvelles fonctionnalités, pour garantire une meilleure staibilité de mon système et pour maîtriser davantage Nix.
+
+## Confidentialité 
+Pour une meilleure protection de mes données je privilégie des services et des produits numériques européens ou Français soumis à des règles plus strict notamment avec la RGPD, respectueux de la vie privée avec du chiffrement de bout en bout et/ou open source.
+
+### Services utilisés
+Grâce à ces services je garanti la confidentialité et l'intégrité des données avec lesquelles je travaille.
+- **Systèmes d'exploitation**: Linux (NixOs) ou AtlasOS pour utiliser windows sans la télémétrie avec une meilleure optimisation
+- **Moteur de recherche** : Duckduckgo
+- **Transfer de fichiers** (à la place de WeTransfer) : [Smash](https://fromsmash.com/fr), français et qui n'utilise pas les fichiers transférés pour entraîner une IA ou pour les revendre
+- **Outils PDF (fusion, modification, conversions, etc...)** : [BentoPDF](https://www.bentopdf.com/) enssemble d'outils open source plutôt que d'utiliser le premier site trouvé sur internet et qui revend les données présentes dans nos fichiers
+- **IA génératives** : Pour un prompt rapide, j'utilise [duck.ia](https://duck.ai/) pour utiliser Claude ou autre anonymement et sans transmettre mes données de navigation. Je fais également attentionn à ne donner aucune information privée dans mes prompt
+- **Diagrammes et modélisations** : [draw.io](https://www.drawio.com/), open source, gratuit et respectueux de la vie privée
+- **Navigateur** : [Librewolf](https://librewolf.net/) pour une version modifiée de Firefox plus respectueuse de la vie privée notamment en désactivant plus de trackers
+- **Cloud/Drive, Authentificateur (Codes A2F), Mail** : [Proton](https://proton.me/) proposant une suite d'outils freemium avec du chiffrement des données, respectant la vie privée et faisant partie de l'Europe (Suisse)  
+
+## Sécurité
+- Je prend en compte les failles de sécurité signalés par les gestionnaires de paquets pour tous mes projets (avec `npm audit` ou `pnpm audit`)
+- J'utilise le paquet open source [Lynis](https://github.com/CISOfy/lynis) pour faire un scan de sécurité (audit) d'un système Linux/UNIX ou MacOS.
