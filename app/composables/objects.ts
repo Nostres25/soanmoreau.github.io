@@ -312,7 +312,7 @@ export const CONCEPTS = {
   'decorators': { id: 'decorators', name: 'Décorateurs', description: "Ajout dynamique de comportements en préservant l'intégrité du code pour une classe ou une fonction." , entities: [] as EntityIntegration[] },
   'middlewares': { id: 'middlewares', name: 'Middlewares', description: "Code s'exécutant avant celui lié à chaque route", entities: [] as EntityIntegration[] },
   
-  // Linux / NixOs
+  // Linux / NixOS
   'zsh-config': { id: 'zsh-config', name: 'Config zsh', description: 'Configuration du shell zsh en déclaratif avec Nix.' , entities: [] as EntityIntegration[] },
   'packages-install': { id: 'packages-install', name: 'Gestion des paquets', description: 'Installation des paquets pour un utilisateur ou le système.', entities: [] as EntityIntegration[] },
   'nvidia-drivers': { id:'nvidia-drivers', name: 'Config drivers GPU Nvidia', description: 'Configuration des drivers GPU nvidia déclarativement sur Nix (offload, prime, powerManagement, open drivers).', entities: [] as EntityIntegration[] },
@@ -325,7 +325,7 @@ export const CONCEPTS = {
   'git-config-declarative': { id: 'git-config-declarative', name: 'Config Git déclarative', description: 'Configuration de Git en déclaratif avec Nix (nom, email, credentials).', entities: [] as EntityIntegration[] },
   'vscode-config-declarative': { id: 'vscode-config-declarative', name: 'Config vscode déclarative', description: "Configuration de l'IDE Vscode en déclaratif (settings, extensions etc..)", entities: [] as EntityIntegration[] },
   'nix-options-vars': { id: 'nix-options-vars', name: "Variables d'options Nix", description: 'Gestion de variables en Nix.', entities: [] as EntityIntegration[] },
-  'mounts': { id: 'mounts', name: 'Montage de partitions', description: "Montage de paritions sur Linux/Debian et NixOs.", entities: []}
+  'mounts': { id: 'mounts', name: 'Montage de partitions', description: "Montage de paritions sur Linux/Debian et NixOS.", entities: []}
 
 } satisfies Record<string, Concept>
 
@@ -606,12 +606,12 @@ export const PROJECTS = {
 
   'nixos-personal-system': {
     id: 'nixos-personal-system',
-    title: 'Système personnel sous NixOs',
+    title: 'Système personnel sous NixOS',
     context: 'Projet Perso',
     educationId: 'formation-perso', 
     github: 'https://github.com/Nostres25/nixos-config-system',
     startDateTimesTamp: 1752012000000,
-    description: "Mon propre système linux que j'utilise au quotidien utilisant la distribution NixOs et donc les paquets Nix avec une configuration déclarative.",
+    description: "Mon propre système linux que j'utilise au quotidien utilisant la distribution NixOS et donc les paquets Nix avec une configuration déclarative.",
     longDescription: renderMarkdown(nixosSystemContent),
 
     competencies: [
@@ -621,6 +621,13 @@ export const PROJECTS = {
       { id: 'nixos', description: "Distribution linux utilisée pour une configuration déclarative & reproductible facilement avec la sécurité de pouvoir revenir en arrière facilement en cas d'échec de mise à jour",   conceptIds: ['zsh-config', 'packages-install', 'nvidia-drivers', 'home-manager', 'desktop-manager', 'wayland', 'dual-boot-config', 'firewall', 'firefox-config-declarative', 'vscode-config-declarative', 'git-config-declarative', 'nix-options-vars', 'mounts'] },
       { id: 'vscode', description: "IDE que j'utilise pour ma configuration Nix avec des extensions pour le style, les formateurs etc...", conceptIds: [] },
 
+    ],
+
+    softSkills: [
+      { id: 'privacy-security-accessibility', description: 'Configuration, habitudes et services utilisés allant dans cette direction'},
+      { id: 'curiosité', description: "La curiosité m'a amené à découvrir NixOS et me pousse à continuer d'utiliser ce système et à en apprendre plus"},
+      { id: 'apprentissage-rapide', description: "Pour maîtriser NixOS tout en utilisant mon système, j'ai du apprendre rapidement pour en pas me pénaliser dans mes études et mes projets."},
+      { id: 'redaction-fr', description: "Puisque NixOS était encore assez niche lorsque je l'ai découvert, j'ai rédigé une \"documentation\" avec les problèmes rencontrés et les solutions trouvées en français."}
     ],
     
     medias:  []
@@ -846,6 +853,7 @@ export const TOOLS: {[toolId: string]: Tool} = {
 
 export const SOFT_SKILLS = {
   'analyse': { id: "analyse", name: "Esprit d'analyse", description: "Analyse de problèmes, de besoins, debug et retours constructifs." },
+  'privacy-security-accessibility': {id: 'privacy-security-accessibility', name: "Intérêt pour la sécurité, la confidentialité et l'accessibilité", description: ''},
   'curiosité': { id: 'curiosité', name: 'Curiosité', description: "En quête de découvertes et d'apprentissage." },
   "esprit-initiative": {id: 'esprit-initiative', name: "Esprit d'intiative", description: "Prises d'initatives pour proposer des solutions à des problèmes."},
   'apprentissage-rapide': {id: 'apprentissage-rapide', name: "Apprentissage rapide", description: "Tendance à apprendre rapidement et en autonomie" },
