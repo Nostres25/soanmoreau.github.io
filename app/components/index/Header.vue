@@ -21,7 +21,7 @@
           </div>
         </div>
         <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300" style="text-align: justify;">
-            Je suis autodidacte en développement back-end depuis mes 13 ans en développement back-end. J’ai développé en Java pendant 2 ans en toute autonomie puis je me suis ensuite concentré sur un projet NodeJs et Typescript durant 3 ans avant de me focaliser sur mes études. Ma rapidité d’apprentissage me permet de lancer et d’entretenir un projet de programmation quelle que soit la complexité <strong>notamment sans IA</strong>.<br>
+            Je suis autodidacte en développement back-end depuis mes 13 ans, c'est-à-dire avant l'IA. J’ai développé en Java pendant 2 ans en toute autonomie puis je me suis ensuite concentré sur un projet NodeJs et Typescript durant 3 ans avant de me focaliser sur mes études. Ma rapidité d’apprentissage me permet de lancer et d’entretenir un projet de programmation quelle que soit la complexité. J'ajoute que la sécurité, la confidentialité et l'accessibilité ont une place importante pour moi<br>
             Aujourd’hui, je recherche une alternance pour ma troisième année d’études (2026-2027), dans le développement logiciel.
         </p>
         <div class="grid grid-cols-1 mt-4 md:grid-cols-3 gap-8">
