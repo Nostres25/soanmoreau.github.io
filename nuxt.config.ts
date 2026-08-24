@@ -13,9 +13,17 @@ export default defineNuxtConfig({
 
   routeRules: { 
     '/': { prerender: true },
+
+    // Used in my resume
     '/portfolio': {
       redirect: "/"
+    },
+
+    // Used on linkedin
+    '/ld': {
+      redirect: '/'
     }
+
   },
 
   nitro: {

@@ -249,7 +249,7 @@ export const CONCEPTS = {
 
   // Notions Git / GitHub / CI
   'git-commits': { id: 'git-commits', name: 'Commits', description: `Sauvegardes atomiques de l'état du code source.` , entities: [] as EntityIntegration[] },
-  'git-remote': { id: 'git-remote', name: 'Dépôt distant', description: `Synchronisation avec des serveurs comme GitHub.` , entities: [] as EntityIntegration[] },
+  'git-remote': { id: 'git-remote', name: 'Dépôt distant', description: `Synchronisation avec des serveurs comme GitHub ou Gitlab.` , entities: [] as EntityIntegration[] },
   'git-branches': { id: 'git-branches', name: 'Branches', description: `Développement parallèle de fonctionnalités.` , entities: [] as EntityIntegration[] },
   'git-cherry': { id: 'git-cherry', name: 'Cherry picks', description: `Sélection et application de commits spécifiques d'une branche à une autre.` , entities: [] as EntityIntegration[] },
   'git-merges': { id: 'git-merges', name: 'Merges', description: `Fusion de différentes branches de développement.` , entities: [] as EntityIntegration[] },
