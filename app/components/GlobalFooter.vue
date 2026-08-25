@@ -38,7 +38,7 @@ export default {
                 <span class="w-2 h-2 bg-emerald-500 rounded-full"></span> À la recherche d'une alternance
                 </li>
                 <li class="flex items-center gap-2 mt-2">
-                <a href="/cv.pdf" download class="inline-flex items-center gap-1 font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">
+                <a href="pdf/CV_Soan_MOREAU.pdf" download class="inline-flex items-center gap-1 font-semibold text-emerald-600 dark:text-emerald-400 hover:underline">
                     Télécharger mon CV &rarr;
                 </a>
                 </li>
