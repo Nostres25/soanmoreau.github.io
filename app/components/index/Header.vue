@@ -3,7 +3,7 @@
         <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mb-4">
           <div class="w-40 h-40 shrink-0 rounded-full bg-emerald-100 dark:bg-emerald-900 border-4 border-white dark:border-gray-800 shadow-xl overflow-hidden relative">
             <div class="absolute inset-0 flex items-center justify-center text-emerald-500 dark:text-emerald-400 font-bold text-4xl">
-              <img src="../../assets/images/nostres_logo.png">   
+              <img src="../../assets/images/photo.jpg">   
             </div>
           </div>
           
