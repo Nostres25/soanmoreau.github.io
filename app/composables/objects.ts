@@ -324,7 +324,7 @@ export const CONCEPTS = {
   'firewall': { id: 'firewall', name: 'Configuration pare-feu', description: 'Apprentissage des configurations de pare-feu sur linux & configuration déclarative avec Nix.', entities: [] as EntityIntegration[] },
   'firefox-config-declarative': { id: 'firefox-config-declarative', name: 'Config firefox déclarative', description: 'Configuration du navigateur Firefox en déclaratif avec Nix.', entities: [] as EntityIntegration[] },
   'git-config-declarative': { id: 'git-config-declarative', name: 'Config Git déclarative', description: 'Configuration de Git en déclaratif avec Nix (nom, email, credentials).', entities: [] as EntityIntegration[] },
-  'vscode-config-declarative': { id: 'vscode-config-declarative', name: 'Config vscode déclarative', description: "Configuration de l'IDE Vscode en déclaratif (settings, extensions etc..)", entities: [] as EntityIntegration[] },
+  'vscode-config-declarative': { id: 'vscode-config-declarative', name: 'Config vscode déclarative', description: "Configuration de Vscode & vscodium en déclaratif (settings, extensions etc..)", entities: [] as EntityIntegration[] },
   'nix-options-vars': { id: 'nix-options-vars', name: "Variables d'options Nix", description: 'Gestion de variables en Nix.', entities: [] as EntityIntegration[] },
   'mounts': { id: 'mounts', name: 'Montage de partitions', description: "Montage de paritions sur Linux/Debian et NixOS.", entities: []}
 
@@ -599,7 +599,7 @@ export const PROJECTS = {
 
     ],
     tools: [
-      { id: 'vscode', description: "IDE utilisé par l'équipe.", conceptIds: [] },
+      { id: 'vscode', description: "Éditeur de texte utilisé par l'équipe.", conceptIds: [] },
       { id: 'java', description: "Développement en Java 8.", conceptIds: ['exceptions', 'java-scanner', 'poo', 'poly', 'java-uml', 'scopes', 'java-arraylist', 'loops', 'switch', 'enums'] },
       { id: 'git', description: "Collaboration de code.", conceptIds: ['git-commits', 'git-branches', 'git-merges', 'git-conflicts'] }
     ],
@@ -620,7 +620,7 @@ export const PROJECTS = {
     ],
     tools: [
       { id: 'nixos', description: "Distribution linux utilisée pour une configuration déclarative & reproductible facilement avec la sécurité de pouvoir revenir en arrière facilement en cas d'échec de mise à jour",   conceptIds: ['zsh-config', 'packages-install', 'nvidia-drivers', 'home-manager', 'desktop-manager', 'wayland', 'dual-boot-config', 'firewall', 'firefox-config-declarative', 'vscode-config-declarative', 'git-config-declarative', 'nix-options-vars', 'mounts'] },
-      { id: 'vscode', description: "IDE que j'utilise pour ma configuration Nix avec des extensions pour le style, les formateurs etc...", conceptIds: [] },
+      { id: 'vscode', description: "Éditeur de texte que j'utilise pour ma configuration Nix avec des extensions pour le style, les formateurs etc...", conceptIds: [] },
 
     ],
 
