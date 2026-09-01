@@ -610,7 +610,7 @@ export const PROJECTS = {
     title: 'Système personnel sous NixOS',
     context: 'Projet Perso',
     educationId: 'formation-perso', 
-    github: 'https://github.com/Nostres25/nixos-config-system',
+    github: 'privé', // https://github.com/Nostres25/nixos-config-system
     startDateTimesTamp: 1752012000000,
     description: "Mon propre système linux que j'utilise au quotidien utilisant la distribution NixOS et donc les paquets Nix avec une configuration déclarative.",
     longDescription: renderMarkdown(nixosSystemContent),
