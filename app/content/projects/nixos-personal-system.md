@@ -43,7 +43,9 @@ Grâce à ces services je garanti la confidentialité et l'intégrité des donn�
 - **IA génératives** : Pour un prompt rapide, j'utilise [duck.ia](https://duck.ai/) pour utiliser Claude ou autre anonymement et sans transmettre mes données de navigation. Je fais également attentionn à ne donner aucune information privée dans mes prompt
 - **Diagrammes et modélisations** : [draw.io](https://www.drawio.com/), open source, gratuit et respectueux de la vie privée
 - **Navigateur** : [Librewolf](https://librewolf.net/) pour une version modifiée de Firefox plus respectueuse de la vie privée notamment en désactivant plus de trackers
-- **Cloud/Drive, Authentificateur (Codes A2F), Mail** : [Proton](https://proton.me/) proposant une suite d'outils freemium avec du chiffrement des données, respectant la vie privée et faisant partie de l'Europe (Suisse)</details>
+- **Cloud/Drive, Authentificateur (Codes A2F), Mail** : [Proton](https://proton.me/) proposant une suite d'outils freemium avec du chiffrement des données, respectant la vie privée et faisant partie de l'Europe (Suisse)
+- **Editeur de texte** (à la place de VSCode) : [VSCodium](https://vscodium.com/) étant une version modifiée de Vscode sans la télémétrie et plus respectueuse de la vie privée. Certaines extensions vscode très utiles mais présentant de la télémétrie ou utilisant les services microsoft n'y sont pas mais il y a des alternatives open source. 
+</details>
 
 <details open><summary class="text-2xl font-bold text-gray-900 dark:text-white mb-0">Astuces pour la confidentialité et la protection de la vie privée</summary>
 **Utiliser des alias d'email** :
