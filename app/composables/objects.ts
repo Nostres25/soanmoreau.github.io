@@ -1,14 +1,17 @@
 import { getYearsFormatted, useModalManager, renderMarkdown } from './usePortfolio'
 import type { CommandPaletteGroup } from '@nuxt/ui'
 
+import butInfoContent from '@/content/educations/but-info.md?raw'
+
 import stageMfContent from '@/content/experiences/stage-mf.md?raw'
+import draftbotContent from '@/content/experiences/draftbot.md?raw'
+
 import unoOnDiscContent from '@/content/projects/uno-on-disc.md?raw'
 import portfolioContent from '@/content/projects/portfolio.md?raw'
 import nixosSystemContent from '@/content/projects/nixos-personal-system.md?raw'
 import phoneBatteryReplacemenContent from '@/content/projects/phone-battery-replacement.md?raw'
-import butInfoContent from '@/content/educations/but-info.md?raw'
-import draftbotContent from '@/content/experiences/draftbot.md?raw'
 import saeSuiviContent from '@/content/projects/sae-suivi.md?raw'
+import authBotContent from '@/content/projects/auth-bot.md?raw'
 
 
 const startDate = Date.now();
@@ -167,6 +170,7 @@ export const CONCEPTS = {
   'mvc': { id: 'mvc', name: 'Architecture MVC', description: `Séparation du code en Modèle, Vue et Contrôleur pour une meilleure maintenabilité.`, entities: [] as EntityIntegration[] },
   'secu': { id: 'secu', name: 'Sécurité & Failles', description: `Identification, prévention et correction de vulnérabilités web.`, entities: [] as EntityIntegration[] },
   'conteneur': { id: 'conteneur', name: 'Conteneurisation', description: `Isolation d'applications avec leurs dépendances pour un déploiement uniforme.` , entities: [] as EntityIntegration[] },
+  'podman': { id: 'podman', name: 'Utilisation de podman', description: 'Utilisation de podman à la place de docker pour une meilleur sécurité en cas de plantage ou de vulnérabilités.', entities: [] as EntityIntegration[] },
   'versioning': { id: 'versioning', name: 'Versioning', description: `Gestion de l'historique et des versions du code source en équipe.` , entities: [] as EntityIntegration[] },
   'sys': { id: 'sys', name: 'Configuration Système', description: `Administration d'OS Linux et configuration des règles réseaux.` , entities: [] as EntityIntegration[] },
   'callbacks': { id: 'callbacks', name: 'Callbacks', description: `Utilisation de fonctions passées en arguments.` , entities: [] as EntityIntegration[] },
@@ -535,6 +539,36 @@ export const PROJECTS = {
     
   },
 
+  'auth-bot': {
+    id: 'auth-bot', title: "Bot d'authentification pour le serveur Discord du département informatique à l'IUTV", context: 'BUT initiative',
+    description: "Application pour l'authentification des étudiants sur l'espace de communication de la formation du BUT Informatique",
+    startDateTimesTamp: 1787652000000,
+    educationId: 'formation-perso',
+    longDescription: renderMarkdown(authBotContent),
+    github: 'privé',
+    competencies: [
+      { id: 'realiser-app', description: "Création d'un agent logiciel ou d'un bot pour l'authentification des étudiants sur Discord",  },
+      { id: 'optimiser', description: "Application optimisée pour l'évolutivité et la configuration.",  },
+      { id: 'administrer', description: "Mise en place d'une image docker/podman, déploiement de l'application en SSH, avec git et podman.",  },
+      { id: 'gerer-donnees', description: "Gestion d'une faible quantité de données via fichiers JSON avec node-fs.",  },
+      { id: 'conduire-projet', description: "Définition des tâches & objectifs, choix techniques, choix de l'achitecture de l'application et des solutions.",  },
+      { id: 'collaborer', description: "Étroite collaboration avec les enseignants reponsables à l'IUT, communication du plan, discussions techniques, communication des avancements...",  },
+    ],
+    tools: [
+      { id: 'javascript', description: "Logique principale du bot.", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'poo', 'switch', 'exceptions', 'loops', 'collections', 'json'] },
+      { id: 'nodejs', description: "Environnement d'exécution. Avec pnpm en tant que gestionnaire de paquets", conceptIds: ['modules', 'modules-dev', 'versioning', 'fs', 'api-usage', 'file-interacts'] },
+      { id: 'nodemon', description: "Outil de dev pour restart l'application à chaque sauvegarde", conceptIds: ['nodemon-restart'] },
+      { id: 'vscode', description: "Environnement de développement.", conceptIds: [] },
+      { id: 'discordjs', description: "Interaction avec l'API Discord.", conceptIds: ['djs-slash', 'djs-components', 'djs-modals', 'djs-ephemeral'] },
+      { id: 'git', description: "Gestion des versions du code source avec dépôt distant sur Gitlab.", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-merges', 'git-pr', 'git-issues'] },
+      { id: 'regex', description: 'Système de recherche dans les logs via Regex', conceptIds: [], longDescription: "D'abord utilisé pour contracter des conditions avec plusieurs `startsWith` en une seul regex, jusqu'à ce que je découvre en réalisant de tests que l'ensemble de startsWith était bien souvent plus rapide qu'un RegEx qui est un outil plutôt lourd à l'échelle de quelques milisecondes" },
+      { id: 'node-fs', description: "Écriture et sauvegarde de fichiers de logs", conceptIds: ['fs']},
+      { id: 'docker', description: "Environnement de développement et de production avec application conteneurisée avec Podman", conceptIds: ['conteneur', 'podman']}
+      
+    ],
+
+  },
+
   'uno-disc': { 
     id: 'uno-disc', title: 'Jeu de UNO sur Discord (Non officiel)', context: 'Projet Perso', educationId: 'formation-perso', startDateTimesTamp: 1648219351000,
     description: 'Agent logiciel très complet pour jouer au UNO sur la messagerie Discord. Présent sur +1800 serveurs, +128 000 membres.', 
@@ -556,7 +590,7 @@ export const PROJECTS = {
       { id: 'vscode', description: "Environnement de développement.", conceptIds: [] },
       { id: 'discordjs', description: "Interaction avec l'API Discord.", conceptIds: ['djs-slash', 'djs-components', 'djs-modals', 'djs-ephemeral', 'sharding', 'djs-cache', 'djs-collectors'] },
       { id: 'sentry', description: "Suivi des erreurs en production.", conceptIds: ['bug-monitoring', 'sentry-debug'] },
-      { id: 'git', description: "Gestion du code source.", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-cherry', 'git-merges', 'git-conflicts'] },
+      { id: 'git', description: "Gestion des versions du code source", conceptIds: ['git-commits', 'git-remote', 'git-branches', 'git-cherry', 'git-merges', 'git-conflicts'] },
       { id: 'regex', description: 'Système de recherche dans les logs via Regex', conceptIds: [], longDescription: "D'abord utilisé pour contracter des conditions avec plusieurs `startsWith` en une seul regex, jusqu'à ce que je découvre en réalisant de tests que l'ensemble de startsWith était bien souvent plus rapide qu'un RegEx qui est un outil plutôt lourd à l'échelle de quelques milisecondes" },
       { id: 'node-fs', description: "Écriture et sauvegarde de fichiers de logs", conceptIds: ['fs']},
       { id: 'docker', description: "Environnement de développement et de production avec application conteneurisée", conceptIds: ['conteneur']}
@@ -707,9 +741,9 @@ export const PROJECTS = {
     description: 'Configurations d\'un système Ubuntu (Linux) et réseaux (IPv4, DHCP, Pare-feux).', github: '', 
     competencies: [{ id: 'administrer', description: "Installation et configuration OS.",  }],
     tools: [{ id: 'linux', description: "Commandes terminal.", conceptIds: ['sys'] }],
-    
-    
   },
+
+
 } satisfies Record<string, Project>
 
 // --- EXPÉRIENCES ---
@@ -831,10 +865,10 @@ export const TOOLS: {[toolId: string]: Tool} = {
   sql: { id: 'sql', name: 'SQL / SGBDR', icon: 'DB', realIcon: 'devicon:sqldeveloper', masteryIndex: 3, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S1.startTimestamp, currentDate), conceptIds: ['db-model', 'conditions', 'db-combining-queries', 'db-group-agg-order', 'db-views-cte', 'db-join', 'indexes', 'db-analyse', 'json', 'normalisation', 'custom-types'], compIds: ['gerer-donnees'] , entities: [] as EntityIntegration[] },
   linux: { id: 'linux', name: 'Linux / Bash', icon: 'L', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['uno-disc'].startDateTimesTamp, currentDate), conceptIds: ['sys', 'firewall', 'mounts', 'packages-install'], compIds: ['administrer'] , entities: [] as EntityIntegration[] },
   nixos: { id: 'nixos', name: 'NixOS', icon: 'Nix', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['nixos-personal-system'].startDateTimesTamp, currentDate), conceptIds: ['zsh-config', 'packages-install', 'nvidia-drivers', 'home-manager', 'desktop-manager', 'wayland', 'dual-boot-config', 'firewall', 'firefox-config-declarative', 'vscode-config-declarative', 'git-config-declarative', 'nix-options-vars', 'mounts'], compIds: ['administrer'] , entities: [] as EntityIntegration[] },
-  docker: { id: 'docker', name: 'Docker', icon: 'D', masteryIndex: 2, duration: getYearsFormatted(1660341600, currentDate), conceptIds: ['conteneur'], compIds: ['administrer'] , entities: [] as EntityIntegration[] },
+  docker: { id: 'docker', name: 'Docker/Podman', icon: 'D', masteryIndex: 2, duration: getYearsFormatted(1660341600, currentDate), conceptIds: ['conteneur', 'podman'], compIds: ['administrer'] , entities: [] as EntityIntegration[] },
 
   // Outils de gestion & IDE
-  vscode: { id: 'vscode', name: 'Visual Studio Code', icon: 'VS', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['uno-disc'].startDateTimesTamp, currentDate), conceptIds: [], compIds: ['realiser-app', 'collaborer'] , entities: [] as EntityIntegration[] },
+  vscode: { id: 'vscode', name: 'Vscode/Vscodium', icon: 'VS', masteryIndex: 3, duration: getYearsFormatted(PROJECTS['uno-disc'].startDateTimesTamp, currentDate), conceptIds: [], compIds: ['realiser-app', 'collaborer'] , entities: [] as EntityIntegration[] },
   eclipse: { id: 'eclipse', name: 'Eclipse IDE', icon: 'Ec', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['mc-plugin'].startDateTimesTamp, currentDate), conceptIds: ['eclipse-libs'], compIds: ['realiser-app'] , entities: [] as EntityIntegration[] },
   'androidstudio': { id: 'androidstudio', name: 'Android Studio', icon: 'AS', masteryIndex: 2, duration: getYearsFormatted(EDUCATIONS['but-info'].segmentations.S4.startTimestamp, currentDate), conceptIds: ['android-bases'], compIds: ['realiser-app'] , entities: [] as EntityIntegration[] },
   'phpstorm': { id: 'phpstorm', name: 'PHP Storm IDE', icon: 'PS', masteryIndex: 2, duration: getYearsFormatted(PROJECTS['sae-suivi'].startDateTimesTamp, currentDate), conceptIds: [], compIds: ['realiser-app', 'collaborer'], entities: [] as EntityIntegration[] },
