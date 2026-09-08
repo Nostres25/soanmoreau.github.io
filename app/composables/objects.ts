@@ -626,6 +626,7 @@ export const PROJECTS = {
     startDateTimesTamp: EDUCATIONS['but-info'].segmentations['S2'].startTimestamp,
     longDescription: renderMarkdown(`Création d'un jeu d'échecs dans complet en respectant les règles officielles (roque, prise en passant) et en implémentant une architecture stricte. Voir le github pour plus d'informations.`), 
     github: 'https://github.com/Nostres25/JavaChess', 
+    medias: ['images/projects/JavaChessOverview.png'],
     competencies: [
       { id: 'realiser-app', description: "Logique métier des échecs.",  },
       { id: 'optimiser', description: "Optmisation de mémoire, des opérations et de l'aspect visuel du code.",  },
