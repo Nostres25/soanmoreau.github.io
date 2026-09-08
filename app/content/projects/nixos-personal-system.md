@@ -40,7 +40,7 @@ Grâce à ces services je garanti la confidentialité et l'intégrité des donn�
 - **Moteur de recherche** : Duckduckgo
 - **Transfer de fichiers** (à la place de WeTransfer) : [Smash](https://fromsmash.com/fr), français et qui n'utilise pas les fichiers transférés pour entraîner une IA ou pour les revendre
 - **Outils PDF (fusion, modification, conversions, etc...)** : [BentoPDF](https://www.bentopdf.com/) enssemble d'outils open source plutôt que d'utiliser le premier site trouvé sur internet et qui revend les données présentes dans nos fichiers
-- **IA génératives** : Pour un prompt rapide, j'utilise [duck.ia](https://duck.ai/) pour utiliser Claude ou autre anonymement et sans transmettre mes données de navigation. Je fais également attentionn à ne donner aucune information privée dans mes prompt
+- **IA génératives** : Pour un prompt rapide, j'utilise [duck.ia](https://duck.ai/) pour utiliser Claude ou autre anonymement et sans transmettre mes données de navigation. Je fais également attention à ne donner aucune information privée dans mes prompt
 - **Diagrammes et modélisations** : [draw.io](https://www.drawio.com/), open source, gratuit et respectueux de la vie privée
 - **Navigateur** : [Librewolf](https://librewolf.net/) pour une version modifiée de Firefox plus respectueuse de la vie privée notamment en désactivant plus de trackers
 - **Cloud/Drive, Authentificateur (Codes A2F), Mail** : [Proton](https://proton.me/) proposant une suite d'outils freemium avec du chiffrement des données, respectant la vie privée et faisant partie de l'Europe (Suisse)

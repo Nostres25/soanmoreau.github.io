@@ -1,6 +1,7 @@
 
 <details open><summary class="text-xl font-bold text-gray-900 dark:text-white mb-0">Introduction</summary>
-Au départ il s'agit d'un projet noté en BUT Informatique qui sert également à nous vendre dans le monde professionnel mais que j'ai travaillé en totale autonomie, avec des technologies que je ne connaissais pas auparavant.</details>
+Au départ il s'agit d'un projet noté en BUT Informatique qui sert également à nous vendre dans le monde professionnel mais que j'ai travaillé en totale autonomie, avec des technologies que je ne connaissais pas auparavant.
+-# Utilisation d'icônes libres de droit venant répertoire d'icônes [Icons8](https://icons8.com/) et de [packs d'icônes open source](https://iconify.design/) disponibles par défaut avec NuxtIcons dont devicons et material-icon-theme, skill-icons, codicon, selfhst et hugeicons</details>
 
 <details><summary class="text-xl font-bold text-gray-900 dark:text-white mb-0">Réflexion : Pourquoi utiliser Nuxt.js</summary>
 Ayant travaillé sur PHP avec des framework comme Laravel ou sans et connaissant de nom les framework web javascript, j'ai choisi Nuxt.js pour mon portfolio afin de découvrir ce nouveau framework et le développement web javascript en général. Et ce dans un context de recherche des meilleurs outils & langages à utiliser pour mes projets.</details>
@@ -28,3 +29,4 @@ J'ai pu en apprendre beaucoup sur le développement web avec un framework javasc
 
 <details open><summary class="text-xl font-bold text-gray-900 dark:text-white mb-0">Ce qu'il me reste à apprendre</summary>
 Avec ce projet je n'ai pu essayer que Nuxt.js avec Vue.js mais j'ai pu comparer les différences avec Next.js et React.js. Je suis alors toujours curieux d'essayer le framework Next.js pour me faire un avis si, avec React, je le considérais meilleur que Nuxt.js. Néanmoins ces deux frameworks ont de mêmes problèmes relatifs à l'écosystème javascript qui sont la répétition de données, les problèmes de performances et les problèmes également de dépendances avec la compatibilité ainsi que la sécurité. J'ai donc cherché s'il y avait de meilleurs frameworks et de meilleurs langages de programmation que le javascript/typescript. Ce qui m'a amené au langage Rust. Principalement considéré comme un langage back-end pour des applications systèmes notamment, il peut être utilisé également pour du développement web. Son fonctionnement confère au code écrit en Rust une certaine qualité, stabilité et évolutivité qui le rend très intéressant pour beaucoup d'usages.</details>
+
