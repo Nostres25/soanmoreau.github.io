@@ -540,7 +540,7 @@ export const PROJECTS = {
   },
 
   'auth-bot': {
-    id: 'auth-bot', title: "Bot d'authentification pour le serveur Discord du département informatique à l'IUTV", context: 'BUT initiative',
+    id: 'auth-bot', title: "Bot d'authentification pour l'IUTV", context: 'BUT initiative',
     description: "Application pour l'authentification des étudiants sur l'espace de communication de la formation du BUT Informatique",
     startDateTimesTamp: 1787652000000,
     educationId: 'formation-perso',
@@ -555,6 +555,7 @@ export const PROJECTS = {
       { id: 'collaborer', description: "Étroite collaboration avec les enseignants reponsables à l'IUT, communication du plan, discussions techniques, communication des avancements...",  },
     ],
     tools: [
+      { id: 'typescript', description: "Typage des formats de données et des fonctions.", conceptIds: ['interfaces', 'enums', 'typage'] },
       { id: 'javascript', description: "Logique principale du bot.", conceptIds: ['async', 'callbacks', 'events', 'scopes', 'poo', 'switch', 'exceptions', 'loops', 'collections', 'json'] },
       { id: 'nodejs', description: "Environnement d'exécution. Avec pnpm en tant que gestionnaire de paquets", conceptIds: ['modules', 'modules-dev', 'versioning', 'fs', 'api-usage', 'file-interacts'] },
       { id: 'nodemon', description: "Outil de dev pour restart l'application à chaque sauvegarde", conceptIds: ['nodemon-restart'] },
