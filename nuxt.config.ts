@@ -22,7 +22,27 @@ export default defineNuxtConfig({
     // Used on linkedin
     '/ld': {
       redirect: '/'
-    }
+    },
+
+    // Used on Welcome To The Jungle
+    '/wtj': {
+      redirect: '/'
+    },
+
+    // Used on Indeed
+    '/id': {
+      redirect: '/'
+    },
+
+    // Used for RATP
+    '/rtp': {
+      redirect: '/'
+    },
+
+    // User for public services
+    '/p': {
+      redirect: '/'
+    },
 
   },
 
