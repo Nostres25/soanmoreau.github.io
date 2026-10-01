@@ -1,5 +1,23 @@
 @import "@nuxt/ui";
 @import "tailwindcss";
+@tailwind utilities;
+
+/* add the code bellow */
+@layer utilities {
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+}
 
 
 .markdown-container details {
@@ -26,6 +44,7 @@
 details>summary {
   cursor: pointer;
 }
+
 /* .markdown-container details:open {
     
     border-left: 2px outset;

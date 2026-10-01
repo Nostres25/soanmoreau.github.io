@@ -83,9 +83,11 @@ const LazyGlobalModal = defineAsyncComponent(() => import('@/components/GlobalMo
           </NuxtLink>
         </li>
         <div
-          class="rounded-md opacity-95 dark:opacity-100 backdrop-blur-2xl transition-all z-140 bg bg-gray-200/80 dark:bg-gray-600/40 overflow-scroll fixed top-1.5 right-15 left-45 has-[input:focus]:top-20 has-[input:focus]:left-2 has-[input:focus]:right-2 lg:left-50 lg:right-50 lg:has-[input:focus]:left-60 lg:has-[input:focus]:right-60 lg:has-[input:focus]:top-20 2xl:mb-10 2xl:left-0 2xl:right-0 2xl:relative 2xl:top-10 2xl:w-auto 2xl:has-[input:focus]:fixed"
+          class="no-scrollbar rounded-md opacity-95 dark:opacity-100 backdrop-blur-2xl transition-all z-140 bg bg-gray-200/80 dark:bg-gray-600/40 overflow-scroll fixed top-1.5 right-15 left-45 has-[input:focus]:top-20 has-[input:focus]:left-2 has-[input:focus]:right-2 lg:left-50 lg:right-50 lg:has-[input:focus]:left-60 lg:has-[input:focus]:right-60 lg:has-[input:focus]:top-20 2xl:mb-10 2xl:left-0 2xl:right-0 2xl:relative 2xl:top-10 2xl:w-auto 2xl:has-[input:focus]:fixed"
           @mousedown="preventInputBlur"
          >
+
+         <!-- Faire en sorte de pouvoir ajouter no-scrollbar à la liste -->
           <NuxtCommandPalette
           class="rounded-lg h-12 has-[input:focus]:h-auto has-[input:focus]:max-h-80 2xl:max-h-80 2xl:h-auto"
           shortcut="meta_k"
