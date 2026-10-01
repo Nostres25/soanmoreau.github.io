@@ -81,7 +81,7 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
       <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" @click="closeAll"/>
 
       <div 
-        class="relative w-full max-h-[82vh] 2xl:max-h-[90vh] flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out top-0"
+        class="relative w-full max-h-[82dvh] 2xl:max-h-[90dvh] flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 ease-in-out top-0"
         :class="currentModal?.type === 'education' || currentModal?.type === 'project' || currentModal?.type === 'experience' || isExpanded ? 'max-w-4xl' : 'max-w-2xl animate-slide-up'"
       >
         <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 shrink-0">
@@ -99,7 +99,7 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
           </button>
         </div>
 
-        <div ref="modalContent" class="p-3 md:p-6 overflow-y-auto">
+        <div ref="modalContent" class="p-3 md:p-6 overflow-y-auto ">
           
           <div v-if="currentModal?.type === 'tool' && toolData">
             <div class="flex items-center gap-4 mb-6">
@@ -182,7 +182,7 @@ const LazyProjectsListField = defineAsyncComponent(() => import('@/components/pr
                 </NuxtCarousel>
                 <NuxtModal v-model:open="imageIsOpen" class="max-w-5xl h-auto">
                   <template #content>
-                    <img v-if="selectedImage" :src="selectedImage" class="w-full h-auto max-h-[90vh] object-contain rounded-lg">
+                    <img v-if="selectedImage" :src="selectedImage" class="w-full h-auto max-h-[90dvh] object-contain rounded-lg">
                   </template>
                 </NuxtModal>
               </div>
