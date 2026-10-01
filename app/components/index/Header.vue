@@ -12,11 +12,11 @@
               Soan <span class="text-emerald-500">MOREAU</span>
             </h1>
             <p class="text-xl text-gray-600 dark:text-gray-300 mb-4 font-medium">
-              Étudiant en 2e année de BUT Informatique
+              Étudiant en 3e année de BUT Informatique
             </p>
             
             <div class="inline-block bg-white dark:bg-gray-800 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 px-4 py-2 rounded-lg font-semibold mb-6 shadow-sm">
-              À la recherche d'une alternance en tant que développeur back-end pour Septembre 2026
+              À la recherche d'une alternance en tant que développeur back-end Septembre 2026-2027
             </div>
           </div>
         </div>
