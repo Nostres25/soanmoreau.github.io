@@ -896,7 +896,7 @@ export const SOFT_SKILLS = {
   'apprentissage-rapide': {id: 'apprentissage-rapide', name: "Apprentissage rapide", description: "Tendance à apprendre rapidement et en autonomie" },
   'bon-communicant': { id: 'bon-communicant', name: 'Bon communicant', description: "Tendance à communiquer un maximum d'informations, à conseiller, à proposer et à informer" },
   'esprit-critique': { id: 'esprit-critique', name: 'Esprit critique', description: "Recul et remise en questions de mon travail, mes connaissances et mes pensées." },
-  'redaction-fr': { id: 'redaction-fr', name: 'Rédaction en français', description: "Beaucoup de rédaction dans l'asistance, le report de bugs, la modération médiatrice, rédaction de documentations et de rapports.", masteryIndex: 4}, // pour DraftBot expliquer comme quoi dans la modération il faut souvent expliquer des situations en prenant en compte tous les détails et dans l'assistance et le report de bugs il faut expliquer les problèmes de manière détaillé + documentation
+  'redaction-fr': { id: 'redaction-fr', name: 'Rédaction en français', description: "Beaucoup de rédaction dans l'assistance, le report de bugs, la modération médiatrice, rédaction de documentations et de rapports.", masteryIndex: 4}, // pour DraftBot expliquer comme quoi dans la modération il faut souvent expliquer des situations en prenant en compte tous les détails et dans l'assistance et le report de bugs il faut expliquer les problèmes de manière détaillé + documentation
   'mediation': { id: 'mediation', name: 'Médiation & résolution de conflits', description: 'Modération médiatrice.'},
 }
 
